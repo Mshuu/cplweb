@@ -1,0 +1,110 @@
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import PollModel from '../../models/Poll';
+import './poll.css';
+
+class Poll extends Component {
+  static defaultProps = {
+    forceNormal: false
+  };
+
+  constructor(props){
+    super(props);
+
+    this.poll = new PollModel(props.poll);
+  }
+
+  openPoll(){
+    console.log(`Open ${this.poll.id}`);
+    this.props.history.push(`/poll/${this.poll.id}`);
+  }
+
+  button(){
+    if(this.poll.hasVoted || this.poll.hasExpired)
+      return (
+        <span className="pollVoteButton resultsButton" onClick={ () => this.openPoll() }>
+          Results
+        </span>
+      );
+    else
+      return (
+        <span className="pollVoteButton" onClick={ () => this.openPoll() }>
+          Vote
+        </span>
+      );
+  }
+
+  renderStar(){
+    return (
+      <div className="starPoll">
+        <div className="pollTop">
+          <div className="pollStarImage">
+            <img src={ this.props.poll.twitterAvatar } />
+          </div>
+          <div className="pollTopQuestion">
+            <div className="pollTopName">
+              { this.props.poll.twitterName }
+            </div>
+            <div className="pollTopQuestionText">
+              { this.props.poll.question }
+            </div>
+          </div>
+        </div>
+        <div className="pollBottom">
+          <span className="pollVotes">
+            <img src={ require('../images/poll_tick_icon.png') } />
+            { this.props.poll.pollVotes }
+          </span>
+          { !this.poll.hasExpired && (
+            <span className="pollTimeRemaining">
+              <img src={ require('../images/poll_clock_icon.png') } />
+              { this.poll.timeRemaining }
+            </span>
+          )}
+          { this.button() }
+        </div>  
+      </div>
+    );
+  }
+
+  renderNormal() {
+    return (
+      <div className="poll">
+        <div className="pollTop">
+          <div className="pollTopHeader">
+            <span className="pollNumber">
+              <img src={ require('../images/poll_hash_icon.png') } />
+              { this.poll.id }
+            </span>
+            { !this.poll.hasExpired && (
+              <span className="pollTimeRemaining">
+                <img src={ require('../images/poll_clock_icon.png') } />
+                { this.poll.timeRemaining }
+              </span>
+              )
+            }
+          </div>
+          <div className="pollTopQuestion">
+            { this.poll.question }
+          </div>
+        </div>
+        <div className="pollBottom">
+          <span className="pollVotes">
+            <img src={ require('../images/poll_tick_icon.png') } />
+            { this.poll.pollVotes }
+          </span>
+          { this.button() }
+        </div>  
+      </div>
+    );
+  }
+
+  render(){
+    if(!this.props.forceNormal && this.poll.type == 'Star')
+      return this.renderStar();
+    else
+      return this.renderNormal();
+  }
+}
+
+export default withRouter(Poll);

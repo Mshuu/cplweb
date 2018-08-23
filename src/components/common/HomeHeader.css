@@ -1,0 +1,155 @@
+.homeHeader {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+  background-color: rgb(0, 14, 39, 0.25);
+  background-blend-mode: multiply;
+}
+
+.homeLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px;
+  align-items: center;
+  padding: 70px 20px 0px 20px;
+}
+
+.homeRight {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 340px;
+  flex: 0 0 340px;
+  margin: 20px;
+}
+
+.searchHeader {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.searchInputContainer {
+  display: flex;
+  margin-top: 36px;
+  width: 100%;
+  max-width: 700px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.searchInput {
+  font-family: 'Roboto-Light-CPL';
+  padding: 16px 0;
+  font-size: 22px;
+  width: calc(100% - 200px);
+  text-align: center;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchInput::placeholder {
+  opacity: 0.6;
+}
+
+.searchButton {
+  display: flex;
+  clear: none;
+  align-items: center;
+  justify-content: center;
+  height: 66px;
+  width: 66px;
+  flex: 0 0 66px;
+  background-color: #01bec0;
+}
+
+.searchButton:hover {
+  background-color: #28a2a6;
+  transition: background-color 100ms linear;
+  cursor: pointer;
+}
+
+.searchIcon {
+  height: 33px;
+}
+
+.headerFeatureButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 160px;
+  height: 120px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.headerFeatureButtonText {
+  color: #fff;
+  font-size: 16px;
+}
+
+.headerFeatureButton.headerBrowsePolls {
+  background-color: #01bec0;
+  transition: background-color 100ms linear;
+}
+
+.headerFeatureButton.headerBrowsePolls:hover {
+  background-color: #28a2a6;
+}
+
+.headerFeatureButton.headerCreateWidgets {
+  background-color: #5691d3;
+  transition: background-color 100ms linear;
+}
+
+.headerFeatureButton.headerCreateWidgets:hover {
+  background-color: #3970bb;
+}
+
+.headerFeatureButton.headerStarPolls {
+  background-color: #c99e10;
+  transition: background-color 100ms linear;
+}
+
+.headerFeatureButton.headerStarPolls:hover {
+  background-color: #c99210;
+}
+
+.headerFeatureButton.headerSponsoredPolls {
+  background-color: #ef7245;
+  transition: background-color 100ms linear;
+}
+
+.headerFeatureButton.headerSponsoredPolls:hover {
+  background-color: #d45f30;
+}
+
+.pollIcon {
+  height: 50px;
+  margin: 10px;
+  opacity: 0.6;
+}
+
+.ratingIcon {
+  height: 40px;
+  margin: 15px;
+  opacity: 0.6;
+}
+
+.starIcon {
+  height: 50px;
+  margin: 10px;
+  opacity: 0.6;
+}
+
+.sponsoredIcon {
+  height: 50px;
+  margin: 10px;
+  opacity: 0.6;
+}

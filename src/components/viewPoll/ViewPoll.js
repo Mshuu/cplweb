@@ -1,0 +1,183 @@
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
+import WebApi from '../../models/webApi';
+import Poll from '../../models/Poll';
+import LoadingOverlay from '../loadingOverlay/LoadingOverlay';
+import AnswerList from './components/AnswerList';
+import ResultsGraph from './components/ResultsGraph';
+import SummaryHeader from './components/SummaryHeader';
+import PollList from '../common/PollList';
+
+import './ViewPoll.css';
+
+class ViewPoll extends Component {
+  constructor(props){
+    super(props);
+
+    this.store = props.store;
+    this.pollId = this.props.match.params.pollId;
+
+    this.state = {
+      loading: false,
+      showOnFeed: true
+    };
+  }
+
+  componentWillReceiveProps(props){
+    this.pollId = props.match.params.pollId;
+    this.store.setPoll(this.pollId, null);
+    this.setState({
+      loading: true,
+      showOnFeed: true
+    });
+    this.webFetch();
+  }
+
+  async componentDidMount(){
+    if(!IS_SERVER){
+      this.webFetch();
+    }
+  }
+
+  async webFetch(){
+    if(this.store.hydrateCheck()){
+      console.log('hydrate recover');
+      return;
+    }
+
+    this.setState({
+      loading: true
+    });
+
+    let poll = await WebApi.fetchPoll( this.pollId );
+    this.store.setPoll(this.pollId, poll);
+
+    this.setState({
+      loading: false
+    });
+  }
+
+  async performVote(answerIdx){
+    this.setState({
+      loading: true
+    });
+
+    let response = await WebApi.voteOnPoll( this.pollId, answerIdx, this.state.showOnFeed );
+
+    if(response.success){
+      let poll = this.store.getPoll(this.pollId);
+      poll.results = response.results;
+      poll.hasVoted = true;
+      poll.votedOn = [{answerId: answerIdx, answerText: poll.answers[answerIdx] }];
+
+      this.store.setPoll(this.pollId, poll);
+    } else {
+      alert('Error');
+    }
+
+    this.setState({
+      loading: false
+    });
+  }
+
+  containerContent(poll){
+    if(poll.hasVoted || poll.hasExpired){
+      return (
+        <ResultsGraph results={ poll.results } totalVotes={ poll.pollVotes } />
+      );
+    } else {
+      return (
+        <AnswerList answers={poll.answers} onVote={ answerIdx => this.performVote(answerIdx) }/>
+      );
+    }
+  }
+
+  handleTwitterShare(){
+    window.location = "https://twitter.com/home?status=" + encodeURI(window.location);
+  }
+
+  handleFacebookShare(){
+    window.location = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURI(window.location);
+  }
+
+  handleGoogleShare(){
+    window.location = "https://plus.google.com/share?url=" + encodeURI(window.location);
+  }
+
+  numberToCommaFormat(num){
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  get socialContent(){
+    return (
+      <div className="socialContainer">
+        <div className="socialBanner">
+          Share Your Vote!
+        </div>
+        <div className="socialButtons">
+          <img src={require('../images/twitter_icon.png')} onClick={() => this.handleTwitterShare()}  />
+          <img src={require('../images/facebook_icon.png')} onClick={() => this.handleFacebookShare()} />
+          <img src={require('../images/google_icon.png')} onClick={() => this.handleGoogleShare()}  />
+        </div>
+      </div>
+    );
+  }
+
+  pollElement(){
+    let pollData = this.store.getPoll(this.pollId);
+    console.dir(pollData);
+    if(!pollData) return null;
+
+    let poll = new Poll(pollData);
+
+    return (
+      <div>
+        <div className="pollQuestion">
+          { poll.question }
+        </div>
+
+        <div className="mainRow">
+          <div className="detailsContainer">
+            <div className="field">
+              <img src={ require('../images/poll_hash_icon.png') } />
+              { poll.pollId }
+            </div>
+            <div className="field">
+              <img src={ require('../images/poll_tick_icon.png') } />
+              { this.numberToCommaFormat(poll.pollVotes) }
+            </div>
+            { !poll.hasExpired && (
+              <div className="field">
+                <img src={ require('../images/poll_clock_icon.png') } />
+                { poll.timeRemaining }
+              </div>
+            )}
+          </div>
+          <div className="contentContainer">
+            { this.containerContent(poll) }
+          </div>
+        </div>
+
+        { this.socialContent }
+
+        <div className="summaryContainer">
+          <SummaryHeader category={ poll.category } />
+          <PollList category={ poll.category } />
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="viewPoll">
+        <LoadingOverlay enabled={ this.state.loading }/>
+
+        { this.pollElement() }      
+      </div>
+    );
+  }
+}
+
+export default ViewPoll;

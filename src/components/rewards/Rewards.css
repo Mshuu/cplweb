@@ -1,0 +1,141 @@
+.rewardsPage {
+
+}
+
+.rewardsContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 35px 35px 35px;
+}
+
+.rewardsHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #fff;
+  margin: 20px 0;
+}
+
+.rewardsHeader img {
+  height: 50px;
+  margin-right: 15px;
+}
+
+.rewardsContent .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 -12.5px;
+}
+
+.rewardsContent .rowItem {
+  flex: 1;
+  margin: 12.5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px 20px 20px;
+  background: rgb(0, 0, 0, 0.1);
+  color: #fff;
+  height: 200px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.rewardsContent .rowItem > * {
+  flex: 1;
+}
+
+.rewardsContent .rowItem .itemHeader {
+  flex: 0.8;
+  font-size: 20px;
+}
+
+.rewardsContent .rowItem .itemValue {
+  font-size: 46px;
+  color: #01bec0;
+}
+
+.rewardsContent .rowItem .payoutButton {
+  background-color: #01bec0;
+  padding: 5px 10px;
+  border-radius: 30px;
+  width: 120px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.itemFooter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.itemLink {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 20px 20px 20px;
+  background: rgb(0, 0, 0, 0.1);
+  color: #fff;
+  height: 200px;
+  font-size: 12px;
+  text-align: center;
+  align-self: stretch;
+  margin-top: 7px;
+}
+
+.bottomContainer .bottomHeader {
+  font-size: 20px;
+}
+
+.bottomContainer .walletButton {
+  background-color: #01bec0;
+  padding: 5px 10px;
+  border-radius: 30px;
+  width: 120px;
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.bottomContainer .addressField {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bottomContainer .addressField span {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #01bec0;
+  height: 46px;
+  font-size: 18px;
+  padding: 0 20px;
+  vertical-align: center;
+}
+
+.bottomContainer .addressField input {
+  width: 320px;
+  text-align: center;
+  height: 40px;
+}
+
+.bottomContainer .important {
+  color: red;
+}

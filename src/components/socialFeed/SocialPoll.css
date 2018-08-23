@@ -1,0 +1,62 @@
+.socialPoll {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 330px;
+  height: 85px;
+  background-color: #ffffff;
+  padding: 0;
+  margin: 0 7px 7px 0;
+}
+
+.socialPoll .pollLeft {
+  flex-grow: 1;
+  height: 100%;
+  font-size: 14px;
+  padding: 5px 15px;
+  color: #8a8a8a;
+}
+
+.socialPoll .pollRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 120px;
+  height: 100%;
+  background-color: #e3e1e1;
+}
+
+.socialPoll .pollVoteButton {
+  width: 105px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 20px;
+  background-color: #01bec0;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
+}
+
+.socialPoll .resultsButton {
+  background-color: #fb704d;
+}
+
+.socialPoll .resultsButton:hover {
+  filter: brightness(90%);
+  transition: filter 100ms linear;
+  cursor: pointer;
+}
+
+.socialPoll .pollVoteButton:hover {
+  filter: brightness(90%);
+  transition: filter 100ms linear;
+  cursor: pointer;
+}
+
+.textHightlightGreen {
+  color: #01bec0;
+}
+
+.textHightlightBlack {
+  color: #000;
+}

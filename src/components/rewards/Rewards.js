@@ -1,0 +1,119 @@
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
+import WebApi from '../../models/webApi';
+import LoadingOverlay from '../loadingOverlay/LoadingOverlay';
+import HomeHeader from '../common/HomeHeader';
+
+import './Rewards.css';
+
+class Rewards extends Component {
+   constructor(props){
+    super(props);
+
+    this.store = props.store;
+
+    this.state = {
+      loading: true,
+      ethAddress: "0x123f681646d4a755815f9cb19e1acc8565a0c2ac"
+    };
+  }
+
+  async componentDidMount(){
+    if(!IS_SERVER){
+      this.webFetch();
+    }
+  }
+
+  async webFetch(resetCache = true){
+    if(this.store.hydrateCheck()){
+      this.setState({loading: false});
+      return;
+    }
+    
+    this.setState({
+      loading: true,
+    });
+
+    let settings = await WebApi.getUserSettings();
+    this.store.setUserSettings(settings);
+
+    this.setState({
+      loading: false
+    });
+  }
+
+  get rewardsElement(){
+    let settings = this.store.getUserSettings();
+
+    return (
+      <div className="rewardsContent">
+        <div className="rewardsHeader">
+          <img src={ require('../images/rewards_icon.png') } />
+          User Rewards
+        </div>
+
+        <div className="row">
+          <div className="rowItem">
+            <div className="itemHeader">Points Received</div>
+            <div className="itemValue">{ settings.RP }</div>
+            <div className="itemFooter">
+              <div>Points reset at the end of each rewards period.</div>
+            </div>
+          </div>
+
+          <div className="rowItem">
+            <div className="itemHeader">POLL Token Balance</div>
+            <div className="itemValue">{ settings.BP }</div>
+            <div className="itemFooter">
+              <div className="payoutButton">Request Payout</div>
+              <div>The minimum payout amount is 50 POLL.</div>
+            </div>
+          </div>
+
+          <div className="rowItem">
+            <div className="itemHeader">Current Multiplier Level</div>
+            <div className="itemValue">x{ settings.BM }</div>
+            <div className="itemFooter">
+              <div>Multiplier levels are based on your existing POLL balance in your wallet and caluclated daily.</div>
+              <div className="itemLink">More information.</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bottomContainer">
+          <div className="bottomHeader">Poll Wallet Address</div>
+
+          <div>Your wallet address is where your POLL tokens will be send when you request a payout. It is also the wallet we check for balance to determine your multiplier level.</div>
+          <div className="walletButton">Get a Wallet</div>
+
+          <div className="addressField">
+            <span>Address</span>
+            <input type="text"
+              placeholder="POLL wallet address"
+              value={this.state.ethAddress}
+              onChange={ e => this.setState({ethAddress: e.target.value}) }
+            />
+          </div>
+
+          <div>
+            <span className="important">Important.</span>
+            Changing your POLL wallet address after entering it will reset your points for the current period. Your POLL balance will remain.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="rewardsPage">
+        <LoadingOverlay enabled={ this.state.loading }/>
+        <HomeHeader />
+        { this.rewardsElement }
+      </div>
+    );
+  }
+}
+
+export default Rewards;

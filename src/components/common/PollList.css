@@ -1,0 +1,38 @@
+.pollListContainer .polls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 0px 0 35px;
+  margin: 0;
+}
+
+
+.pollListContainer .showMore {
+  width: 150px;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 5px 0;
+  cursor: pointer;
+  margin: 0 auto;
+  border-radius: 100px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.pollListContainer .showMore:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: background-color 100ms linear;
+  cursor: pointer;
+}
+
+.fullScreenPollListContainer .headerContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 35px
+}
+
+.fullScreenPollListContainer {
+  margin-bottom: 40px;
+}

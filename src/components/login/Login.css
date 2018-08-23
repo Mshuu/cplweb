@@ -1,0 +1,118 @@
+.loginContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0px;
+}
+
+.loginHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 35px;
+  margin-bottom: 25px;
+}
+
+.loginHeader img {
+  height: 100px;
+}
+
+.loginText {
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 0 40px;
+}
+
+.loginField {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 470px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.loginField .loginFieldText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: #ffffff;
+  background-color: #01bec0;
+  font-size: 20px;
+  height: 48px;
+}
+
+.loginField input {
+  flex: 2;
+  outline: none;
+  box-shadow: none;
+  font-family: 'Roboto-Light-CPL';
+  font-size: 20px;
+  height: 46px;
+  padding: 0 0 0 10px;
+  text-align: left;
+  border: none;
+}
+
+.loginField input:focus {
+  outline: none;
+}
+
+.loginField input.loginFieldDesktopCode {
+  letter-spacing: 2px;
+}
+
+.loginSubText {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.loginButton {
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: #01bec0;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 50px;
+  margin-top: 30px;
+  transition: background-color 100ms linear;
+}
+
+.loginButton:hover {
+  background-color: #0191c1;
+  transition: background-color 100ms linear;
+  cursor: pointer;
+}
+
+.installBanner {
+  background-color: rgb(0, 0, 0, 0.2);
+  width: 100%;
+  padding: 20px 0;
+  margin: 30px 0 0 0;
+}
+
+.installBannerText {
+  color: #fff;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.installBannerImages {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.installBannerImages img {
+  height: 70px;
+  margin: 5px;
+}

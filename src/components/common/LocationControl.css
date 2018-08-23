@@ -1,0 +1,27 @@
+.locationListWrapper {
+  display: inline-flex;
+  flex-direciton: row;
+  justify-content: flex-start;
+}
+
+.locationListWrapper .selected, .locationListWrapper .unselected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 40px;
+  border-radius: 20px;
+  color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.locationListWrapper .selected {
+  background-color: #40cfd0;
+}
+
+
+.locationListWrapper .unselected {
+  background-color: rgb(255, 255, 255, 0.2);
+}
+

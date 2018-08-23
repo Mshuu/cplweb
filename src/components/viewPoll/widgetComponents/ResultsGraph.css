@@ -1,0 +1,63 @@
+.graphContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.graphContainer .resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.graphContainer .graph {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.graphContainer .resultAnswer {
+  text-align: left;
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+
+.voteCount, .votePercentage {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 14px;
+  background-color: #d6d8d9;
+  margin-right: 6px;
+}
+
+.voteCount {
+  width: 50px;
+}
+
+.votePercentage {
+  width: 50px;
+}
+
+.voteBarContainer {
+  flex-grow: 1;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.voteBarContainer .voteBarInner {
+  min-height: 30px;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+  transform-origin: bottom left;
+}
+
+

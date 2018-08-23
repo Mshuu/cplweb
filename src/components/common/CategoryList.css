@@ -1,0 +1,50 @@
+.categoryList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 15px -7px 15px 0;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+  height: 170px;
+  margin: 0 7px 7px 0;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.category:hover {
+  cursor: pointer;
+  filter: brightness(90%);
+  transition: filter 100ms linear;
+}
+
+.category img {
+  height: 60px;
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.category .categoryImage {
+  flex: 1.8;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.category span {
+  flex: 1.2;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
+

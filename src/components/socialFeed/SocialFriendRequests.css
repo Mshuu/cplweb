@@ -1,0 +1,77 @@
+.socialFriendRequests {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 30px 0 0 0;
+  padding: 0 20px;
+}
+
+
+.socialFriendRequests .requestHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.socialFriendRequests .requestHeader img {
+  height: 30px;
+  margin-right: 15px;
+}
+
+.lolNoFriends {
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  border-radius: 30px;
+  background-color: rgb(255, 255, 255, 0.1);
+  padding: 5px 0;
+}
+
+.friendContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.friendRequest {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  color: #fff;
+}
+
+.requestName {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  border-radius: 30px;
+  background-color: rgb(255, 255, 255, 0.1);
+}
+
+.acceptRequest, .rejectRequest {
+  flex: 0 0 30px;
+  margin: 0 0 0 4px;
+  cursor: pointer;
+}
+
+.acceptRequest:hover, .rejectRequest:hover {
+  opacity: 0.8;
+}
+
+
+.acceptRequest img, .rejectRequest img {
+  height: 30px;
+}
+
+

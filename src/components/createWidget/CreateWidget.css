@@ -1,0 +1,101 @@
+
+.createWidget {
+  display: flex;
+  flex-direction: row;
+}
+
+.widgetFormContainer {
+  flex: 1;
+  margin: 35px;
+  background-color: #fff;
+}
+
+.widgetFormContainer .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  height: 50px;
+  background-color: #1a2c33;
+  color: #fff;
+  font-size: 20px;
+}
+
+.widgetFormContainer .header img {
+  max-width: 30px;
+  max-height: 30px;
+  width: auto;
+  height: auto;
+}
+
+.widgetFormContainer .summary {
+  padding: 10px 15px;
+  background-color: #e3e1e1;
+  color: #000;
+  font-size: 13px;
+  border-left: 10px solid #00bec0;
+}
+
+.widgetFormContainer .description {
+  padding: 25px 25px;
+  color: #000;
+  font-size: 13px;
+  text-align: left;
+}
+
+.widgetFormContainer .form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.widgetFormContainer .form span {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+.widgetFormContainer .form input {
+  width: 160px;
+  height: 30px;
+  background-color: #e3e1e1;
+  border: 3px solid #dbdada;
+  border-radius: 2px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.widgetFormContainer .code {
+  word-break: break-all;
+  white-space: pre-wrap;
+  margin: 10px;
+  padding: 5px;
+  background-color: #e3e1e1;
+  border: 3px solid #dbdada;
+  border-radius: 2px;
+}
+
+.widgetFormContainer .copyButton {
+  margin: 5px auto;
+  padding: 5px 30px;
+  width: 80px;
+  background-color: #00bec0;
+  border-radius: 100px;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+}
+
+.widgetFormContainer .copyButton:hover {
+  filter: brightness(90%);
+  transition: filter 100ms linear;
+  cursor: pointer;
+}
+
+.widgetFormContainer .footerText {
+  padding: 25px 25px;
+  color: #000;
+  font-size: 13px;
+  text-align: center;
+}

@@ -1,0 +1,23 @@
+.socialContent {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  min-height: 450px;
+  padding: 0 25px 25px 25px;
+}
+
+.socialPageHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 38px;
+  margin: 15px 0 15px 0;
+}
+
+.socialPageHeader img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}

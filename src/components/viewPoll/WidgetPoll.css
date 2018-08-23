@@ -1,0 +1,21 @@
+.widgetPoll {
+  background-color: #fff;
+  height: 100%;
+}
+
+.widgetPoll .pollQuestion {
+  font-size: 20px;
+  color: #000;
+  padding: 0 50px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.widgetPoll .contentContainer {
+  padding: 0 20px;
+}
+
+.scrollableContainer {
+  height: calc(100% - 80px);
+  overflow-y: auto;
+}

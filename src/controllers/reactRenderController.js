@@ -1,0 +1,437 @@
+import React from "react";
+import { renderToStaticNodeStream } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import ServerApi from '../models/serverApi';
+import Store from '../models/store';
+import Authenticator from '../models/authenticator';
+import Template from '../components/template/template';
+import WidgetRouter from '../components/widgetRouter';
+
+const Home = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store({
+    homePolls: await apiClient.fetchHome()
+  });
+
+  renderReact(req, res, store);
+};
+
+const Login = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
+
+const Poll = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  if(!req.params.pollId){
+    res.status(404).end();
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  store.setPoll( req.params.pollId, await apiClient.fetchPoll(req.params.pollId) );
+
+  renderReact(req, res, store);
+};
+
+const Search = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  let searchTerm = req.query.q;
+
+  if(!searchTerm){
+    res.status(404).end();
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+
+  store.setSearchResult(searchTerm, await apiClient.doSearch(searchTerm) );
+
+  renderReact(req, res, store);
+};
+
+const CompletedPolls = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let isCompletedPage = req.url.startsWith('/completed');
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let category = req.params.category;
+
+
+
+  if(category){
+    let polls = await apiClient.getPollList({
+      active: isCompletedPage ? 'false' : 'true',
+      type: isCompletedPage ? 'Completed' : 'Normal',
+      category: category,
+      sortOrder: 'mostVotes',
+      recordStartNo: 0,
+      recordQty: 16,
+      positionLatitude: '',
+      positionLongitude: '',
+      locationFilter: 'Global'
+    });
+
+    store.setCategoryPolls(category, polls);
+  }
+
+
+  renderReact(req, res, store);
+};
+
+const BrowsePolls = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let category = req.params.category;
+
+  if(category){
+    let polls = await apiClient.getPollList({
+      active: 'false',
+      type: 'Completed',
+      category: category,
+      sortOrder: 'mostVotes',
+      recordStartNo: 0,
+      recordQty: 16,
+      positionLatitude: '',
+      positionLongitude: '',
+      locationFilter: 'Global'
+    });
+
+    store.setCategoryPolls(category, polls);
+  }
+
+
+  renderReact(req, res, store);
+};
+
+const StarPolls = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let polls = await apiClient.getPollList({
+    category: 'All',
+    type: 'Star',
+    active: 'true',
+    sortOrder: 'mostVotes',
+    recordStartNo: 0,
+    recordQty: 16,
+    positionLatitude: '',
+    positionLongitude: '',
+    locationFilter: ''
+  });
+
+  store.setStarPolls(polls);
+  renderReact(req, res, store);
+};
+
+const MyVotes = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let polls = await apiClient.getPollList({
+    category: 'All',
+    type: 'MyVotes',
+    active: 'true',
+    sortOrder: 'mostVotes',
+    recordStartNo: 0,
+    recordQty: 16,
+    positionLatitude: '',
+    positionLongitude: '',
+    locationFilter: ''
+  });
+
+  store.setMyVotes(polls);
+  renderReact(req, res, store);
+};
+
+const MyPolls = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let polls = await apiClient.getPollList({
+    category: 'All',
+    type: 'MyPolls',
+    active: 'true',
+    sortOrder: 'mostVotes',
+    recordStartNo: 0,
+    recordQty: 16,
+    positionLatitude: '',
+    positionLongitude: '',
+    locationFilter: ''
+  });
+
+  store.setMyVotes(polls);
+  renderReact(req, res, store);
+};
+
+const SocialFeed = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let polls = await apiClient.getSocialFeed({
+    sortingOrder: 'mostVotes',
+    quantity: 16,
+    positionLatitude: '',
+    positionLongitude: ''
+  });
+
+  store.setSocialFeed(polls);
+  renderReact(req, res, store);
+};
+
+const ManageFriends = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+
+  renderReact(req, res, store);
+};
+
+const Account = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let settings = await apiClient.getUserSettings();
+
+  store.setUserSettings(settings);
+  renderReact(req, res, store);
+};
+
+const CreateWidget = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let store = new Store();
+  renderReact(req, res, store);
+};
+
+const Rewards = async ( req, res ) => {
+  let auth;
+
+  try {
+    auth = Authenticator.verify( req.cookies['_auth'] );
+  } catch(e) {
+    res.redirect('/login');
+    return;
+  }
+
+  renderHead(req, res);
+
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let settings = await apiClient.getUserSettings();
+
+  store.setUserSettings(settings);
+  renderReact(req, res, store);
+};
+
+
+
+function renderHead(req, res){
+  res.writeHead( 200, { "Content-Type": "text/html" } );
+  res.write(htmlHead);
+}
+
+function renderReact(req, res, store){
+  let context = {};
+  let url = req.url;
+
+  const jsx = (
+    <StaticRouter context={ context } location={ url }>
+      <Template store={ store } />
+    </StaticRouter>
+  );
+  const appStream = renderToStaticNodeStream( jsx );
+
+  appStream.pipe(res, {end: false})
+
+  appStream.on(`end`, () => {
+    res.end(htmlTail(store))
+  })
+}
+
+const htmlHead = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+  	<link rel="shortcut icon" href="/public/favicon.png" type="image/x-icon" />
+
+
+    <link rel="shortcut icon" href="/public/favicon.ico">
+    <link href="/public/style.css" rel="stylesheet" type="text/css">
+
+    <title>Clearpoll Desktop</title>
+
+    <style>
+      @font-face {
+        font-family: 'Roboto-Light-CPL';
+        src: url('/public/fonts/Roboto-Light.ttf') format('truetype');
+      }
+
+      html {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          font-family: 'Roboto-Light-CPL';
+      }
+
+      body {
+          margin: 0;
+          padding: 0;
+          min-height: 100%;
+          float: left;
+          width: 100%;
+          background: #057cab; /* Old browsers */
+          background: #057cab; /* Old browsers */
+          background: -moz-linear-gradient(top, #019eba 1%, #057cab 15%, #234588 45%, #2c3372 66%, #472078 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top, #019eba 1%, #057cab 15%,#234588 45%,#2c3372 66%,#472078 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom, #019eba 1%, #057cab 15%,#234588 45%,#2c3372 66%,#472078 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#019eba', endColorstr='#472078',GradientType=0 ); background-attachment: fixed;
+          font-family: 'Roboto-Light-CPL';
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+`
+const htmlTail = store => `
+      </div>
+      <script>
+        if(window.parent){
+          window.parent.postMessage({event: "loadingComplete"}, '*');
+          console.log("Message sent");
+        }
+        window.storeData = ${JSON.stringify(store.data)};
+      </script>
+      <script type="text/javascript" src="/public/bundle.js"></script>
+    </body>
+  </html>
+`;
+
+
+export { Home, Login, Poll, Search, CompletedPolls, StarPolls, MyVotes, MyPolls, SocialFeed, ManageFriends, Account, CreateWidget, Rewards };
