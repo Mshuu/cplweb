@@ -62,7 +62,7 @@ require("source-map-support").install();
   left:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -379,45 +379,45 @@ require("source-map-support").install();
 }
 
 .headerFeatureButton.headerStarPolls {
-  background-color: #c99e10;
+  background-color: #222d31;
   transition: background-color 100ms linear;
 }
 
 .headerFeatureButton.headerStarPolls:hover {
-  background-color: #c99210;
+  background-color: #161d1f;
 }
 
-.headerFeatureButton.headerSponsoredPolls {
+.headerFeatureButton.headerSocialPolls {
   background-color: #ef7245;
   transition: background-color 100ms linear;
 }
 
-.headerFeatureButton.headerSponsoredPolls:hover {
+.headerFeatureButton.headerSocialPolls:hover {
   background-color: #d45f30;
 }
 
 .pollIcon {
   height: 50px;
   margin: 10px;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .ratingIcon {
   height: 40px;
   margin: 15px;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .starIcon {
   height: 50px;
   margin: 10px;
-  opacity: 0.6;
+  opacity: 1;
 }
 
-.sponsoredIcon {
+.socialIcon {
   height: 50px;
   margin: 10px;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .summaryHeader {
@@ -483,18 +483,15 @@ require("source-map-support").install();
   background-color: #e3e1e1;
 }
 
-.poll .pollNumber {
-  display: flex;
-  margin: 10px;
-}
-
 .poll .pollNumber img, .poll .pollTimeRemaining img {
-  height: 28px;
-  margin-right: 8px;
+  height: 20px;
+  margin-right: 5px;
 }
 
-.poll .pollTimeRemaining {
+.poll .pollNumber, .poll .pollTimeRemaining {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px;
 }
 
@@ -654,7 +651,7 @@ require("source-map-support").install();
   justify-content: flex-start;
 }
 .pollSummary {
-  padding:  10px 35px;
+  padding:  10px 35px 30px 35px;
 }
 .App {
   text-align: center;
@@ -853,7 +850,7 @@ require("source-map-support").install();
 }
 
 .fullScreenPollListContainer {
-  margin-bottom: 40px;
+  margin-bottom: 5px;
 }
 .viewPoll {
   text-align: center;
@@ -1781,7 +1778,7 @@ require("source-map-support").install();
 
 .templateInnerContainer {
   width: 1050px;
-  min-height: 100%;
+  min-height: 800px;
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.05);

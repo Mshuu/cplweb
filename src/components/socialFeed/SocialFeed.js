@@ -11,6 +11,7 @@ import SortControl from '../common/SortControl';
 import ShowMore from '../common/ShowMore';
 import SocialPollList from './SocialPollList';
 import SocialFriendControls from './SocialFriendControls';
+import CategoryIcon from '../common/CategoryIcon';
 
 import './SocialFeed.css';
 
@@ -30,7 +31,7 @@ class SocialFeed extends Component {
         <HomeHeader />
 
         <div className="socialPageHeader">
-          <img src={require('../images/social_icon.png')} />
+          <img src={ CategoryIcon['Social'] } />
           Social
         </div>
 

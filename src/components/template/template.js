@@ -47,7 +47,7 @@ class Template extends Component {
       <div className="templateContainer">
         <div className="templateInnerContainer">
           <div className="templateHeader">
-            <img src={ require("./images/ClearPoll-Logo.png") } onClick={() => this.handleLogoClick()}/>
+            <img src={ require("../images/ClearPoll-Logo.png") } onClick={() => this.handleLogoClick()}/>
             <Menu />
           </div>
           <Switch>

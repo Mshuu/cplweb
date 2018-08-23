@@ -113,43 +113,43 @@
 }
 
 .headerFeatureButton.headerStarPolls {
-  background-color: #c99e10;
+  background-color: #222d31;
   transition: background-color 100ms linear;
 }
 
 .headerFeatureButton.headerStarPolls:hover {
-  background-color: #c99210;
+  background-color: #161d1f;
 }
 
-.headerFeatureButton.headerSponsoredPolls {
+.headerFeatureButton.headerSocialPolls {
   background-color: #ef7245;
   transition: background-color 100ms linear;
 }
 
-.headerFeatureButton.headerSponsoredPolls:hover {
+.headerFeatureButton.headerSocialPolls:hover {
   background-color: #d45f30;
 }
 
 .pollIcon {
   height: 50px;
   margin: 10px;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .ratingIcon {
   height: 40px;
   margin: 15px;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .starIcon {
   height: 50px;
   margin: 10px;
-  opacity: 0.6;
+  opacity: 1;
 }
 
-.sponsoredIcon {
+.socialIcon {
   height: 50px;
   margin: 10px;
-  opacity: 0.6;
+  opacity: 0.4;
 }

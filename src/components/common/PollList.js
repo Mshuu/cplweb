@@ -65,7 +65,9 @@ class PollList extends Component {
         <div className="polls">
           { this.pollElements }
         </div>
-        <ShowMore moreAvailable={ this.state.canLoadMore } loading={this.state.loadingMore} onClick={() => this.webFetch()} />
+        {!this.state.loading && 
+          <ShowMore moreAvailable={ this.state.canLoadMore } loading={this.state.loadingMore} onClick={() => this.webFetch()} />
+        }
       </div>
     );
   }

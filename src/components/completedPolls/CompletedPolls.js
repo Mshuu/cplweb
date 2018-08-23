@@ -129,7 +129,7 @@ class CompletedPolls extends Component {
       return <CategoryList basePath={this.pageType} />
     else
       return (
-        <div>
+        <div style={{margin: 0, padding: 0}}>
           <div className="headerLocation">
             <LocationControl defaultLocation={ this.state.locationFilter} onChange={location => this.changeLocationFilter(location)} />
           </div>
@@ -143,7 +143,7 @@ class CompletedPolls extends Component {
   }
 
   get showMoreElement(){
-    if(this.isCategorySelected)
+    if(this.isCategorySelected && !this.state.loading)
       return <ShowMore moreAvailable={ this.state.canLoadMore } loading={this.state.loadingMore} onClick={() => this.webFetch()} />
   }
 

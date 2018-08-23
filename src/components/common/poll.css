@@ -42,18 +42,15 @@
   background-color: #e3e1e1;
 }
 
-.poll .pollNumber {
-  display: flex;
-  margin: 10px;
-}
-
 .poll .pollNumber img, .poll .pollTimeRemaining img {
-  height: 28px;
-  margin-right: 8px;
+  height: 20px;
+  margin-right: 5px;
 }
 
-.poll .pollTimeRemaining {
+.poll .pollNumber, .poll .pollTimeRemaining {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px;
 }
 

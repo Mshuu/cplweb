@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-
+import CategoryIcon from '../../common/CategoryIcon';
 import './SummaryHeader.css';
 
 const IMAGE_PATH = "../../images/";
 
 const CATEGORIES = {
-
-  'Pol': {image: require("../../images/political_icon.png"), title: 'Political'},
-  'Env': {image: require("../../images/environmental_icon.png"), title: 'Environmental'},
-  'Lif': {image: require("../../images/lifestyle_icon.png"), title: 'LifeStyle'},
-  'Hum': {image: require("../../images/humanrights_icon.png"), title: 'Human Rights'},
-  'Oth': {image: require("../../images/other_icon.png"), title: 'Other'},
-  'All': {image: require("../../images/trending_icon.png"), title: 'All'},
-  'Jus': {image: require("../../images/justforfun_icon.png"), title: 'Just For Fun'},
-  'Spo': {image: require("../../images/sports_icon.png"), title: 'Sports'},
-  'Ent': {image: require("../../images/entertainment_icon.png"), title: 'Entertainment'},
-  'Tec': {image: require("../../images/science_icon.png"), title: 'Science & Tech'},
+  'Pol': {title: 'Political & Human Rights'},
+  'Env': {title: 'Science & Nature'},
+  'Lif': {title: 'Lifestyle & Health'},
+  'Hum': {title: 'News & Current Events'},
+  'Oth': {title: 'Everything Else'},
+  'All': {title: 'All Categories'},
+  'Jus': {title: 'Just For Fun'},
+  'Spo': {title: 'Sports, Hobbies & Games'},
+  'Ent': {title: 'Arts & Entertainment'},
+  'Tec': {title: 'Technology & Gadgets'},
 }
 
 class SummaryHeader extends Component {
@@ -30,7 +29,7 @@ class SummaryHeader extends Component {
 
     return (
       <div className="pollSummaryHeader">
-        <img src={ category.image } />
+        <img src={ CategoryIcon[category.title] } />
         <span>{ category.title }</span>
       </div>
     );

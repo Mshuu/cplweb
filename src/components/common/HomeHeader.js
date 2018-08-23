@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CategoryIcon from './CategoryIcon';
 import { withRouter } from 'react-router-dom';
 
 import './HomeHeader.css';
@@ -29,6 +30,10 @@ class HomeHeader extends Component {
 
   openCreateWidget(){
     this.props.history.push(`/createWidget`);
+  }
+
+  openSocial(){
+    this.props.history.push(`/social`);
   }
 
   render() {
@@ -62,12 +67,12 @@ class HomeHeader extends Component {
             <span className="headerFeatureButtonText">Create Widgets</span>
           </div>
           <div className="headerFeatureButton headerStarPolls" onClick={() => this.openStarPolls()}>
-            <img className="starIcon" src={ require("../images/star_icon.png") } />
+            <img className="starIcon" src={ CategoryIcon['Star Polls'] } />
             <span className="headerFeatureButtonText">Star Polls</span>
           </div>
-          <div className="headerFeatureButton headerSponsoredPolls">
-            <img className="sponsoredIcon" src={ require("../images/sponsored_icon.png") } />
-            <span className="headerFeatureButtonText">Sponsored Polls</span>
+          <div className="headerFeatureButton headerSocialPolls" onClick={() => this.openSocial()}>
+            <img className="socialIcon" src={ CategoryIcon['Social'] } />
+            <span className="headerFeatureButtonText">Social</span>
           </div>
         </div>
       </div>

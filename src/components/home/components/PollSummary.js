@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import SummaryHeader from './SummaryHeader';
 import PollRow from './PollRow';
+import CategoryIcon from '../../common/CategoryIcon';
 
 import './PollSummary.css';
 
-const IMAGE_PATH = '../../images/';
 const CATEGORY_MAP = {
-  trendingPolls: {title: 'Trending', image: require("../../images/trending_icon.png") },
-  endingSoonest: {title: 'Ending Soon', image: require("../../images/trending_icon.png") },
-  latestPolls: {title: 'Latest', image: require("../../images/latestPolls_icon.png") },
-  starPolls: {title: 'Star Polls', image: require("../../images/starPolls_icon.png"), url: '/starPolls' },
-  myVotes: {title: 'My Votes', image: require("../../images/myVotes_icon.png"), url: '/myVotes' },
-  localPolls: {title: 'Local', image: require("../../images/local_icon.png") },
-  nationalPolls: {title: 'National', image: require("../../images/national_icon.png") },
-  socialPolls: {title: 'Friends Voted On...', image: require("../../images/social_icon.png"), url: '/social' },
-  politicalPolls: {title: 'Political & Human Rights', image: require("../../images/political_icon.png"), url: '/browse/Pol' },
-  humanRightsPolls: {title: 'News & Current Events', image: require("../../images/humanrights_icon.png"), url: '/browse/Hum' },
-  lifestylePolls: {title: 'Lifestyle & Health', image: require("../../images/lifestyle_icon.png"), url: '/browse/Lif' },
-  sportsPolls: {title: 'Sports, Hobbies & Game', image: require("../../images/sports_icon.png"), url: '/browse/Spo' },
-  technologyPolls: {title: 'Business & Finance', image: require("../../images/science_icon.png"), url: '/browse/Tec' },
-  environmentPolls: {title: 'Science & Nature', image: require("../../images/environmental_icon.png"), url: '/browse/Env' },
-  justForFunPolls: {title: 'Technology & Gadgets', image: require("../../images/justforfun_icon.png"), url: '/browse/Jus' },
-  entertainmentPolls: {title: 'Arts & Entertainment', image: require("../../images/entertainment_icon.png"), url: '/browse/Ent' },
-  otherPolls: {title: 'Everything Else', image: require("../../images/other_icon.png"), url: '/browse/Oth' },
-  randomPolls: {title: 'Random', image: require("../../images/other_icon.png") },
+  trendingPolls: {title: 'Trending'},
+  endingSoonest: {title: 'Ending Soon'},
+  latestPolls: {title: 'Latest'},
+  starPolls: {title: 'Star Polls', url: '/starPolls' },
+  myVotes: {title: 'My Votes', url: '/myVotes' },
+  localPolls: {title: 'Local'},
+  nationalPolls: {title: 'National' },
+  socialPolls: {title: 'Friends Voted On...', url: '/social' },
+  politicalPolls: {title: 'Political & Human Rights', url: '/browse/Pol' },
+  humanRightsPolls: {title: 'News & Current Events', url: '/browse/Hum' },
+  lifestylePolls: {title: 'Lifestyle & Health', url: '/browse/Lif' },
+  sportsPolls: {title: 'Sports, Hobbies & Games', url: '/browse/Spo' },
+  technologyPolls: {title: 'Business & Finance', url: '/browse/Tec' },
+  environmentPolls: {title: 'Science & Nature', url: '/browse/Env' },
+  justForFunPolls: {title: 'Technology & Gadgets', url: '/browse/Jus' },
+  entertainmentPolls: {title: 'Arts & Entertainment', url: '/browse/Ent' },
+  otherPolls: {title: 'Everything Else', url: '/browse/Oth' },
+  randomPolls: {title: 'Random'},
 };
 
 class PollSummary extends Component {
@@ -53,7 +53,7 @@ class PollSummary extends Component {
 
       return (
         <div>
-          <SummaryHeader title={ details.title } image={ details.image } url={ details.url } />
+          <SummaryHeader title={ details.title } image={ CategoryIcon[details.title] } url={ details.url } />
           <PollRow polls={ this.getPollsFor(category, 4) } />
         </div>
       );
@@ -70,7 +70,7 @@ class PollSummary extends Component {
         { this.getRowFor('endingSoonest') }
         { this.getRowFor('latestPolls') }
 
-        <SummaryHeader title={ "Star Polls" } image={ require("../../images/starPolls_icon.png") } url={ '/starPolls' }/>
+        <SummaryHeader title={ "Star Polls" } image={ CategoryIcon['Star Polls'] } url={ '/starPolls' }/>
         <PollRow polls={ this.getPollsFor('starPolls', 3) } forceNormal={ false } />
 
         { this.getRowFor('myVotes') }

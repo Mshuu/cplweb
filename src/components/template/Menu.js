@@ -25,51 +25,47 @@ class Menu extends Component {
   render() {
     return (
       <div className="menuContainer" onMouseOver={() => this.toggleMenu(true)} onMouseOut={() => this.toggleMenu(false)}>
-        <img src={ require("./images/menu_icon.png") } />
+        <img src={ require("../images/menu_icon.png") } />
 
         <div className={ this.state.active ? "menu" : "menu inactive" }>
           <div onClick={() => this.openUrl('/browse')}>
-            <img src={ require('./images/vote_icon.png') } />
+            <img src={ require('../images/menuIcons/vote_icon.png') } />
             Vote
           </div>
           <div onClick={() => this.openUrl('/createWidget')}>
-            <img src={ require('./images/create_icon.png') } />
+            <img src={ require('../images/menuIcons/create_icon.png') } />
             Create Widgets
           </div>
           <div onClick={() => this.openUrl('/completed')}>
-            <img src={ require('./images/completed_icon.png') } />
+            <img src={ require('../images/menuIcons/completed_icon.png') } />
             View Completed Polls
           </div>
           <div onClick={() => this.openUrl('/social')}>
-            <img src={ require('./images/social_icon.png') } />
+            <img src={ require('../images/menuIcons/social_icon.png') } />
             Social
           </div>
           <div onClick={() => this.openUrl('/rewards')}>
-            <img src={ require('./images/rewards_icon.png') } />
+            <img src={ require('../images/menuIcons/rewards_icon.png') } />
             Rewards
           </div>
           <div onClick={() => this.openUrl('/myVotes')}>
-            <img src={ require('./images/myvotes_icon.png') } />
+            <img src={ require('../images/menuIcons/myvotes_icon.png') } />
             My Votes
           </div>
           <div onClick={() => this.openUrl('/myPolls')}>
-            <img src={ require('./images/mypolls_icon.png') } />
+            <img src={ require('../images/menuIcons/mypolls_icon.png') } />
             My Polls
           </div>
           <div onClick={() => this.openUrl('/starPolls')}>
-            <img src={ require('./images/star_icon.png') } />
+            <img src={ require('../images/menuIcons/star_icon.png') } />
             Star Polls
           </div>
-          <div onClick={() => this.openUrl('/sponsoredPolls')}>
-            <img src={ require('./images/sponsored_icon.png') } />
-            Sponsored Polls
-          </div>
           <div onClick={() => this.openUrl('/account')}>
-            <img src={ require('./images/account_icon.png') } />
+            <img src={ require('../images/menuIcons/account_icon.png') } />
             Account & Settings
           </div>
           <div onClick={() => this.openExternalUrl('https://clearpoll.com/faq/')}>
-            <img src={ require('./images/support_icon.png') } />
+            <img src={ require('../images/menuIcons/support_icon.png') } />
             FAQ & Support
           </div>
         </div>
