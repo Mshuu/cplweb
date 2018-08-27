@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const SERVER_BASE_URL = JSON.stringify("http://node12.l2shuu.com:3001");
+const SERVER_BASE_URL = JSON.stringify("http://127.0.0.1:3001");
 
 const common = {
   rules: [
@@ -111,8 +111,8 @@ const serverConfig = {
 
 const clientWidgetConfig = {
   entry: './src/widget/widget.js',
-  mode: "production",
-//  devtool: 'eval-cheap-module-source-map',
+  mode: "development",
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'widget.js',
@@ -146,8 +146,8 @@ const clientWidgetConfig = {
 
 const widgetConfig = {
   entry: './src/WidgetApp.js',
-  mode: "production",
- // devtool: 'eval-cheap-module-source-map',
+  mode: "development",
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'widgetBundle.js',

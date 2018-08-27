@@ -1,6 +1,10 @@
 import ClearpollApi from './webApi';
 import moment from 'moment';
 
+function numberToCommaFormat(num){
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 class Poll {
   constructor(params){
     Object.assign(this, params);
@@ -22,6 +26,10 @@ class Poll {
     let endTime = moment(1000*this.pollTime);
 
     return endTime <= now;
+  }
+
+  get votes(){
+    return numberToCommaFormat(this.pollVotes);
   }
 }
 

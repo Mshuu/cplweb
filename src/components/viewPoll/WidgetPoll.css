@@ -1,4 +1,7 @@
 .widgetPoll {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   background-color: #fff;
   height: 100%;
 }
@@ -16,6 +19,6 @@
 }
 
 .scrollableContainer {
-  height: calc(100% - 80px);
+  flex: 1 0;
   overflow-y: auto;
 }

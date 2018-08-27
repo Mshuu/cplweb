@@ -45,7 +45,10 @@
   padding: 16px 0;
   font-size: 22px;
   width: calc(100% - 200px);
-  text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;
+  text-align: center;
+  outline: none;
+  border: none !important;
+  border-radius: 3px 0px 0px 3px;
 }
 
 .searchInput:focus {

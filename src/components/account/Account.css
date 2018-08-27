@@ -26,7 +26,8 @@
 
 .settingsHighlight {
   color: #01bec0;
-  padding-right: 5px;font-weight:bold;
+  padding-right: 5px;
+  font-weight: bold;
 }
 
 .accountHeader {
@@ -54,7 +55,8 @@
 }
 
 .deleteAccountButton:hover {
-  background-color: #a80101;transition:all 200ms;
+  background-color: #a80101;
+  transition: all 200ms;
 }
 
 .totesImportants {

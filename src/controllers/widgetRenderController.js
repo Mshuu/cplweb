@@ -7,27 +7,48 @@ import Authenticator from '../models/authenticator';
 import WidgetRouter from '../components/widgetRouter';
 
 const WidgetPoll = async ( req, res ) => {
+  let pollId = req.params.pollId;
   let auth;
+  let store = new Store();
 
   try {
     auth = Authenticator.verify( req.cookies['_auth'] );
   } catch(e) {
-    res.redirect('/login');
-    return;
+    //store.setAuthenticated( false );
   }
 
-  if(!req.params.pollId){
+  if(!pollId){
     res.status(404).end();
+    return;
   }
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
-  let store = new Store();
-  store.setPoll( req.params.pollId, await apiClient.fetchPoll(req.params.pollId) );
-
-  renderReact(req, res, store);
+  if(auth)
+    authenticatedWidget(req, res, store, pollId, auth);
+  else
+    unauthenticatedWidget(req, res, store, pollId);
 };
+
+async function authenticatedWidget(req, res, store, pollId, auth){
+  let apiClient = new ServerApi(auth);
+
+  store.setAuthenticated( true );
+  store.setPoll( pollId, await apiClient.fetchPoll(pollId) );
+
+  renderReact(req, res, store, pollId);
+}
+
+async function unauthenticatedWidget(req, res, store, pollId){
+  console.log('unauth widget');
+  let apiClient = new ServerApi();
+
+  store.setAuthenticated( false );
+  store.setPoll( pollId, await apiClient.fetchUnauthPoll(pollId) );
+
+  renderReact(req, res, store, pollId);
+}
+
 
 
 function renderHead(req, res){
@@ -35,7 +56,7 @@ function renderHead(req, res){
   res.write(htmlHead);
 }
 
-function renderReact(req, res, store){
+function renderReact(req, res, store, pollId){
   let context = {};
   let url = req.url;
 
@@ -49,7 +70,7 @@ function renderReact(req, res, store){
   appStream.pipe(res, {end: false})
 
   appStream.on(`end`, () => {
-    res.end(htmlTail(store))
+    res.end(htmlTail(store, pollId))
   })
 }
 
@@ -94,12 +115,13 @@ const htmlHead = `
   </head>
   <body>
     <div id="root">
-`
-const htmlTail = store => `
+`;
+
+const htmlTail = (store, pollId) => `
       </div>
       <script>
         if(window.parent){
-          window.parent.postMessage({event: "loadingComplete"}, '*');
+          window.parent.postMessage({event: "loadingComplete", pollId: ${pollId}}, '*');
           console.log("Message sent");
         }
         window.storeData = ${JSON.stringify(store.data)};

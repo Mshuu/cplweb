@@ -6,6 +6,14 @@ import Store from '../models/store';
 import Authenticator from '../models/authenticator';
 import Template from '../components/template/template';
 import WidgetRouter from '../components/widgetRouter';
+import url from 'url';
+
+const defaultMetadata = {
+  title: "Clearpoll Desktop",
+  description: "Vote on anything, anytime.",
+  imageUrl: ""
+};
+
 
 const Home = async ( req, res ) => {
   let auth;
@@ -47,12 +55,16 @@ const Poll = async ( req, res ) => {
     res.status(404).end();
   }
 
-  renderHead(req, res);
+
 
   let apiClient = new ServerApi(auth);
   let store = new Store();
-  store.setPoll( req.params.pollId, await apiClient.fetchPoll(req.params.pollId) );
+  let poll = await apiClient.fetchPoll(req.params.pollId);
+  store.setPoll( req.params.pollId, poll );
 
+  let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+
+  renderHead(req, res, metadata);
   renderReact(req, res, store);
 };
 
@@ -349,9 +361,16 @@ const Rewards = async ( req, res ) => {
 
 
 
-function renderHead(req, res){
+function renderHead(req, res, metadata = defaultMetadata){
+  let thisUrl = url.format({
+    protocol: req.protocol,
+    host: req.get('host'),
+    pathname: req.originalUrl
+  });
+
+
   res.writeHead( 200, { "Content-Type": "text/html" } );
-  res.write(htmlHead);
+  res.write(htmlHead(thisUrl, metadata));
 }
 
 function renderReact(req, res, store){
@@ -372,7 +391,7 @@ function renderReact(req, res, store){
   })
 }
 
-const htmlHead = `
+const htmlHead = (url, metadata) => `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -381,6 +400,11 @@ const htmlHead = `
     <meta name="theme-color" content="#000000">
   	<link rel="shortcut icon" href="/public/favicon.png" type="image/x-icon" />
 
+    <meta property="og:url"         content="${url}" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="${metadata.title}" />
+    <meta property="og:description" content="${metadata.description}" />
+    <meta property="og:image"       content="${metadata.imageUrl}" />
 
     <link rel="shortcut icon" href="/public/favicon.ico">
     <link href="/public/style.css" rel="stylesheet" type="text/css">
@@ -417,7 +441,8 @@ const htmlHead = `
   </head>
   <body>
     <div id="root" style="width: 100%; height: 100%; margin: 0; padding: 0;">
-`
+`;
+
 const htmlTail = store => `
       </div>
       <script>

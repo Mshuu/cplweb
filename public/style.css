@@ -29,9 +29,15 @@
   font-family: 'Roboto-Light-CPL';
   flex: 1 1 auto;
   padding: 5px;
+<<<<<<< HEAD
   height: 34px;
   font-size: 16px;
   text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;
+=======
+  height: 30px;
+  font-size: 16px;
+  text-align: center;
+>>>>>>> master
 }
 
 .socialSearchButton {
@@ -44,6 +50,7 @@
   width: 44px;
   background-color: #01bec0;
   transition: background-color 100ms linear;
+<<<<<<< HEAD
   cursor: pointer;border-radius:0px 3px 3px 0px;
 }
 
@@ -51,6 +58,11 @@
 
 .socialSearchButton:hover {  background-color:#009799;
 }
+=======
+  cursor: pointer;
+}
+
+>>>>>>> master
 .socialSearchResults {
   position: absolute;
   background-color: #fff;
@@ -277,7 +289,11 @@
 .homeHeader {
   display: flex;
   flex-direction: row;
+<<<<<<< HEAD
   height: 260px;
+=======
+  height: 200px;
+>>>>>>> master
   background-color: rgb(0, 35, 75, 0.5);
   background-blend-mode: multiply;
 }
@@ -321,7 +337,14 @@
   padding: 16px 0;
   font-size: 22px;
   width: calc(100% - 200px);
+<<<<<<< HEAD
   text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;
+=======
+  text-align: center;
+  outline: none;
+  border: none !important;
+  border-radius: 3px 0px 0px 3px;
+>>>>>>> master
 }
 
 .searchInput:focus {
@@ -465,7 +488,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ef6f13', end
 .socialIcon {
   height: 50px;
   margin: 10px;
+<<<<<<< HEAD
   opacity: 1;
+=======
+  opacity: 0.4;
+>>>>>>> master
 }
 .poll {
   display: inline-block;
@@ -1093,6 +1120,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 .socialPollList { 
   flex-grow: 1;
 }
+<<<<<<< HEAD
 
 .loadingOverlayFullScreen {
   position:fixed;
@@ -1136,6 +1164,86 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   }
 }
 
+@-webkit-keyframes lds-ripple {
+=======
+
+.loadingOverlayFullScreen {
+  position:fixed;
+  z-index:3;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingOverlayDisabled {
+  display: none !important;
+}
+
+.loadingOverlay {
+  width:100%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes lds-ripple {
+>>>>>>> master
+  0% {
+    top: 90px;
+    left: 90px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 35px;
+    left: 35px;
+    width: 110px;
+    height: 110px;
+    opacity: 0;
+  }
+}
+
+<<<<<<< HEAD
+.lds-ripple {
+  position: relative;
+}
+
+.lds-ripple div {
+  box-sizing: content-box;
+  position: absolute;
+  border-width: 10px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  -webkit-animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds-ripple div:nth-child(1) {
+  border-color: #98fffc;
+}
+
+.lds-ripple div:nth-child(2) {
+  border-color: #1764a1;
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+.lds-ripple {
+  width: 200px !important;
+  height: 200px !important;
+  -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}
+
+=======
 @-webkit-keyframes lds-ripple {
   0% {
     top: 90px;
@@ -1185,6 +1293,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
 }
 
+>>>>>>> master
 .socialFriendRequests {
   display: flex;
   flex-direction: column;
@@ -1399,7 +1508,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 
 .settingsHighlight {
   color: #01bec0;
+<<<<<<< HEAD
   padding-right: 5px;font-weight:bold;
+=======
+  padding-right: 5px;
+  font-weight: bold;
+>>>>>>> master
 }
 
 .accountHeader {
@@ -1427,7 +1541,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 }
 
 .deleteAccountButton:hover {
+<<<<<<< HEAD
   background-color: #a80101;transition:all 200ms;
+=======
+  background-color: #a80101;
+  transition: all 200ms;
+>>>>>>> master
 }
 
 .totesImportants {
@@ -1916,5 +2035,166 @@ html {
 .catSummaryHeader span {
   color: #ffffff;
   font-size: 22px;
+  line-height: 30px;
+}
+
+.summaryHeader {
+  width: 100%;
+  display: flex;
+  height: 30px;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.summaryHeader img {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px -3px 0;
+}
+
+.summaryHeader span {
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 30px;
+}
+.pollRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.pollSummary {
+  padding:  10px 35px 30px 35px;
+}
+.answersContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.answersSpacer {
+  flex: 1;
+  min-height: 1px;
+}
+
+.answer {
+  height: 50px;
+  border-radius: 30px;
+  text-align: center;
+  line-height: 50px;
+  color: #ffffff;
+  font-size: 21px;
+  background-color: #01bec0;
+  margin: 3px;
+}
+
+.answer:hover {
+  filter: brightness(90%);
+  transition: filter 100ms linear;
+  cursor: pointer;
+}
+.graphContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 35px;
+}
+
+.graphContainer .resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.graphContainer .graph {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.graphContainer .resultAnswer {
+  text-align: left;
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.voteCount, .votePercentage {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  height: 50px;
+  font-size: 21px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-right: 6px;
+}
+
+.voteCount {
+  width: 90px;
+}
+
+.votePercentage {
+  width: 65px;
+}
+
+.voteBarContainer {
+  flex-grow: 1;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.voteBarContainer .voteBarInner {
+  min-height: 50px;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+  transform-origin: bottom left;
+}
+
+
+
+.pollSummaryHeader {
+  width: 100%;
+  display: flex;
+  height: 30px;
+  margin: 20px 0;
+  padding: 0 0 0 35px;
+}
+
+.pollSummaryHeader img {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px -3px 0;
+}
+
+.pollSummaryHeader span {
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.catSummaryHeader {
+  display: inline-flex;
+  height: 30px;
+  width: 500px;
+  margin: 20px 0 0 0;
+}
+
+.catSummaryHeader img {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px -3px 0;
+}
+
+.catSummaryHeader span {
+  color: #ffffff;
+  font-size: 24px;
   line-height: 30px;
 }

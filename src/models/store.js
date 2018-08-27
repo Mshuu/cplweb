@@ -75,4 +75,12 @@ export default class Store {
   getUserSettings(){
     return this.data.userSettings;
   }
+
+  setAuthenticated(isAuthenticated){
+    this.data.authenticated = isAuthenticated;
+  }
+
+  getAuthenticated(){
+    return this.data.authenticated;
+  }
 }
