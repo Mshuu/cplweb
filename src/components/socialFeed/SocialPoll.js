@@ -33,14 +33,30 @@ class SocialPoll extends Component {
       );
   }
 
-
-  render() {
-    return (
-      <div className="socialPoll">
+  get descriptionText(){
+    if(this.poll.createdPoll == 'T'){
+      return (
+        <div className="pollLeft">
+          <span className="textHightlightGreen">{ this.poll.friendName }</span> created poll #{ this.poll.pollId}
+          <span className="textHightlightBlack"> '{this.poll.topic}'</span>
+        </div>
+      );
+    } else {
+      return (
         <div className="pollLeft">
           <span className="textHightlightGreen">{ this.poll.friendName }</span> voted <span className="textHightlightBlack">'{ this.poll.friendVoted }'</span> on poll #{ this.poll.pollId}
           <span className="textHightlightBlack"> '{this.poll.topic}'</span>
         </div>
+      );
+    }
+  }
+
+  render() {
+    console.dir(this.poll);
+    return (
+      <div className="socialPoll">
+        { this.descriptionText }
+
         <div className="pollRight">
           { this.button() }
         </div>  

@@ -59,13 +59,14 @@ class SocialFriendList extends Component {
     let friend = this.state.friends.find(f => f.id == friendId);
 
     if(confirm(`Are you sure you want to remove ${ friend.username }?`)){
+      this.props.onRefresh(false);
       let removePromise = WebApi.ignoreFriendRequest(friendId);
 
       let friends = this.state.friends.filter(f => f.id != friendId);
       this.setState({friends});
 
       await removePromise;
-      this.props.onRefresh();
+      this.props.onRefresh(true);
     }
   }
 

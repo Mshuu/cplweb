@@ -94,8 +94,12 @@ class Login extends Component {
             Not registered? Install ClearPoll app to get started!
           </div>
           <div className="installBannerImages">
-            <img src={ require('../images/google_play_icon.png') }/>
-            <img src={ require('../images/app_store_icon.svg') }/>
+            <a href="https://play.google.com/store/apps/developer?id=ClearPoll" target="_blank">
+              <img src={ require('../images/google_play_icon.png') }/>
+            </a>
+            <a href="https://itunes.apple.com/us/app/clearpoll/id1347664374" target="_blank">
+              <img src={ require('../images/app_store_icon.svg') }/>
+            </a>
           </div>
         </div>
       </div>

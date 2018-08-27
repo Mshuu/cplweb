@@ -310,10 +310,10 @@ class ServerApi {
     });
   }
 
-  async ignoreFriendRequest(friendId){
+  async ignoreFriendRequest(requestId){
     return await ServerApi.request({
       function: 'IgnoreFriendRequest',
-      friendId,
+      requestId,
       ...this.auth
     });
   }

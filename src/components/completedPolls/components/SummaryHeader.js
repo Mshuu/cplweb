@@ -10,10 +10,10 @@ const CATEGORY_MAP = {
   'Hum': {title: 'News & Current Events'},
   'Oth': {title: 'Everything Else'},
   'All': {title: 'All Categories'},
-  'Jus': {title: 'Just For Fun'},
+  'Jus': {title: 'Technology & Gadgets'},
   'Spo': {title: 'Sports, Hobbies & Games'},
   'Ent': {title: 'Arts & Entertainment'},
-  'Tec': {title: 'Technology & Gadgets'},
+  'Tec': {title: 'Business & Finance'},
 
   "All": { title: "All Categories" },
   "Star": { title: "Star Polls" },

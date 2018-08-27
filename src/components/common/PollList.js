@@ -6,7 +6,7 @@ import ShowMore from './ShowMore';
 
 import './PollList.css';
 
-const LOAD_MORE_QTY = 16;
+const LOAD_MORE_QTY = 20;
 
 class PollList extends Component {
   constructor(props){
