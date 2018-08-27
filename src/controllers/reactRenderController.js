@@ -10,7 +10,7 @@ import url from 'url';
 
 const defaultMetadata = {
   title: "Clearpoll Desktop",
-  description: "Vote on anything, anytime.",
+  description: "ClearPoll - Vote on anything, any time. Earn crypto rewards for creating polls. Get the ClearPoll app now!",
   imageUrl: `${SERVER_BASE_URL}/public/share_thumbnail.png`
 };
 
@@ -55,8 +55,6 @@ const Poll = async ( req, res ) => {
   if(!req.params.pollId){
     res.status(404).end();
   }
-
-
 
   let apiClient = new ServerApi(auth);
   let store = new Store();
