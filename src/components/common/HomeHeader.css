@@ -1,8 +1,8 @@
 .homeHeader {
   display: flex;
   flex-direction: row;
-  height: 300px;
-  background-color: rgb(0, 14, 39, 0.25);
+  height: 260px;
+  background-color: rgb(0, 35, 75, 0.5);
   background-blend-mode: multiply;
 }
 
@@ -10,9 +10,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 70px;
+  padding-top: 60px;
   align-items: center;
-  padding: 70px 20px 0px 20px;
+  padding: 60px 20px 0px 20px;
 }
 
 .homeRight {
@@ -45,15 +45,15 @@
   padding: 16px 0;
   font-size: 22px;
   width: calc(100% - 200px);
-  text-align: center;
+  text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;
 }
 
 .searchInput:focus {
-  outline: none;
+  outline: none; 
 }
 
 .searchInput::placeholder {
-  opacity: 0.6;
+  opacity: 0.5!important;
 }
 
 .searchButton {
@@ -64,7 +64,7 @@
   height: 66px;
   width: 66px;
   flex: 0 0 66px;
-  background-color: #01bec0;
+  background-color: #01bec0;border-radius:0px 3px 3px 0px;
 }
 
 .searchButton:hover {
@@ -83,51 +83,89 @@
   justify-content: center;
   flex-direction: column;
   width: 160px;
-  height: 120px;
+  height: 100px;
   margin: 5px;
   cursor: pointer;
   border-radius: 4px;
 }
 
+.headerFeatureButton img {margin-top:0px;}
+
 .headerFeatureButtonText {
   color: #fff;
-  font-size: 16px;
+  font-size: 16px;margin-top:-6px;
 }
 
 .headerFeatureButton.headerBrowsePolls {
-  background-color: #01bec0;
+  background: #0bc1c4; /* Old browsers */
+background: -moz-linear-gradient(top, #0bc1c4 0%, #0097a8 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #0bc1c4 0%,#0097a8 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #0bc1c4 0%,#0097a8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bc1c4', endColorstr='#0097a8',GradientType=0 ); /* IE6-9 */
   transition: background-color 100ms linear;
 }
 
 .headerFeatureButton.headerBrowsePolls:hover {
-  background-color: #28a2a6;
+  background: #0bb4ba; /* Old browsers */
+background: -moz-linear-gradient(top, #0bb4ba 0%, #00869e 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #0bb4ba 0%,#00869e 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #0bb4ba 0%,#00869e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', endColorstr='#00869e',GradientType=0 ); /* IE6-9 */    transition: all 200ms;
+
 }
 
 .headerFeatureButton.headerCreateWidgets {
-  background-color: #5691d3;
+  background: #6390ce; /* Old browsers */
+background: -moz-linear-gradient(top, #6390ce 0%, #2e62c9 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #6390ce 0%,#2e62c9 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #6390ce 0%,#2e62c9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6390ce', endColorstr='#2e62c9',GradientType=0 ); /* IE6-9 */;
   transition: background-color 100ms linear;
 }
 
 .headerFeatureButton.headerCreateWidgets:hover {
-  background-color: #3970bb;
+  background: #4982cc; /* Old browsers */
+background: -moz-linear-gradient(top, #4982cc 0%, #2a4fb7 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #4982cc 0%,#2a4fb7 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #4982cc 0%,#2a4fb7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4982cc', endColorstr='#2a4fb7',GradientType=0 ); /* IE6-9 */    transition: all 200ms;
+
 }
 
 .headerFeatureButton.headerStarPolls {
-  background-color: #222d31;
+  background: #384249; /* Old browsers */
+background: -moz-linear-gradient(top, #384249 0%, #242d31 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #384249 0%,#242d31 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #384249 0%,#242d31 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#384249', endColorstr='#242d31',GradientType=0 ); /* IE6-9 */
   transition: background-color 100ms linear;
 }
 
 .headerFeatureButton.headerStarPolls:hover {
-  background-color: #161d1f;
+  background: #2b3238; /* Old browsers */
+background: -moz-linear-gradient(top, #2b3238 0%, #181e21 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #2b3238 0%,#181e21 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #2b3238 0%,#181e21 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b3238', endColorstr='#181e21',GradientType=0 ); /* IE6-9 */    transition: all 200ms;
+
 }
 
 .headerFeatureButton.headerSocialPolls {
-  background-color: #ef7245;
-  transition: background-color 100ms linear;
+background: #f98313; /* Old browsers */
+background: -moz-linear-gradient(top, #f98313 0%, #cc5633 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #f98313 0%,#cc5633 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #f98313 0%,#cc5633 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', endColorstr='#cc5633',GradientType=0 ); /* IE6-9 */
+  ;transition: background-color 100ms linear;
 }
 
 .headerFeatureButton.headerSocialPolls:hover {
-  background-color: #d45f30;
+  background: #ef6f13; /* Old browsers */
+background: -moz-linear-gradient(top, #ef6f13 0%, #c44e23 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #ef6f13 0%,#c44e23 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #ef6f13 0%,#c44e23 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ef6f13', endColorstr='#c44e23',GradientType=0 ); /* IE6-9 */    transition: all 200ms;
+
 }
 
 .pollIcon {
@@ -139,7 +177,7 @@
 .ratingIcon {
   height: 40px;
   margin: 15px;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .starIcon {
@@ -151,5 +189,5 @@
 .socialIcon {
   height: 50px;
   margin: 10px;
-  opacity: 0.4;
+  opacity: 1;
 }

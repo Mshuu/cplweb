@@ -19,10 +19,20 @@
   font-size: 21px;
   background-color: #01bec0;
   margin: 3px;
+  -ms-transform: scale(1.00, 1.00); /* IE 9 */
+    -webkit-transform: scale(1.00, 1.00); /* Safari */
+    transform: scale(1.00, 1.00);
+  -webkit-transition: all 200ms; /* Safari */
+    transition: all 200ms;
 }
 
+.answer::first-letter {text-transform:uppercase}
+
 .answer:hover {
-  filter: brightness(90%);
-  transition: filter 100ms linear;
+  -ms-transform: scale(1.04, 1.04); /* IE 9 */
+    -webkit-transform: scale(1.04, 1.04); /* Safari */
+    transform: scale(1.04, 1.04);
+  -webkit-transition: all 200ms; /* Safari */
+    transition: all 200ms;
   cursor: pointer;
 }

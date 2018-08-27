@@ -407,11 +407,10 @@ const htmlHead = `
           float: left;
           width: 100%;
           background: #057cab; /* Old browsers */
-          background: #057cab; /* Old browsers */
-          background: -moz-linear-gradient(top, #019eba 1%, #057cab 15%, #234588 45%, #2c3372 66%, #472078 100%); /* FF3.6-15 */
-          background: -webkit-linear-gradient(top, #019eba 1%, #057cab 15%,#234588 45%,#2c3372 66%,#472078 100%); /* Chrome10-25,Safari5.1-6 */
-          background: linear-gradient(to bottom, #019eba 1%, #057cab 15%,#234588 45%,#2c3372 66%,#472078 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#019eba', endColorstr='#472078',GradientType=0 ); background-attachment: fixed;
+          background: -moz-linear-gradient(top, #019eba 1%, #057cab 11%, #234588 40%, #2c3372 60%, #24145e 80%, #271148 100%); /* FF3.6-15 */
+          background: -webkit-linear-gradient(top, #019eba 1%, #057cab 11%,#234588 40%,#2c3372 60%,#24145e 80%, #271148 100%); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(to bottom, #019eba 1%, #057cab 11%,#234588 40%,#2c3372 60%,#24145e 80%, #271148 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#019eba', endColorstr='#24145e',GradientType=0 ); background-attachment: fixed;
           font-family: 'Roboto-Light-CPL';
       }
     </style>

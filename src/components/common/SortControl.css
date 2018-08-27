@@ -22,13 +22,13 @@
   position: absolute;
   margin: 35px 0 0 0;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 150px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
   z-index: 1;
   right: 0;
   top: 0;
   background-color: #fff;
-  padding: 10px;
+  padding: 10px;border-radius:3px;
 }
 
 .sortListDisabled {
@@ -48,9 +48,9 @@
 
 .sortListItem {
   list-style: none;
-  width: 200px;
+  width: 130px;
   margin:5px 0 0 0;
-  padding: 3px 0 3px 10px;
+  padding: 10px;border-radius:3px;
   cursor: pointer;
   text-align: left;
   color: #000;
