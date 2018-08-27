@@ -1,8 +1,8 @@
 .homeHeader {
   display: flex;
   flex-direction: row;
-  height: 300px;
-  background-color: rgb(0, 14, 39, 0.25);
+  height: 200px;
+  background-color: rgb(0, 35, 75, 0.5);
   background-blend-mode: multiply;
 }
 
@@ -10,9 +10,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 70px;
+  padding-top: 60px;
   align-items: center;
-  padding: 70px 20px 0px 20px;
+  padding: 60px 20px 0px 20px;
 }
 
 .homeRight {
@@ -46,6 +46,9 @@
   font-size: 22px;
   width: calc(100% - 200px);
   text-align: center;
+  outline: none;
+  border: none !important;
+  border-radius: 3px 0px 0px 3px;
 }
 
 .searchInput:focus {
@@ -53,7 +56,7 @@
 }
 
 .searchInput::placeholder {
-  opacity: 0.6;
+  opacity: 0.6 !important;
 }
 
 .searchButton {

@@ -37,6 +37,11 @@ class Login extends Component {
 
     try {
       await WebApi.login(this.state.username, this.state.desktopCode);
+
+      if(window.parent){
+        window.parent.postMessage({event: "loggedIn"}, '*');
+      }
+
       this.props.history.push('/');
     } catch(e) {
       alert(e.message);

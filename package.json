@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@svgr/cli": "^2.2.0",
     "axios": "^0.18.0",
     "babel-jest": "^23.4.0",
     "babel-plugin-css-modules-transform": "^1.6.1",
@@ -30,6 +31,7 @@
     "query-string": "^6.1.0",
     "react": "^16.4.2",
     "react-copy-to-clipboard": "^5.0.1",
+    "react-cursor-position": "^2.5.0",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

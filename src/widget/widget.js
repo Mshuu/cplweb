@@ -5,8 +5,11 @@ class WidgetLoader {
   constructor(){
     this.pollWidgets = [];
 
-    this.addLoadingStyle();
-    this.findAndInitialize();
+    if(!window.__cplLoaded){
+      window.__cplLoaded = true;
+      this.addLoadingStyle();
+      this.findAndInitialize();
+    }
   }
 
   findAndInitialize(){

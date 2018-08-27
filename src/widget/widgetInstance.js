@@ -9,8 +9,17 @@ class WidgetInstance {
     return this.pollDiv.attributes['data-clearpoll-pollid'].value;
   }
 
+  get pollType(){
+    let dataProp = this.pollDiv.attributes['data-clearpoll-type'];
+    return dataProp? dataProp.value : 'standard';
+  }
+
   get widgetUrl(){
-    return `${SERVER_BASE_URL}/poll/${this.pollId}/widget`;
+    return `${SERVER_BASE_URL}/poll/${this.pollId}/widget?type=${this.pollType}`;
+  }
+
+  get loginUrl(){
+    return `${SERVER_BASE_URL}/login`;
   }
 
   initialize(){
@@ -47,22 +56,54 @@ class WidgetInstance {
     this.iframe.style.display = 'none';
 
     window.addEventListener("message", this.handleIframeMessage.bind(this), false);
+  
     this.pollDiv.appendChild(this.iframe);
+  }
 
+  refreshPoll(){
+    this.loadingContainer.style.display = 'block';
+
+    this.pollDiv.removeChild(this.iframe);
+    this.createIframe();
+  }
+
+  openLogin(){
+    this.loginOverlay = document.createElement('div');
+    this.loginOverlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center;';
+    this.loginOverlay.addEventListener("click", () => this.closeLogin());
+
+    let loginIframe = document.createElement('iframe');
+    loginIframe.src = this.loginUrl;
+    loginIframe.frameBorder = 0;
+    loginIframe.scrolling = "no";
+    loginIframe.style.cssText = 'width: 1050px; height: 800px; overflow: hidden; opacity: 1;';
+    this.loginOverlay.appendChild(loginIframe);
+
+    document.body.appendChild(this.loginOverlay);
+  }
+
+  closeLogin(){
+    if(!this.loginOverlay) return;
+
+    document.body.removeChild(this.loginOverlay);
   }
 
   handleIframeMessage(messageEvent){
-    let originFullUrl = messageEvent.source.location.href;
-
-    if(originFullUrl != this.widgetUrl) return;
-
     let data = messageEvent.data;
 
     switch(data.event){
       case 'loadingComplete':
+        if(data.pollId != this.pollId) return;
         this.closeLoading();
         break;
-
+      case 'openLogin':
+        if(data.pollId != this.pollId) return;
+        this.openLogin();
+        break;
+      case 'loggedIn':
+        this.closeLogin();
+        this.refreshPoll();
+        break;
     }
   }
 }

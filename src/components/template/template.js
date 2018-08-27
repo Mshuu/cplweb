@@ -42,13 +42,19 @@ class Template extends Component {
     window.location = 'https://clearpoll.com/'; // TODO - Change me!
   }
 
+  get showMenu(){
+    console.dir(this.props);
+    //console.dir(window.location.href);
+    return this.props.location.pathname != '/login';
+  }
+
   render() {
     return (
       <div className="templateContainer">
         <div className="templateInnerContainer">
           <div className="templateHeader">
             <img src={ require("../images/ClearPoll-Logo.png") } onClick={() => this.handleLogoClick()}/>
-            <Menu />
+            { this.showMenu && <Menu /> }
           </div>
           <Switch>
             <Route path="/rewards" render={(props) => <Rewards {...props} store={this.store} />} />
