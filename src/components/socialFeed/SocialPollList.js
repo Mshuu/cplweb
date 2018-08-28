@@ -74,7 +74,7 @@ class SocialPollList extends Component {
       <div className="socialPollList">
         <LoadingOverlay enabled={ this.state.loading } fullScreen={ false } />
 
-        { this.store.getSocialFeed().map( (poll, i) => <SocialPoll poll={ poll } key={ i } /> ) }
+        { !this.state.loading && this.store.getSocialFeed().map( (poll, i) => <SocialPoll poll={ poll } key={ i } /> ) }
       </div>
     );
   }

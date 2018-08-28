@@ -90,8 +90,15 @@
   align-items: center;
 }
 
-.itemLink {
+.itemLink, .itemLink:visited {
+  color: #fff;
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.walletButton, .walletButton:visited {
+  color: #fff;
+  text-decoration: none;
   cursor: pointer;
 }
 

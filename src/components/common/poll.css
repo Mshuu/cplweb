@@ -28,9 +28,9 @@
 }
 
 .poll .pollTop .pollTopQuestion {
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   word-wrap: break-word;
-  padding-left: 10px;
+  padding: 0 10px;
   text-align: left;
   max-width: 175px;
     font-size:15px;line-height:1.3;

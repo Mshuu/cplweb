@@ -68,6 +68,10 @@ class Menu extends Component {
             <img src={ require('../images/menuIcons/support_icon.png') } />
             FAQ & Support
           </div>
+          <div onClick={() => this.openExternalUrl('/logout')}>
+            <img src={ require('../images/menuIcons/logout_icon.png') } />
+            Logout
+          </div>
         </div>
       </div>
     );

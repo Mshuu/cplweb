@@ -76,7 +76,7 @@ class Rewards extends Component {
             <div className="itemValue">x{ settings.BM }</div>
             <div className="itemFooter">
               <div>Multiplier levels are based on your existing POLL balance in your wallet and caluclated daily.</div>
-              <div className="itemLink">More information.</div>
+              <a className="itemLink" href="https://www.clearpoll.com/multiplier" target="_blank">More information.</a>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@ class Rewards extends Component {
           <div className="bottomHeader">Poll Wallet Address</div>
 
           <div>Your wallet address is where your POLL tokens will be send when you request a payout. It is also the wallet we check for balance to determine your multiplier level.</div>
-          <div className="walletButton">Get a Wallet</div>
+          <a className="walletButton" href="https://clearpoll.com/beginners-guide-to-creating-a-poll-token-wallet" target="_blank">Get a Wallet</a>
 
           <div className="addressField">
             <span>Address</span>

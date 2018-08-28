@@ -20,7 +20,8 @@ app.use(cookieParser());
 
 app.use('/public', express.static('public'));
 
-app.post( "/api/auth", AuthController);
+app.post( "/api/auth", AuthController.login);
+app.get( "/logout", AuthController.logout);
 app.get( "/", Home);
 app.get( "/login", Login);
 app.get( "/poll/:pollId", Poll);
@@ -35,6 +36,8 @@ app.get( "/social", SocialFeed);
 app.get( "/social/manageFriends", ManageFriends);
 app.get( "/account", Account);
 app.get( "/createWidget", CreateWidget);
+app.get( "/rewards", Rewards);
+
 app.get( "/rewards", Rewards);
 
 app.ws('/api/ws', WsController);

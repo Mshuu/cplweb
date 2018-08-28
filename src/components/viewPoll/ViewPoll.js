@@ -22,6 +22,8 @@ class ViewPoll extends Component {
       loading: false,
       showOnFeed: true
     };
+
+    console.dir(this.props);
   }
 
   componentWillReceiveProps(props){
@@ -42,7 +44,6 @@ class ViewPoll extends Component {
 
   async webFetch(){
     if(this.store.hydrateCheck()){
-      console.log('hydrate recover');
       return;
     }
 
@@ -93,16 +94,24 @@ class ViewPoll extends Component {
     }
   }
 
-  handleTwitterShare(){
-    window.location = "https://twitter.com/home?status=" + encodeURI(window.location);
+  get currentUrlEscaped(){
+    return `${SERVER_BASE_URL}${this.props.location.pathname}`
   }
 
-  handleFacebookShare(){
-    window.location = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURI(window.location);
+  get twitterShareUrl(){
+    return "https://twitter.com/home?status=" + this.currentUrlEscaped;
   }
 
-  handleGoogleShare(){
-    window.location = "https://plus.google.com/share?url=" + encodeURI(window.location);
+  get facebookShareUrl(){
+    return "https://www.facebook.com/sharer/sharer.php?u=" + this.currentUrlEscaped;
+  }
+
+  get googleShareUrl(){
+    return "https://plus.google.com/share?url=" + this.currentUrlEscaped;
+  }
+
+  get redditShareUrl(){
+    return "http://www.reddit.com/submit?url=" + this.currentUrlEscaped;
   }
 
   numberToCommaFormat(num){
@@ -116,9 +125,18 @@ class ViewPoll extends Component {
           Share Your Vote!
         </div>
         <div className="socialButtons">
-          <img src={require('../images/twitter_icon.png')} onClick={() => this.handleTwitterShare()}  />
-          <img src={require('../images/facebook_icon.png')} onClick={() => this.handleFacebookShare()} />
-          <img src={require('../images/google_icon.png')} onClick={() => this.handleGoogleShare()}  />
+          <a target="_blank" href={ this.twitterShareUrl }>
+            <img src={require('../images/twitter_icon.png')} />
+          </a>
+          <a target="_blank" href={ this.facebookShareUrl }>
+            <img src={require('../images/facebook_icon.png')} />
+          </a>
+          <a target="_blank" href={ this.googleShareUrl }>
+            <img src={require('../images/google_icon.png')} />
+          </a>
+          <a target="_blank" href={ this.redditShareUrl }>
+            <img src={require('../images/reddit_icon.png')} />
+          </a>
         </div>
       </div>
     );
@@ -126,7 +144,6 @@ class ViewPoll extends Component {
 
   pollElement(){
     let pollData = this.store.getPoll(this.pollId);
-    console.dir(pollData);
     if(!pollData) return null;
 
     let poll = new Poll(pollData);
