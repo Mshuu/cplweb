@@ -18,6 +18,12 @@
   border-radius: 3px;
 }
 
+@media only screen and (max-width: 480px) {
+  .categoryList {
+  position:absolute;left:0;min-width:430px;
+}
+}
+
 .category:hover {
   cursor: pointer;
   filter: brightness(90%);

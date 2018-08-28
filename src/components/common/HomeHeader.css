@@ -12,7 +12,87 @@
   flex-direction: column;
   padding-top: 60px;
   align-items: center;
-  padding: 60px 20px 0px 20px;
+  padding: 60px 10px 0px 10px;
+}
+
+@media only screen and (max-width: 480px) {
+
+.searchInput::placeholder {
+  opacity: 0.5!important;font-size:15px!important;
+}
+
+.homeRight {min-width:100%!important}
+
+.headerFeatureButton.headerBrowsePolls { width:180px!important;position:absolute;left:30px;top:210px;
+  
+}
+
+.headerFeatureButton.headerSocialPolls { width:180px!important;position:absolute;left:235px;top:210px;
+  
+}
+
+.searchInput {width:320px!important;position:absolute;left:35px;top:50px;height:34px;}
+
+.searchButton {width:65px!important;position:absolute;left:355px;top:50px;height:67px}
+
+    .headerFeatureButton.headerCreateWidgets {display:none;}
+}
+
+@media only screen and (max-width: 640px) {
+  .headerFeatureButton {
+
+  width: 100px!important;min-width:100px;}
+  .headerFeatureButton.headerStarPolls {display:none;}
+
+  .homeRight {
+  margin-left:1.5%!important
+}
+
+.searchInput {min-width:285px!important;}
+
+.searchInputContainer {margin-left:-8px!important}
+
+}
+
+
+@media only screen and (max-width: 850px) {
+
+
+ .homeLeft {
+  max-height:200px;padding-top:10px!important;display:block;min-width:100%;float:left;position:absolute;padding-bottom:none!important;margin-bottom:none!important;
+}
+
+.homeHeader {
+  height: 280px;width:100%;
+}
+
+.searchHeader {display:none;}
+
+.headerFeatureButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 140px!important;min-width:140px;
+  height: 100px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 4px;}
+
+  .homeRight {display:block;min-width:97%;margin-top:150px!important;max-height:100px;margin-left:none!important;padding-left:none!important}
+
+.searchInputContainer {
+  display: flex;
+  margin-top: 36px;
+  width: 100%;
+  max-width: none!important;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+
+
 }
 
 .homeRight {
@@ -45,10 +125,7 @@
   padding: 16px 0;
   font-size: 22px;
   width: calc(100% - 200px);
-  text-align: center;
-  outline: none;
-  border: none !important;
-  border-radius: 3px 0px 0px 3px;
+  text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;
 }
 
 .searchInput:focus {
@@ -56,7 +133,7 @@
 }
 
 .searchInput::placeholder {
-  opacity: 0.5!important;
+  opacity: 0.5!important;font-size:18px
 }
 
 .searchButton {

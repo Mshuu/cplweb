@@ -17,6 +17,37 @@
   color: #8a8a8a;
 }
 
+@media only screen and (max-width: 700px) { 
+.socialPoll {
+width:calc(100% - 25px)!important;height: 65px;
+
+}
+
+.socialPoll .pollRight {
+  height: auto!important;
+}
+
+.socialPoll .pollLeft {
+  font-size: 13px;padding-top:10px;padding-bottom:10px;
+}
+}
+
+
+
+@media only screen and (max-width:1050px) { 
+
+.socialPoll {
+width:48%;height: 85px;
+
+}
+
+.socialPoll .pollLeft {
+  font-size: 13px;padding-top:10px;padding-bottom:10px;padding-right:5px;
+}
+}
+
+
+
 .socialPoll .pollRight {
   display: flex;
   justify-content: center;

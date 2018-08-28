@@ -52,6 +52,18 @@
   flex: 1;
 }
 
+@media only screen and (max-width: 850px) {
+  .itemHeader {
+}
+
+.rewardsContent .rowItem {
+  height: 300px; margin: 7px;
+
+}
+
+.addressField {padding-bottom:30px;padding-top:20px;}
+}
+
 .rewardsContent .rowItem .itemHeader {
   flex: 0.8;
   font-size: 20px;

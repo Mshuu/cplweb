@@ -41,6 +41,15 @@
   cursor: pointer;
 }
 
+@media only screen and (max-width: 850px) {
+
+.sortListTitle {
+  font-size:12px;
+}
+
+
+.sortListWrapper {min-width:125px;max-width:125px;}}
+
 .sortListTitle img {
   width: 35px;
   height: 35px;

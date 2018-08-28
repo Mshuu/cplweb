@@ -60,6 +60,17 @@ class PollSummary extends Component {
     }
   }
 
+  starPolls(){
+    if( this.countPolls('starPolls') > 0 ){
+      return (
+        <div>
+          <SummaryHeader title={ "Star Polls" } image={ CategoryIcon['Star Polls'] } url={ '/starPolls' }/>
+          <PollRow polls={ this.getPollsFor('starPolls', 3) } forceNormal={ false } />
+        </div>
+      )
+    }
+  }
+
   render() {
     if(!this.props.polls)
       return <div className="pollSummary"></div>;
@@ -70,8 +81,7 @@ class PollSummary extends Component {
         { this.getRowFor('endingSoonest') }
         { this.getRowFor('latestPolls') }
 
-        <SummaryHeader title={ "Star Polls" } image={ CategoryIcon['Star Polls'] } url={ '/starPolls' }/>
-        <PollRow polls={ this.getPollsFor('starPolls', 3) } forceNormal={ false } />
+        { this.starPolls() }
 
         { this.getRowFor('myVotes') }
         { this.getRowFor('localPolls') }

@@ -10,10 +10,11 @@ import url from 'url';
 
 const defaultMetadata = {
   title: "Clearpoll Desktop",
-  description: "Vote on anything, anytime.",
-  imageUrl: ""
+  description: "ClearPoll - Vote on anything, any time. Earn crypto rewards for creating polls. Get the ClearPoll app now!",
+  imageUrl: `${SERVER_BASE_URL}/public/share_thumbnail.png`
 };
 
+const LOAD_MORE_QUANTITY = 20;
 
 const Home = async ( req, res ) => {
   let auth;
@@ -54,8 +55,6 @@ const Poll = async ( req, res ) => {
   if(!req.params.pollId){
     res.status(404).end();
   }
-
-
 
   let apiClient = new ServerApi(auth);
   let store = new Store();
@@ -121,7 +120,7 @@ const CompletedPolls = async ( req, res ) => {
       category: category,
       sortOrder: 'mostVotes',
       recordStartNo: 0,
-      recordQty: 16,
+      recordQty: LOAD_MORE_QUANTITY,
       positionLatitude: '',
       positionLongitude: '',
       locationFilter: 'Global'
@@ -157,7 +156,7 @@ const BrowsePolls = async ( req, res ) => {
       category: category,
       sortOrder: 'mostVotes',
       recordStartNo: 0,
-      recordQty: 16,
+      recordQty: LOAD_MORE_QUANTITY,
       positionLatitude: '',
       positionLongitude: '',
       locationFilter: 'Global'
@@ -190,7 +189,7 @@ const StarPolls = async ( req, res ) => {
     active: 'true',
     sortOrder: 'mostVotes',
     recordStartNo: 0,
-    recordQty: 16,
+    recordQty: LOAD_MORE_QUANTITY,
     positionLatitude: '',
     positionLongitude: '',
     locationFilter: ''
@@ -220,7 +219,7 @@ const MyVotes = async ( req, res ) => {
     active: 'true',
     sortOrder: 'mostVotes',
     recordStartNo: 0,
-    recordQty: 16,
+    recordQty: LOAD_MORE_QUANTITY,
     positionLatitude: '',
     positionLongitude: '',
     locationFilter: ''
@@ -250,7 +249,7 @@ const MyPolls = async ( req, res ) => {
     active: 'true',
     sortOrder: 'mostVotes',
     recordStartNo: 0,
-    recordQty: 16,
+    recordQty: LOAD_MORE_QUANTITY,
     positionLatitude: '',
     positionLongitude: '',
     locationFilter: ''
@@ -276,7 +275,7 @@ const SocialFeed = async ( req, res ) => {
   let store = new Store();
   let polls = await apiClient.getSocialFeed({
     sortingOrder: 'mostVotes',
-    quantity: 16,
+    quantity: LOAD_MORE_QUANTITY,
     positionLatitude: '',
     positionLongitude: ''
   });
@@ -405,6 +404,8 @@ const htmlHead = (url, metadata) => `
     <meta property="og:title"       content="${metadata.title}" />
     <meta property="og:description" content="${metadata.description}" />
     <meta property="og:image"       content="${metadata.imageUrl}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@voteclearpoll" />
 
     <link rel="shortcut icon" href="/public/favicon.ico">
     <link href="/public/style.css" rel="stylesheet" type="text/css">
