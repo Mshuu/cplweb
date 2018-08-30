@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 import State from './state';
 
-const SERVER_URL = "https://node4.l2shuu.com:3000/Clearpoll";
+const SERVER_URL = "https://node.clearpoll.com/Clearpoll";
 
 class ServerApi {
   static async request(params){

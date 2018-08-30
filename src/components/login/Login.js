@@ -11,26 +11,13 @@ class Login extends Component {
 
     this.props = props;
     this.state = {
-      username: 'AnonymousCoward',
-      desktopCode: 'bsa6jr',
+      username: '',
+      desktopCode: '',
       loading: false
     };
 
     this.props.store.hydrateCheck();
   }
-
-/*
-  async test(){
-    let params = {
-      function: 'GetDesktopCode',
-      phoneNumber: '+61423777097',
-      code: '093068'
-    }
-
-    let response = await ClearpollApi.request(params);
-    console.dir(response);
-  }
-*/
 
   async doLogin(){
     this.setState({loading: true});
