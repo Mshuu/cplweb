@@ -2,18 +2,39 @@ import React, { Component } from 'react';
 
 import './StarGraph.css';
 
+const ANIMATION_LENGTH = 1000;
+
 class StarGraph extends Component {
   constructor(props){
     super(props);
 
     let selectedAnswer = this.props.userAnswer ? Number(this.props.userAnswer.answerText) : null;
  
-    console.dir(this.props.userAnswer);
-
     this.state = {
       lockToAnswer: (selectedAnswer > 0),
       mouseOver: false,
-      mouseStarPosition: (selectedAnswer > 0 ? selectedAnswer-1 : 0)
+      mouseStarPosition: (selectedAnswer > 0 ? selectedAnswer-1 : 0),
+      animationScale: 0
+    }
+  }
+
+  componentDidMount(){
+    if(!IS_SERVER){
+      window.requestAnimationFrame(this.animateIn.bind(this));
+    }
+  }
+
+  animateIn(timestamp){
+    if(!this.animationStartTime) this.animationStartTime = timestamp;
+
+    let dt = 1 + timestamp - this.animationStartTime;
+    let progress = dt / ANIMATION_LENGTH;
+
+    if(progress < 1.0){
+      this.setState({animationScale: progress});
+      window.requestAnimationFrame(this.animateIn.bind(this));
+    } else {
+      this.setState({animationScale: 1.0});
     }
   }
 
@@ -32,6 +53,7 @@ class StarGraph extends Component {
   }
 
   get mousePointer(){
+    if(!this.props.enabled) return;
     if(!this.state.mouseOver && !this.state.lockToAnswer) return;
 
     const startOffset = 35;
@@ -66,7 +88,7 @@ class StarGraph extends Component {
         <rect
           x='15'
           y='0'
-          width={ this.highlightWidth }
+          width={ this.state.animationScale * this.highlightWidth }
           height="95"
           fill="#06bfc1" 
         />

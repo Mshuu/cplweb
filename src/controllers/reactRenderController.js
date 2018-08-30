@@ -44,28 +44,52 @@ const Login = async ( req, res ) => {
 
 const Poll = async ( req, res ) => {
   let auth;
+  let pollId = req.params.pollId;
 
   try {
     auth = Authenticator.verify( req.cookies['_auth'] );
   } catch(e) {
-    res.redirect('/login');
-    return;
   }
 
   if(!req.params.pollId){
     res.status(404).end();
   }
 
+  if(auth)
+    authenticatedPoll(req, res, pollId, auth);
+  else
+    unauthenticatedPoll(req, res, pollId);
+};
+
+async function authenticatedPoll(req, res, pollId, auth){
   let apiClient = new ServerApi(auth);
   let store = new Store();
-  let poll = await apiClient.fetchPoll(req.params.pollId);
-  store.setPoll( req.params.pollId, poll );
+  let poll = await apiClient.fetchPoll(pollId);
+
+  store.setAuthenticated( true );
+  store.setPoll( pollId, poll );
 
   let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
 
   renderHead(req, res, metadata);
   renderReact(req, res, store);
-};
+}
+
+async function unauthenticatedPoll(req, res, pollId, auth){
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let poll = await apiClient.fetchUnauthPoll(pollId);
+
+  store.setAuthenticated( false );
+  store.setPoll( pollId, poll );
+
+  let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+
+  renderHead(req, res, metadata);
+  renderReact(req, res, store);
+}
+
+
 
 const Search = async ( req, res ) => {
   let auth;
@@ -189,7 +213,7 @@ const StarPolls = async ( req, res ) => {
     active: 'true',
     sortOrder: 'mostVotes',
     recordStartNo: 0,
-    recordQty: LOAD_MORE_QUANTITY,
+    recordQty: 12,
     positionLatitude: '',
     positionLongitude: '',
     locationFilter: ''
@@ -274,10 +298,8 @@ const SocialFeed = async ( req, res ) => {
   let apiClient = new ServerApi(auth);
   let store = new Store();
   let polls = await apiClient.getSocialFeed({
-    sortingOrder: 'mostVotes',
-    quantity: LOAD_MORE_QUANTITY,
-    positionLatitude: '',
-    positionLongitude: ''
+    recordStartNo: 0,
+    recordQty: LOAD_MORE_QUANTITY
   });
 
   store.setSocialFeed(polls);

@@ -96,3 +96,18 @@
 .viewPoll .summaryContainer {
   margin-bottom: 30px;
 }
+
+.socialContainer .voteButton {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 50px;
+  margin: 10px 0;
+  font-size: 30px;
+  background-color: #01bec0;
+  border-radius: 30px;
+}
+
+.pollInstallBanner {
+  margin: 15px 0 35px 0;
+}

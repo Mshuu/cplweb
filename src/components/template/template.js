@@ -18,6 +18,7 @@ import CreateWidget from '../createWidget/CreateWidget';
 import Rewards from '../rewards/Rewards';
 import Store from '../../models/store';
 
+import * as qs from 'query-string';
 
 import './template.css';
 
@@ -31,11 +32,14 @@ class Template extends Component {
     if( typeof window !== 'undefined' && window )
       delete window.storeData;
 
+    let params = qs.parse(props.location.search); 
+
     this.storeContext = React.createContext(this.store);
+    this.embedded = params.embedded ? true : false;
   }
 
   handleLogoClick(){
-    this.props.history.push(`/`);
+    this.store.getAuthenticated() ? this.props.history.push(`/`) : this.props.history.push(`/login`);
   }
 
   handleContactClick(){
@@ -43,19 +47,19 @@ class Template extends Component {
   }
 
   get showMenu(){
-    console.dir(this.props);
-    //console.dir(window.location.href);
-    return this.props.location.pathname != '/login';
+    return this.store.getAuthenticated() && this.props.location.pathname != '/login';
   }
 
   render() {
     return (
       <div className="templateContainer">
         <div className="templateInnerContainer">
-          <div className="templateHeader">
-            <img src={ require("../images/ClearPoll-Logo.png") } onClick={() => this.handleLogoClick()}/>
-            { this.showMenu && <Menu /> }
-          </div>
+          { !this.embedded && 
+            <div className="templateHeader">
+              <img src={ require("../images/ClearPoll-Logo.png") } onClick={() => this.handleLogoClick()}/>
+              { this.showMenu && <Menu /> }
+            </div>
+          }
           <Switch>
             <Route path="/rewards" render={(props) => <Rewards {...props} store={this.store} />} />
             <Route path="/createWidget" render={(props) => <CreateWidget {...props} store={this.store} />} />

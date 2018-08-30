@@ -19,11 +19,10 @@ class ViewPoll extends Component {
     this.pollId = this.props.match.params.pollId;
 
     this.state = {
+      authenticated: this.store.getAuthenticated(),
       loading: false,
       showOnFeed: true
     };
-
-    console.dir(this.props);
   }
 
   componentWillReceiveProps(props){
@@ -43,7 +42,7 @@ class ViewPoll extends Component {
   }
 
   async webFetch(){
-    if(this.store.hydrateCheck()){
+    if(this.store.hydrateCheck() || !this.store.getAuthenticated()){
       return;
     }
 
@@ -83,7 +82,7 @@ class ViewPoll extends Component {
   }
 
   containerContent(poll){
-    if(poll.hasVoted || poll.hasExpired){
+    if((poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated()){
       return (
         <ResultsGraph results={ poll.results } totalVotes={ poll.pollVotes } />
       );
@@ -119,31 +118,69 @@ class ViewPoll extends Component {
   }
 
   get socialContent(){
-    return (
-      <div className="socialContainer">
-        <div className="socialBanner">
-          Share Your Vote!
+    if(this.state.authenticated) {
+      return (
+        <div className="socialContainer">
+          <div className="socialBanner">
+            Share Your Vote!
+          </div>
+          <div className="socialButtons">
+            <a target="_blank" href={ this.twitterShareUrl }>
+              <img src={require('../images/twitter_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.facebookShareUrl }>
+              <img src={require('../images/facebook_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.googleShareUrl }>
+              <img src={require('../images/google_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.redditShareUrl }>
+              <img src={require('../images/reddit_icon.png')} />
+            </a>
+          </div>
         </div>
-        <div className="socialButtons">
-          <a target="_blank" href={ this.twitterShareUrl }>
-            <img src={require('../images/twitter_icon.png')} />
-          </a>
-          <a target="_blank" href={ this.facebookShareUrl }>
-            <img src={require('../images/facebook_icon.png')} />
-          </a>
-          <a target="_blank" href={ this.googleShareUrl }>
-            <img src={require('../images/google_icon.png')} />
-          </a>
-          <a target="_blank" href={ this.redditShareUrl }>
-            <img src={require('../images/reddit_icon.png')} />
-          </a>
+      );
+    } else {
+      return (
+        <div className="socialContainer">
+          <div className="socialBanner">
+            <a className="voteButton" href="/login">Vote</a>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+  }
+
+  summaryContent(poll){
+    if(this.state.authenticated) {
+      return (
+        <div className="summaryContainer">
+          <SummaryHeader category={ poll.category } />
+          <PollList category={ poll.category } />
+        </div>
+      );
+    } else {
+      return (
+        <div className="pollInstallBanner">
+          <div className="installBannerText">
+            Not registered? Install ClearPoll app to get started!
+          </div>
+          <div className="installBannerImages">
+            <a href="https://play.google.com/store/apps/developer?id=ClearPoll" target="_blank">
+              <img src={ require('../images/google_play_icon.png') }/>
+            </a>
+            <a href="https://itunes.apple.com/us/app/clearpoll/id1347664374" target="_blank">
+              <img src={ require('../images/app_store_icon.svg') }/>
+            </a>
+          </div>
+        </div>
+      );
+    }
   }
 
   pollElement(){
     let pollData = this.store.getPoll(this.pollId);
+
     if(!pollData) return null;
 
     let poll = new Poll(pollData);
@@ -178,10 +215,7 @@ class ViewPoll extends Component {
 
         { this.socialContent }
 
-        <div className="summaryContainer">
-          <SummaryHeader category={ poll.category } />
-          <PollList category={ poll.category } />
-        </div>
+        { this.summaryContent(poll) }
       </div>
     );
   }
@@ -191,7 +225,7 @@ class ViewPoll extends Component {
       <div className="viewPoll">
         <LoadingOverlay enabled={ this.state.loading }/>
 
-        { this.pollElement() }      
+        { !this.state.loading && this.pollElement() }      
       </div>
     );
   }

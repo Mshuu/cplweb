@@ -19,7 +19,7 @@ class WidgetInstance {
   }
 
   get loginUrl(){
-    return `${SERVER_BASE_URL}/login`;
+    return `${SERVER_BASE_URL}/login?embedded=1`;
   }
 
   initialize(){
@@ -76,7 +76,7 @@ class WidgetInstance {
     loginIframe.src = this.loginUrl;
     loginIframe.frameBorder = 0;
     loginIframe.scrolling = "no";
-    loginIframe.style.cssText = 'width: 1050px; height: 800px; overflow: hidden; opacity: 1;';
+    loginIframe.style.cssText = 'width: 670px; height: 550px; overflow: hidden; opacity: 1;';
     this.loginOverlay.appendChild(loginIframe);
 
     document.body.appendChild(this.loginOverlay);
@@ -90,6 +90,8 @@ class WidgetInstance {
 
   handleIframeMessage(messageEvent){
     let data = messageEvent.data;
+
+    console.log(`id=${this.pollId}, event=${data.event}`);
 
     switch(data.event){
       case 'loadingComplete':

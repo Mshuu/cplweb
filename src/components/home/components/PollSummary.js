@@ -54,7 +54,7 @@ class PollSummary extends Component {
       return (
         <div>
           <SummaryHeader title={ details.title } image={ CategoryIcon[details.title] } url={ details.url } />
-          <PollRow polls={ this.getPollsFor(category, 4) } />
+          <PollRow polls={ this.getPollsFor(category, 5) } />
         </div>
       );
     }

@@ -147,13 +147,21 @@
   height: 46px;
   font-size: 18px;
   padding: 0 20px;
-  vertical-align: center;border-radius:3px 0px 0px 3px;
+  vertical-align: center;
+  border-radius:3px 0px 0px 3px;
+}
+
+.addressField .saveButton {
+  border-radius:0px 3px 3px 0px;
+}
+.addressField .saveButton img {
+  height: 20px;
 }
 
 .bottomContainer .addressField input {
   width: 320px;
   text-align: center;
-  height: 44px;outline:none; border:none;border-radius:0px 3px 3px 0px;
+  height: 43px;outline:none; border:none;
 }
 
 .bottomContainer .important {

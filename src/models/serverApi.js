@@ -45,7 +45,6 @@ class ServerApi {
       function: 'GetPollListHome',
       ...this.auth
     });
-    let categories = [];
 
     this.voteHistory = homeData.voteHistory;
     this.historyFetched = true;
@@ -56,14 +55,12 @@ class ServerApi {
       homeData[key] = homeData[key].map( poll => {
         if(!poll.id) return;
 
-        let cat = poll.category;
-
-        if(categories.indexOf(cat) == -1) categories.push(cat);
-
         return Object.assign(poll, this.getHasVoted(poll.id));
       });
     }
-    //console.dir(categories);
+
+    console.dir(homeData.starPolls);
+
     return homeData;
   }
 
@@ -169,20 +166,6 @@ class ServerApi {
       ...this.auth
     });
 
-    console.dir(response);
-
-    return response;
-  }
-
-  async voteOnPoll(params){
-    params.showOnFeed = params.showOnFeed ? 1 : 0;
-
-    let response = await ServerApi.request({
-      function: 'VoteOnPoll',
-      ...params,
-      ...this.auth
-    });
-
     return response;
   }
 
@@ -246,7 +229,7 @@ class ServerApi {
   async getSocialFeed(params){
     let response = await ServerApi.request({
       function: 'GetFeed',
-      params,
+      ...params,
       ...this.auth
     });
 
@@ -338,6 +321,43 @@ class ServerApi {
     return await ServerApi.request({
       function: 'ApproveFriendRequest',
       requestId: friendId,
+      ...this.auth
+    });
+  }
+
+  async approveFriendRequest(friendId){
+    return await ServerApi.request({
+      function: 'ApproveFriendRequest',
+      requestId: friendId,
+      ...this.auth
+    });
+  }
+
+  async saveWalletAddress(wallet){
+    return await ServerApi.request({
+      function: 'SaveEthereumWallet',
+      wallet,
+      ...this.auth
+    });
+  }
+
+  async getWalletAddress(){
+    try {
+      return await ServerApi.request({
+        function: 'GetEthereumWallet',
+        ...this.auth
+      });
+    } catch(e){
+      return {
+        success: false,
+        error: e.message
+      }
+    }
+  }
+
+  async deleteAccount(){
+    return await ServerApi.request({
+      function: 'DeleteAccount',
       ...this.auth
     });
   }

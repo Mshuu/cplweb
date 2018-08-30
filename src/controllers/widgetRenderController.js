@@ -9,12 +9,11 @@ import WidgetRouter from '../components/widgetRouter';
 const WidgetPoll = async ( req, res ) => {
   let pollId = req.params.pollId;
   let auth;
-  let store = new Store();
+
 
   try {
     auth = Authenticator.verify( req.cookies['_auth'] );
   } catch(e) {
-    //store.setAuthenticated( false );
   }
 
   if(!pollId){
@@ -25,12 +24,13 @@ const WidgetPoll = async ( req, res ) => {
   renderHead(req, res);
 
   if(auth)
-    authenticatedWidget(req, res, store, pollId, auth);
+    authenticatedWidget(req, res, pollId, auth);
   else
-    unauthenticatedWidget(req, res, store, pollId);
+    unauthenticatedWidget(req, res, pollId);
 };
 
-async function authenticatedWidget(req, res, store, pollId, auth){
+async function authenticatedWidget(req, res, pollId, auth){
+  let store = new Store();
   let apiClient = new ServerApi(auth);
 
   store.setAuthenticated( true );
@@ -39,8 +39,8 @@ async function authenticatedWidget(req, res, store, pollId, auth){
   renderReact(req, res, store, pollId);
 }
 
-async function unauthenticatedWidget(req, res, store, pollId){
-  console.log('unauth widget');
+async function unauthenticatedWidget(req, res, pollId){
+  let store = new Store();
   let apiClient = new ServerApi();
 
   store.setAuthenticated( false );

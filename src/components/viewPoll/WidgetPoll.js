@@ -62,9 +62,12 @@ class WidgetPoll extends Component {
       return;
     }
 
-    let poll = this.store.getPoll(this.pollId);
+    console.dir(this.pollId);
 
-    if(poll.hasVoted) return;
+    let pollData = this.store.getPoll(this.pollId);
+    let poll = new Poll(pollData);
+
+    if(poll.hasVoted || poll.hasExpired) return;
 
     this.setState({
       loading: true
@@ -89,7 +92,7 @@ class WidgetPoll extends Component {
   }
 
   containerContent(poll){
-    if(poll.hasVoted || poll.hasExpired){
+    if(!this.store.getAuthenticated() || (poll.hasVoted || poll.hasExpired)){
       return (
         <ResultsGraph results={ poll.results } totalVotes={ poll.pollVotes } />
       );

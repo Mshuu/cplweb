@@ -7,7 +7,8 @@ export default class Store {
       starPolls: [],
       myVotes: [],
       socialFeed: [],
-      userSettings: {}
+      userSettings: {},
+      authenticated: true
     }, prefetchData);
 
     this.initialPage = true;

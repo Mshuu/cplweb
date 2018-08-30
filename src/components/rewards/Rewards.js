@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import WebApi from '../../models/webApi';
 import LoadingOverlay from '../loadingOverlay/LoadingOverlay';
 import HomeHeader from '../common/HomeHeader';
+import WalletAddress from './WalletAddress';
 
 import './Rewards.css';
 
@@ -15,7 +16,6 @@ class Rewards extends Component {
 
     this.state = {
       loading: true,
-      ethAddress: "0x123f681646d4a755815f9cb19e1acc8565a0c2ac"
     };
   }
 
@@ -87,14 +87,7 @@ class Rewards extends Component {
           <div>Your wallet address is where your POLL tokens will be send when you request a payout. It is also the wallet we check for balance to determine your multiplier level.</div>
           <a className="walletButton" href="https://clearpoll.com/beginners-guide-to-creating-a-poll-token-wallet" target="_blank">Get a Wallet</a>
 
-          <div className="addressField">
-            <span>Address</span>
-            <input type="text"
-              placeholder="POLL wallet address"
-              value={this.state.ethAddress}
-              onChange={ e => this.setState({ethAddress: e.target.value}) }
-            />
-          </div>
+          <WalletAddress />
 
           <div>
             <span className="important">Important.</span>

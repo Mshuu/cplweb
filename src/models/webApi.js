@@ -122,6 +122,25 @@ class WebApi {
     });
   }
 
+  static async saveWalletAddress(wallet){
+    return await WebApi.wsRequest({
+      function: 'SaveWalletAddress',
+      wallet
+    });
+  }
+
+  static async getWalletAddress(){
+    return await WebApi.wsRequest({
+      function: 'GetWalletAddress'
+    });
+  }
+
+  static async deleteAccount(){
+    return await WebApi.wsRequest({
+      function: 'DeleteAccount'
+    });
+  }
+
   static async postRequest(params){
     let response;
     let requestParams = params;

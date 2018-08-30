@@ -35,8 +35,9 @@ class RatingPoll extends Component {
         </div>
         <div className="bottomRow">
           <StarGraph
+            enabled={ !this.props.poll.hasExpired }
             averageRating={this.props.poll.averageRating}
-            onClick={ this.props.onAnswer }
+            onClick={ answerIdx => this.props.onAnswer(answerIdx) }
             userAnswer={ this.props.poll.votedOn && this.props.poll.votedOn[0] }
           />
         </div>

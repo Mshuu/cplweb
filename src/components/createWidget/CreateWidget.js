@@ -34,7 +34,7 @@ class CreateWidget extends Component {
   }
 
   get ratingWidgetCode(){
-    return `<script async charset="utf-8" src="${SERVER_ADDR}/public/widget.js"></script><div style="width: 380px; height: 560px;" data-clearpoll-type="rating" data-clearpoll-pollId="${this.state.ratingPollId}"></div>`;
+    return `<script async charset="utf-8" src="${SERVER_ADDR}/public/widget.js"></script><div style="width: 590px; height: 100px;" data-clearpoll-type="rating" data-clearpoll-pollId="${this.state.ratingPollId}"></div>`;
   }
 
   selectCode(e){

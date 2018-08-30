@@ -59,7 +59,7 @@ class Search extends Component {
       <div className="search">
         <LoadingOverlay enabled={ this.state.loading }/>
         <HomeHeader searchText={this.searchTerm} />
-        <FullScreenPollList polls={this.store.getSearchResult(this.searchTerm)} forceNormal={ true } />
+        <FullScreenPollList polls={this.store.getSearchResult(this.searchTerm)} forceNormal={ true } showSortOrder={ false } />
       </div>
     );
   }

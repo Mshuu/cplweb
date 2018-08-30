@@ -17,7 +17,8 @@ class ResultGraph extends Component {
 
   get resultsWithPercentages(){
     let results = this.props.results.map(result => {
-      return Object.assign(result, { votePercentage: Math.floor(100 * result.voteCount / this.totalVotes) });
+      let votePercentage = this.totalVotes == 0 ? 0 : Math.floor(100 * result.voteCount / this.totalVotes);
+      return Object.assign(result, { votePercentage });
     });
 
 
@@ -43,7 +44,7 @@ class ResultGraph extends Component {
   }
 
   graphElement(result, i){
-    let votePercentage = Math.floor(100 * result.voteCount / this.props.totalVotes);
+    let votePercentage = Math.floor(100 * result.voteCount / (this.props.totalVotes || 1));
 
     return (
       <div className="resultContainer" key={ i }>

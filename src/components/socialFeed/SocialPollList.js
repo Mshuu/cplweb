@@ -4,10 +4,11 @@ import WebApi from '../../models/webApi';
 import Poll from '../../models/Poll';
 import LoadingOverlay from '../loadingOverlay/LoadingOverlay';
 import SocialPoll from './SocialPoll';
+import ShowMore from '../common/ShowMore';
 
 import './SocialPollList.css';
 
-const LOAD_MORE_QTY = 18;
+const LOAD_MORE_QTY = 20;
 
 class SocialPollList extends Component {
   constructor(props){
@@ -17,7 +18,7 @@ class SocialPollList extends Component {
 
     this.state = {
       loading: true,
-      canLoadMore: (this.store.getSocialFeed() == LOAD_MORE_QTY)
+      canLoadMore: (this.store.getSocialFeed().length == LOAD_MORE_QTY)
     };
   }
 
@@ -43,16 +44,15 @@ class SocialPollList extends Component {
     }
     
     this.setState({
-      loading: true,
+      loading: resetCache,
+      loadingMore: true
     });
 
     let existingPolls = resetCache ? [] : this.store.getSocialFeed();
 
     let response = await WebApi.fetchSocialFeed({
-      sortingOrder: 'mostVotes',
-      quantity: LOAD_MORE_QTY,
-      positionLatitude: '',
-      positionLongitude: ''
+      recordQty: LOAD_MORE_QTY,
+      recordStartNo: existingPolls.length
     });
 
     console.dir(response);
@@ -61,6 +61,7 @@ class SocialPollList extends Component {
 
     this.setState({
       loading: false,
+      loadingMore: false,
       canLoadMore: response.polls && response.polls.length == LOAD_MORE_QTY
     });
   }
@@ -75,6 +76,7 @@ class SocialPollList extends Component {
         <LoadingOverlay enabled={ this.state.loading } fullScreen={ false } />
 
         { !this.state.loading && this.store.getSocialFeed().map( (poll, i) => <SocialPoll poll={ poll } key={ i } /> ) }
+        { !this.state.loading && this.showMoreElement }
       </div>
     );
   }

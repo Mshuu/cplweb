@@ -73,6 +73,15 @@ class WsController {
         case 'ApproveFriendRequest':
           await this.replyApproveFriendRequest(msg);
           break;
+        case 'SaveWalletAddress':
+          await this.replySaveWalletAddress(msg);
+          break;
+        case 'GetWalletAddress':
+          await this.replyGetWalletAddress(msg);
+          break;
+        case 'DeleteAccount':
+          await this.replyDeleteAccount(msg);
+          break;
       }
     } catch(e){
       console.dir(e);
@@ -141,9 +150,8 @@ class WsController {
     this.ws.send( JSON.stringify(response) )
   }
 
-  async replySocialFeed(params){
-    let id = params.id;
-    let polls = await this.apiClient.getSocialFeed(params);
+  async replySocialFeed({id, recordQty, recordStartNo}){
+    let polls = await this.apiClient.getSocialFeed({recordQty, recordStartNo});
 
     let response = Object.assign({polls, id });
 
@@ -210,6 +218,27 @@ class WsController {
 
   async replyApproveFriendRequest({id, friendId}){
     let result = await this.apiClient.approveFriendRequest(friendId);
+
+    let response = Object.assign(result, {id});
+    this.ws.send( JSON.stringify(response) );
+  }
+
+  async replySaveWalletAddress({id, wallet}){
+    let result = await this.apiClient.saveWalletAddress(wallet);
+
+    let response = Object.assign(result, {id});
+    this.ws.send( JSON.stringify(response) );
+  }
+
+  async replyGetWalletAddress({id}){
+    let result = await this.apiClient.getWalletAddress();
+
+    let response = Object.assign(result, {id});
+    this.ws.send( JSON.stringify(response) );
+  }
+
+  async replyDeleteAccount({id}){
+    let result = await this.apiClient.deleteAccount();
 
     let response = Object.assign(result, {id});
     this.ws.send( JSON.stringify(response) );
