@@ -13,6 +13,13 @@
 }
 }
 
+@media only screen and (max-width: 490px) {
+
+  .catSummaryHeader span{
+  font-size:16px!important;line-height:18px!important;
+}
+}
+
 .catSummaryHeader img {
   width: 30px;
   height: 30px;

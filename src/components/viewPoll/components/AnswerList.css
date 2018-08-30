@@ -2,7 +2,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100%;min-width:360px;justify-content: center;
 }
 
 .answersSpacer {
@@ -35,4 +35,9 @@
   -webkit-transition: all 200ms; /* Safari */
     transition: all 200ms;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 450px) {.answer {
+  width:calc(100% - 30px)
+}
 }

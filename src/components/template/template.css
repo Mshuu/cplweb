@@ -70,5 +70,5 @@ html {
 
 @media only screen and (max-width: 475px) {
 
-html {min-width:500px!important}
+html {min-width:380px!important}
 }
