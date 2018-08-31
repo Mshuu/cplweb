@@ -16,7 +16,7 @@ import './WidgetPoll.css';
 class WidgetPoll extends Component {
   constructor(props){
     super(props);
-    console.dir(this.props);
+
     this.store = props.store;
     this.pollId = this.props.match.params.pollId;
 
@@ -61,8 +61,6 @@ class WidgetPoll extends Component {
       this.emitLoginMessage();
       return;
     }
-
-    console.dir(this.pollId);
 
     let pollData = this.store.getPoll(this.pollId);
     let poll = new Poll(pollData);

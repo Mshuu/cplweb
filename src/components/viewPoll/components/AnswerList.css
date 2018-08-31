@@ -2,7 +2,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  width: 100%;min-width:360px;justify-content: center;
+  width: 100%;
+  min-width:340px;
+  justify-content: center;
 }
 
 .answersSpacer {
@@ -17,7 +19,6 @@
   line-height: 50px;
   color: #ffffff;
   font-size: 21px;
-  background-color: #01bec0;
   margin: 3px;
   -ms-transform: scale(1.00, 1.00); /* IE 9 */
     -webkit-transform: scale(1.00, 1.00); /* Safari */
@@ -37,7 +38,8 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: 450px) {.answer {
-  width:calc(100% - 30px)
-}
+@media only screen and (max-width: 450px) {
+  .answer {
+    width:calc(100% - 30px)
+  }
 }

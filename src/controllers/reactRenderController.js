@@ -417,8 +417,7 @@ const htmlHead = (url, metadata) => `
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
   	<link rel="shortcut icon" href="/public/favicon.png" type="image/x-icon" />
 
     <meta property="og:url"         content="${url}" />
@@ -429,7 +428,6 @@ const htmlHead = (url, metadata) => `
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@voteclearpoll" />
 
-    <link rel="shortcut icon" href="/public/favicon.ico">
     <link href="/public/style.css" rel="stylesheet" type="text/css">
 
     <title>Clearpoll Desktop</title>
@@ -443,11 +441,11 @@ const htmlHead = (url, metadata) => `
       html {
           margin: 0;
           padding: 0;
-          height: 100%;
           font-family: 'Roboto-Light-CPL';
       }
 
       body {
+          position: absolute;
           margin: 0;
           padding: 0;
           min-height: 100%;

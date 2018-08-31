@@ -37,14 +37,14 @@ class SocialPoll extends Component {
     if(this.poll.createdPoll == 'T'){
       return (
         <div className="pollLeft">
-          <span className="textHightlightGreen">{ this.poll.friendName }</span> created poll #{ this.poll.pollId}
+          <span className="textHightlightGreen">{ this.poll.friendName }</span> created poll #{ this.poll.pollId }
           <span className="textHightlightBlack"> '{this.poll.topic}'</span>
         </div>
       );
     } else {
       return (
         <div className="pollLeft">
-          <span className="textHightlightGreen">{ this.poll.friendName }</span> voted <span className="textHightlightBlack">'{ this.poll.friendVoted }'</span> on poll #{ this.poll.pollId}
+          <span className="textHightlightGreen">{ this.poll.friendName }</span> voted on on poll #{ this.poll.pollId }
           <span className="textHightlightBlack"> '{this.poll.topic}'</span>
         </div>
       );

@@ -50,10 +50,7 @@ class WidgetInstance {
     this.iframe.src = this.widgetUrl;
     this.iframe.frameBorder = 0;
     this.iframe.scrolling = "no";
-    this.iframe.style.width = "100%";
-    this.iframe.style.height = "100%";
-    this.iframe.style.overflow = "hidden";
-    this.iframe.style.display = 'none';
+    this.iframe.style.cssText = 'width: 100%; height: 100%; overflow: hidden; display: none;' + (this.pollType != 'standard' ? '' : 'border-radius: 3px;');
 
     window.addEventListener("message", this.handleIframeMessage.bind(this), false);
   

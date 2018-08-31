@@ -30,28 +30,21 @@
   padding: 0;
 }
 
-@media only screen and (max-width: 480px) {
-  .menuContainer {
-  right: 20%!important;
-}
-}
-
-@media only screen and (max-width: 400px) {
- .menu {
-  width:100%!important;left:-210px;
-}
-.menu div {
-  font-size:18px;line-height:33px!important;
-}
-
+@media only screen and (max-width: 420px) {
+  .menu {
+    width:100%!important;left:-210px;
+  }
+  .menu div {
+    font-size: 5vw !important;
+    line-height: 8vw !important;
+    padding: 7.5px 0 !important;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-
   .menu div {
-  font-size:20px;line-height:40px;
-}
-
+    font-size:20px;line-height:40px;
+  }
 }
 
 .menu.inactive {

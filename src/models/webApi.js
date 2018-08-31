@@ -148,11 +148,9 @@ class WebApi {
     try {
       response = await axios.post(AUTH_URL, requestParams);
     } catch(e){
-      console.dir(requestParams);
-      console.dir(e);
       throw new Error('A network error occured');
     }
-    console.dir(response);
+
     return response.data;
   }
 

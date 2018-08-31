@@ -83,10 +83,11 @@ const clientConfig = {
     minimize: true,
     minimizer: [
       new UglifyJsPlugin({
-        sourceMap: true,
+        sourceMap: false,
         uglifyOptions: {
           compress: {
-            inline: false
+            inline: false,
+            drop_console: true
           }
         }}
       )
@@ -144,7 +145,8 @@ const clientWidgetConfig = {
         sourceMap: true,
         uglifyOptions: {
           compress: {
-            inline: false
+            inline: false,
+            drop_console: true
           }
         }}
       )
@@ -190,7 +192,8 @@ const widgetConfig = {
         sourceMap: true,
         uglifyOptions: {
           compress: {
-            inline: false
+            inline: false,
+            drop_console: true
           }
         }}
       )

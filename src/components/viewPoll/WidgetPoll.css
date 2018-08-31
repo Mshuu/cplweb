@@ -1,6 +1,10 @@
 .widgetPoll {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: calc(100% - 4px);
   background-color: #fff;
-  height: 100%;border:2px solid #212c32;
+  border:2px solid #212c32;
 }
 
 .widgetPoll .pollQuestion {
@@ -11,11 +15,14 @@
   text-align: center;
 }
 
+.widgetPoll .pollQuestion::first-letter {text-transform:uppercase}
+
 .widgetPoll .contentContainer {
   padding: 0 20px;
 }
 
 .scrollableContainer {
-  height: calc(100% - 80px);
-  overflow-y: auto;background-color: #f1f2f2;
+  flex: 1 0;
+  overflow-y: auto;
+  background-color: #f1f2f2;
 }

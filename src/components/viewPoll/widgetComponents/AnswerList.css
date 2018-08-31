@@ -12,17 +12,18 @@
 }
 
 .answersContainer .answer {
-  height: 50px;
   border-radius: 30px;
   text-align: center;
-  line-height: 50px;
   color: #ffffff;
   font-size: 21px;
   background-color: #01bec0;
-  margin: 3px;
+  margin: 5px;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
+  padding: 8px 13px;
 }
+
+.answersContainer .answer::first-letter {text-transform:uppercase}
 
 .answersContainer .answer:hover {
   filter: brightness(90%);

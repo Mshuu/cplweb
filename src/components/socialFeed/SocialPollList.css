@@ -1,17 +1,21 @@
 .socialPollList { 
   flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
+@media only screen and (max-width: 1050px) { 
+  .socialPollList { 
+    flex: 0 0 400px;
+    justify-content: center;
+  }
+}
 
-@media only screen and (max-width:700px) { 
-.socialPollList {
-  position:absolute;max-height:1380px!important;overflow:hidden;left:25px;
-}
+@media only screen and (max-width: 750px) { 
+  .socialPollList { 
+    flex: 1 0;
+    justify-content: center;
+  }
 }
 
-
-@media only screen and (max-width:1050px) { 
-.socialPollList {
-  position:absolute;max-height:925px;overflow:hidden;left:25px;margin-bottom:50px;
-}
-}

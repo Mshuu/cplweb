@@ -22,10 +22,18 @@ class Menu extends Component {
     window.location = url;
   }
 
+  touchMenuOpen(){
+    //if(this.state.active)
+    //  this.toggleMenu(false);
+  }
+
   render() {
     return (
-      <div className="menuContainer" onMouseOver={() => this.toggleMenu(true)} onMouseOut={() => this.toggleMenu(false)}>
-        <img src={ require("../images/menu_icon.png") } />
+      <div className="menuContainer"
+        onMouseOver={() => this.toggleMenu(true)}
+        onMouseOut={() => this.toggleMenu(false)}
+        >
+        <img src={ require("../images/menu_icon.png") } onClick={() => this.touchMenuOpen()} />
 
         <div className={ this.state.active ? "menu" : "menu inactive" }>
           <div onClick={() => this.openUrl('/browse')}>

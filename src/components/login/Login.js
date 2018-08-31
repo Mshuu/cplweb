@@ -20,10 +20,17 @@ class Login extends Component {
   }
 
   async doLogin(){
+    if(
+      this.state.username.length == 0 ||
+      this.state.desktopCode.length == 0
+    ) return;
+
     this.setState({loading: true});
 
     try {
-      await WebApi.login(this.state.username, this.state.desktopCode);
+      let result = await WebApi.login(this.state.username, this.state.desktopCode);
+
+      if(!result) throw new Error("Incorrect username or desktop code");
 
       if(window.parent){
         window.parent.postMessage({event: "loggedIn"}, '*');
@@ -33,7 +40,8 @@ class Login extends Component {
     } catch(e) {
       alert(e.message);
     }
-      this.setState({loading: false});
+
+    this.setState({loading: false});
   }
 
   render() {

@@ -65,7 +65,7 @@ class ResultGraph extends Component {
             { result.votePercentage }%
           </div>
          <div className="voteBarContainer">
-           <div className="voteBarInner" style={{width: `${barPercentage}%`, backgroundColor: COLORS[i]}}>
+           <div className="voteBarInner" style={{width: `${barPercentage}%`, backgroundColor: `${COLORS[i]} !important`}}>
             </div>
           </div>
         </div>

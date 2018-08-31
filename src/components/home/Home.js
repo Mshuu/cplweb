@@ -26,8 +26,15 @@ class Home extends Component {
 
   async webFetch(){
     if(this.store.hydrateCheck()){
+      this.setState({
+        loading: false
+      });
       return;
     }
+
+    this.setState({
+      loading: true
+    });
 
     try {
       this.store.data.homePolls = await WebApi.fetchHome();
@@ -47,7 +54,9 @@ class Home extends Component {
         <LoadingOverlay enabled={ this.state.loading }/>
 
         <HomeHeader />
-        <PollSummary polls={ this.store.data.homePolls }/>
+        { !this.state.loading && 
+          <PollSummary polls={ this.store.data.homePolls }/>
+        }
       </div>
     );
   }

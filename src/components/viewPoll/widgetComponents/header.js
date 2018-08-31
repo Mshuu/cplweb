@@ -13,9 +13,9 @@ class Header extends Component {
 
     return (
       <div className="widgetHeaderContainer">
-        <div className="widgetHeader">
+        <a className="widgetHeader" href="https://clearpoll.com" target="_blank">
           <img className="logo" src={ require('../../images/clearpoll_logo_white.png') } />
-        </div>
+        </a>
         <div className="widgetHeaderDetails">
           <div>
             <img src={ require('../../images/poll_tick_icon.png') } />

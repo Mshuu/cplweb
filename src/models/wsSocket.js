@@ -10,10 +10,10 @@ export default class WsSocket {
 
   connect(){
     return new Promise( res => {
-      this.socket = new WebSocket("ws://" + location.host + WS_PATH);
+      let protocol = location.protocol != 'https:' ? "ws://" : "wss://";
+      this.socket = new WebSocket(protocol + location.host + WS_PATH);
 
       this.socket.addEventListener('open', (event) => {
-        console.log('WS Connected');
         this.open = true;
         res();
       });

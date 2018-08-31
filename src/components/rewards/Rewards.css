@@ -41,7 +41,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 30px 20px 20px 20px;
-  background: rgb(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   color: #fff;
   height: 200px;
   text-align: center;
@@ -53,45 +53,65 @@
 }
 
 @media only screen and (max-width: 850px) {
-  .itemHeader {
-}
+  .rewardsContent .rowItem {
+    height: 300px; margin: 7px;
+  }
 
-.rewardsContent .rowItem {
-  height: 300px; margin: 7px;
+  .bottomContainer {
+    height: 240px !important;
+  }
 
-}
+  .bottomContainer .addressField{
+    margin-bottom: 60px !important;
+  }
 
-@media only screen and (max-width: 540px) {
+  @media only screen and (max-width: 540px) {
+    .rewardsContent .rowItem {
+      height: 170px;
+      margin: 7px;
+      min-width:calc(100% - 30px)!important;
+    }
 
-.rewardsContent .rowItem {
-  height: 170px; margin: 7px;min-width:calc(100% - 30px)!important}
+    .rewardsContent .row {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 -12.5px;
+    }
 
-  .rewardsContent .row {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 -12.5px;
-}
+    .bottomContainer .addressField input {
+      width: 40vw !important;
+    }
 
-.bottomContainer .addressField span {
-  font-size: 12px!important;
-  padding: 0 2px;
-}
+    .bottomContainer {
+      min-width: calc(100% - 40px)!important;
+    }
 
-.bottomContainer .addressField input {
-  width: 220px!important;padding-left:5px;padding-right:5px;
-  text-align: center;
-  height: 44px;outline:none; border:none;border-radius:0px 3px 3px 0px;margin-left:-10px;
-}
+    .rewardsContent {
+      padding: 0 10px 35px 10px;
+    }
 
-.bottomContainer .addressField{
-  margin-left:-50px;
-}
+    .rewardsContent .row {
+      padding: 0 10px;
+    }
 
-}
+    .rewardsContent .rowItem {
+      min-width: calc(100% - 40px)!important;
+    }
+  }
 
-.addressField {padding-bottom:30px;padding-top:20px;}
+  @media only screen and (max-width: 410px) {
+    .bottomContainer .addressField span {
+      font-size: 4vw !important;
+      padding: 0 5px !important;
+    }
+
+    .bottomContainer {
+      height: 300px !important;
+    }
+  }
 }
 
 .rewardsContent .rowItem .itemHeader {
@@ -121,6 +141,7 @@
 }
 
 .itemLink {
+  color: #fff;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -131,7 +152,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px 20px 20px 20px;
-  background: rgb(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   color: #fff;
   height: 200px;
   font-size: 12px;
@@ -176,9 +197,25 @@
 .bottomContainer .addressField input {
   width: 320px;
   text-align: center;
-  height: 44px;outline:none; border:none;border-radius:0px 3px 3px 0px;
+  height: 44px;outline:none; border:none;
 }
 
 .bottomContainer .important {
   color: red;
+}
+
+.walletButton, .walletButton:visited {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.addressField .saveButton {
+  border-radius:0px 3px 3px 0px !important;
+  cursor: pointer;
+}
+
+.addressField .saveButton img {
+  height: 20px;
+
 }

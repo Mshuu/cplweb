@@ -11,6 +11,7 @@ import PollList from '../common/PollList';
 
 import './ViewPoll.css';
 
+
 class ViewPoll extends Component {
   constructor(props){
     super(props);
@@ -21,7 +22,8 @@ class ViewPoll extends Component {
     this.state = {
       authenticated: this.store.getAuthenticated(),
       loading: false,
-      showOnFeed: true
+      showOnFeed: true,
+      showVote: true
     };
   }
 
@@ -29,8 +31,7 @@ class ViewPoll extends Component {
     this.pollId = props.match.params.pollId;
     this.store.setPoll(this.pollId, null);
     this.setState({
-      loading: true,
-      showOnFeed: true
+      loading: true
     });
     this.webFetch();
   }
@@ -39,6 +40,14 @@ class ViewPoll extends Component {
     if(!IS_SERVER){
       this.webFetch();
     }
+  }
+
+  toggleSocial(){
+    this.setState({ showOnFeed: !this.state.showOnFeed });
+  }
+
+  toggleVote(){
+    this.setState({ showVote: !this.state.showVote });
   }
 
   async webFetch(){
@@ -69,7 +78,7 @@ class ViewPoll extends Component {
       let poll = this.store.getPoll(this.pollId);
       poll.results = response.results;
       poll.hasVoted = true;
-      poll.votedOn = [{answerId: answerIdx, answerText: poll.answers[answerIdx] }];
+      poll.votedOn = [{answerText: answerIdx }];
 
       this.store.setPoll(this.pollId, poll);
     } else {
@@ -81,10 +90,14 @@ class ViewPoll extends Component {
     });
   }
 
+  shouldShowResults(poll){
+    return (poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated();
+  }
+
   containerContent(poll){
-    if((poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated()){
+    if(this.shouldShowResults(poll)){
       return (
-        <ResultsGraph results={ poll.results } totalVotes={ poll.pollVotes } />
+        <ResultsGraph poll={ poll } showVote={ this.state.showVote } />
       );
     } else {
       return (
@@ -122,7 +135,7 @@ class ViewPoll extends Component {
       return (
         <div className="socialContainer">
           <div className="socialBanner">
-            Share Your Vote!
+            Share this poll!
           </div>
           <div className="socialButtons">
             <a target="_blank" href={ this.twitterShareUrl }>
@@ -207,11 +220,31 @@ class ViewPoll extends Component {
                 { poll.timeRemaining }
               </div>
             )}
+            { !this.shouldShowResults(poll) && (
+                <div className="field socialField">
+                  <div className="socialFeedText">Share vote on your social feed?</div>
+                  <div className="socialFeedContainer">
+                    <img src={ require('../images/social_share_icon.png')} />
+                    { this.state.showOnFeed ?
+                      <span className="socialButton enabled" onClick={() => this.toggleSocial()}>Yes</span> :
+                      <span className="socialButton disabled" onClick={() => this.toggleSocial()}>No</span>
+                    }
+                  </div>
+                </div>
+            )
+          }
           </div>
           <div className="contentContainer">
             { this.containerContent(poll) }
           </div>
         </div>
+        { this.store.getAuthenticated() && this.shouldShowResults(poll) && (
+          <div className="voteControlContainer">
+            <div className="voteControl" onClick={() => this.toggleVote()}>
+              { this.state.showVote ? "Hide Vote" : "Show Vote" }
+            </div>
+          </div>
+        )}
 
         { this.socialContent }
 

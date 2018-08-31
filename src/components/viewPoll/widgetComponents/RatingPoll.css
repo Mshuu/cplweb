@@ -45,12 +45,12 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  font-size: 5vw;
+
   padding: 0 2vw;
 }
 
 .ratingPoll .votes, .ratingPoll .id {
-  flex: 0 0 5vw;
+  flex: 0 0 9vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -17,20 +17,20 @@
 
 .widgetHeaderDetails {
   width: 100%;
-  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(to right, #3b6f90, #36215b) no-repeat fixed;
   color: #fff;
   font-size: 14px;
+  flex-wrap: wrap;
 }
 
 .widgetHeaderDetails div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 20px;
+  margin: 3px 10px 5px 10px;
 }
 
 .widgetHeaderDetails img {

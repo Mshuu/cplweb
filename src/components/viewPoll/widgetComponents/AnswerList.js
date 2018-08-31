@@ -16,7 +16,7 @@ class AnswerList extends Component {
   render() {
     let answerElements = this.props.answers.map( (answer, index) => {
       return (
-        <div className="answer" key={ index } style={{ backgroundColor: COLORS[index] }} onClick={ () => this.onVote(answer) }>
+        <div className="answer" key={ index } style={{ backgroundColor: `${COLORS[index]}!important` }} onClick={ () => this.onVote(answer) }>
           { answer }
         </div>
       );

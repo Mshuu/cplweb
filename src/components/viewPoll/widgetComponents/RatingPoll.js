@@ -16,6 +16,11 @@ class RatingPoll extends Component {
     return parseFloat(Math.round(this.props.poll.averageRating * 10) / 10).toFixed(1);
   }
 
+  get questionFontSize(){
+    let calcSize = 5 - Math.max(0, this.props.poll.question.length - 14)*0.20
+    return Math.min(5, calcSize)
+  }
+
   render() {
     return (
       <div className="ratingPoll">
@@ -23,7 +28,7 @@ class RatingPoll extends Component {
 
         <div className="topRow">
           <div className="avgScore">{ this.averageScoreString }</div>
-          <div className="question">{ this.props.poll.question }</div>
+          <div className="question" style={{fontSize: `${this.questionFontSize}vw`}}>{ this.props.poll.question }</div>
           <div className="votes">
             <img src={ require('../../images/poll_tick_icon.png') } />
             { this.props.poll.votes }
@@ -46,4 +51,4 @@ class RatingPoll extends Component {
   }
 }
 
-export default RatingPoll;
+export default RatingPoll; //

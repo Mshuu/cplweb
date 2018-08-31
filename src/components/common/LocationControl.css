@@ -12,7 +12,7 @@
   height: 40px;
   border-radius: 20px;
   color: #fff;
-  margin-right: 10px;
+  margin: 0 5px;
   cursor: pointer;
 }
 
@@ -22,15 +22,15 @@
 
 
 .locationListWrapper .unselected {
-  background-color: rgb(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 @media only screen and (max-width: 440px) {
+  .locationListWrapper .selected, .locationListWrapper .unselected {
+    width: 30vw;
+    font-size: 5vw;
+  }
 
- .locationListWrapper .selected, .locationListWrapper .unselected {
-
-  width: 110px;
- 
-}
+  
 }
 
