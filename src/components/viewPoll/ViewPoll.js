@@ -168,8 +168,8 @@ class ViewPoll extends Component {
     if(this.state.authenticated) {
       return (
         <div className="summaryContainer">
-          <SummaryHeader category={ poll.category } />
-          <PollList category={ poll.category } />
+          <SummaryHeader category={ poll.category} type={ poll.type }/>
+          <PollList category={ poll.category }  type={ poll.type }/>
         </div>
       );
     } else {
@@ -179,7 +179,7 @@ class ViewPoll extends Component {
             Not registered? Install ClearPoll app to get started!
           </div>
           <div className="installBannerImages">
-            <a href="https://play.google.com/store/apps/developer?id=ClearPoll" target="_blank">
+            <a href="https://play.google.com/store/apps/details?id=com.nextechdevelopments.clearpoll" target="_blank">
               <img src={ require('../images/google_play_icon.png') }/>
             </a>
             <a href="https://itunes.apple.com/us/app/clearpoll/id1347664374" target="_blank">
@@ -222,7 +222,7 @@ class ViewPoll extends Component {
             )}
             { !this.shouldShowResults(poll) && (
                 <div className="field socialField">
-                  <div className="socialFeedText">Share vote on your social feed?</div>
+                  <div className="socialFeedText">Show friends you voted?</div>
                   <div className="socialFeedContainer">
                     <img src={ require('../images/social_share_icon.png')} />
                     { this.state.showOnFeed ?

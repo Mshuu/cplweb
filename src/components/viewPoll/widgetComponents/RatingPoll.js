@@ -34,7 +34,7 @@ class RatingPoll extends Component {
             { this.props.poll.votes }
           </div>
           <div className="id">
-            <img src={ require('../../images/poll_hash_icon.png') } />
+            <img src={ require('../../images/poll_hash_icon2.png') } />
             { this.props.poll.pollId }
           </div>
         </div>

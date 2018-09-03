@@ -22,7 +22,7 @@ class MyPolls extends Component {
 
     this.state = {
       loading: true,
-      sortOrder: 'mostVotes',
+      sortOrder: 'newest',
       loadingMore: false,
       canLoadMore: (this.store.getMyVotes() == LOAD_MORE_QTY)
     };
@@ -39,7 +39,7 @@ class MyPolls extends Component {
       this.setState({loading: false});
       return;
     }
-    
+
     this.setState({
       loadingMore: true,
     });

@@ -17,7 +17,7 @@ class PollList extends Component {
       polls: [],
       loadingMore: true,
       canLoadMore: true
-    };    
+    };
   }
 
   componentDidMount(){
@@ -33,7 +33,18 @@ class PollList extends Component {
 
     let currentPosition = this.state.polls.length;
 
-    let response = await WebApi.getPolls({
+   let response;
+    if (this.props.type == "Star"){
+			response = await WebApi.getPolls({
+				active: 'true',
+				type: 'Star',
+				category: 'All',
+				sortOrder: 'mostVotes',
+				recordStartNo: currentPosition,
+				recordQty: LOAD_MORE_QTY
+			});
+		} else {
+    response = await WebApi.getPolls({
       active: 'true',
       type: 'Normal',
       category: this.props.category,
@@ -41,6 +52,7 @@ class PollList extends Component {
       recordStartNo: currentPosition,
       recordQty: LOAD_MORE_QTY
     });
+}
 
     this.setState({
       loading: false,
@@ -65,7 +77,7 @@ class PollList extends Component {
         <div className="polls">
           { this.pollElements }
         </div>
-        {!this.state.loading && 
+        {!this.state.loading &&
           <ShowMore moreAvailable={ this.state.canLoadMore } loading={this.state.loadingMore} onClick={() => this.webFetch()} />
         }
       </div>

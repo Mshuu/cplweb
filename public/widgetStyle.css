@@ -293,6 +293,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+	border-radius: 3px;
+	overflow:hidden;
 }
 
 .ratingPoll .topRow {
@@ -343,6 +345,7 @@
   align-items: center;
   font-size: 3vw;
   padding: 0 2vw;
+	padding-top: 4px;
   border-left: 2px solid #d5d5d5;
 }
 

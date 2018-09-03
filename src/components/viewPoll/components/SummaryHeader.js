@@ -31,12 +31,21 @@ class SummaryHeader extends Component {
   render() {
     let category = CATEGORY_MAP[this.props.category];
 
+		if (this.props.type == "Star"){
     return (
       <div className="pollSummaryHeader">
-        <img src={ CategoryIcon[category.title] } />
-        <span>{ category.title }</span>
+        <img src={ CategoryIcon["Star Polls"] } />
+        <span>{ "Star Polls" }</span>
       </div>
     );
+	} else {
+		return (
+			<div className="pollSummaryHeader">
+				<img src={ CategoryIcon[category.title] } />
+				<span>{ category.title }</span>
+			</div>
+		);
+	}
   }
 }
 

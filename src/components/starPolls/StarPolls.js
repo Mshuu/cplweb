@@ -22,7 +22,7 @@ class CompletedPolls extends Component {
 
     this.state = {
       loading: true,
-      sortOrder: 'mostVotes',
+      sortOrder: 'newest',
       loadingMore: false,
       canLoadMore: (this.store.getStarPolls() == LOAD_MORE_QTY)
     };
