@@ -111,7 +111,7 @@ class ViewPoll extends Component {
   }
 
   get twitterShareUrl(){
-    return "https://twitter.com/home?status=" + this.currentUrlEscaped;
+    return "https://twitter.com/share?url=" + this.currentUrlEscaped;
   }
 
   get facebookShareUrl(){
@@ -258,7 +258,7 @@ class ViewPoll extends Component {
       <div className="viewPoll">
         <LoadingOverlay enabled={ this.state.loading }/>
 
-        { !this.state.loading && this.pollElement() }      
+        { !this.state.loading && this.pollElement() }
       </div>
     );
   }
