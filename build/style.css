@@ -166,6 +166,9 @@ require("source-map-support").install();
   outline: none;
 }
 
+.loginField input.loginFieldUsername{
+	letter-spacing: 2px;
+}
 .loginField input.loginFieldDesktopCode {
   letter-spacing: 2px;
 }
