@@ -12,7 +12,7 @@ import ShowMore from '../common/ShowMore';
 
 import '../completedPolls/CompletedPolls.css';
 
-const LOAD_MORE_QTY = 12;
+const LOAD_MORE_QTY = 36;
 
 class CompletedPolls extends Component {
   constructor(props){
@@ -39,7 +39,7 @@ class CompletedPolls extends Component {
       this.setState({loading: false});
       return;
     }
-    
+
     this.setState({
       loadingMore: true,
     });
