@@ -67,7 +67,7 @@ class WidgetInstance {
   openLogin(){
     this.loginOverlay = document.createElement('div');
 		this.loginOverlay.id = "loginOverlay";
-    this.loginOverlay.style.cssText = 'position: fixed; top: 0; bottom: 0; left: 0; right: 0;margin: auto;height:550px;width: 670px;z-index:100; display: flex;justify-content: center; align-items: center;border-radius: 7px';
+    this.loginOverlay.style.cssText = 'position: fixed; top: 0; bottom: 0; left: 0; right: 0;margin: auto;height:30%;width: 30%;z-index:100; display: flex;justify-content: center; align-items: center;border-radius: 7px';
     this.loginOverlay.addEventListener("click", () => this.closeLogin());
 
 	 let closeButton  = document.createElement('a');
