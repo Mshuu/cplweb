@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 
-const SERVER_BASE_URL = JSON.stringify("http://142.93.83.225:3001");
+const SERVER_BASE_URL = JSON.stringify("https://web.clearpoll.com");
 
 const common = {
   rules: [
