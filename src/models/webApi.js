@@ -1,6 +1,8 @@
 import axios from 'axios';
 import WsSocket from './wsSocket';
 const AUTH_URL = "/api/auth";
+import ClearpollApi from './serverApi';
+
 
 let socket, connected = false;
 
@@ -40,6 +42,86 @@ class WebApi {
       showOnFeed
     });
   }
+  static async GetDesktopCode(phoneNumber,code){
+      let params = {
+        function: 'GetDesktopCode',
+        phoneNumber,
+        code
+      }
+
+      let response = await ClearpollApi.request(params);
+
+      if(!response.success) throw new Error('Invalid Auth');
+
+      return response;
+    }
+    static async CheckUsername(username){
+        let params = {
+          function: 'CheckUsername',
+          username
+        }
+
+        let response = await ClearpollApi.request(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+    static async GetCountry(){
+        let params = {
+          function: 'GetCountryCode',
+        }
+
+        let response = await ClearpollApi.request(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+
+	static async UserSignup(phoneNumber){
+	    let params = {
+	      function: 'UserSignup',
+	      phoneNumber,
+	    }
+
+	    let response = await ClearpollApi.request(params);
+
+	    if(!response.success) throw new Error('Invalid Auth');
+
+	    return response;
+	  }
+    static async UserSignup2(phoneNumber,code){
+        let params = {
+          function: 'UserVerification',
+          phoneNumber,
+          code
+        }
+
+        let response = await ClearpollApi.request(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+      static async UserSignup3(phoneNumber,code,birth_year,sex,user_name){
+        var isIos = 'false';
+          let params = {
+            function: 'UserFinishSignup',
+            phoneNumber,
+            code,
+            birth_year,
+            sex,
+            isIos,
+            user_name
+          }
+
+          let response = await ClearpollApi.request(params);
+
+          if(!response.success) throw new Error('Invalid Auth');
+
+          return response;
+        }
 
   static async getPolls(params){
     return await WebApi.wsRequest({
@@ -168,7 +250,6 @@ class WebApi {
 
   static async wsRequest(params){
     await WebApi.ensureConnected();
-    console.dir(params);
     let response = await socket.request(params);
 
     return response

@@ -4,6 +4,10 @@ import { withRouter } from 'react-router-dom';
 
 import Menu from './Menu';
 import Login from '../login/Login';
+import Signup from '../signup/Signup';
+import Signup2 from '../signup2/Signup2';
+import Signup3 from '../signup3/Signup3';
+import FinishSignup from '../finishSignup/FinishSignup';
 import Home from '../home/Home';
 import ViewPoll from '../viewPoll/ViewPoll';
 import Search from '../search/Search';
@@ -32,7 +36,7 @@ class Template extends Component {
     if( typeof window !== 'undefined' && window )
       delete window.storeData;
 
-    let params = qs.parse(props.location.search); 
+    let params = qs.parse(props.location.search);
 
     this.storeContext = React.createContext(this.store);
     this.embedded = params.embedded ? true : false;
@@ -54,7 +58,7 @@ class Template extends Component {
     return (
       <div className="templateContainer">
         <div className="templateInnerContainer">
-          { !this.embedded && 
+          { !this.embedded &&
             <div className="templateHeader">
               <img src={ require("../images/ClearPoll-Logo.png") } onClick={() => this.handleLogoClick()}/>
               { this.showMenu && <Menu /> }
@@ -74,6 +78,10 @@ class Template extends Component {
             <Route path="/search" render={(props) => <Search {...props} store={this.store} />} />
             <Route path="/poll/:pollId" render={(props) => <ViewPoll {...props} store={this.store} />} />
             <Route path="/login" render={(props) => <Login {...props} store={this.store} />} />
+						<Route path="/signup" render = {(props) => <Signup {...props} store={this.store} />} />
+						<Route path="/signup2" render = {(props) => <Signup2 {...props} store={this.store} />} />
+						<Route path="/signup3" render = {(props) => <Signup3 {...props} store={this.store} />} />
+						<Route path="/finishSignup" render = {(props) => <FinishSignup {...props} store={this.store} />} />
             <Route path="/" render={(props) => <Home {...props} store={this.store} />} />
           </Switch>
         </div>

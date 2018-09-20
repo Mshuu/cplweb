@@ -15,7 +15,7 @@
 }
 
 .loginHeader img {
-  height: 30px !important;
+  height: 75px;
 }
 
 .loginText {
@@ -26,7 +26,7 @@
   padding: 0 40px
 }
 
-.loginField {
+.loginField2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -36,7 +36,7 @@
   margin-bottom: 10px
 }
 
-.loginField .loginFieldText {
+.loginField2 .loginField2Text {
   flex: 0 0 140px;
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@
   border-radius:3px 0px 0px 3px;
 }
 
-.loginField input {
+.loginField2 input {
   flex-grow: 1;
   outline: none;
   box-shadow: none;
@@ -60,41 +60,23 @@
   border: none;border-radius:0px 3px 3px 0px;
 }
 
-.loginField input:focus {
+.loginField2 input:focus {
   outline: none;
 }
-.faqButton {
-	border-radius: 5px;
-	border: 0;
-	margin: 0;
-	background-color: rgba(0,0,0,0.3);
-	padding: 7px;
-	margin-left: 5px !important;
-	margin-right: -50px !important;
-}
- .faqIcon {
-  width: 30px;
-  height: 30px;
-}
-.signupButton .signupImage{
-	height: 30px;
-	float: right;
-	margin-right: 20px;
-	vertical-align: middle;
-	display: inline-block;
-  margin-top: 10px;
-  margin-left: -50px;
 
-}
-
-.loginField input.loginFieldUsername{
+.loginField2 input.loginField2Username{
 	letter-spacing: 2px;
 }
-.loginField input.loginFieldDesktopCode {
+.loginField2 input.loginField2DesktopCode {
   letter-spacing: 2px;
 }
 
 .loginSubText {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+}
+.signupDesc {
   font-size: 12px;
   text-align: center;
   color: #fff;
@@ -117,9 +99,9 @@
   width: 240px;
   height: 50px;
   border-radius: 25px;
-  padding-top: 10px;
+  padding: 0;
   border: none;
-  background: #ef7245 !important;
+  background: #01bec0;
   color: #ffffff;
   font-size: 22px;
   line-height: 50px;
@@ -159,11 +141,11 @@
 
 
 @media only screen and (max-width: 410px) {
-  .loginField {
+  .loginField2 {
     width: 95vw;
   }
 
-  .loginField input {
+  .loginField2 input {
     width: 50vw;
   }
 }

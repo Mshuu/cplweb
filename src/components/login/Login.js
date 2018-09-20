@@ -19,6 +19,10 @@ class Login extends Component {
     this.props.store.hydrateCheck();
   }
 
+	async faqRedirect(){
+
+	}
+
   async doLogin(){
     if(
       this.state.username.length == 0 ||
@@ -34,6 +38,7 @@ class Login extends Component {
 
       if(window.parent){
         window.parent.postMessage({event: "loggedIn"}, '*');
+				this.props.store.setAuthenticated(true);
       }
 
       this.props.history.push('/');
@@ -43,6 +48,18 @@ class Login extends Component {
 
     this.setState({loading: false});
   }
+	async doSignup(){
+
+		this.setState({loading: true});
+
+		try {
+			this.props.history.push('/signup');
+		} catch(e) {
+			alert(e.message);
+		}
+
+		this.setState({loading: false});
+	}
 
   render() {
     return (
@@ -50,8 +67,7 @@ class Login extends Component {
         <LoadingOverlay enabled={ this.state.loading }/>
 
         <div className="loginHeader">
-          <img src={ require('./images/desktop-connect.png') } />
-          ClearPoll Login
+          <img src={ require('../images/white-logo.png') } className="whiteLogo" />
         </div>
 
         <div className="loginField">
@@ -67,13 +83,16 @@ class Login extends Component {
 
         <div className="loginField">
           <span className="loginFieldText">
-            Desktop Code
+            Login Code
           </span>
           <input type="text"
             className="loginFieldDesktopCode"
             value={this.state.desktopCode}
             onChange={ e => this.setState({desktopCode: e.target.value}) }
           />
+					<a  className="faqButton" href="https://clearpoll.com/faq" target="_blank">
+						<img src={ require('../images/question-icon.png')}  className = "faqIcon" />
+					</a>
         </div>
 
         <div className="loginSubText">
@@ -83,6 +102,10 @@ class Login extends Component {
         <button className="loginButton" onClick={ this.doLogin.bind(this) }>
           Login
         </button>
+				<button className="signupButton" onClick={ this.doSignup.bind(this)}>
+					Sign Up
+					<img src= { require('../images/pencil.png')} className = "signupImage" />
+				</button>
 
         <div className="installBanner">
           <div className="installBannerText">

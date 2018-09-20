@@ -41,6 +41,26 @@ const Login = async ( req, res ) => {
   renderHead(req, res);
   renderReact(req, res, store);
 };
+const FinishSignup = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
+const Signup = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
+const Signup2 = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
+const Signup3 = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
 
 const Poll = async ( req, res ) => {
   let auth;
@@ -344,6 +364,7 @@ const Account = async ( req, res ) => {
   renderReact(req, res, store);
 };
 
+
 const CreateWidget = async ( req, res ) => {
   let auth;
 
@@ -479,4 +500,4 @@ const htmlTail = store => `
 `;
 
 
-export { Home, Login, Poll, Search, CompletedPolls, StarPolls, MyVotes, MyPolls, SocialFeed, ManageFriends, Account, CreateWidget, Rewards };
+export { Home, Login, Poll, Search, CompletedPolls, StarPolls, MyVotes, MyPolls, SocialFeed, ManageFriends, Account, CreateWidget, Rewards , Signup, Signup2, Signup3, FinishSignup};

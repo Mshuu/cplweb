@@ -4,7 +4,7 @@ import expressWS from 'express-ws';
 import cluster from 'cluster';
 import os from 'os';
 
-import {Home, Login, Poll, Search, CompletedPolls, StarPolls, MyVotes, MyPolls, SocialFeed, ManageFriends, Account, CreateWidget, Rewards} from './controllers/reactRenderController';
+import {Home, Login, Poll, Search, CompletedPolls, StarPolls, MyVotes, MyPolls, SocialFeed, ManageFriends, Account, CreateWidget, Rewards, Signup, Signup2, Signup3, FinishSignup} from './controllers/reactRenderController';
 import {WidgetPoll} from './controllers/widgetRenderController';
 import AuthController from './controllers/authController';
 import WsController from './controllers/wsController';
@@ -53,6 +53,10 @@ function childProcess() {
   app.get( "/account", Account);
   app.get( "/createWidget", CreateWidget);
   app.get( "/rewards", Rewards);
+	app.get("/signup", Signup);
+	app.get("/signup2", Signup2);
+	app.get("/signup3", Signup3);
+	app.get("/finishSignup", FinishSignup);
 
   app.get( "/rewards", Rewards);
 
@@ -61,5 +65,3 @@ function childProcess() {
 
   app.listen( 3001 );
 }
-
-

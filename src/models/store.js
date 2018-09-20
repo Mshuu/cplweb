@@ -8,7 +8,9 @@ export default class Store {
       myVotes: [],
       socialFeed: [],
       userSettings: {},
-      authenticated: true
+      authenticated: false,
+			phoneNumber: '',
+			code: ''
     }, prefetchData);
 
     this.initialPage = true;
@@ -68,6 +70,12 @@ export default class Store {
   setSocialFeed(socialPolls){
     this.data.socialFeed = socialPolls;
   }
+	setPhoneNumber(phoneNumber){
+		this.data.phoneNumber = phoneNumber;
+	}
+	setCode(code){
+		this.data.code = code;
+	}
 
   setUserSettings(settings){
     this.data.userSettings = settings;

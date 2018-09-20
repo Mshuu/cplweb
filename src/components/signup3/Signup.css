@@ -13,9 +13,21 @@
   font-size: 28px;
   margin-bottom: 25px;
 }
+.ErrorText{
+	background-color: rgba(0,0,0,0.3);
+	padding: 10px;
+	margin-left: 150px;
+	margin-top: -5px;
+	border-radius: 5px;
+}
+.errorText {
+  font-size: 10px;
+  text-align: center;
+  color: #fff;
+}
 
 .loginHeader img {
-  height: 30px !important;
+  height: 75px;
 }
 
 .loginText {
@@ -63,29 +75,6 @@
 .loginField input:focus {
   outline: none;
 }
-.faqButton {
-	border-radius: 5px;
-	border: 0;
-	margin: 0;
-	background-color: rgba(0,0,0,0.3);
-	padding: 7px;
-	margin-left: 5px !important;
-	margin-right: -50px !important;
-}
- .faqIcon {
-  width: 30px;
-  height: 30px;
-}
-.signupButton .signupImage{
-	height: 30px;
-	float: right;
-	margin-right: 20px;
-	vertical-align: middle;
-	display: inline-block;
-  margin-top: 10px;
-  margin-left: -50px;
-
-}
 
 .loginField input.loginFieldUsername{
 	letter-spacing: 2px;
@@ -98,6 +87,21 @@
   font-size: 12px;
   text-align: center;
   color: #fff;
+}
+.signupDesc {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.signupDesc2 {
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+	margin-bottom: 10px;
+}
+.SexButtons{
+	flex-direction: row;
 }
 
 .loginButton {
@@ -113,13 +117,71 @@
   margin-top: 30px;
   transition: background-color 100ms linear;font-weight:300;
 }
+.sexButton {
+  width: 140px;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: #59719b;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 50px;
+  margin-top: 10px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+  transition: background-color 100ms linear;font-weight:300;
+}
+.sexButton3 {
+  width: 140px;
+  height: 50px;
+  border-radius: 25px;
+	margin-bottom: 20px;
+  padding: 0;
+  border: none;
+  background: #59719b;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 50px;
+  margin-top: 10px;
+  transition: background-color 100ms linear;font-weight:300;
+}
+.sexButton2 {
+  width: 140px;
+  height: 50px;
+	margin-bottom: 20px;
+  border-radius: 25px;
+  padding: 0;
+	margin-right: 10px;
+  border: none;
+  background: #01bec0;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 50px;
+  margin-top: 10px;
+  transition: background-color 100ms linear;font-weight:300;
+}
+.sexButton4 {
+  width: 140px;
+  height: 50px;
+	margin-bottom: 20px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: #01bec0;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 50px;
+  margin-top: 10px;
+  transition: background-color 100ms linear;font-weight:300;
+}
 .signupButton {
   width: 240px;
   height: 50px;
   border-radius: 25px;
-  padding-top: 10px;
+  padding: 0;
   border: none;
-  background: #ef7245 !important;
+  background: #01bec0;
   color: #ffffff;
   font-size: 22px;
   line-height: 50px;

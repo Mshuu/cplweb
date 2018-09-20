@@ -30,7 +30,7 @@ class ServerApi {
 
   getHasVoted(pollId){
     let voteMatch = this.voteHistory.find( h => { return h.pollID == pollId});
-    
+
     if(voteMatch)
       return {
         hasVoted: true,
@@ -53,14 +53,10 @@ class ServerApi {
       if(typeof homeData[key] != "object") continue;
 
       homeData[key] = homeData[key].map( poll => {
-        if(!poll.id) return;
-
+        if(!poll.id) return
         return Object.assign(poll, this.getHasVoted(poll.id));
       });
     }
-
-    console.dir(homeData.starPolls);
-
     return homeData;
   }
 
@@ -215,7 +211,7 @@ class ServerApi {
     });
 
     this.voteHistory = response.voteHistory;
-    
+
     let polls = response.poll.map(poll => {
       return Object.assign(
         poll,
@@ -316,6 +312,14 @@ class ServerApi {
       ...this.auth
     });
   }
+	async UserSignup(phoneNumber){
+    console.log("this");
+
+		return await ServerApi.request({
+			function: 'UserSignup',
+			phoneNumber
+		});
+	}
 
   async approveFriendRequest(friendId){
     return await ServerApi.request({

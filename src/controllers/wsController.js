@@ -82,6 +82,9 @@ class WsController {
         case 'DeleteAccount':
           await this.replyDeleteAccount(msg);
           break;
+        case 'UserSignup':
+          await this.replyUserSignup(msg);
+          break;
       }
     } catch(e){
       console.dir(e);
@@ -242,6 +245,14 @@ class WsController {
 
     let response = Object.assign(result, {id});
     this.ws.send( JSON.stringify(response) );
+  }
+  async replyUserSignup({phoneNumber}){
+		console.log("this");
+
+    let result = await this.apiClient.UserSignup(phoneNumber);
+
+    let response = Object.assign(result, {phoneNumber});
+    this.ws.send(JSON.stringify(response));
   }
 }
 

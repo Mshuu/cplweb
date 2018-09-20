@@ -15,7 +15,7 @@
 }
 
 .loginHeader img {
-  height: 30px !important;
+  height: 75px;
 }
 
 .loginText {
@@ -63,41 +63,52 @@
 .loginField input:focus {
   outline: none;
 }
-.faqButton {
-	border-radius: 5px;
-	border: 0;
-	margin: 0;
-	background-color: rgba(0,0,0,0.3);
-	padding: 7px;
-	margin-left: 5px !important;
-	margin-right: -50px !important;
-}
- .faqIcon {
-  width: 30px;
-  height: 30px;
-}
-.signupButton .signupImage{
-	height: 30px;
-	float: right;
-	margin-right: 20px;
-	vertical-align: middle;
-	display: inline-block;
-  margin-top: 10px;
-  margin-left: -50px;
-
-}
 
 .loginField input.loginFieldUsername{
 	letter-spacing: 2px;
 }
-.loginField input.loginFieldDesktopCode {
+.loginField2 input.loginFieldDesktopCode {
   letter-spacing: 2px;
+	text-align: center;
 }
 
 .loginSubText {
   font-size: 12px;
   text-align: center;
   color: #fff;
+}
+.signupDesc {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+	margin-top: 10px;
+}
+.signupDesc1 {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+}
+.signupDesc2 {
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+.importantText{
+  font-size: 16px;
+  text-align: center;
+  color: #01bec0;
+  flex: 1;
+}
+.nonImportantText{
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+	margin-top: 10px;
+}
+.AlertText{
+  flex-direction: row;
+	display: flex;
 }
 
 .loginButton {
@@ -117,9 +128,9 @@
   width: 240px;
   height: 50px;
   border-radius: 25px;
-  padding-top: 10px;
+  padding: 0;
   border: none;
-  background: #ef7245 !important;
+  background: #01bec0;
   color: #ffffff;
   font-size: 22px;
   line-height: 50px;
