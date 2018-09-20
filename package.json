@@ -7,7 +7,9 @@
     "build": "NODE_ENV=production webpack --progress --config webpack.config.production.js",
     "dev": "npm-run-all --parallel server client",
     "server": "nodemon build/server.js",
-    "client": "webpack --watch --progress"
+    "client": "webpack --watch --progress",
+    "start": "node build/server.js",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
