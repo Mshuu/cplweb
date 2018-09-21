@@ -67,7 +67,7 @@ async doUsername(){
 		this.setState({
 			showError: false
 		});
-		this.doLogin();
+		this.doLogin.bind(this);
 	}
 	console.log("this:" + this.state.showError);
 
@@ -179,7 +179,7 @@ if (this.state.sex == ''){
 	style ={{"margin-top": "10px"}}
 />
 
-				<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+				<button className="loginButton" onClick={ this.doUsername.bind(this) }>
 					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
         </button>
 
@@ -235,7 +235,7 @@ if (this.state.sex == ''){
   onChange={this.handleChange}
 	style ={{"margin-top": "10px"}}
 />
-				<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+				<button className="loginButton" onClick={ this.doUsername.bind(this) }>
 					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
         </button>
 
@@ -291,7 +291,7 @@ if (this.state.sex == ''){
   onChange={this.handleChange}
 	style ={{"margin-top": "10px"}}
 />
-				<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+				<button className="loginButton" onClick={ this.doUsername.bind(this) }>
 					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
         </button>
 
@@ -354,7 +354,7 @@ if (this.state.sex == ''){
 	  onChange={this.handleChange}
 		style ={{"margin-top": "10px"}}
 	/>
-					<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+					<button className="loginButton" onClick={ this.doUsername.bind(this) }>
 						<img src={ require('../images/next-btn.png')}  className = "nextButton" />
 	        </button>
 
@@ -415,7 +415,7 @@ if (this.state.sex == ''){
 	  onChange={this.handleChange}
 		style ={{"margin-top": "10px"}}
 	/>
-					<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+					<button className="loginButton" onClick={ this.doUsername.bind(this) }>
 						<img src={ require('../images/next-btn.png')}  className = "nextButton" />
 	        </button>
 
@@ -476,7 +476,7 @@ if (this.state.sex == ''){
 	  onChange={this.handleChange}
 		style ={{"margin-top": "10px"}}
 	/>
-					<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+					<button className="loginButton" onClick={ this.doUsername.bind(this) }>
 						<img src={ require('../images/next-btn.png')}  className = "nextButton" />
 	        </button>
 
