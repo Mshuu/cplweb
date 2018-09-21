@@ -46,6 +46,7 @@ handleChange = value => {
  };
 
 async doUsername(){
+  console.log("USERNAME: "+ this.state.userName);
 	if (
 		this.state.userName.length == 0
 	) return;
@@ -69,6 +70,10 @@ async doUsername(){
 		});
 		this.doLogin.bind(this);
 	}
+  if (this.state.showError  == false){
+    this.doLogin();
+    console.log("hi");
+  }
 	console.log("this:" + this.state.showError);
 
 	} catch(e) {
