@@ -8,7 +8,7 @@ export default class Store {
       myVotes: [],
       socialFeed: [],
       userSettings: {},
-      authenticated: false,
+      authenticated: true,
 			phoneNumber: '',
 			code: '',
 			username: ''

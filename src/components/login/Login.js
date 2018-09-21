@@ -17,6 +17,7 @@ class Login extends Component {
     };
 
     this.props.store.hydrateCheck();
+		this.props.store.setAuthenticated(false);
   }
 
 	async faqRedirect(){
