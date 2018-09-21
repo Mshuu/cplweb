@@ -6,6 +6,7 @@ import Store from '../models/store';
 import Authenticator from '../models/authenticator';
 import Template from '../components/template/template';
 import WidgetRouter from '../components/widgetRouter';
+import CryptoJS from "crypto-js";
 import url from 'url';
 
 const defaultMetadata = {
@@ -425,11 +426,13 @@ function renderReact(req, res, store){
     </StaticRouter>
   );
   const appStream = renderToStaticNodeStream( jsx );
+	console.log("STORE: %j",store.data);
+	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(store.data), 'Y;8)t,[;xzy9niU2$tL?');
 
   appStream.pipe(res, {end: false})
 
   appStream.on(`end`, () => {
-    res.end(htmlTail(store))
+    res.end(htmlTail(ciphertext))
   })
 }
 
@@ -492,7 +495,7 @@ const htmlTail = store => `
           window.parent.postMessage({event: "loadingComplete"}, '*');
           console.log("Message sent");
         }
-        window.storeData = ${JSON.stringify(store.data)};
+        window.storeData = "${store}";
       </script>
       <script type="text/javascript" src="/public/bundle.js"></script>
     </body>

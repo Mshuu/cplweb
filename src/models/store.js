@@ -1,5 +1,11 @@
+import CryptoJS from "crypto-js";
+
 export default class Store {
-  constructor(prefetchData = {}){
+constructor(prefetchData = {}){
+var bytes  = CryptoJS.AES.decrypt(prefetchData, 'Y;8)t,[;xzy9niU2$tL?');
+var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+console.log("BYTES : " + bytes);
+console.log("PLAINTEXT: " + plaintext);
     this.data = Object.assign({
       polls: {},
       searchResults: {},
@@ -12,7 +18,7 @@ export default class Store {
 			phoneNumber: '',
 			code: '',
 			username: ''
-    }, prefetchData);
+    }, plaintext);
 
     this.initialPage = true;
   }

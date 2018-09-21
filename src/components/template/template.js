@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import  CryptoJS from "crypto-js";
 
 import Menu from './Menu';
 import Login from '../login/Login';
@@ -31,6 +32,8 @@ class Template extends Component {
     super(props);
 
     this.props = props;
+
+
     this.store = props.store || new Store(window.storeData);
 
     if( typeof window !== 'undefined' && window )
