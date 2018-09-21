@@ -81,7 +81,7 @@ class WebApi {
 
 	static async UserSignup(phoneNumber){
 	    let params = {
-	      function: 'UserSignup',
+	      function: 'UserSignup2',
 	      phoneNumber,
 	    }
 
