@@ -41,12 +41,10 @@ async setMale(){
 	});
 }
 handleChange = value => {
-	 console.log("Captcha value:", value);
 	 this.setState({ 'recaptcha': value });
  };
 
 async doUsername(){
-  console.log("USERNAME: "+ this.state.userName);
 	if (
 		this.state.userName.length == 0
 	) return;
@@ -57,14 +55,11 @@ async doUsername(){
 		let result = await WebApi.CheckUsername(this.state.userName);
 
 		if(!result) throw new Error("Incorrect username or desktop code");
-		console.log(result);
 	if (result.usernameTaken == 'true'){
-		console.log("yaken");
 		this.setState({
 			showError: true
 		});
 	} else {
-		console.log("notakens");
 		this.setState({
 			showError: false
 		});
@@ -72,9 +67,7 @@ async doUsername(){
 	}
   if (this.state.showError  == false){
     this.doLogin();
-    console.log("hi");
   }
-	console.log("this:" + this.state.showError);
 
 	} catch(e) {
 		alert(e.message);
@@ -84,13 +77,10 @@ async doUsername(){
 }
 
   async doLogin(){
-		console.log("HERE");
-		console.log("VLUE: %j", this.state.recaptcha);
 
 		    if(
       this.props.store.data.code.length == 0 || this.props.store.data.phoneNumber.length == 0 || this.state.birthYear.length == 0 || this.state.sex.length == 0 || this.state.userName.length == 0 || this.state.recaptcha == null
     ) return;
-		console.log("HERE2");
 
     this.setState({loading: true});
 
@@ -98,7 +88,6 @@ async doUsername(){
       let result = await WebApi.UserSignup3(this.props.store.data.phoneNumber,this.props.store.data.code,this.state.birthYear,this.state.sex,this.state.userName);
 
       if(!result) throw new Error("Incorrect username or desktop code");
-			console.log(result);
 			if(result.success == 'true' && result.signupComplete == 'true'){
 				try {
 					let result2 = await WebApi.SendStat(this.state.username);

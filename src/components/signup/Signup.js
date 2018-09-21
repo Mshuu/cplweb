@@ -64,13 +64,11 @@ class Signup extends Component {
 		try {
 			let result = await WebApi.GetCountry();
 			if(!result) throw new Error("Incorrect username or desktop code");
-			console.log(result);
 			this.setState({
 				countryCode: result.callingCode,
 				country: result.country.toLowerCase(),
 				phoneNumber: result.callingCode
 			})
-			console.log(this.state.country);
 			this.forceUpdate()
 
 		} catch(e){

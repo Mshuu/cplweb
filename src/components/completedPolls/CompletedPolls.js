@@ -78,7 +78,7 @@ class CompletedPolls extends Component {
   async webFetch(resetCache = false){
     if(this.store.hydrateCheck() || !this.isCategorySelected)
       return;
-    
+
     if(resetCache)
       this.store.setCategoryPolls(this.category, []);
 
@@ -89,7 +89,6 @@ class CompletedPolls extends Component {
 
     let existingPolls = this.store.getCategoryPolls(this.category);
 
-    console.log(this.state.sortOrder);
 
     let response = await WebApi.getPolls(
       Object.assign(this.filterParams, {

@@ -95,9 +95,7 @@ class WidgetInstance {
   }
 
   closeLogin(){
-		console.log("This");
     if(!this.loginOverlay) {
-			console.log("Orthis");
 			return;
 		}
     document.body.removeChild(document.getElementById("loginOverlay"));
@@ -106,7 +104,6 @@ class WidgetInstance {
   handleIframeMessage(messageEvent){
     let data = messageEvent.data;
 
-    console.log(`id=${this.pollId}, event=${data.event}`);
 
     switch(data.event){
       case 'loadingComplete':

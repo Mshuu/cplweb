@@ -58,7 +58,6 @@ class CategoryList extends Component {
   }
 
   render() {
-    console.log('test');
     return (
       <div className="categoryList">
         { this.categoryElements }

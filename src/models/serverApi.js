@@ -328,7 +328,6 @@ class ServerApi {
     });
   }
 	async UserSignup(phoneNumber){
-    console.log("this");
 
 		return await ServerApi.request({
 			function: 'UserSignup',

@@ -247,7 +247,6 @@ class WsController {
     this.ws.send( JSON.stringify(response) );
   }
   async replyUserSignup({phoneNumber}){
-		console.log("this");
 
     let result = await this.apiClient.UserSignup(phoneNumber);
 
