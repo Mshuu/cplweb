@@ -62,6 +62,6 @@ function childProcess() {
 
   app.ws('/api/ws', WsController);
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3001;
   app.listen( port );
 }
