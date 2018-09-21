@@ -34,32 +34,49 @@ class SocialPoll extends Component {
   }
 
   get descriptionText(){
+		if (this.poll.friendIsStar == 'T'){
+			if(this.poll.createdPoll == 'T'){
+				return (
+					<div className="pollLeft">
+						<span className="textHightlightGreen">{ this.poll.friendTwitterName }</span> created poll #{ this.poll.pollId }
+						<span className="textHightlightBlack"> '{this.poll.topic}'</span>
+					</div>
+				);
+			} else {
+				return (
+					<div className="pollLeft">
+						<span className="textHightlightGreen">{ this.poll.friendTwitterName }</span> voted on on poll #{ this.poll.pollId }
+						<span className="textHightlightBlack"> '{this.poll.topic}'</span>
+					</div>
+				);
+			}
+		} else {
     if(this.poll.createdPoll == 'T'){
       return (
         <div className="pollLeft">
-          <span className="textHightlightGreen">{ this.poll.friendName }</span> created poll #{ this.poll.pollId }
+          <span className="textHightlightGreen">{ this.poll.username }</span> created poll #{ this.poll.pollId }
           <span className="textHightlightBlack"> '{this.poll.topic}'</span>
         </div>
       );
     } else {
       return (
         <div className="pollLeft">
-          <span className="textHightlightGreen">{ this.poll.friendName }</span> voted on on poll #{ this.poll.pollId }
+          <span className="textHightlightGreen">{ this.poll.username }</span> voted on on poll #{ this.poll.pollId }
           <span className="textHightlightBlack"> '{this.poll.topic}'</span>
         </div>
       );
     }
+	}
   }
 
   render() {
-    console.dir(this.poll);
     return (
       <div className="socialPoll">
         { this.descriptionText }
 
         <div className="pollRight">
           { this.button() }
-        </div>  
+        </div>
       </div>
     );
   }
