@@ -110,7 +110,7 @@ class Login extends Component {
 
         <div className="installBanner">
           <div className="installBannerText">
-						Get the ClearPoll App
+						Get the ClearPoll App!
           </div>
           <div className="installBannerImages">
             <a href="https://play.google.com/store/apps/details?id=com.nextechdevelopments.clearpoll" target="_blank">
