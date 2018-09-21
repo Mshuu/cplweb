@@ -91,6 +91,21 @@ class WebApi {
 
 	    return response;
 	  }
+    static async SendStat(userName){
+        let params = {
+          function: 'CheckIn',
+          userName: userName,
+          event: 'APP_START',
+          data: 'WEB'
+        }
+
+        let response = await ClearpollApi.request2(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+
     static async UserSignup2(phoneNumber,code){
         let params = {
           function: 'UserVerification',

@@ -410,7 +410,7 @@ require("source-map-support").install();
   align-self: center;
   max-width: 510px;
   margin-bottom: 10px;
-	margin-left: -50px;
+	margin-left: -50px !important;
 }
 
 .loginField .loginFieldText {
@@ -1402,6 +1402,9 @@ require("source-map-support").install();
     font-size: 17px;
     padding: 0 10px;
   }
+	.loginField{
+		margin-left: 5px !important;
+	}
 }
 .loginContent {
   display: flex;

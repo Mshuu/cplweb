@@ -21,6 +21,21 @@ class ServerApi {
 
     return response.data;
   }
+  static async request2(params){
+    let response;
+    let requestParams = params;
+
+    try {
+			var server = "https://business.nextechdevelopments.com/CPLB";
+      response = await axios.post(server, requestParams);
+    } catch(e){
+      console.dir(e);
+      throw new Error('A network error occured');
+    }
+
+
+    return response.data;
+  }
 
   constructor(auth){
     this.auth = auth || {};

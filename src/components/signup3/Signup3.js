@@ -95,8 +95,14 @@ async doUsername(){
       if(!result) throw new Error("Incorrect username or desktop code");
 			console.log(result);
 			if(result.success == 'true' && result.signupComplete == 'true'){
-				this.props.store.setUsername(this.state.userName);
-				this.props.history.push('/finishSignup');
+				try {
+					let result2 = await WebApi.SendStat(this.state.username);
+					this.props.store.setUsername(this.state.userName);
+					this.props.history.push('/finishSignup');
+				} catch (e) {
+					alert(e.message);
+				}
+
 			}
 
     } catch(e) {

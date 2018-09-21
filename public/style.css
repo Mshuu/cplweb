@@ -409,7 +409,7 @@
   align-self: center;
   max-width: 510px;
   margin-bottom: 10px;
-	margin-left: -50px;
+	margin-left: -50px !important;
 }
 
 .loginField .loginFieldText {
@@ -1401,6 +1401,9 @@
     font-size: 17px;
     padding: 0 10px;
   }
+	.loginField{
+		margin-left: 5px !important;
+	}
 }
 .loginContent {
   display: flex;
