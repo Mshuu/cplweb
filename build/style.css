@@ -177,6 +177,8 @@ require("source-map-support").install();
   color: #ffffff;
   font-size: 28px;
   margin-bottom: 25px;
+  font-size:26px !important;
+  font-weight:lighter !important;
 }
 
 .loginHeader img {
@@ -198,7 +200,9 @@ require("source-map-support").install();
   align-items: center;
   align-self: center;
   max-width: 510px;
-  margin-bottom: 10px
+  margin-bottom: 10px;
+	margin-left: 5px !important;
+	margin-right: 5px !important;
 }
 
 .loginField .loginFieldText {
@@ -289,7 +293,9 @@ require("source-map-support").install();
   font-size: 22px;
   line-height: 50px;
   margin-top: 30px;
+  cursor: pointer;
   transition: background-color 100ms linear;font-weight:300;
+
 }
 .loginButton:hover {
   background-color: #0191c1;
@@ -338,6 +344,9 @@ require("source-map-support").install();
     height: 13vw;
     margin: 5px;
   }
+	.faqButton {
+		display:none;
+	}
 
   .installBannerText {
     font-size: 17px;
@@ -365,6 +374,11 @@ require("source-map-support").install();
  .faqIcon {
   width: 30px;
   height: 30px;
+}
+.loginButton .nextButton{
+  width: 25px;
+  height: 25px;
+  margin-top: 13px;
 }
 
 .loginHeader {
@@ -443,6 +457,12 @@ require("source-map-support").install();
   font-size: 12px;
   text-align: center;
   color: #fff;
+}
+.signupDesc3 {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+	padding: 10px;
 }
 .signupDesc2 {
   font-size: 12px;
@@ -1403,6 +1423,7 @@ require("source-map-support").install();
   height: 75px;
 }
 
+
 .loginText {
   color: #ffffff;
   font-size: 18px;
@@ -1561,6 +1582,7 @@ require("source-map-support").install();
   font-size: 28px;
   margin-bottom: 25px;
 }
+
 .ErrorText{
 	background-color: rgba(0,0,0,0.3);
 	padding: 10px;
@@ -1678,11 +1700,13 @@ require("source-map-support").install();
   margin-top: 10px;
 	margin-bottom: 20px;
 	margin-right: 10px;
+  cursor: pointer;
   transition: background-color 100ms linear;font-weight:300;
 }
 .sexButton3 {
   width: 140px;
   height: 50px;
+  cursor: pointer;
   border-radius: 25px;
 	margin-bottom: 20px;
   padding: 0;
@@ -1697,6 +1721,7 @@ require("source-map-support").install();
 .sexButton2 {
   width: 140px;
   height: 50px;
+  cursor: pointer;
 	margin-bottom: 20px;
   border-radius: 25px;
   padding: 0;
@@ -1712,6 +1737,7 @@ require("source-map-support").install();
 .sexButton4 {
   width: 140px;
   height: 50px;
+  cursor: pointer;
 	margin-bottom: 20px;
   border-radius: 25px;
   padding: 0;

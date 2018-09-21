@@ -5,6 +5,9 @@ import WebApi from '../../models/webApi';
 
 import "./Signup.css";
 
+
+
+
 class FinishSignup extends Component {
   constructor(props){
 
@@ -42,9 +45,32 @@ class FinishSignup extends Component {
 		}
 	}
 
-  async doLogin(){
-		console.log(this.state.desktopCode);
-  }
+		async doLogin(){
+			if(
+				this.props.store.data.username.length == 0 ||
+				this.state.desktopCode.length == 0
+			) return;
+
+			this.setState({loading: true});
+
+			try {
+				let result = await WebApi.login(this.props.store.data.username, this.state.desktopCode);
+
+				if(!result) throw new Error("Incorrect username or desktop code");
+
+				if(window.parent){
+					window.parent.postMessage({event: "loggedIn"}, '*');
+					this.props.store.setAuthenticated(true);
+				}
+
+				this.props.history.push('/');
+			} catch(e) {
+				alert(e.message);
+			}
+
+			this.setState({loading: false});
+		}
+
 	async doSignup(){
 
 		this.setState({loading: true});
@@ -91,7 +117,7 @@ class FinishSignup extends Component {
 				 You will need it, along with your username, everytime you login to ClearPoll.
 				</div>
 				<div className = "signupDesc1">
-					Remember it, Write it down, Email it to yourself if you wish. Please keep it handy!
+					Remember it, write it down, email it to yourself if you wish. Please keep it handy!
 				</div>
 
       </div>

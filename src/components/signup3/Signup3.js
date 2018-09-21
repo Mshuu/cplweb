@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import LoadingOverlay from '../loadingOverlay/LoadingOverlay';
 import WebApi from '../../models/webApi';
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 import "./Signup.css";
 
@@ -18,12 +20,14 @@ class Signup3 extends Component {
 			sex: '',
 			userName: '',
       loading: false,
-			showError: false
+			showError: false,
+			recaptcha: null
     };
 
     this.props.store.hydrateCheck();
 		this.setState({
-			phoneNumber: this.props.store.data.phoneNumber
+			phoneNumber: this.props.store.data.phoneNumber,
+			"recaptcha": null
 		});
   }
 async setFemale(){
@@ -36,6 +40,11 @@ async setMale(){
 		sex: 'm'
 	});
 }
+handleChange = value => {
+	 console.log("Captcha value:", value);
+	 this.setState({ 'recaptcha': value });
+ };
+
 async doUsername(){
 	if (
 		this.state.userName.length == 0
@@ -71,8 +80,10 @@ async doUsername(){
 
   async doLogin(){
 		console.log("HERE");
+		console.log("VLUE: %j", this.state.recaptcha);
+
 		    if(
-      this.props.store.data.code.length == 0 || this.props.store.data.phoneNumber.length == 0 || this.state.birthYear.length == 0 || this.state.sex.length == 0 || this.state.userName.length == 0
+      this.props.store.data.code.length == 0 || this.props.store.data.phoneNumber.length == 0 || this.state.birthYear.length == 0 || this.state.sex.length == 0 || this.state.userName.length == 0 || this.state.recaptcha == null
     ) return;
 		console.log("HERE2");
 
@@ -84,6 +95,7 @@ async doUsername(){
       if(!result) throw new Error("Incorrect username or desktop code");
 			console.log(result);
 			if(result.success == 'true' && result.signupComplete == 'true'){
+				this.props.store.setUsername(this.state.userName);
 				this.props.history.push('/finishSignup');
 			}
 
@@ -155,9 +167,14 @@ if (this.state.sex == ''){
 						onChange={ e => this.setState({userName: e.target.value}) }
 					/>
 				</div>
+        <ReCAPTCHA
+  sitekey="6LebY3EUAAAAAF-uUe5N2wNV7G2sPotP-XGDwJ7G"
+  onChange={this.handleChange}
+	style ={{"margin-top": "10px"}}
+/>
 
-        <button className="loginButton" onClick={ this.doUsername.bind(this) }>
-          >
+				<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
         </button>
 
       </div>
@@ -207,10 +224,14 @@ if (this.state.sex == ''){
 						onChange={ e => this.setState({userName: e.target.value}) }
 					/>
 				</div>
-
-				<button className="loginButton" onClick={ this.doUsername.bind(this) }>
-					>
-				</button>
+				<ReCAPTCHA
+  sitekey="6LebY3EUAAAAAF-uUe5N2wNV7G2sPotP-XGDwJ7G"
+  onChange={this.handleChange}
+	style ={{"margin-top": "10px"}}
+/>
+				<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
+        </button>
 
 			</div>
 		);
@@ -259,10 +280,14 @@ if (this.state.sex == ''){
 						onChange={ e => this.setState({userName: e.target.value}) }
 					/>
 				</div>
-
-				<button className="loginButton" onClick={ this.doUsername.bind(this) }>
-					>
-				</button>
+				<ReCAPTCHA
+  sitekey="6LebY3EUAAAAAF-uUe5N2wNV7G2sPotP-XGDwJ7G"
+  onChange={this.handleChange}
+	style ={{"margin-top": "10px"}}
+/>
+				<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
+        </button>
 
 			</div>
 		);
@@ -318,9 +343,13 @@ if (this.state.sex == ''){
 						 Username taken. Please try a different one.
 						</div>
 					</div>
-
-	        <button className="loginButton" onClick={ this.doUsername.bind(this) }>
-	          >
+					<ReCAPTCHA
+	  sitekey="6LebY3EUAAAAAF-uUe5N2wNV7G2sPotP-XGDwJ7G"
+	  onChange={this.handleChange}
+		style ={{"margin-top": "10px"}}
+	/>
+					<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+						<img src={ require('../images/next-btn.png')}  className = "nextButton" />
 	        </button>
 
 	      </div>
@@ -375,9 +404,14 @@ if (this.state.sex == ''){
 						 Username taken. Please try a different one.
 						</div>
 					</div>
-					<button className="loginButton" onClick={ this.doUsername.bind(this) }>
-						>
-					</button>
+					<ReCAPTCHA
+	  sitekey="6LebY3EUAAAAAF-uUe5N2wNV7G2sPotP-XGDwJ7G"
+	  onChange={this.handleChange}
+		style ={{"margin-top": "10px"}}
+	/>
+					<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+						<img src={ require('../images/next-btn.png')}  className = "nextButton" />
+	        </button>
 
 				</div>
 			);
@@ -431,9 +465,14 @@ if (this.state.sex == ''){
 						 Username taken. Please try a different one.
 						</div>
 					</div>
-					<button className="loginButton" onClick={ this.doUsername.bind(this) }>
-						>
-					</button>
+					<ReCAPTCHA
+	  sitekey="6LebY3EUAAAAAF-uUe5N2wNV7G2sPotP-XGDwJ7G"
+	  onChange={this.handleChange}
+		style ={{"margin-top": "10px"}}
+	/>
+					<button className="loginButton" onClick={ this.doLogin.bind(this) }>
+						<img src={ require('../images/next-btn.png')}  className = "nextButton" />
+	        </button>
 
 				</div>
 			);

@@ -13,6 +13,7 @@
   font-size: 28px;
   margin-bottom: 25px;
 }
+
 .ErrorText{
 	background-color: rgba(0,0,0,0.3);
 	padding: 10px;
@@ -130,11 +131,13 @@
   margin-top: 10px;
 	margin-bottom: 20px;
 	margin-right: 10px;
+  cursor: pointer;
   transition: background-color 100ms linear;font-weight:300;
 }
 .sexButton3 {
   width: 140px;
   height: 50px;
+  cursor: pointer;
   border-radius: 25px;
 	margin-bottom: 20px;
   padding: 0;
@@ -149,6 +152,7 @@
 .sexButton2 {
   width: 140px;
   height: 50px;
+  cursor: pointer;
 	margin-bottom: 20px;
   border-radius: 25px;
   padding: 0;
@@ -164,6 +168,7 @@
 .sexButton4 {
   width: 140px;
   height: 50px;
+  cursor: pointer;
 	margin-bottom: 20px;
   border-radius: 25px;
   padding: 0;

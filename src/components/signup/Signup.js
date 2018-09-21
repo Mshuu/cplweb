@@ -99,7 +99,7 @@ if (this.state.showError == false){
         <LoadingOverlay enabled={ this.state.loading }/>
 
         <div className="loginHeader">
-          Create a Clearpoll Account
+          Create a ClearPoll Account
         </div>
 				<div className = "signupDesc">
 					Please enter your mobile phone number to recieve a 6-digit SMS code
@@ -119,16 +119,16 @@ if (this.state.showError == false){
 					preferredCountries={['au', 'us', 'gb']}
 					 />
           </div>
-					<a  className="faqButton2" href="https://clearpoll.com/faq" target="_blank">
+					<a  className="faqButton2" href="https://ClearPoll.com/faq" target="_blank">
 						<img src={ require('../images/question-icon.png')}  className = "faqIcon" />
 					</a>
         </div>
 
         <button className="loginButton" onClick={ this.doLogin.bind(this) }>
-          >
+					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
         </button>
 				<br />
-				<div className = "signupDesc">
+				<div className = "signupDesc3">
 					We will never send you unsolicited messages or make your personal details available to any third parties.
 				</div>
 				<div className = "signupDesc">
@@ -143,7 +143,7 @@ if (this.state.showError == false){
 				<LoadingOverlay enabled={ this.state.loading }/>
 
 				<div className="loginHeader">
-					Create a Clearpoll Account
+					Create a ClearPoll Account
 				</div>
 				<div className = "signupDesc">
 					Please enter your mobile phone number to recieve a 6-digit SMS code
@@ -163,14 +163,14 @@ if (this.state.showError == false){
 					preferredCountries={['au', 'us', 'gb']}
 					 />
           </div>
-					<a  className="faqButton2" href="https://clearpoll.com/faq" target="_blank">
+					<a  className="faqButton2" href="https://ClearPoll.com/faq" target="_blank">
 						<img src={ require('../images/question-icon.png')}  className = "faqIcon" />
 					</a>
         </div>
 
 				<button className="loginButton" onClick={ this.doLogin.bind(this) }>
-					>
-				</button>
+					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
+        </button>
 				<br />
 				<div className = "signupBox">
 				<div className = "signupDesc2">

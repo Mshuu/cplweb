@@ -10,7 +10,8 @@ export default class Store {
       userSettings: {},
       authenticated: false,
 			phoneNumber: '',
-			code: ''
+			code: '',
+			username: ''
     }, prefetchData);
 
     this.initialPage = true;
@@ -34,6 +35,9 @@ export default class Store {
   setSearchResult(searchTerm, results){
     this.data.searchResults[searchTerm] = results;
   }
+	setUsername(username){
+		this.data.username = username;
+	}
 
   getSearchResult(searchTerm){
     return this.data.searchResults[searchTerm] || [];

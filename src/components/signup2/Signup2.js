@@ -91,7 +91,7 @@ class Signup2 extends Component {
         </div>
 
         <button className="loginButton" onClick={ this.doLogin.bind(this) }>
-          >
+					<img src={ require('../images/next-btn.png')}  className = "nextButton" />
         </button>
 				<br />
 				<div className = "signupDesc">
