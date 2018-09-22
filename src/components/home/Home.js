@@ -43,7 +43,6 @@ class Home extends Component {
       });
 
     } catch(e){
-      console.log('API fail', e);
       this.props.history.push('/login');
     }
   }
@@ -54,7 +53,7 @@ class Home extends Component {
         <LoadingOverlay enabled={ this.state.loading }/>
 
         <HomeHeader />
-        { !this.state.loading && 
+        { !this.state.loading &&
           <PollSummary polls={ this.store.data.homePolls }/>
         }
       </div>

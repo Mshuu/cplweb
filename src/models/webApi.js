@@ -266,7 +266,6 @@ class WebApi {
   static async wsRequest(params){
     await WebApi.ensureConnected();
     let response = await socket.request(params);
-		console.log("HERE1");
     return response;
   }
 }

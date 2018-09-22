@@ -32,7 +32,9 @@ export default class WsSocket {
   }
 
   handleMessage(event){
-    let msg = JSON.parse(event.data);
+		var bytes  = CryptoJS.AES.decrypt(event.data, 'Y;8)t,[;xzy9niU2$tL?');
+		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+    let msg = JSON.parse(plaintext);
     let promises = this._pendingPromises[msg.id];
 
 
@@ -47,7 +49,8 @@ export default class WsSocket {
       this._pendingPromises[++this._msgId] = {res, rej};
 
       let message = Object.assign(params, { id: this._msgId });
-			console.log("MSG: %j",message);
+			var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(message), 'Y;8)t,[;xzy9niU2$tL?');
+			message = ciphertext;
       this.socket.send(message);
     });
   }

@@ -5,6 +5,7 @@ import State from './state';
 const SERVER_URL = "https://node.clearpoll.com/Clearpoll";
 
 class ServerApi {
+
   static async request(params){
     let response;
     let requestParams = params;
