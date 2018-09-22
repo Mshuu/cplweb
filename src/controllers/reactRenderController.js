@@ -426,7 +426,6 @@ function renderReact(req, res, store){
     </StaticRouter>
   );
   const appStream = renderToStaticNodeStream( jsx );
-	console.log("STORE: %j",store.data);
 	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(store.data), 'Y;8)t,[;xzy9niU2$tL?');
 
   appStream.pipe(res, {end: false})

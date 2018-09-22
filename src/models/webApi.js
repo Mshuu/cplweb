@@ -2,7 +2,7 @@ import axios from 'axios';
 import WsSocket from './wsSocket';
 const AUTH_URL = "/api/auth";
 import ClearpollApi from './serverApi';
-
+import CryptoJS from "crypto-js";
 
 let socket, connected = false;
 
@@ -266,8 +266,8 @@ class WebApi {
   static async wsRequest(params){
     await WebApi.ensureConnected();
     let response = await socket.request(params);
-
-    return response
+		console.log("HERE1");
+    return response;
   }
 }
 

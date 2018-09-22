@@ -1,5 +1,7 @@
 
 const WS_PATH = '/api/ws';
+import CryptoJS from "crypto-js";
+
 
 export default class WsSocket {
   constructor(){
@@ -33,7 +35,9 @@ export default class WsSocket {
     let msg = JSON.parse(event.data);
     let promises = this._pendingPromises[msg.id];
 
+
     if(promises){
+
       promises.res(msg);
     }
   }
@@ -43,7 +47,8 @@ export default class WsSocket {
       this._pendingPromises[++this._msgId] = {res, rej};
 
       let message = Object.assign(params, { id: this._msgId });
-      this.socket.send(JSON.stringify(message));
+			console.log("MSG: %j",message);
+      this.socket.send(message);
     });
   }
 }

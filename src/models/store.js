@@ -4,8 +4,6 @@ export default class Store {
 constructor(prefetchData = {}){
 var bytes  = CryptoJS.AES.decrypt(prefetchData, 'Y;8)t,[;xzy9niU2$tL?');
 var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-console.log("BYTES : " + bytes);
-console.log("PLAINTEXT: " + plaintext);
     this.data = Object.assign({
       polls: {},
       searchResults: {},

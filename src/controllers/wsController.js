@@ -25,6 +25,7 @@ class WsController {
 
   async handleMessage(msgJSON){
     let msg = JSON.parse(msgJSON);
+    console.log("Message: " + msg);
 
     try{
       switch(msg.function){
