@@ -30,8 +30,10 @@ const Home = async ( req, res ) => {
   renderHead(req, res);
 
   let apiClient = new ServerApi(auth);
+	let homePolls = await apiClient.fetchHome();
+	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(homePolls), 'Y;8)t,[;xzy9niU2$tL?');
   let store = new Store({
-    homePolls: await apiClient.fetchHome()
+    homePolls: homePolls
   });
 
   renderReact(req, res, store);
@@ -419,6 +421,7 @@ function renderHead(req, res, metadata = defaultMetadata){
 function renderReact(req, res, store){
   let context = {};
   let url = req.url;
+
 
   const jsx = (
     <StaticRouter context={ context } location={ url }>

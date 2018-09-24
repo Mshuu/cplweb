@@ -33,11 +33,12 @@ class Template extends Component {
 
     this.props = props;
 
-
     this.store = props.store || new Store(window.storeData);
 
     if( typeof window !== 'undefined' && window )
       delete window.storeData;
+
+
 
     let params = qs.parse(props.location.search);
 
