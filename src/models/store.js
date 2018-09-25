@@ -2,7 +2,6 @@ import CryptoJS from "crypto-js";
 var printerCount = 1;
 export default class Store {
 constructor(prefetchData = {}){
-	console.log("PRE: " + prefetchData);
 	if (!IS_SERVER){
 		var bytes  = CryptoJS.AES.decrypt(prefetchData, 'Y;8)t,[;xzy9niU2$tL?');
 		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
@@ -22,7 +21,6 @@ constructor(prefetchData = {}){
 				code: '',
 				username: ''
 	    }, prefetchData);
-			console.log("DATA: " + JSON.stringify(this.data));
 
 
 

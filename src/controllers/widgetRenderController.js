@@ -126,7 +126,7 @@ const htmlTail = (store, pollId) => `
           window.parent.postMessage({event: "loadingComplete", pollId: ${pollId}}, '*');
           console.log("Message sent");
         }
-        window.storeData = ${store};
+        window.storeData = "${store}";
       </script>
       <script type="text/javascript" src="/public/widgetBundle.js"></script>
     </body>
