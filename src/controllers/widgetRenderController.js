@@ -5,6 +5,7 @@ import ServerApi from '../models/serverApi';
 import Store from '../models/store';
 import Authenticator from '../models/authenticator';
 import WidgetRouter from '../components/widgetRouter';
+import CryptoJS from "crypto-js";
 
 const WidgetPoll = async ( req, res ) => {
   let pollId = req.params.pollId;
@@ -66,11 +67,12 @@ function renderReact(req, res, store, pollId){
     </StaticRouter>
   );
   const appStream = renderToStaticNodeStream( jsx );
+	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(store.data), 'Y;8)t,[;xzy9niU2$tL?');
 
   appStream.pipe(res, {end: false})
 
   appStream.on(`end`, () => {
-    res.end(htmlTail(store, pollId))
+    res.end(htmlTail(ciphertext, pollId))
   })
 }
 
@@ -124,7 +126,7 @@ const htmlTail = (store, pollId) => `
           window.parent.postMessage({event: "loadingComplete", pollId: ${pollId}}, '*');
           console.log("Message sent");
         }
-        window.storeData = ${JSON.stringify(store.data)};
+        window.storeData = ${store};
       </script>
       <script type="text/javascript" src="/public/widgetBundle.js"></script>
     </body>
