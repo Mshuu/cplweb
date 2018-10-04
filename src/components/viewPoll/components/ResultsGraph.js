@@ -7,6 +7,7 @@ class ResultGraph extends Component {
   constructor(props){
     super(props);
     this.props = props;
+		console.log("poll2: %j", this.props.poll);
   }
 
   get totalVotes(){

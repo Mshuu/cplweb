@@ -9,9 +9,14 @@ class ServerApi {
   static async request(params){
     let response;
     let requestParams = params;
+    let axiosConfig = {
+  headers: {
+      'x-forwarded-for': '103.94.51.210'
+      }
+};
 
     try {
-      response = await axios.post(SERVER_URL, requestParams);
+      response = await axios.post(SERVER_URL, requestParams, axiosConfig);
     } catch(e){
       console.dir(e);
       throw new Error('A network error occured');
@@ -75,10 +80,60 @@ class ServerApi {
     }
     return homeData;
   }
+	async fetchPollAnon(pollId){
+
+    let pollData = await ServerApi.request({
+      function: 'GetPoll',
+      pollId
+    });
+		console.log("here");
+    let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
+		var pollisAnon = poll.isAnon;
+    let hasExpired = moment(1000*poll.pollTime) < moment();
+		console.log("POLL88: %j", poll);
+    if( hasExpired || poll.isAnon == 0){
+			console.log("anon");
+      let pollResults = await this.getPollResultAnon(pollId);
+			console.log("got results: %j", pollResults);
+      poll = Object.assign(this.getHasVoted(pollId), pollResults.pollInfo[0], {pollId});
+			console.log("ACTUAL:: %j", poll);
+      poll.results = pollResults.votesPerAnswer;
+      poll.votedOn = pollResults.voted;
+      poll.pollVotes = pollResults.totalVotes;
+			poll.isAnon = pollisAnon;
+			console.log("POLL2: %j", poll);
+    } else {
+      let pollAnswers = await this.getPollAnswers(pollId);
+      poll.answers = pollAnswers.answer;
+    }
+
+    if(poll.type == "Ratings"){
+      if(!poll.results) {
+        let resultResponse = await ServerApi.request({
+          function: 'GetPublicPollResult',
+          pollId
+        });
+        poll.results = resultResponse.votesPerAnswer;
+      }
+
+      let totalVotes = poll.pollVotes;
+
+      if(totalVotes == 0)
+        poll.averageRating = 0;
+      else
+        poll.averageRating = poll.results.reduce(
+          (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
+          0
+        );
+    }
+
+    return poll;
+  }
 
   async fetchPoll(pollId){
-    if(!this.historyFetched)
-      await this.fetchVotehistory();
+    if(!this.historyFetched) {
+			await this.fetchVotehistory();
+		}
 
     let pollData = await ServerApi.request({
       function: 'GetPoll',
@@ -87,7 +142,6 @@ class ServerApi {
 
     let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
     let hasExpired = moment(1000*poll.pollTime) < moment();
-
     if( hasExpired || poll.hasVoted ){
       let pollResults = await this.getPollResult(pollId);
 
@@ -124,37 +178,49 @@ class ServerApi {
   }
 
   async fetchUnauthPoll(pollId){
-    let pollData = await ServerApi.request({
-      function: 'GetPoll',
-      pollId
-    });
 
-    let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
-    console.dir(poll);
 
-    let pollResults = await ServerApi.request({
-      function: 'GetPublicPollResult',
-      pollId
-    });
 
-    poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
-    poll.results = pollResults.votesPerAnswer;
-    poll.votedOn = pollResults.voted;
-    poll.pollVotes = pollResults.totalVotes;
+		    let pollData = await ServerApi.request({
+		      function: 'GetPoll',
+		      pollId
+		    });
 
-    if(poll.type == "Ratings"){
-      let totalVotes = poll.pollVotes;
+		    let poll = Object.assign(false, pollData.poll[0], {pollId});
+		    let hasExpired = moment(1000*poll.pollTime) < moment();
+		    if( hasExpired || poll.hasVoted || poll.isAnon == 0 ){
+		      let pollResults = await this.getPollResultAnon(pollId);
 
-      if(totalVotes == 0)
-        poll.averageRating = 0;
-      else
-        poll.averageRating = poll.results.reduce(
-          (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
-          0
-        );
-    }
+		      poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+		      poll.results = pollResults.votesPerAnswer;
+		      poll.votedOn = pollResults.voted;
+		      poll.pollVotes = pollResults.totalVotes;
+		    } else {
+		      let pollAnswers = await this.getPollAnswers(pollId);
+		      poll.answers = pollAnswers.answer;
+		    }
 
-    return poll;
+		    if(poll.type == "Ratings"){
+		      if(!poll.results) {
+		        let resultResponse = await ServerApi.request({
+		          function: 'GetPublicPollResult',
+		          pollId
+		        });
+		        poll.results = resultResponse.votesPerAnswer;
+		      }
+
+		      let totalVotes = poll.pollVotes;
+
+		      if(totalVotes == 0)
+		        poll.averageRating = 0;
+		      else
+		        poll.averageRating = poll.results.reduce(
+		          (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
+		          0
+		        );
+		    }
+
+		    return poll;
   }
 
   async fetchVotehistory(pollId){
@@ -177,6 +243,17 @@ class ServerApi {
       ...params,
       ...this.auth
     });
+    console.log("hi");
+    return response;
+  }
+  async voteOnPollAnon(params){
+    params.showOnFeed = 0;
+
+    let response = await ServerApi.request({
+      function: 'VoteOnPollAnon',
+      ...params
+    });
+
 
     return response;
   }
@@ -190,12 +267,19 @@ class ServerApi {
 
     return response;
   }
+	async getPollResultAnon(pollId){
+		let response = await ServerApi.request({
+			function: 'GetPollResultAnon',
+			pollId
+		});
+
+		return response;
+	}
 
   async getPollAnswers(pollId){
     let response = await ServerApi.request({
       function: 'GetPollAnswer',
-      pollId,
-      ...this.auth
+      pollId
     });
 
     return response;

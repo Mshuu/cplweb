@@ -101,8 +101,8 @@ async function authenticatedPoll(req, res, pollId, auth){
 async function unauthenticatedPoll(req, res, pollId, auth){
   let apiClient = new ServerApi(auth);
   let store = new Store();
-  let poll = await apiClient.fetchUnauthPoll(pollId);
-
+  let poll = await apiClient.fetchPollAnon(pollId);
+	console.log("POLL5: %j", poll);
   store.setAuthenticated( false );
   store.setPoll( pollId, poll );
 

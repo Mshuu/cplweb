@@ -49,31 +49,46 @@ class ViewPoll extends Component {
   toggleVote(){
     this.setState({ showVote: !this.state.showVote });
   }
-
-  async webFetch(){
-    if(this.store.hydrateCheck() || !this.store.getAuthenticated()){
+	async webFetch(){
+		if(this.store.hydrateCheck()){
       return;
     }
+		console.log("fetching");
+		if (this.state.authenticated == true){
+			this.setState({
+				loading: true
+			});
 
+			let poll = await WebApi.fetchPoll( this.pollId );
+			this.store.setPoll(this.pollId, poll);
+
+			this.setState({
+				loading: false
+			});
+		} else {
+			this.setState({
+				loading: true
+			});
+
+			let poll = await WebApi.fetchPollAnon( this.pollId );
+			this.store.setPoll(this.pollId, poll);
+
+			this.setState({
+				loading: false
+			});
+		}
+
+	}
+
+  async performVote(answerIdx,auth){
     this.setState({
       loading: true
     });
 
-    let poll = await WebApi.fetchPoll( this.pollId );
-    this.store.setPoll(this.pollId, poll);
-
-    this.setState({
-      loading: false
-    });
-  }
-
-  async performVote(answerIdx){
-    this.setState({
-      loading: true
-    });
-
+		if (this.state.authenticated == true){
+		console.log("auth yes");
     let response = await WebApi.voteOnPoll( this.pollId, answerIdx, this.state.showOnFeed );
-
+		console.log("response: " + response);
     if(response.success){
       let poll = this.store.getPoll(this.pollId);
       poll.results = response.results;
@@ -84,14 +99,38 @@ class ViewPoll extends Component {
     } else {
       alert('Error');
     }
+		this.setState({
+			loading: false
+		});
+	} else {
+		console.log("auth no : " + this.pollId + " " + answerIdx + " " + this.state.showOnFeed);
+		    let response = await WebApi.voteOnPollAnon( this.pollId, answerIdx, this.state.showOnFeed );
+				console.log("response: " + response);
+		    if(response.success){
+		      let poll = this.store.getPoll(this.pollId);
+		      poll.results = response.results;
+		      poll.hasVoted = true;
+		      poll.votedOn = [{answerText: answerIdx }];
 
-    this.setState({
-      loading: false
-    });
+		      this.store.setPoll(this.pollId, poll);
+		    } else {
+		      alert('Error');
+		    }
+				this.setState({
+					loading: false
+				});
+	}
+
+
   }
 
   shouldShowResults(poll){
-    return (poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated();
+		if (poll.isAnon == 0 && this.state.authenticated == false){
+			console.log("POLL71: %j", poll);
+			return true;
+		} else {
+    return (poll.hasVoted || poll.hasExpired);
+	}
   }
 
   containerContent(poll){
@@ -194,10 +233,12 @@ class ViewPoll extends Component {
   pollElement(){
     let pollData = this.store.getPoll(this.pollId);
 
-    if(!pollData) return null;
+    if(!pollData) {
+		return null;
+	}
 
     let poll = new Poll(pollData);
-
+		console.log("pollDaTA: %j", pollData);
     return (
       <div>
         <div className="pollQuestion">
@@ -238,7 +279,7 @@ class ViewPoll extends Component {
             { this.containerContent(poll) }
           </div>
         </div>
-        { this.store.getAuthenticated() && this.shouldShowResults(poll) && (
+        { this.shouldShowResults(poll) && (
           <div className="voteControlContainer">
             <div className="voteControl" onClick={() => this.toggleVote()}>
               { this.state.showVote ? "Hide Vote" : "Show Vote" }
