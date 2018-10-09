@@ -96,7 +96,7 @@
   justify-content: flex-start;
   height: calc(100% - 4px);
   background-color: #fff;
-  border:2px solid #212c32;
+  height: 100%;border:2px solid #212c32;
 }
 
 .widgetPoll .pollQuestion {
@@ -114,9 +114,8 @@
 }
 
 .scrollableContainer {
-  flex: 1 0;
-  overflow-y: auto;
-  background-color: #f1f2f2;
+  height: calc(100% - 80px);
+  overflow-y: auto;background-color: #f1f2f2;
 }
 .answersContainer {
   flex: 1;

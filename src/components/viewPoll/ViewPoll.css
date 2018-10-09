@@ -8,49 +8,17 @@
   margin: 60px 0 56px 0;
 }
 
-@media only screen and (max-width: 590px) {
-  .viewPoll > div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+@media only screen and (max-width: 560px) {.viewPoll .pollQuestion {
+  font-size: 24px;max-width:380px;padding-left:30px;padding-right:30px;margin-top:30px!important;
+}
 
-  .viewPoll .pollQuestion {
-    font-size: 24px;max-width:380px;padding-left:30px;padding-right:30px;margin-top:30px!important;
-  }
+.mainRow .detailsContainer {width:100%;position:absolute;top:158px;left:0px;min-width:380px;margin-top:40px!important;}
 
-  .mainRow .detailsContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+.detailsContainer .field {
+  display:inline-block;float:left;font-size:16px;margin-right:-10px!important;
+}
 
-  .detailsContainer .field {
-    font-size:16px;
-    margin: 10px 20px !important;
-  }
-
-  .contentContainer {
-    margin-top:60px;
-  }
-
-  .mainRow {
-    flex-direction: column!important;
-  }
-
-  .answersSpacer {
-    display: none !important;
-  }
-
-  .answersContainer {
-    padding: 0 20px;
-    align-items: center;
-  }
-
-  .answer {
-      width: calc(100% - 30px);
-  }
+.contentContainer {margin-top:60px;padding-left:30px;}
 }
 
 
@@ -191,4 +159,3 @@
   justify-content: center;
   margin-bottom: 20px;
 }
-

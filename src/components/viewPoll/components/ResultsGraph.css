@@ -29,12 +29,7 @@
   font-size: 21px;
 }
 
-.graphContainer .resultAnswer img {
-  height: 25px;
-  padding: 0 10px 0 0;
-}
-
-.graphContainer .resultAnswer .resultAnswerText::first-letter {text-transform:uppercase}
+.graphContainer .resultAnswer::first-letter {text-transform:uppercase}
 
 
 .voteCount, .votePercentage {
