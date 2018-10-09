@@ -72,7 +72,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006ea5', end
   .searchInput {
     font-size: 22px;
     width: 90vw !important;
-    border-radius:3px!important;
+    border-radius:3px!important;background:#FFFFFF!important;
   }
 
   .homeHeader {

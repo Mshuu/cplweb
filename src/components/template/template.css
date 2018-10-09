@@ -16,7 +16,7 @@ body {
 
 .templateInnerContainer {
   width: 1050px;
-  min-height: 700px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   border-radius:0px 0px 5px 5px;
