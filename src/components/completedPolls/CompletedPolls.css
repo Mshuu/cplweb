@@ -1,0 +1,19 @@
+.completedPolls .headerLocation {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.completedPolls .headerNameFilter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 35px;
+}
+
+@media only screen and (max-width: 450px) {
+  .completedPolls .headerNameFilter {
+    flex-direction: column !important;
+    align-items: center !important;
+  } 
+}

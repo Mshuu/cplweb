@@ -1,0 +1,66 @@
+.socialFriends {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 30px;
+  padding: 0 20px;
+}
+
+.socialFriends .friendsHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px;color:#000;
+}
+
+.socialFriends .friendsHeader img {
+  height: 25px;
+}
+
+.friendContainer {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.friendContainer .friend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  padding: 3px 10px;
+  color: #FFF;
+  margin: 3px 0;
+  background-color: #01bec0;
+  transition: background-color 100ms linear;
+}
+
+.friendContainer .friend .muteToggle, .friendContainer .friend .unfriend {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.friendContainer .friend .muteToggle img {
+  height: 25px;
+}
+
+.friendContainer .friend .unfriend img {
+  height: 15px;
+}
+
+.friendContainer .friend .unfriend:hover {
+  opacity: 0.8;
+}
+
+
+.friendContainer .friend .muteToggle.muted {
+  opacity: 0.4;
+}
+
+.friend.loading {
+  justify-content: center;
+}

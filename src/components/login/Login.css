@@ -1,0 +1,192 @@
+.loginContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0px;
+}
+
+.loginHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000!important;
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-size:26px !important;
+  font-weight:lighter !important;
+}
+
+.loginHeader img {
+  height: 30px !important;display:none;
+}
+
+.loginText {
+  color: #000;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 0 40px
+}
+
+.loginField {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  max-width: 510px;
+  margin-bottom: 10px;
+	margin-left: 5px !important;
+	margin-right: 5px !important;
+}
+
+.loginField .loginFieldText {
+  flex: 0 0 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background-color: #01bec0;
+  font-size: 20px;
+  height: 46px;
+  border-radius:3px 0px 0px 3px;
+}
+
+.loginField input {
+  flex-grow: 1;
+  outline: none;
+  box-shadow: none;
+  font-family: 'Roboto-Light-CPL';
+  font-size: 20px;
+  height: 46px;
+  padding: 0 0 0 10px;
+  text-align: left;
+  border: none;border-radius:0px 3px 3px 0px;background:#e7e9f0
+}
+
+.loginField input:focus {
+  outline: none;
+}
+.faqButton {
+	border-radius: 5px;
+	border: 0;
+	margin: 0;
+	background-color: #e7e9ee;
+	padding: 7px;
+	margin-left: 5px !important;
+	margin-right: -50px !important;
+}
+ .faqIcon {
+  width: 30px;
+  height: 30px;
+}
+.signupButton .signupImage{
+	height: 30px;
+	float: right;
+	margin-right: 20px;
+	vertical-align: middle;
+	display: inline-block;
+  margin-top: 10px;
+  margin-left: -50px;
+
+}
+
+.loginField input.loginFieldUsername{
+	letter-spacing: 2px;
+}
+.loginField input.loginFieldDesktopCode {
+  letter-spacing: 2px;
+}
+
+.loginSubText {
+  font-size: 12px;
+  text-align: center;
+  color: #000!important;
+}
+
+.loginButton {
+  width: 140px;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: #01bec0;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 50px;
+  margin-top: 30px;
+  transition: background-color 100ms linear;font-weight:300;
+}
+.signupButton {
+  width: 240px;
+  height: 50px;
+  border-radius: 25px;
+  padding-top: 10px;
+  border: none;
+  background: #ef7245 !important;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 50px;
+  margin-top: 20px!important;
+  cursor: pointer;
+  transition: background-color 100ms linear;font-weight:300
+
+}
+
+.signupButton:hover {transition: background-color 100ms linear;background:#cc5323!important;cursor:pointer!important;}
+.loginButton:hover {
+  background-color: #00a8aa!important;
+  transition: background-color 100ms linear;
+  cursor: pointer;
+}
+
+.installBanner {
+  background-color: #d9dbe1!important;
+  width: 100%;
+  padding: 20px 0;
+  margin: 30px 0 0 0;
+}
+
+.installBannerText {
+  color: #000!important;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 18px
+}
+
+.installBannerImages {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.installBannerImages img {
+  height: 70px;
+  margin: 5px;
+}
+
+
+@media only screen and (max-width: 410px) {
+  .loginField {
+    width: 95vw;
+  }
+
+  .loginField input {
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .installBannerImages img {
+    height: 13vw;
+    margin: 5px;
+  }
+	.faqButton {
+		display:none;
+	}
+
+  .installBannerText {
+    font-size: 17px;
+    padding: 0 10px;
+  }
+}

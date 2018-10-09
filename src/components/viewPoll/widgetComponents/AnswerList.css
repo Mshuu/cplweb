@@ -1,0 +1,32 @@
+.answersContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.answersSpacer {
+  flex: 1;
+  min-height: 1px;
+}
+
+.answersContainer .answer {
+  border-radius: 30px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 21px;
+  background-color: #01bec0;
+  margin: 5px;
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 13px;
+}
+
+.answersContainer .answer::first-letter {text-transform:uppercase}
+
+.answersContainer .answer:hover {
+  filter: brightness(90%);
+  transition: filter 100ms linear;
+  cursor: pointer;
+}

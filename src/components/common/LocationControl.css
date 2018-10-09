@@ -1,0 +1,40 @@
+.locationListWrapper {
+  display: inline-flex;
+  flex-direciton: row;
+  justify-content: flex-start;
+}
+
+.locationListWrapper .selected, .locationListWrapper .unselected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 40px;
+  border-radius: 20px;
+  color: #fff;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.locationListWrapper .selected {
+  background-color: #40cfd0;
+}
+
+
+.locationListWrapper .unselected {
+  background-color: #babcc2;
+}
+
+.locationListWrapper .unselected:hover{
+  background: #40cfd0!important;cursor:pointer!important;
+}
+
+@media only screen and (max-width: 440px) {
+  .locationListWrapper .selected, .locationListWrapper .unselected {
+    width: 30vw;
+    font-size: 5vw;
+  }
+
+  
+}
+

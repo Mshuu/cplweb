@@ -1,0 +1,91 @@
+.graphContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 35px;
+}
+
+.graphContainer .resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.graphContainer .graph {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.graphContainer .resultAnswer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;color:#000;
+}
+
+.graphContainer .resultAnswer .resultAnswerText {
+  text-align: left;
+  font-size: 24px;
+}
+
+.graphContainer .resultAnswer img {
+  height: 25px;
+  padding: 0 10px 0 0;
+}
+
+.graphContainer .resultAnswer .resultAnswerText::first-letter {text-transform:uppercase}
+
+
+.voteCount, .votePercentage {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  height: 50px;
+  font-size: 21px;
+  background-color: #d4d6da;
+  margin-right: 6px;color:#000;
+}
+
+.voteCount {
+  width: 90px;
+}
+
+.votePercentage {
+  width: 65px;
+}
+
+.voteBarContainer {
+  flex-grow: 1;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.voteBarContainer .voteBarInner {
+  min-height: 50px;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+  transform-origin: bottom left;background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.08) 51%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.08) 51%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.08) 51%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#21000000',GradientType=0 );
+}
+
+
+@media only screen and (max-width: 360px) {
+
+  .contentContainer {
+    padding: 0 10px;
+  }
+
+  .graphContainer {
+    margin-right: 0px !important;
+  }
+}
