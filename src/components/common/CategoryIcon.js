@@ -24,7 +24,7 @@ export default {
   'Trending': require("../images/categories/trending_icon.png"),
   'Ending Soon': require("../images/categories/endingsoon_icon.png"),
   'Latest': require("../images/categories/latestPolls_icon.png"),
-  'Star Polls': require("../images/categories/starPolls_icon.png"),
+  'Featured Polls': require("../images/categories/starPolls_icon.png"),
   'My Votes': require("../images/categories/myVotes_icon.png"),
   'My Polls': require("../images/categories/myPolls_icon.png"),
   'Local': require("../images/categories/local_icon.png"),

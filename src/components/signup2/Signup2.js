@@ -95,7 +95,7 @@ class Signup2 extends Component {
         </button>
 				<br />
 				<div className = "signupDesc">
-				 Not recieving your SMS code? <a href="https://clearpoll.com/faq" target="_blank"><font color="#ffffff">FAQs & Support</font></a>
+				 Not recieving your SMS code? <a href="https://clearpoll.com/faq" target="_blank"><font color="#000000">FAQs & Support</font></a>
 				</div>
 
       </div>
