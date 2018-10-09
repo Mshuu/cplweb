@@ -25,3 +25,12 @@
   background-color: rgb(255, 255, 255, 0.2);
 }
 
+@media only screen and (max-width: 440px) {
+
+ .locationListWrapper .selected, .locationListWrapper .unselected {
+
+  width: 110px;
+ 
+}
+}
+

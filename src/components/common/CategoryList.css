@@ -11,11 +11,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 230px;
-  height: 170px;
+  width: 155px;
+  height: 155px;
   margin: 0 7px 7px 0;
-  padding: 10px;
+  padding: 20px;
   border-radius: 3px;
+}
+
+@media only screen and (max-width: 480px) {
+  .categoryList {
+  position:absolute;left:0;min-width:380px;
+}
+
+.category span {
+  font-size: 16px!important;
+  line-height:20px;
+}
+
+.category {
+  width: 115px;
+  height: 155px;padding:15px;
+}
 }
 
 .category:hover {
@@ -25,8 +41,8 @@
 }
 
 .category img {
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   margin-bottom: 10px;
 }
 
@@ -42,7 +58,7 @@
   color: #fff;
   font-size: 20px;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 

@@ -2,7 +2,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100%;min-width:360px;justify-content: center;
 }
 
 .answersSpacer {
@@ -19,10 +19,25 @@
   font-size: 21px;
   background-color: #01bec0;
   margin: 3px;
+  -ms-transform: scale(1.00, 1.00); /* IE 9 */
+    -webkit-transform: scale(1.00, 1.00); /* Safari */
+    transform: scale(1.00, 1.00);
+  -webkit-transition: all 200ms; /* Safari */
+    transition: all 200ms;
 }
 
+.answer::first-letter {text-transform:uppercase}
+
 .answer:hover {
-  filter: brightness(90%);
-  transition: filter 100ms linear;
+  -ms-transform: scale(1.04, 1.04); /* IE 9 */
+    -webkit-transform: scale(1.04, 1.04); /* Safari */
+    transform: scale(1.04, 1.04);
+  -webkit-transition: all 200ms; /* Safari */
+    transition: all 200ms;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 450px) {.answer {
+  width:calc(100% - 30px)
+}
 }

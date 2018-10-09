@@ -29,9 +29,9 @@
   font-family: 'Roboto-Light-CPL';
   flex: 1 1 auto;
   padding: 5px;
-  height: 30px;
+  height: 34px;
   font-size: 16px;
-  text-align: center;
+  text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;
 }
 
 .socialSearchButton {
@@ -44,9 +44,13 @@
   width: 44px;
   background-color: #01bec0;
   transition: background-color 100ms linear;
-  cursor: pointer;
+  cursor: pointer;border-radius:0px 3px 3px 0px;
 }
 
+.socialSearchButton img {height: 25px;}
+
+.socialSearchButton:hover {  background-color:#009799;
+}
 .socialSearchResults {
   position: absolute;
   background-color: #fff;

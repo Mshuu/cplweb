@@ -1,6 +1,6 @@
 .widgetPoll {
   background-color: #fff;
-  height: 100%;
+  height: 100%;border:2px solid #212c32;
 }
 
 .widgetPoll .pollQuestion {
@@ -17,5 +17,5 @@
 
 .scrollableContainer {
   height: calc(100% - 80px);
-  overflow-y: auto;
+  overflow-y: auto;background-color: #f1f2f2;
 }
