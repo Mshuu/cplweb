@@ -75,7 +75,7 @@ class Rewards extends Component {
             <div className="itemHeader">Current Multiplier Level</div>
             <div className="itemValue">x{ settings.BM }</div>
             <div className="itemFooter">
-              <div>Multiplier levels are based on your existing POLL balance in your wallet and caluclated daily.</div>
+              <div>Multiplier levels are based on your existing POLL balance in your wallet and calculated daily.</div>
               <a className="itemLink" href="https://www.clearpoll.com/multiplier" target="_blank">More information.</a>
             </div>
           </div>
