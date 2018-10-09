@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import * as qs from 'query-string';
 
 import WebApi from '../../models/webApi';
 import Poll from '../../models/Poll';
@@ -7,6 +8,8 @@ import LoadingOverlay from '../loadingOverlay/LoadingOverlay';
 import AnswerList from './widgetComponents/AnswerList';
 import ResultsGraph from './widgetComponents/ResultsGraph';
 import WidgetHeader from './widgetComponents/header';
+import WidgetFooter from './widgetComponents/footer';
+import RatingPoll from './widgetComponents/RatingPoll';
 
 import './WidgetPoll.css';
 
@@ -17,20 +20,13 @@ class WidgetPoll extends Component {
     this.store = props.store;
     this.pollId = this.props.match.params.pollId;
 
+    let params = qs.parse(props.location.search); 
+    this.widgetType = params.type;
+
     this.state = {
       loading: false,
       showOnFeed: true
     };
-  }
-
-  componentWillReceiveProps(props){
-    this.pollId = props.match.params.pollId;
-    this.store.setPoll(this.pollId, null);
-    this.setState({
-      loading: true,
-      showOnFeed: true
-    });
-    this.webFetch();
   }
 
   async componentDidMount(){
@@ -56,7 +52,21 @@ class WidgetPoll extends Component {
     });
   }
 
+  emitLoginMessage(){
+    window.parent.postMessage({event: "openLogin", pollId: this.pollId}, '*');
+  }
+
   async performVote(answerIdx){
+    if(!this.store.getAuthenticated()){
+      this.emitLoginMessage();
+      return;
+    }
+
+    let pollData = this.store.getPoll(this.pollId);
+    let poll = new Poll(pollData);
+
+    if(poll.hasVoted || poll.hasExpired) return;
+
     this.setState({
       loading: true
     });
@@ -64,8 +74,8 @@ class WidgetPoll extends Component {
     let response = await WebApi.voteOnPoll( this.pollId, answerIdx, this.state.showOnFeed );
 
     if(response.success){
-      let poll = this.store.getPoll(this.pollId);
       poll.results = response.results;
+      poll.pollVotes += 1;
       poll.hasVoted = true;
       poll.votedOn = [{answerId: answerIdx, answerText: poll.answers[answerIdx] }];
 
@@ -80,7 +90,7 @@ class WidgetPoll extends Component {
   }
 
   containerContent(poll){
-    if(poll.hasVoted || poll.hasExpired){
+    if(!this.store.getAuthenticated() || (poll.hasVoted || poll.hasExpired)){
       return (
         <ResultsGraph results={ poll.results } totalVotes={ poll.pollVotes } />
       );
@@ -108,18 +118,28 @@ class WidgetPoll extends Component {
     );
   }
 
-  render() {
-    let pollData = this.store.getPoll(this.pollId);
-    let poll = pollData ? new Poll(pollData) : null;
-
+  standardPoll(poll){
     return (
       <div className="widgetPoll">
         <LoadingOverlay enabled={ this.state.loading }/>
 
-        {poll && <WidgetHeader pollId={poll.pollId} pollVotes={this.numberToCommaFormat(poll.pollVotes)} pollTime={poll.timeRemaining}/> }
+        {poll && <WidgetHeader poll={poll} pollVotes={poll.votes} /> }
+
         { this.pollElement(poll) }      
+
+        { !this.store.getAuthenticated() && <WidgetFooter onClick={() => this.emitLoginMessage()}/> }
       </div>
     );
+  }
+
+  render() {
+    let pollData = this.store.getPoll(this.pollId);
+    let poll = pollData ? new Poll(pollData) : null;
+
+    if(this.widgetType == 'rating')
+      return <RatingPoll poll={poll} loading={ this.state.loading } onAnswer={ answerIdx => this.performVote(answerIdx) } />;
+    else
+      return this.standardPoll(poll);
   }
 }
 

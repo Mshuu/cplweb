@@ -10,14 +10,15 @@ class ResultGraph extends Component {
   }
 
   get totalVotes(){
-    return this.props.results.reduce((acc, result) => {
+    return this.props.poll.results.reduce((acc, result) => {
       return acc + result.voteCount;
     }, 0);
   }
 
   get resultsWithPercentages(){
-    let results = this.props.results.map(result => {
-      return Object.assign(result, { votePercentage: Math.floor(100 * result.voteCount / this.totalVotes) });
+    let results = this.props.poll.results.map(result => {
+      let votePercentage = this.totalVotes == 0 ? 0 : Math.floor(100 * result.voteCount / this.totalVotes);
+      return Object.assign(result, { votePercentage });
     });
 
 
@@ -43,12 +44,17 @@ class ResultGraph extends Component {
   }
 
   graphElement(result, i){
-    let votePercentage = Math.floor(100 * result.voteCount / this.props.totalVotes);
+    let votePercentage = Math.floor(100 * result.voteCount / (this.props.poll.pollVotes || 1));
+    let votedOn = this.props.poll.votedOn && this.props.poll.votedOn[0];
+
 
     return (
       <div className="resultContainer" key={ i }>
         <div className="resultAnswer">
-          { result.answerText }
+          { this.props.showVote && votedOn && result.answerText == votedOn.answerText &&
+            <img src={ require('../../images/poll_tick_icon.png') }/>
+          }
+          <span className="resultAnswerText">{ result.answerText }</span>
         </div>
 
         <div className="graph">

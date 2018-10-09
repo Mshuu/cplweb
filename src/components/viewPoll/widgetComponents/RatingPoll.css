@@ -1,0 +1,68 @@
+.ratingPoll {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+	border-radius: 3px;
+	overflow:hidden;
+}
+
+.ratingPoll .topRow {
+  height: 7.5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: #e6e6e6;
+}
+
+.ratingPoll .bottomRow {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.ratingPoll .avgScore {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #01bec0;
+  color: #fff;
+  font-size: 7vw;
+  padding: 0 2vw;
+}
+
+.ratingPoll .question {
+  flex: 1 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 0 2vw;
+}
+
+.ratingPoll .votes, .ratingPoll .id {
+  flex: 0 0 9vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vw;
+  padding: 0 2vw;
+	padding-top: 4px;
+  border-left: 2px solid #d5d5d5;
+}
+
+.ratingPoll img {
+  height: 3vw;
+}

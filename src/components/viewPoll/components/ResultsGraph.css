@@ -19,9 +19,14 @@
 }
 
 .graphContainer .resultAnswer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.graphContainer .resultAnswer .resultAnswerText {
   text-align: left;
   font-size: 21px;
-  margin-bottom: 8px;
 }
 
 .graphContainer .resultAnswer::first-letter {text-transform:uppercase}
@@ -66,3 +71,13 @@
 }
 
 
+@media only screen and (max-width: 360px) {
+
+  .contentContainer {
+    padding: 0 10px;
+  }
+
+  .graphContainer {
+    margin-right: 0px !important;
+  }
+}

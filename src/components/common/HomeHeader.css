@@ -17,7 +17,7 @@
 @media only screen and (max-width: 400px) {
 .homeLeft {max-width:400px!important}
 .headerFeatureButton.headerBrowsePolls { width:140px!important;position:absolute;left:30px;top:210px;padding-left:5px!important;padding-right:5px!important
-  
+
 }
 
 .searchInput {
@@ -32,7 +32,7 @@
 
 
 .headerFeatureButton.headerSocialPolls { width:140px!important;position:absolute;left:198px!important;top:210px;padding-left:5px!important;padding-right:5px!important
-  
+
 }}
 
 
@@ -45,11 +45,11 @@
 .homeRight {min-width:100%!important}
 
 .headerFeatureButton.headerBrowsePolls { width:180px;position:absolute;left:30px;top:210px;padding-left:20px;padding-right:20px;
-  
+
 }
 
 .headerFeatureButton.headerSocialPolls { width:180px;position:absolute;left:235px;top:210px;padding-left:20px;padding-right:20px
-  
+
 }
 
 .searchInput {width:320px!important;position:absolute;left:35px;top:50px;height:34px;}
@@ -150,7 +150,7 @@
 }
 
 .searchInput:focus {
-  outline: none; 
+  outline: none;
 }
 
 .searchInput::placeholder {

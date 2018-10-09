@@ -41,7 +41,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 30px 20px 20px 20px;
-  background: rgb(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   color: #fff;
   height: 200px;
   text-align: center;
@@ -121,6 +121,7 @@
 }
 
 .itemLink {
+  color: #fff;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -131,7 +132,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px 20px 20px 20px;
-  background: rgb(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   color: #fff;
   height: 200px;
   font-size: 12px;
@@ -181,4 +182,20 @@
 
 .bottomContainer .important {
   color: red;
+}
+
+.walletButton, .walletButton:visited {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.addressField .saveButton {
+  border-radius:0px 3px 3px 0px !important;
+  cursor: pointer;
+}
+
+.addressField .saveButton img {
+  height: 20px;
+
 }

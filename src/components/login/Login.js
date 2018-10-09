@@ -11,38 +11,56 @@ class Login extends Component {
 
     this.props = props;
     this.state = {
-      username: 'AnonymousCoward',
-      desktopCode: 'bsa6jr',
+      username: '',
+      desktopCode: '',
       loading: false
     };
 
     this.props.store.hydrateCheck();
+		this.props.store.setAuthenticated(false);
   }
 
-/*
-  async test(){
-    let params = {
-      function: 'GetDesktopCode',
-      phoneNumber: '+61423777097',
-      code: '093068'
-    }
+	async faqRedirect(){
 
-    let response = await ClearpollApi.request(params);
-    console.dir(response);
-  }
-*/
+	}
 
   async doLogin(){
+    if(
+      this.state.username.length == 0 ||
+      this.state.desktopCode.length == 0
+    ) return;
+
     this.setState({loading: true});
 
     try {
-      await WebApi.login(this.state.username, this.state.desktopCode);
+      let result = await WebApi.login(this.state.username, this.state.desktopCode);
+
+      if(!result) throw new Error("Incorrect username or desktop code");
+
+      if(window.parent){
+        window.parent.postMessage({event: "loggedIn"}, '*');
+				this.props.store.setAuthenticated(true);
+      }
+
       this.props.history.push('/');
     } catch(e) {
       alert(e.message);
     }
-      this.setState({loading: false});
+
+    this.setState({loading: false});
   }
+	async doSignup(){
+
+		this.setState({loading: true});
+
+		try {
+			this.props.history.push('/signup');
+		} catch(e) {
+			alert(e.message);
+		}
+
+		this.setState({loading: false});
+	}
 
   render() {
     return (
@@ -50,8 +68,7 @@ class Login extends Component {
         <LoadingOverlay enabled={ this.state.loading }/>
 
         <div className="loginHeader">
-          <img src={ require('./images/desktop-connect.png') } />
-          ClearPoll Login
+          <img src={ require('../images/white-logo.png') } className="whiteLogo" />
         </div>
 
         <div className="loginField">
@@ -67,13 +84,16 @@ class Login extends Component {
 
         <div className="loginField">
           <span className="loginFieldText">
-            Desktop Code
+            Login Code
           </span>
           <input type="text"
             className="loginFieldDesktopCode"
             value={this.state.desktopCode}
             onChange={ e => this.setState({desktopCode: e.target.value}) }
           />
+					<a  className="faqButton" href="https://clearpoll.com/faq" target="_blank">
+						<img src={ require('../images/question-icon.png')}  className = "faqIcon" />
+					</a>
         </div>
 
         <div className="loginSubText">
@@ -83,14 +103,22 @@ class Login extends Component {
         <button className="loginButton" onClick={ this.doLogin.bind(this) }>
           Login
         </button>
+				<button className="signupButton" onClick={ this.doSignup.bind(this)}>
+					Sign Up
+					<img src= { require('../images/pencil.png')} className = "signupImage" />
+				</button>
 
         <div className="installBanner">
           <div className="installBannerText">
-            Not registered? Install ClearPoll app to get started!
+						Get the ClearPoll App!
           </div>
           <div className="installBannerImages">
-            <img src={ require('../images/google_play_icon.png') }/>
-            <img src={ require('../images/app_store_icon.svg') }/>
+            <a href="https://play.google.com/store/apps/details?id=com.nextechdevelopments.clearpoll" target="_blank">
+              <img src={ require('../images/google_play_icon.png') }/>
+            </a>
+            <a href="https://itunes.apple.com/us/app/clearpoll/id1347664374" target="_blank">
+              <img src={ require('../images/app_store_icon.svg') }/>
+            </a>
           </div>
         </div>
       </div>

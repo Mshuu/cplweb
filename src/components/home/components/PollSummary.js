@@ -9,7 +9,7 @@ const CATEGORY_MAP = {
   trendingPolls: {title: 'Trending'},
   endingSoonest: {title: 'Ending Soon'},
   latestPolls: {title: 'Latest'},
-  starPolls: {title: 'Star Polls', url: '/starPolls' },
+  starPolls: {title: 'Featured Polls', url: '/starPolls' },
   myVotes: {title: 'My Votes', url: '/myVotes' },
   localPolls: {title: 'Local'},
   nationalPolls: {title: 'National' },
@@ -39,7 +39,7 @@ class PollSummary extends Component {
     if(numOfPolls > limit){
       let startIndex = Math.floor(Math.random() * (numOfPolls - limit + 1));
       return this.props.polls[category].slice(startIndex, startIndex + limit);
-    } else 
+    } else
       return this.props.polls[category];
   }
 
@@ -60,6 +60,17 @@ class PollSummary extends Component {
     }
   }
 
+  starPolls(){
+    if( this.countPolls('starPolls') > 0 ){
+      return (
+        <div>
+          <SummaryHeader title={ "Featured Polls" } image={ CategoryIcon['Featured Polls'] } url={ '/starPolls' }/>
+          <PollRow polls={ this.getPollsFor('starPolls', 3) } forceNormal={ false } />
+        </div>
+      )
+    }
+  }
+
   render() {
     if(!this.props.polls)
       return <div className="pollSummary"></div>;
@@ -70,8 +81,7 @@ class PollSummary extends Component {
         { this.getRowFor('endingSoonest') }
         { this.getRowFor('latestPolls') }
 
-        <SummaryHeader title={ "Star Polls" } image={ CategoryIcon['Star Polls'] } url={ '/starPolls' }/>
-        <PollRow polls={ this.getPollsFor('starPolls', 3) } forceNormal={ false } />
+        { this.starPolls() }
 
         { this.getRowFor('myVotes') }
         { this.getRowFor('localPolls') }

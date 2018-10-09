@@ -15,7 +15,6 @@ class Poll extends Component {
   }
 
   openPoll(){
-    console.log(`Open ${this.poll.id}`);
     this.props.history.push(`/poll/${this.poll.id}`);
   }
 
@@ -62,7 +61,7 @@ class Poll extends Component {
             </span>
           )}
           { this.button() }
-        </div>  
+        </div>
       </div>
     );
   }
@@ -94,7 +93,7 @@ class Poll extends Component {
             { this.poll.pollVotes }
           </span>
           { this.button() }
-        </div>  
+        </div>
       </div>
     );
   }

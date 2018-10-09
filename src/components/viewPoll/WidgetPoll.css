@@ -1,4 +1,8 @@
 .widgetPoll {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: calc(100% - 4px);
   background-color: #fff;
   height: 100%;border:2px solid #212c32;
 }
@@ -10,6 +14,8 @@
   margin: 15px 0;
   text-align: center;
 }
+
+.widgetPoll .pollQuestion::first-letter {text-transform:uppercase}
 
 .widgetPoll .contentContainer {
   padding: 0 20px;

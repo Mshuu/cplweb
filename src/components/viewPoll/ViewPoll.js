@@ -11,6 +11,7 @@ import PollList from '../common/PollList';
 
 import './ViewPoll.css';
 
+
 class ViewPoll extends Component {
   constructor(props){
     super(props);
@@ -19,8 +20,10 @@ class ViewPoll extends Component {
     this.pollId = this.props.match.params.pollId;
 
     this.state = {
+      authenticated: this.store.getAuthenticated(),
       loading: false,
-      showOnFeed: true
+      showOnFeed: true,
+      showVote: true
     };
   }
 
@@ -28,8 +31,7 @@ class ViewPoll extends Component {
     this.pollId = props.match.params.pollId;
     this.store.setPoll(this.pollId, null);
     this.setState({
-      loading: true,
-      showOnFeed: true
+      loading: true
     });
     this.webFetch();
   }
@@ -40,9 +42,16 @@ class ViewPoll extends Component {
     }
   }
 
+  toggleSocial(){
+    this.setState({ showOnFeed: !this.state.showOnFeed });
+  }
+
+  toggleVote(){
+    this.setState({ showVote: !this.state.showVote });
+  }
+
   async webFetch(){
-    if(this.store.hydrateCheck()){
-      console.log('hydrate recover');
+    if(this.store.hydrateCheck() || !this.store.getAuthenticated()){
       return;
     }
 
@@ -69,7 +78,7 @@ class ViewPoll extends Component {
       let poll = this.store.getPoll(this.pollId);
       poll.results = response.results;
       poll.hasVoted = true;
-      poll.votedOn = [{answerId: answerIdx, answerText: poll.answers[answerIdx] }];
+      poll.votedOn = [{answerText: answerIdx }];
 
       this.store.setPoll(this.pollId, poll);
     } else {
@@ -81,10 +90,14 @@ class ViewPoll extends Component {
     });
   }
 
+  shouldShowResults(poll){
+    return (poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated();
+  }
+
   containerContent(poll){
-    if(poll.hasVoted || poll.hasExpired){
+    if(this.shouldShowResults(poll)){
       return (
-        <ResultsGraph results={ poll.results } totalVotes={ poll.pollVotes } />
+        <ResultsGraph poll={ poll } showVote={ this.state.showVote } />
       );
     } else {
       return (
@@ -93,16 +106,24 @@ class ViewPoll extends Component {
     }
   }
 
-  handleTwitterShare(){
-    window.location = "https://twitter.com/home?status=" + encodeURI(window.location);
+  get currentUrlEscaped(){
+    return `${SERVER_BASE_URL}${this.props.location.pathname}`
   }
 
-  handleFacebookShare(){
-    window.location = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURI(window.location);
+  get twitterShareUrl(){
+    return "https://twitter.com/share?url=" + this.currentUrlEscaped;
   }
 
-  handleGoogleShare(){
-    window.location = "https://plus.google.com/share?url=" + encodeURI(window.location);
+  get facebookShareUrl(){
+    return "https://www.facebook.com/sharer/sharer.php?u=" + this.currentUrlEscaped;
+  }
+
+  get googleShareUrl(){
+    return "https://plus.google.com/share?url=" + this.currentUrlEscaped;
+  }
+
+  get redditShareUrl(){
+    return "http://www.reddit.com/submit?url=" + this.currentUrlEscaped;
   }
 
   numberToCommaFormat(num){
@@ -110,23 +131,69 @@ class ViewPoll extends Component {
   }
 
   get socialContent(){
-    return (
-      <div className="socialContainer">
-        <div className="socialBanner">
-          Share Your Vote!
+    if(this.state.authenticated) {
+      return (
+        <div className="socialContainer">
+          <div className="socialBanner">
+            Share this poll!
+          </div>
+          <div className="socialButtons">
+            <a target="_blank" href={ this.twitterShareUrl }>
+              <img src={require('../images/twitter_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.facebookShareUrl }>
+              <img src={require('../images/facebook_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.googleShareUrl }>
+              <img src={require('../images/google_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.redditShareUrl }>
+              <img src={require('../images/reddit_icon.png')} />
+            </a>
+          </div>
         </div>
-        <div className="socialButtons">
-          <img src={require('../images/twitter_icon.png')} onClick={() => this.handleTwitterShare()}  />
-          <img src={require('../images/facebook_icon.png')} onClick={() => this.handleFacebookShare()} />
-          <img src={require('../images/google_icon.png')} onClick={() => this.handleGoogleShare()}  />
+      );
+    } else {
+      return (
+        <div className="socialContainer">
+          <div className="socialBanner">
+            <a className="voteButton" href="/login">Vote</a>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+  }
+
+  summaryContent(poll){
+    if(this.state.authenticated) {
+      return (
+        <div className="summaryContainer">
+          <SummaryHeader category={ poll.category} type={ poll.type }/>
+          <PollList category={ poll.category }  type={ poll.type }/>
+        </div>
+      );
+    } else {
+      return (
+        <div className="pollInstallBanner">
+          <div className="installBannerText">
+            Not registered? Install ClearPoll app to get started!
+          </div>
+          <div className="installBannerImages">
+            <a href="https://play.google.com/store/apps/details?id=com.nextechdevelopments.clearpoll" target="_blank">
+              <img src={ require('../images/google_play_icon.png') }/>
+            </a>
+            <a href="https://itunes.apple.com/us/app/clearpoll/id1347664374" target="_blank">
+              <img src={ require('../images/app_store_icon.svg') }/>
+            </a>
+          </div>
+        </div>
+      );
+    }
   }
 
   pollElement(){
     let pollData = this.store.getPoll(this.pollId);
-    console.dir(pollData);
+
     if(!pollData) return null;
 
     let poll = new Poll(pollData);
@@ -153,18 +220,35 @@ class ViewPoll extends Component {
                 { poll.timeRemaining }
               </div>
             )}
+            { !this.shouldShowResults(poll) && (
+                <div className="field socialField">
+                  <div className="socialFeedText">Show friends you voted?</div>
+                  <div className="socialFeedContainer">
+                    <img src={ require('../images/social_share_icon.png')} />
+                    { this.state.showOnFeed ?
+                      <span className="socialButton enabled" onClick={() => this.toggleSocial()}>Yes</span> :
+                      <span className="socialButton disabled" onClick={() => this.toggleSocial()}>No</span>
+                    }
+                  </div>
+                </div>
+            )
+          }
           </div>
           <div className="contentContainer">
             { this.containerContent(poll) }
           </div>
         </div>
+        { this.store.getAuthenticated() && this.shouldShowResults(poll) && (
+          <div className="voteControlContainer">
+            <div className="voteControl" onClick={() => this.toggleVote()}>
+              { this.state.showVote ? "Hide Vote" : "Show Vote" }
+            </div>
+          </div>
+        )}
 
         { this.socialContent }
 
-        <div className="summaryContainer">
-          <SummaryHeader category={ poll.category } />
-          <PollList category={ poll.category } />
-        </div>
+        { this.summaryContent(poll) }
       </div>
     );
   }
@@ -174,7 +258,7 @@ class ViewPoll extends Component {
       <div className="viewPoll">
         <LoadingOverlay enabled={ this.state.loading }/>
 
-        { this.pollElement() }      
+        { !this.state.loading && this.pollElement() }
       </div>
     );
   }

@@ -14,7 +14,7 @@ import ShowMore from '../common/ShowMore';
 
 import './CompletedPolls.css';
 
-const LOAD_MORE_QTY = 16;
+const LOAD_MORE_QTY = 20;
 
 class CompletedPolls extends Component {
   constructor(props){
@@ -78,7 +78,7 @@ class CompletedPolls extends Component {
   async webFetch(resetCache = false){
     if(this.store.hydrateCheck() || !this.isCategorySelected)
       return;
-    
+
     if(resetCache)
       this.store.setCategoryPolls(this.category, []);
 
@@ -89,12 +89,13 @@ class CompletedPolls extends Component {
 
     let existingPolls = this.store.getCategoryPolls(this.category);
 
+
     let response = await WebApi.getPolls(
       Object.assign(this.filterParams, {
         category: this.category,
         sortOrder: this.state.sortOrder,
         recordStartNo: existingPolls.length,
-        recordQty: 16,
+        recordQty: LOAD_MORE_QTY,
         positionLatitude: '',
         positionLongitude: '',
         locationFilter: this.state.locationFilter
@@ -144,7 +145,7 @@ class CompletedPolls extends Component {
 
   get showMoreElement(){
     if(this.isCategorySelected && !this.state.loading)
-      return <ShowMore moreAvailable={ this.state.canLoadMore } loading={this.state.loadingMore} onClick={() => this.webFetch()} />
+      return <ShowMore moreAvailable={ this.state.canLoadMore } loading={this.state.loadingMore} onClick={() => this.webFetch(false)} />
   }
 
   render() {

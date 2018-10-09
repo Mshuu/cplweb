@@ -12,7 +12,7 @@ import ShowMore from '../common/ShowMore';
 
 import '../completedPolls/CompletedPolls.css';
 
-const LOAD_MORE_QTY = 16;
+const LOAD_MORE_QTY = 20;
 
 class MyVotes extends Component {
   constructor(props){
@@ -52,7 +52,7 @@ class MyVotes extends Component {
       active: 'true',
       sortOrder: this.state.sortOrder,
       recordStartNo: existingPolls.length,
-      recordQty: 16,
+      recordQty: LOAD_MORE_QTY,
       positionLatitude: '',
       positionLongitude: '',
       locationFilter: ''

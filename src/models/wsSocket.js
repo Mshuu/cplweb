@@ -1,5 +1,7 @@
 
 const WS_PATH = '/api/ws';
+import CryptoJS from "crypto-js";
+
 
 export default class WsSocket {
   constructor(){
@@ -10,10 +12,10 @@ export default class WsSocket {
 
   connect(){
     return new Promise( res => {
-      this.socket = new WebSocket("ws://" + location.host + WS_PATH);
+      let protocol = location.protocol != 'https:' ? "ws://" : "wss://";
+      this.socket = new WebSocket(protocol + location.host + WS_PATH);
 
       this.socket.addEventListener('open', (event) => {
-        console.log('WS Connected');
         this.open = true;
         res();
       });
@@ -30,10 +32,14 @@ export default class WsSocket {
   }
 
   handleMessage(event){
-    let msg = JSON.parse(event.data);
+		var bytes  = CryptoJS.AES.decrypt(event.data, 'Y;8)t,[;xzy9niU2$tL?');
+		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+    let msg = JSON.parse(plaintext);
     let promises = this._pendingPromises[msg.id];
 
+
     if(promises){
+
       promises.res(msg);
     }
   }
@@ -43,7 +49,9 @@ export default class WsSocket {
       this._pendingPromises[++this._msgId] = {res, rej};
 
       let message = Object.assign(params, { id: this._msgId });
-      this.socket.send(JSON.stringify(message));
+			var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(message), 'Y;8)t,[;xzy9niU2$tL?');
+			message = ciphertext;
+      this.socket.send(message);
     });
   }
 }

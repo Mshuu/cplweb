@@ -96,3 +96,66 @@
 .viewPoll .summaryContainer {
   margin-bottom: 30px;
 }
+
+.socialContainer .voteButton {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 50px;
+  margin: 10px 0;
+  font-size: 30px;
+  background-color: #01bec0;
+  border-radius: 30px;
+}
+
+.pollInstallBanner {
+  margin: 15px 0 35px 0;
+}
+
+.socialFeedText {
+  font-size: 12px;
+}
+
+.socialButton {
+  display: inline-block;
+  border-radius: 30px;
+  padding: 3px 0;
+  width: 86px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.socialButton.enabled {
+  border: 1px solid #01bec0;
+  background-color: #01bec0;
+}
+
+.socialButton.disabled {
+  border: 1px solid #fff;
+  background-color: transparent;
+}
+
+.field.socialField {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.socialFeedContainer {
+  display: flex;
+  align-items: center;
+}
+
+.voteControl {
+  color: #fff;
+  padding: 8px 25px;
+  border-radius: 30px;
+  background-color: rgba(16, 2, 81, 0.2);
+  cursor: pointer;
+}
+
+.voteControlContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}

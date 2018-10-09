@@ -1,6 +1,8 @@
 import axios from 'axios';
 import WsSocket from './wsSocket';
 const AUTH_URL = "/api/auth";
+import ClearpollApi from './serverApi';
+import CryptoJS from "crypto-js";
 
 let socket, connected = false;
 
@@ -40,6 +42,101 @@ class WebApi {
       showOnFeed
     });
   }
+  static async GetDesktopCode(phoneNumber,code){
+      let params = {
+        function: 'GetDesktopCode',
+        phoneNumber,
+        code
+      }
+
+      let response = await ClearpollApi.request(params);
+
+      if(!response.success) throw new Error('Invalid Auth');
+
+      return response;
+    }
+    static async CheckUsername(username){
+        let params = {
+          function: 'CheckUsername',
+          username
+        }
+
+        let response = await ClearpollApi.request(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+    static async GetCountry(){
+        let params = {
+          function: 'GetCountryCode',
+        }
+
+        let response = await ClearpollApi.request(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+
+	static async UserSignup(phoneNumber){
+	    let params = {
+	      function: 'UserSignup2',
+	      phoneNumber,
+	    }
+
+	    let response = await ClearpollApi.request(params);
+
+	    if(!response.success) throw new Error('Invalid Auth');
+
+	    return response;
+	  }
+    static async SendStat(userName){
+        let params = {
+          function: 'CheckIn',
+          userName: userName,
+          event: 'APP_START',
+          data: 'WEB'
+        }
+
+        let response = await ClearpollApi.request2(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+
+    static async UserSignup2(phoneNumber,code){
+        let params = {
+          function: 'UserVerification',
+          phoneNumber,
+          code
+        }
+
+        let response = await ClearpollApi.request(params);
+
+        if(!response.success) throw new Error('Invalid Auth');
+
+        return response;
+      }
+      static async UserSignup3(phoneNumber,code,birth_year,sex,user_name){
+        var isIos = 'false';
+          let params = {
+            function: 'UserFinishSignup',
+            phoneNumber,
+            code,
+            birth_year,
+            sex,
+            isIos,
+            user_name
+          }
+
+          let response = await ClearpollApi.request(params);
+
+          if(!response.success) throw new Error('Invalid Auth');
+
+          return response;
+        }
 
   static async getPolls(params){
     return await WebApi.wsRequest({
@@ -122,6 +219,25 @@ class WebApi {
     });
   }
 
+  static async saveWalletAddress(wallet){
+    return await WebApi.wsRequest({
+      function: 'SaveWalletAddress',
+      wallet
+    });
+  }
+
+  static async getWalletAddress(){
+    return await WebApi.wsRequest({
+      function: 'GetWalletAddress'
+    });
+  }
+
+  static async deleteAccount(){
+    return await WebApi.wsRequest({
+      function: 'DeleteAccount'
+    });
+  }
+
   static async postRequest(params){
     let response;
     let requestParams = params;
@@ -129,11 +245,9 @@ class WebApi {
     try {
       response = await axios.post(AUTH_URL, requestParams);
     } catch(e){
-      console.dir(requestParams);
-      console.dir(e);
       throw new Error('A network error occured');
     }
-    console.dir(response);
+
     return response.data;
   }
 
@@ -151,10 +265,8 @@ class WebApi {
 
   static async wsRequest(params){
     await WebApi.ensureConnected();
-    console.dir(params);
     let response = await socket.request(params);
-
-    return response
+    return response;
   }
 }
 

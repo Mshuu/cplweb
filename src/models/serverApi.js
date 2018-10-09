@@ -2,9 +2,10 @@ import axios from 'axios';
 import moment from 'moment';
 import State from './state';
 
-const SERVER_URL = "https://node4.l2shuu.com:3000/Clearpoll";
+const SERVER_URL = "https://node.clearpoll.com/Clearpoll";
 
 class ServerApi {
+
   static async request(params){
     let response;
     let requestParams = params;
@@ -21,16 +22,31 @@ class ServerApi {
 
     return response.data;
   }
+  static async request2(params){
+    let response;
+    let requestParams = params;
+
+    try {
+			var server = "https://business.nextechdevelopments.com/CPLB";
+      response = await axios.post(server, requestParams);
+    } catch(e){
+      console.dir(e);
+      throw new Error('A network error occured');
+    }
+
+
+    return response.data;
+  }
 
   constructor(auth){
-    this.auth = auth;
+    this.auth = auth || {};
     this.voteHistory = [];
     this.historyFetched = false;
   }
 
   getHasVoted(pollId){
     let voteMatch = this.voteHistory.find( h => { return h.pollID == pollId});
-    
+
     if(voteMatch)
       return {
         hasVoted: true,
@@ -45,7 +61,6 @@ class ServerApi {
       function: 'GetPollListHome',
       ...this.auth
     });
-    let categories = [];
 
     this.voteHistory = homeData.voteHistory;
     this.historyFetched = true;
@@ -54,16 +69,10 @@ class ServerApi {
       if(typeof homeData[key] != "object") continue;
 
       homeData[key] = homeData[key].map( poll => {
-        if(!poll.id) return;
-
-        let cat = poll.category;
-
-        if(categories.indexOf(cat) == -1) categories.push(cat);
-
+        if(!poll.id) return
         return Object.assign(poll, this.getHasVoted(poll.id));
       });
     }
-    //console.dir(categories);
     return homeData;
   }
 
@@ -91,6 +100,60 @@ class ServerApi {
       poll.answers = pollAnswers.answer;
     }
 
+    if(poll.type == "Ratings"){
+      if(!poll.results) {
+        let resultResponse = await ServerApi.request({
+          function: 'GetPublicPollResult',
+          pollId
+        });
+        poll.results = resultResponse.votesPerAnswer;
+      }
+
+      let totalVotes = poll.pollVotes;
+
+      if(totalVotes == 0)
+        poll.averageRating = 0;
+      else
+        poll.averageRating = poll.results.reduce(
+          (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
+          0
+        );
+    }
+
+    return poll;
+  }
+
+  async fetchUnauthPoll(pollId){
+    let pollData = await ServerApi.request({
+      function: 'GetPoll',
+      pollId
+    });
+
+    let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
+    console.dir(poll);
+
+    let pollResults = await ServerApi.request({
+      function: 'GetPublicPollResult',
+      pollId
+    });
+
+    poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+    poll.results = pollResults.votesPerAnswer;
+    poll.votedOn = pollResults.voted;
+    poll.pollVotes = pollResults.totalVotes;
+
+    if(poll.type == "Ratings"){
+      let totalVotes = poll.pollVotes;
+
+      if(totalVotes == 0)
+        poll.averageRating = 0;
+      else
+        poll.averageRating = poll.results.reduce(
+          (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
+          0
+        );
+    }
+
     return poll;
   }
 
@@ -104,20 +167,6 @@ class ServerApi {
     this.historyFetched = true;
 
     return this.voteHistory;
-  }
-
-  async voteOnPoll(params){
-    params.showOnFeed = params.showOnFeed ? 1 : 0;
-
-    let response = await ServerApi.request({
-      function: 'VoteOnPoll',
-      ...params,
-      ...this.auth
-    });
-
-    console.dir(response);
-
-    return response;
   }
 
   async voteOnPoll(params){
@@ -178,7 +227,7 @@ class ServerApi {
     });
 
     this.voteHistory = response.voteHistory;
-    
+
     let polls = response.poll.map(poll => {
       return Object.assign(
         poll,
@@ -192,7 +241,7 @@ class ServerApi {
   async getSocialFeed(params){
     let response = await ServerApi.request({
       function: 'GetFeed',
-      params,
+      ...params,
       ...this.auth
     });
 
@@ -256,10 +305,10 @@ class ServerApi {
     });
   }
 
-  async ignoreFriendRequest(friendId){
+  async ignoreFriendRequest(requestId){
     return await ServerApi.request({
       function: 'IgnoreFriendRequest',
-      friendId,
+      requestId,
       ...this.auth
     });
   }
@@ -279,11 +328,55 @@ class ServerApi {
       ...this.auth
     });
   }
+	async UserSignup(phoneNumber){
+
+		return await ServerApi.request({
+			function: 'UserSignup',
+			phoneNumber
+		});
+	}
 
   async approveFriendRequest(friendId){
     return await ServerApi.request({
       function: 'ApproveFriendRequest',
       requestId: friendId,
+      ...this.auth
+    });
+  }
+
+  async approveFriendRequest(friendId){
+    return await ServerApi.request({
+      function: 'ApproveFriendRequest',
+      requestId: friendId,
+      ...this.auth
+    });
+  }
+
+  async saveWalletAddress(wallet){
+    return await ServerApi.request({
+      function: 'SaveEthereumWallet',
+      wallet,
+      ...this.auth
+    });
+  }
+
+  async getWalletAddress(){
+    try {
+      return await ServerApi.request({
+        function: 'GetEthereumWallet',
+        ...this.auth
+      });
+    } catch(e){
+      return {
+        success: false,
+        error: e.message
+      }
+    }
+  }
+
+  async deleteAccount(){
+    return await ServerApi.request({
+      function: 'DeleteAccount',
       ...this.auth
     });
   }

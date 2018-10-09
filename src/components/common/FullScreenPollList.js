@@ -24,7 +24,7 @@ class FullScreenPollList extends Component {
     if(!this.props.polls) return null;
 
     let polls = this.props.polls.slice(0);
-    this.applySortOrder(polls)
+    //this.applySortOrder(polls)
 
     return polls.map( (poll, i) => {
       return (

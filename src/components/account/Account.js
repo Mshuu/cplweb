@@ -44,9 +44,15 @@ class Account extends Component {
     });
   }
 
-  performDeleteAccount(){
-    //TODO Account delete endpoint
-    alert('No! You stay!');
+  async performDeleteAccount(){
+    if(!confirm("Are you sure you want to delete your account?")) return;
+
+    let response = await WebApi.deleteAccount();
+
+    if(response.success)
+      window.location = '/logout';
+    else
+      alert('An error occured');
   }
 
   get settingsElement(){

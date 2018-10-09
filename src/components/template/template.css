@@ -1,9 +1,16 @@
+html {
+  min-height: 120%;
+}
+body {
+  min-height: 120%;
+}
 
 .templateContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  align-self: stretch;
   font-family: 'Roboto-Light-CPL';
 }
 
@@ -18,8 +25,10 @@
 }
 
 .templateHeader {
-  width: calc(100% - 33px);
+  flex: 0 0 100%;
   height: 70px;
+	min-height: 70px;
+	max-height: 70px;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -65,7 +74,7 @@ html {
 
 @media only screen and (max-width: 650px) {
 
-  
+
 }
 
 @media only screen and (max-width: 475px) {

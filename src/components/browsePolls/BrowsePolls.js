@@ -14,7 +14,7 @@ import ShowMore from '../common/ShowMore';
 
 import './CompletedPolls.css';
 
-const LOAD_MORE_QTY = 16;
+const LOAD_MORE_QTY = 20;
 
 class BrowsePolls extends Component {
   constructor(props){
@@ -67,7 +67,7 @@ class BrowsePolls extends Component {
       category: this.category,
       sortOrder: this.state.sortOrder,
       recordStartNo: existingPolls.length,
-      recordQty: 16,
+      recordQty: LOAD_MORE_QTY,
       positionLatitude: '',
       positionLongitude: '',
       locationFilter: this.state.locationFilter

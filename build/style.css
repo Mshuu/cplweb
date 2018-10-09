@@ -202,16 +202,20 @@ require("source-map-support").install();
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 470px;
   align-items: center;
+<<<<<<< HEAD
+=======
+  align-self: center;
+  max-width: 510px;
+>>>>>>> master
   margin-bottom: 10px
 }
 
 .loginField .loginFieldText {
+  flex: 0 0 140px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
   color: #ffffff;
   background-color: #01bec0;
   font-size: 20px;
@@ -219,7 +223,7 @@ require("source-map-support").install();
 }
 
 .loginField input {
-  flex: 2;
+  flex-grow: 1;
   outline: none;
   box-shadow: none;
   font-family: 'Roboto-Light-CPL';
@@ -234,14 +238,51 @@ require("source-map-support").install();
   outline: none;
 }
 
-.loginField input.loginFieldDesktopCode {
+.loginField input.loginFieldUsername{
+	letter-spacing: 2px;
+}
+.loginField2 input.loginFieldDesktopCode {
   letter-spacing: 2px;
+	text-align: center;
 }
 
 .loginSubText {
   font-size: 12px;
   text-align: center;
   color: #fff;
+}
+.signupDesc {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+	margin-top: 10px;
+}
+.signupDesc1 {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+}
+.signupDesc2 {
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+.importantText{
+  font-size: 16px;
+  text-align: center;
+  color: #01bec0;
+  flex: 1;
+}
+.nonImportantText{
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+	margin-top: 10px;
+}
+.AlertText{
+  flex-direction: row;
+	display: flex;
 }
 
 .loginButton {
@@ -257,7 +298,6 @@ require("source-map-support").install();
   margin-top: 30px;
   transition: background-color 100ms linear;font-weight:300;
 }
-
 .loginButton:hover {
   background-color: #0191c1;
   transition: background-color 100ms linear;
@@ -265,7 +305,7 @@ require("source-map-support").install();
 }
 
 .installBanner {
-  background-color: rgb(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 100%;
   padding: 20px 0;
   margin: 30px 0 0 0;
@@ -288,6 +328,29 @@ require("source-map-support").install();
   height: 70px;
   margin: 5px;
 }
+
+
+@media only screen and (max-width: 410px) {
+  .loginField {
+    width: 95vw;
+  }
+
+  .loginField input {
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .installBannerImages img {
+    height: 13vw;
+    margin: 5px;
+  }
+
+  .installBannerText {
+    font-size: 17px;
+    padding: 0 10px;
+  }
+}
 .homeHeader {
   display: flex;
   flex-direction: row;
@@ -307,7 +370,7 @@ require("source-map-support").install();
 @media only screen and (max-width: 400px) {
 .homeLeft {max-width:400px!important}
 .headerFeatureButton.headerBrowsePolls { width:140px!important;position:absolute;left:30px;top:210px;padding-left:5px!important;padding-right:5px!important
-  
+
 }
 
 .searchInput {
@@ -322,7 +385,7 @@ require("source-map-support").install();
 
 
 .headerFeatureButton.headerSocialPolls { width:140px!important;position:absolute;left:198px!important;top:210px;padding-left:5px!important;padding-right:5px!important
-  
+
 }}
 
 
@@ -335,11 +398,11 @@ require("source-map-support").install();
 .homeRight {min-width:100%!important}
 
 .headerFeatureButton.headerBrowsePolls { width:180px;position:absolute;left:30px;top:210px;padding-left:20px;padding-right:20px;
-  
+
 }
 
 .headerFeatureButton.headerSocialPolls { width:180px;position:absolute;left:235px;top:210px;padding-left:20px;padding-right:20px
-  
+
 }
 
 .searchInput {width:320px!important;position:absolute;left:35px;top:50px;height:34px;}
@@ -440,7 +503,7 @@ require("source-map-support").install();
 }
 
 .searchInput:focus {
-  outline: none; 
+  outline: none;
 }
 
 .searchInput::placeholder {
@@ -715,7 +778,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bc1c4', end
 background: -moz-linear-gradient(top, #f98313 0%, #cc5633 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, #f98313 0%,#cc5633 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom, #f98313 0%,#cc5633 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', endColorstr='#cc5633',GradientType=0 ); /* IE6-9 */ 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', endColorstr='#cc5633',GradientType=0 ); /* IE6-9 */
 }
 
 .poll .resultsButton:hover, .starPoll .resultsButton:hover {
@@ -906,7 +969,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
   line-height: 50px;
   color: #ffffff;
   font-size: 21px;
-  background-color: #01bec0;
   margin: 3px;
   -ms-transform: scale(1.00, 1.00); /* IE 9 */
     -webkit-transform: scale(1.00, 1.00); /* Safari */
@@ -951,9 +1013,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
 }
 
 .graphContainer .resultAnswer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.graphContainer .resultAnswer .resultAnswerText {
   text-align: left;
   font-size: 21px;
-  margin-bottom: 8px;
 }
 
 .graphContainer .resultAnswer::first-letter {text-transform:uppercase}
@@ -998,6 +1065,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
 }
 
 
+@media only screen and (max-width: 360px) {
+
+  .contentContainer {
+    padding: 0 10px;
+  }
+
+  .graphContainer {
+    margin-right: 0px !important;
+  }
+}
 
 .pollSummaryHeader {
   width: 100%;
@@ -1017,6 +1094,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
   color: #ffffff;
   font-size: 24px;
   line-height: 30px;
+}
+
+
+@media only screen and (max-width: 450px) {
+  .pollSummaryHeader span {
+    font-size: 5vw;
+  }
+
+  .pollSummaryHeader {
+    padding: 0 ;
+  }
 }
 .showMore {
   width: 150px;
@@ -1075,6 +1163,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
 
 .fullScreenPollListContainer {
   margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 450px) {
+  .pollListContainer .polls {
+    padding: 0 5px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
 }
 .viewPoll {
   text-align: center;
@@ -1152,28 +1248,31 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
   padding: 5px 0;
 }
 
-.socialContainer .socialButtons {
-  width: 100%;
+.field.socialField {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
-.socialContainer .socialButtons img {
-  width: 50px;
-  height: 50px;
-  margin: 20px 5px 0 5px;
+.socialFeedContainer {
+  display: flex;
+  align-items: center;
 }
 
-.socialContainer .socialButtons img:hover {
+.voteControl {
+  color: #fff;
+  padding: 8px 25px;
+  border-radius: 30px;
+  background-color: rgba(16, 2, 81, 0.2);
   cursor: pointer;
-  filter: brightness(90%);
-  transition: filter 100ms linear;
 }
 
-.viewPoll .summaryContainer {
-  margin-bottom: 30px;
+.voteControlContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
+
 .sortListWrapper {
   width: 140px;
   display: flex;
@@ -1325,7 +1424,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
   height: 40px;
   border-radius: 20px;
   color: #fff;
-  margin-right: 10px;
+  margin: 0 5px;
   cursor: pointer;
 }
 
@@ -1335,7 +1434,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
 
 
 .locationListWrapper .unselected {
-  background-color: rgb(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (max-width: 440px) {
+  .locationListWrapper .selected, .locationListWrapper .unselected {
+    width: 30vw;
+    font-size: 5vw;
+  }
+
+
 }
 
 @media only screen and (max-width: 440px) {
@@ -1343,7 +1451,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
  .locationListWrapper .selected, .locationListWrapper .unselected {
 
   width: 110px;
- 
+
 }
 }
 
@@ -1392,6 +1500,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
   align-items: center;
   margin: 0 35px;
 }
+
+@media only screen and (max-width: 450px) {
+  .completedPolls .headerNameFilter {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}
 .socialPoll {
   display: inline-flex;
   flex-direction: row;
@@ -1403,6 +1518,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
   margin: 0 7px 7px 0;
 }
 
+@media only screen and (max-width: 400px) {
+  .socialPoll {
+    height: auto !important;
+    min-height: 90px !important;
+  }
+
+  .socialPoll .pollRight {
+    flex: 0 1 !important;
+    padding: 0 5px;
+  }
+
+  .socialPoll .pollVoteButton {
+    font-size: 5vw !important;
+    width: 22vw !important;
+  }
+}
+
+
 .socialPoll .pollLeft {
   flex-grow: 1;
   height: 100%;
@@ -1411,7 +1544,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bb4ba', end
   color: #8a8a8a;
 }
 
-@media only screen and (max-width: 700px) { 
+@media only screen and (max-width: 700px) {
 .socialPoll {
 width:calc(100% - 25px)!important;height: 65px;
 
@@ -1428,7 +1561,7 @@ width:calc(100% - 25px)!important;height: 65px;
 
 
 
-@media only screen and (max-width:1050px) { 
+@media only screen and (max-width:1050px) {
 
 .socialPoll {
 width:48%;height: 85px;
@@ -1471,7 +1604,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0bc1c4', end
 background: -moz-linear-gradient(top, #f98313 0%, #cc5633 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, #f98313 0%,#cc5633 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom, #f98313 0%,#cc5633 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', endColorstr='#cc5633',GradientType=0 ); /* IE6-9 */ 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', endColorstr='#cc5633',GradientType=0 ); /* IE6-9 */
 }
 
 .socialPoll .resultsButton:hover {
@@ -1493,19 +1626,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 .textHightlightBlack {
   color: #000;
 }
-.socialPollList { 
+.socialPollList {
   flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 1050px) {
+  .socialPollList {
+    flex: 0 0 400px;
+    justify-content: center;
+  }
 }
 
 
-@media only screen and (max-width:700px) { 
+@media only screen and (max-width:700px) {
 .socialPollList {
   position:absolute;max-height:1380px!important;overflow:hidden;left:25px;
 }
 }
 
 
-@media only screen and (max-width:1050px) { 
+@media only screen and (max-width:1050px) {
 .socialPollList {
   position:absolute;max-height:925px;overflow:hidden;left:25px;margin-bottom:50px;
 }
@@ -1596,7 +1739,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   flex: 1 0 auto;
   text-align: center;
   color: #fff;
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 5px 0;
   margin: 0 5px 0 0;
   border-radius: 20px;
@@ -1645,7 +1788,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   align-items: center;
   flex-grow: 1;
   border-radius: 30px;
-  background-color: rgb(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 5px 0;
 }
 
@@ -1670,7 +1813,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   align-items: center;
   flex-grow: 1;
   border-radius: 30px;
-  background-color: rgb(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .acceptRequest, .rejectRequest {
@@ -1711,7 +1854,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 .friendContainer {
   display: flex;
   flex-direction: column;
-  
+
 }
 
 .friendContainer .friend {
@@ -1719,7 +1862,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 3px 10px;
   color: #fff;
@@ -1756,7 +1899,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 }
 .socialFriendControls {
   flex: 0 0 320px;
-  background-color: rgb(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .socialHeader {
@@ -1776,13 +1919,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   height: 22px;
 }
 
-@media only screen and (max-width: 700px) { 
+@media only screen and (max-width: 700px) {
 .socialFriendControls {
   position:absolute;width:calc(100% - 50px);top:1850px!important;margin-bottom:50px;
 }
 }
 
-@media only screen and (max-width: 1050px) { 
+@media only screen and (max-width: 1050px) {
 .socialFriendControls {
   position:absolute;width:calc(100% - 50px);top:1360px;margin-bottom:50px;
 }
@@ -1794,6 +1937,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   flex-direction: row;
   min-height: 450px;
   padding: 0 25px 25px 25px;
+}
+
+@media only screen and (max-width: 750px) {
+  .socialContent {
+    flex-direction: column-reverse;
+  }
 }
 
 .socialPageHeader {
@@ -2044,7 +2193,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   justify-content: space-between;
   align-items: center;
   padding: 30px 20px 20px 20px;
-  background: rgb(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   color: #fff;
   height: 200px;
   text-align: center;
@@ -2124,6 +2273,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 }
 
 .itemLink {
+  color: #fff;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -2134,7 +2284,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   justify-content: space-between;
   align-items: center;
   padding: 40px 20px 20px 20px;
-  background: rgb(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   color: #fff;
   height: 200px;
   font-size: 12px;
@@ -2186,11 +2336,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
   color: red;
 }
 
+.walletButton, .walletButton:visited {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.addressField .saveButton {
+  border-radius:0px 3px 3px 0px !important;
+  cursor: pointer;
+}
+
+.addressField .saveButton img {
+  height: 20px;
+
+}
+html {
+  min-height: 120%;
+}
+body {
+  min-height: 120%;
+}
+
 .templateContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  align-self: stretch;
   font-family: 'Roboto-Light-CPL';
 }
 
@@ -2205,8 +2378,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f98313', end
 }
 
 .templateHeader {
-  width: calc(100% - 33px);
+  flex: 0 0 100%;
   height: 70px;
+	min-height: 70px;
+	max-height: 70px;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -2252,7 +2427,7 @@ html {
 
 @media only screen and (max-width: 650px) {
 
-  
+
 }
 
 @media only screen and (max-width: 475px) {
@@ -2273,17 +2448,18 @@ html {min-width:380px!important}
 }
 
 .answersContainer .answer {
-  height: 50px;
   border-radius: 30px;
   text-align: center;
-  line-height: 50px;
   color: #ffffff;
   font-size: 21px;
   background-color: #01bec0;
-  margin: 3px;
+  margin: 5px;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
+  padding: 8px 13px;
 }
+
+.answersContainer .answer::first-letter {text-transform:uppercase}
 
 .answersContainer .answer:hover {
   filter: brightness(90%);
@@ -2372,20 +2548,20 @@ html {min-width:380px!important}
 
 .widgetHeaderDetails {
   width: 100%;
-  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(to right, #3b6f90, #36215b) no-repeat fixed;
   color: #fff;
   font-size: 14px;
+  flex-wrap: wrap;
 }
 
 .widgetHeaderDetails div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 20px;
+  margin: 3px 10px 5px 10px;
 }
 
 .widgetHeaderDetails img {
@@ -2396,7 +2572,107 @@ html {min-width:380px!important}
   height: auto;
   margin-right: 5px;
 }
+.widgetFooter {
+  flex: 0 0 55px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #d7d8da;
+}
+
+.widgetFooter .voteButton {
+  padding: 5px;
+  width: 130px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #01bec0;
+  color: #fff;
+  font-size: 20px;
+}
+
+.widgetFooter .voteButton:hover {
+  filter: brightness(90%);
+  transition: filter 100ms linear;
+}
+.starGraph {
+  width: 100%;
+  cursor: pointer;
+}
+.ratingPoll {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+	border-radius: 3px;
+	overflow:hidden;
+}
+
+.ratingPoll .topRow {
+  height: 7.5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: #e6e6e6;
+}
+
+.ratingPoll .bottomRow {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.ratingPoll .avgScore {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #01bec0;
+  color: #fff;
+  font-size: 7vw;
+  padding: 0 2vw;
+}
+
+.ratingPoll .question {
+  flex: 1 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 0 2vw;
+}
+
+.ratingPoll .votes, .ratingPoll .id {
+  flex: 0 0 9vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vw;
+  padding: 0 2vw;
+	padding-top: 4px;
+  border-left: 2px solid #d5d5d5;
+}
+
+.ratingPoll img {
+  height: 3vw;
+}
 .widgetPoll {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: calc(100% - 4px);
   background-color: #fff;
   height: 100%;border:2px solid #212c32;
 }
@@ -2408,6 +2684,8 @@ html {min-width:380px!important}
   margin: 15px 0;
   text-align: center;
 }
+
+.widgetPoll .pollQuestion::first-letter {text-transform:uppercase}
 
 .widgetPoll .contentContainer {
   padding: 0 20px;

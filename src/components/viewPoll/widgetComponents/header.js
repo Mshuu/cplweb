@@ -12,10 +12,10 @@ class Header extends Component {
   render() {
 
     return (
-      <div>
-        <div className="widgetHeader">
+      <div className="widgetHeaderContainer">
+        <a className="widgetHeader" href="https://clearpoll.com" target="_blank">
           <img className="logo" src={ require('../../images/clearpoll_logo_white.png') } />
-        </div>
+        </a>
         <div className="widgetHeaderDetails">
           <div>
             <img src={ require('../../images/poll_tick_icon.png') } />
@@ -23,12 +23,15 @@ class Header extends Component {
           </div>
           <div>
             <img src={ require('../../images/poll_hash_icon.png') } />
-            { this.props.pollId }
+            { this.props.poll.pollId }
           </div>
-          <div>
-            <img src={ require('../../images/poll_clock_icon.png') } />
-            { this.props.pollTime }
-          </div>
+          { !this.props.poll.hasExpired && (
+            <div>
+              <img src={ require('../../images/poll_clock_icon.png') } />
+              { this.props.poll.timeRemaining }
+            </div>
+            )
+          }
         </div>
       </div>
     );

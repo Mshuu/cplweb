@@ -18,3 +18,14 @@
   font-size: 24px;
   line-height: 30px;
 }
+
+
+@media only screen and (max-width: 450px) {
+  .pollSummaryHeader span {
+    font-size: 5vw;
+  }
+
+  .pollSummaryHeader {
+    padding: 0 ;
+  }
+}

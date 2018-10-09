@@ -22,10 +22,18 @@ class Menu extends Component {
     window.location = url;
   }
 
+  touchMenuOpen(){
+    //if(this.state.active)
+    //  this.toggleMenu(false);
+  }
+
   render() {
     return (
-      <div className="menuContainer" onMouseOver={() => this.toggleMenu(true)} onMouseOut={() => this.toggleMenu(false)}>
-        <img src={ require("../images/menu_icon.png") } />
+      <div className="menuContainer"
+        onMouseOver={() => this.toggleMenu(true)}
+        onMouseOut={() => this.toggleMenu(false)}
+        >
+        <img src={ require("../images/menu_icon.png") } onClick={() => this.touchMenuOpen()} />
 
         <div className={ this.state.active ? "menu" : "menu inactive" }>
           <div onClick={() => this.openUrl('/browse')}>
@@ -58,7 +66,7 @@ class Menu extends Component {
           </div>
           <div onClick={() => this.openUrl('/starPolls')}>
             <img src={ require('../images/menuIcons/star_icon.png') } />
-            Star Polls
+            Featured Polls
           </div>
           <div onClick={() => this.openUrl('/account')}>
             <img src={ require('../images/menuIcons/account_icon.png') } />
@@ -67,6 +75,10 @@ class Menu extends Component {
           <div onClick={() => this.openExternalUrl('https://clearpoll.com/faq/')}>
             <img src={ require('../images/menuIcons/support_icon.png') } />
             FAQ & Support
+          </div>
+          <div onClick={() => this.openExternalUrl('/logout')}>
+            <img src={ require('../images/menuIcons/logout_icon.png') } />
+            Logout
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import Authenticator from '../models/authenticator';
 import ServerApi from '../models/serverApi';
+import CryptoJS from "crypto-js";
+
 
 class WsController {
   static connectionHandler(ws, req){
@@ -23,8 +25,17 @@ class WsController {
     ws.on('message', this.handleMessage.bind(this));
   }
 
+	encryptResponse(response){
+		var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(response), 'Y;8)t,[;xzy9niU2$tL?');
+		return ciphertext.toString();
+	}
+
   async handleMessage(msgJSON){
-    let msg = JSON.parse(msgJSON);
+
+		var bytes  = CryptoJS.AES.decrypt(msgJSON.toString(), 'Y;8)t,[;xzy9niU2$tL?');
+		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+    let msg = JSON.parse(plaintext);
+
 
     try{
       switch(msg.function){
@@ -73,12 +84,24 @@ class WsController {
         case 'ApproveFriendRequest':
           await this.replyApproveFriendRequest(msg);
           break;
+        case 'SaveWalletAddress':
+          await this.replySaveWalletAddress(msg);
+          break;
+        case 'GetWalletAddress':
+          await this.replyGetWalletAddress(msg);
+          break;
+        case 'DeleteAccount':
+          await this.replyDeleteAccount(msg);
+          break;
+        case 'UserSignup':
+          await this.replyUserSignup(msg);
+          break;
       }
     } catch(e){
       console.dir(e);
 
       let response = Object.assign({success: false, error: e.message}, { id: msg.id });
-      this.ws.send( JSON.stringify(response) )
+      this.ws.send( this.encryptResponse(response) )
     }
   }
 
@@ -86,7 +109,7 @@ class WsController {
     let data = await this.apiClient.fetchHome();
     let response = Object.assign(data, { id });
 
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
   async replyGetPoll({ id, pollId }){
@@ -94,7 +117,7 @@ class WsController {
 
     let response = Object.assign(poll, { id });
 
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
   async replyVoteOnPoll({ id, pollId, voteAnswer, showOnFeed }){
@@ -113,14 +136,14 @@ class WsController {
         results: results.votesPerAnswer
       };
 
-      this.ws.send( JSON.stringify(response) )
+      this.ws.send( this.encryptResponse(response) )
     } catch(e){
       let response = {
         id,
         success: false
       };
 
-      this.ws.send( JSON.stringify(response) )
+      this.ws.send( this.encryptResponse(response) )
     }
   }
 
@@ -130,7 +153,7 @@ class WsController {
 
     let response = Object.assign({polls, id });
 
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
   async replySearchPolls({id, searchString}){
@@ -138,16 +161,15 @@ class WsController {
     console.dir(polls);
     let response = Object.assign({polls, id });
 
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
-  async replySocialFeed(params){
-    let id = params.id;
-    let polls = await this.apiClient.getSocialFeed(params);
+  async replySocialFeed({id, recordQty, recordStartNo}){
+    let polls = await this.apiClient.getSocialFeed({recordQty, recordStartNo});
 
     let response = Object.assign({polls, id });
 
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
   async replyGetUserSettings({id}){
@@ -155,7 +177,7 @@ class WsController {
 
     let response = Object.assign(settings, { id });
 
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
   async replyGetFriendRequests({id}){
@@ -163,56 +185,84 @@ class WsController {
 
     let response = {id, requests};
 
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
   async replyGetFriends({id}){
     let friends = await this.apiClient.getFriends();
 
     let response = {id, friends};
-    this.ws.send( JSON.stringify(response) )
+    this.ws.send( this.encryptResponse(response) )
   }
 
   async replyMuteFriend({id, friendId}){
     let result = await this.apiClient.muteFriend(friendId);
 
     let response = Object.assign(result, {id});
-    this.ws.send( JSON.stringify(response) );
+    this.ws.send( this.encryptResponse(response) );
   }
 
   async replyUnmuteFriend({id, friendId}){
     let result = await this.apiClient.unmuteFriend(friendId);
 
     let response = Object.assign(result, {id});
-    this.ws.send( JSON.stringify(response) );
+    this.ws.send( this.encryptResponse(response) );
   }
 
   async replyIgnoreFriendRequest({id, friendId}){
     let result = await this.apiClient.ignoreFriendRequest(friendId);
 
     let response = Object.assign(result, {id});
-    this.ws.send( JSON.stringify(response) );
+    this.ws.send( this.encryptResponse(response) );
   }
 
   async replySearchUsername({id, searchString}){
     let result = await this.apiClient.searchUsername(searchString);
 
     let response = Object.assign(result, {id});
-    this.ws.send( JSON.stringify(response) );
+    this.ws.send( this.encryptResponse(response) );
   }
 
   async replySendFriendRequest({id, friendId}){
     let result = await this.apiClient.sendFriendRequest(friendId);
 
     let response = Object.assign(result, {id});
-    this.ws.send( JSON.stringify(response) );
+    this.ws.send( this.encryptResponse(response) );
   }
 
   async replyApproveFriendRequest({id, friendId}){
     let result = await this.apiClient.approveFriendRequest(friendId);
 
     let response = Object.assign(result, {id});
-    this.ws.send( JSON.stringify(response) );
+    this.ws.send( this.encryptResponse(response) );
+  }
+
+  async replySaveWalletAddress({id, wallet}){
+    let result = await this.apiClient.saveWalletAddress(wallet);
+
+    let response = Object.assign(result, {id});
+    this.ws.send( this.encryptResponse(response) );
+  }
+
+  async replyGetWalletAddress({id}){
+    let result = await this.apiClient.getWalletAddress();
+
+    let response = Object.assign(result, {id});
+    this.ws.send( this.encryptResponse(response) );
+  }
+
+  async replyDeleteAccount({id}){
+    let result = await this.apiClient.deleteAccount();
+
+    let response = Object.assign(result, {id});
+    this.ws.send( this.encryptResponse(response) );
+  }
+  async replyUserSignup({phoneNumber}){
+
+    let result = await this.apiClient.UserSignup(phoneNumber);
+
+    let response = Object.assign(result, {phoneNumber});
+    this.ws.send(this.encryptResponse(response));
   }
 }
 

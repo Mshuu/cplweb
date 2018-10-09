@@ -5,29 +5,51 @@ import ServerApi from '../models/serverApi';
 import Store from '../models/store';
 import Authenticator from '../models/authenticator';
 import WidgetRouter from '../components/widgetRouter';
+import CryptoJS from "crypto-js";
 
 const WidgetPoll = async ( req, res ) => {
+  let pollId = req.params.pollId;
   let auth;
+
 
   try {
     auth = Authenticator.verify( req.cookies['_auth'] );
   } catch(e) {
-    res.redirect('/login');
-    return;
   }
 
-  if(!req.params.pollId){
+  if(!pollId){
     res.status(404).end();
+    return;
   }
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
-  let store = new Store();
-  store.setPoll( req.params.pollId, await apiClient.fetchPoll(req.params.pollId) );
-
-  renderReact(req, res, store);
+  if(auth)
+    authenticatedWidget(req, res, pollId, auth);
+  else
+    unauthenticatedWidget(req, res, pollId);
 };
+
+async function authenticatedWidget(req, res, pollId, auth){
+  let store = new Store();
+  let apiClient = new ServerApi(auth);
+
+  store.setAuthenticated( true );
+  store.setPoll( pollId, await apiClient.fetchPoll(pollId) );
+
+  renderReact(req, res, store, pollId);
+}
+
+async function unauthenticatedWidget(req, res, pollId){
+  let store = new Store();
+  let apiClient = new ServerApi();
+
+  store.setAuthenticated( false );
+  store.setPoll( pollId, await apiClient.fetchUnauthPoll(pollId) );
+
+  renderReact(req, res, store, pollId);
+}
+
 
 
 function renderHead(req, res){
@@ -35,7 +57,7 @@ function renderHead(req, res){
   res.write(htmlHead);
 }
 
-function renderReact(req, res, store){
+function renderReact(req, res, store, pollId){
   let context = {};
   let url = req.url;
 
@@ -45,11 +67,12 @@ function renderReact(req, res, store){
     </StaticRouter>
   );
   const appStream = renderToStaticNodeStream( jsx );
+	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(store.data), 'Y;8)t,[;xzy9niU2$tL?');
 
   appStream.pipe(res, {end: false})
 
   appStream.on(`end`, () => {
-    res.end(htmlTail(store))
+    res.end(htmlTail(ciphertext, pollId))
   })
 }
 
@@ -94,15 +117,16 @@ const htmlHead = `
   </head>
   <body>
     <div id="root">
-`
-const htmlTail = store => `
+`;
+
+const htmlTail = (store, pollId) => `
       </div>
       <script>
         if(window.parent){
-          window.parent.postMessage({event: "loadingComplete"}, '*');
+          window.parent.postMessage({event: "loadingComplete", pollId: ${pollId}}, '*');
           console.log("Message sent");
         }
-        window.storeData = ${JSON.stringify(store.data)};
+        window.storeData = "${store}";
       </script>
       <script type="text/javascript" src="/public/widgetBundle.js"></script>
     </body>

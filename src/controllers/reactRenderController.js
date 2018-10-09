@@ -6,6 +6,16 @@ import Store from '../models/store';
 import Authenticator from '../models/authenticator';
 import Template from '../components/template/template';
 import WidgetRouter from '../components/widgetRouter';
+import CryptoJS from "crypto-js";
+import url from 'url';
+
+const defaultMetadata = {
+  title: "Clearpoll Desktop",
+  description: "ClearPoll - Vote on anything, any time. Earn crypto rewards for creating polls. Get the ClearPoll app now!",
+  imageUrl: `${SERVER_BASE_URL}/public/share_thumbnail.png`
+};
+
+const LOAD_MORE_QUANTITY = 20;
 
 const Home = async ( req, res ) => {
   let auth;
@@ -20,8 +30,10 @@ const Home = async ( req, res ) => {
   renderHead(req, res);
 
   let apiClient = new ServerApi(auth);
+	let homePolls = await apiClient.fetchHome();
+	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(homePolls), 'Y;8)t,[;xzy9niU2$tL?');
   let store = new Store({
-    homePolls: await apiClient.fetchHome()
+    homePolls: homePolls
   });
 
   renderReact(req, res, store);
@@ -32,29 +44,75 @@ const Login = async ( req, res ) => {
   renderHead(req, res);
   renderReact(req, res, store);
 };
+const FinishSignup = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
+const Signup = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
+const Signup2 = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
+const Signup3 = async ( req, res ) => {
+  let store = new Store({});
+  renderHead(req, res);
+  renderReact(req, res, store);
+};
 
 const Poll = async ( req, res ) => {
   let auth;
+  let pollId = req.params.pollId;
 
   try {
     auth = Authenticator.verify( req.cookies['_auth'] );
   } catch(e) {
-    res.redirect('/login');
-    return;
   }
 
   if(!req.params.pollId){
     res.status(404).end();
   }
 
-  renderHead(req, res);
+  if(auth)
+    authenticatedPoll(req, res, pollId, auth);
+  else
+    unauthenticatedPoll(req, res, pollId);
+};
 
+async function authenticatedPoll(req, res, pollId, auth){
   let apiClient = new ServerApi(auth);
   let store = new Store();
-  store.setPoll( req.params.pollId, await apiClient.fetchPoll(req.params.pollId) );
+  let poll = await apiClient.fetchPoll(pollId);
 
+  store.setAuthenticated( true );
+  store.setPoll( pollId, poll );
+
+  let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+
+  renderHead(req, res, metadata);
   renderReact(req, res, store);
-};
+}
+
+async function unauthenticatedPoll(req, res, pollId, auth){
+  let apiClient = new ServerApi(auth);
+  let store = new Store();
+  let poll = await apiClient.fetchUnauthPoll(pollId);
+
+  store.setAuthenticated( false );
+  store.setPoll( pollId, poll );
+
+  let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+
+  renderHead(req, res, metadata);
+  renderReact(req, res, store);
+}
+
+
 
 const Search = async ( req, res ) => {
   let auth;
@@ -109,7 +167,7 @@ const CompletedPolls = async ( req, res ) => {
       category: category,
       sortOrder: 'mostVotes',
       recordStartNo: 0,
-      recordQty: 16,
+      recordQty: LOAD_MORE_QUANTITY,
       positionLatitude: '',
       positionLongitude: '',
       locationFilter: 'Global'
@@ -145,7 +203,7 @@ const BrowsePolls = async ( req, res ) => {
       category: category,
       sortOrder: 'mostVotes',
       recordStartNo: 0,
-      recordQty: 16,
+      recordQty: LOAD_MORE_QUANTITY,
       positionLatitude: '',
       positionLongitude: '',
       locationFilter: 'Global'
@@ -178,7 +236,7 @@ const StarPolls = async ( req, res ) => {
     active: 'true',
     sortOrder: 'mostVotes',
     recordStartNo: 0,
-    recordQty: 16,
+    recordQty: 12,
     positionLatitude: '',
     positionLongitude: '',
     locationFilter: ''
@@ -208,7 +266,7 @@ const MyVotes = async ( req, res ) => {
     active: 'true',
     sortOrder: 'mostVotes',
     recordStartNo: 0,
-    recordQty: 16,
+    recordQty: LOAD_MORE_QUANTITY,
     positionLatitude: '',
     positionLongitude: '',
     locationFilter: ''
@@ -238,7 +296,7 @@ const MyPolls = async ( req, res ) => {
     active: 'true',
     sortOrder: 'mostVotes',
     recordStartNo: 0,
-    recordQty: 16,
+    recordQty: LOAD_MORE_QUANTITY,
     positionLatitude: '',
     positionLongitude: '',
     locationFilter: ''
@@ -263,10 +321,8 @@ const SocialFeed = async ( req, res ) => {
   let apiClient = new ServerApi(auth);
   let store = new Store();
   let polls = await apiClient.getSocialFeed({
-    sortingOrder: 'mostVotes',
-    quantity: 16,
-    positionLatitude: '',
-    positionLongitude: ''
+    recordStartNo: 0,
+    recordQty: LOAD_MORE_QUANTITY
   });
 
   store.setSocialFeed(polls);
@@ -311,6 +367,7 @@ const Account = async ( req, res ) => {
   renderReact(req, res, store);
 };
 
+
 const CreateWidget = async ( req, res ) => {
   let auth;
 
@@ -349,14 +406,22 @@ const Rewards = async ( req, res ) => {
 
 
 
-function renderHead(req, res){
+function renderHead(req, res, metadata = defaultMetadata){
+  let thisUrl = url.format({
+    protocol: req.protocol,
+    host: req.get('host'),
+    pathname: req.originalUrl
+  });
+
+
   res.writeHead( 200, { "Content-Type": "text/html" } );
-  res.write(htmlHead);
+  res.write(htmlHead(thisUrl, metadata));
 }
 
 function renderReact(req, res, store){
   let context = {};
   let url = req.url;
+
 
   const jsx = (
     <StaticRouter context={ context } location={ url }>
@@ -364,25 +429,31 @@ function renderReact(req, res, store){
     </StaticRouter>
   );
   const appStream = renderToStaticNodeStream( jsx );
+	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(store.data), 'Y;8)t,[;xzy9niU2$tL?');
 
   appStream.pipe(res, {end: false})
 
   appStream.on(`end`, () => {
-    res.end(htmlTail(store))
+    res.end(htmlTail(ciphertext))
   })
 }
 
-const htmlHead = `
+const htmlHead = (url, metadata) => `
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
   	<link rel="shortcut icon" href="/public/favicon.png" type="image/x-icon" />
 
+    <meta property="og:url"         content="${url}" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="${metadata.title}" />
+    <meta property="og:description" content="${metadata.description}" />
+    <meta property="og:image"       content="${metadata.imageUrl}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@voteclearpoll" />
 
-    <link rel="shortcut icon" href="/public/favicon.ico">
     <link href="/public/style.css" rel="stylesheet" type="text/css">
 
     <title>Clearpoll Desktop</title>
@@ -396,11 +467,11 @@ const htmlHead = `
       html {
           margin: 0;
           padding: 0;
-          height: 100%;
           font-family: 'Roboto-Light-CPL';
       }
 
       body {
+          position: absolute;
           margin: 0;
           padding: 0;
           min-height: 100%;
@@ -417,7 +488,8 @@ const htmlHead = `
   </head>
   <body>
     <div id="root" style="width: 100%; height: 100%; margin: 0; padding: 0;">
-`
+`;
+
 const htmlTail = store => `
       </div>
       <script>
@@ -425,7 +497,7 @@ const htmlTail = store => `
           window.parent.postMessage({event: "loadingComplete"}, '*');
           console.log("Message sent");
         }
-        window.storeData = ${JSON.stringify(store.data)};
+        window.storeData = "${store}";
       </script>
       <script type="text/javascript" src="/public/bundle.js"></script>
     </body>
@@ -433,4 +505,4 @@ const htmlTail = store => `
 `;
 
 
-export { Home, Login, Poll, Search, CompletedPolls, StarPolls, MyVotes, MyPolls, SocialFeed, ManageFriends, Account, CreateWidget, Rewards };
+export { Home, Login, Poll, Search, CompletedPolls, StarPolls, MyVotes, MyPolls, SocialFeed, ManageFriends, Account, CreateWidget, Rewards , Signup, Signup2, Signup3, FinishSignup};
