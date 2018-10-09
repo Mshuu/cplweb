@@ -20,8 +20,9 @@
 
 @media only screen and (max-width: 480px) {
   .categoryList {
-  position:absolute;left:0;min-width:380px;
-}
+    width: 100% !important;
+    margin: 0 !important;
+  }
 
 .category span {
   font-size: 16px!important;
@@ -60,3 +61,7 @@
   text-align: center;
   margin-top: 10px;
 }
+
+
+
+

@@ -16,7 +16,7 @@ const CATEGORY_MAP = {
   'Tec': {title: 'Business & Finance'},
 
   "All": { title: "All Categories" },
-  "Star": { title: "Featured Polls" },
+  "Star": { title: "Star Polls" },
   "MyVotes": { title: "My Votes" },
   "MyPolls": { title: "My Polls" },
   "Social": { title: "Social" },

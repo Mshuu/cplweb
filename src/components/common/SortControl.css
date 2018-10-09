@@ -3,17 +3,17 @@
   display: flex;
   align-items: center;
   position: relative;
-  background: rgba(0,0,0,0.3);
+  background: #c2c5ca;
   padding: 3px 10px;
   border-radius: 100px;
-  margin-top: 8px;
+  margin-top: 20px;
 }
 
 .sortListHeader {
   width: 100%;
   text-align: center;
   line-height: 35px;
-  color: #fff;
+  color: #FFF;
   font-weight: bold;
   margin-left:10px;
 }
@@ -21,7 +21,7 @@
 .sortList {
   position: absolute;
   margin: 35px 0 0 0;
-  background-color: #f9f9f9;
+  background-color: #babcc2;
   min-width: 150px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
   z-index: 1;
@@ -29,6 +29,10 @@
   top: 0;
   background-color: #fff;
   padding: 10px;border-radius:3px;
+}
+
+.sortlist:hover{
+  background: #40cfd0!important;cursor:pointer!important;
 }
 
 .sortListDisabled {

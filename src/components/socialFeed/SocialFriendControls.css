@@ -1,6 +1,6 @@
 .socialFriendControls {
   flex: 0 0 320px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #FFF;-webkit-box-shadow:0px 0px 0px 1px #c9ccd3;border-radius:4px;
 }
 
 .socialHeader {
@@ -13,21 +13,17 @@
   background-color: #1a2d33;
   color: #fff;
   font-size: 18px;
-  padding: 0 20px;
+  padding: 0 20px;border-radius:4px 4px 0px 0px;
 }
 
 .socialHeader img {
   height: 22px;
 }
 
-@media only screen and (max-width: 700px) {
-.socialFriendControls {
-  position:absolute;width:calc(100% - 50px);top:1850px!important;margin-bottom:50px;
-}
+@media only screen and (max-width: 750px) { 
+  .socialFriendControls {
+    padding-bottom: 30px;
+    margin-bottom:50px;
+  }
 }
 
-@media only screen and (max-width: 1050px) {
-.socialFriendControls {
-  position:absolute;width:calc(100% - 50px);top:1360px;margin-bottom:50px;
-}
-}

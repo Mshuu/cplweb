@@ -67,8 +67,8 @@ class HomeHeader extends Component {
             <span className="headerFeatureButtonText">Create Widgets</span>
           </div>
           <div className="headerFeatureButton headerStarPolls" onClick={() => this.openStarPolls()}>
-            <img className="starIcon" src={ CategoryIcon['Featured Polls'] } />
-            <span className="headerFeatureButtonText">Featured Polls</span>
+            <img className="starIcon" src={ CategoryIcon['Star Polls'] } />
+            <span className="headerFeatureButtonText">Star Polls</span>
           </div>
           <div className="headerFeatureButton headerSocialPolls" onClick={() => this.openSocial()}>
             <img className="socialIcon" src={ CategoryIcon['Social'] } />
