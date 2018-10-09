@@ -66,7 +66,7 @@ class Menu extends Component {
           </div>
           <div onClick={() => this.openUrl('/starPolls')}>
             <img src={ require('../images/menuIcons/star_icon.png') } />
-            Star Polls
+            Featured Polls
           </div>
           <div onClick={() => this.openUrl('/account')}>
             <img src={ require('../images/menuIcons/account_icon.png') } />

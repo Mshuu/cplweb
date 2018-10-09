@@ -90,6 +90,34 @@
   transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
 }
 
+.widgetPoll {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: calc(100% - 4px);
+  background-color: #fff;
+  border:2px solid #212c32;
+}
+
+.widgetPoll .pollQuestion {
+  font-size: 20px;
+  color: #000;
+  padding: 0 50px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.widgetPoll .pollQuestion::first-letter {text-transform:uppercase}
+
+.widgetPoll .contentContainer {
+  padding: 0 20px;
+}
+
+.scrollableContainer {
+  flex: 1 0;
+  overflow-y: auto;
+  background-color: #f1f2f2;
+}
 .answersContainer {
   flex: 1;
   display: flex;
@@ -323,34 +351,6 @@
 
 .ratingPoll img {
   height: 3vw;
-}
-.widgetPoll {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: calc(100% - 4px);
-  background-color: #fff;
-  border:2px solid #212c32;
-}
-
-.widgetPoll .pollQuestion {
-  font-size: 20px;
-  color: #000;
-  padding: 0 50px;
-  margin: 15px 0;
-  text-align: center;
-}
-
-.widgetPoll .pollQuestion::first-letter {text-transform:uppercase}
-
-.widgetPoll .contentContainer {
-  padding: 0 20px;
-}
-
-.scrollableContainer {
-  flex: 1 0;
-  overflow-y: auto;
-  background-color: #f1f2f2;
 }
 
 /*# sourceMappingURL=widgetStyle.css.map*/
