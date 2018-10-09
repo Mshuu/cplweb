@@ -3,22 +3,61 @@
 }
 
 .viewPoll .pollQuestion {
-  font-size: 28px;
-  color: #ffffff;
-  margin: 60px 0 56px 0;
+  font-size: 30px;font-weight:lighter!important;line-height:1.2;
+  color: #FFF;
+  margin: 0px 0px 45px 0px;padding-left:30px;padding-right:30px;line-height:1.2;padding-top:30px;padding-bottom:30px;
+background: #006ea5; /* Old browsers */
+background: -moz-linear-gradient(top, #006ea5 0%, #282170 98%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #006ea5 0%,#282170 98%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #006ea5 0%,#282170 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006ea5', endColorstr='#282170',GradientType=0 );
+
 }
 
-@media only screen and (max-width: 560px) {.viewPoll .pollQuestion {
-  font-size: 24px;max-width:380px;padding-left:30px;padding-right:30px;margin-top:30px!important;
+.pollQuestion::before { 
+    content: "Question: ";color:#53bbbe;font-weight:bold;
 }
 
-.mainRow .detailsContainer {width:100%;position:absolute;top:158px;left:0px;min-width:380px;margin-top:40px!important;}
+@media only screen and (max-width: 590px) {
+  .viewPoll > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.detailsContainer .field {
-  display:inline-block;float:left;font-size:16px;margin-right:-10px!important;
-}
+  
 
-.contentContainer {margin-top:60px;padding-left:30px;}
+  .mainRow .detailsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;order: 2;
+  }
+
+  .detailsContainer .field {
+    font-size:16px;
+    margin: 10px 20px !important;
+  }
+
+  .contentContainer {
+    margin-top:60px;
+  }
+
+  .mainRow {
+    flex-direction: column!important
+  }
+  .answersSpacer {
+    display: none !important;
+  }
+
+  .answersContainer {
+    padding: 0 20px;
+    align-items: center;order: 1;margin-top:-70px;
+  }
+
+  .answer {
+      width: calc(100% - 30px);
+  }
 }
 
 
@@ -49,8 +88,8 @@
 .detailsContainer .field {
   display: flex;
   align-items:center;
-  margin-bottom: 45px;
-  margin-left: 55px;
+  margin-bottom: 20px;
+  margin-left: 55px;color:#000;
 }
 
 .detailsContainer .field img {
@@ -62,16 +101,15 @@
 .socialContainer {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;margin-bottom:30px;background:#d4d6da;padding-top:18px;padding-bottom:12px;
 }
 
 .socialContainer .socialBanner {
   width: 100%;
-  background-color: rgba(16, 2, 81, 0.2);
   font-size: 24px;
   text-align: center;
-  color: #FFF;
-  padding: 5px 0;
+  color: #000;
+  padding: 5px 0;display:none;
 }
 
 .socialContainer .socialButtons {
@@ -84,7 +122,7 @@
 .socialContainer .socialButtons img {
   width: 50px;
   height: 50px;
-  margin: 20px 5px 0 5px;
+  margin: 0px 5px 0 5px;
 }
 
 .socialContainer .socialButtons img:hover {
@@ -127,12 +165,14 @@
 
 .socialButton.enabled {
   border: 1px solid #01bec0;
-  background-color: #01bec0;
+  background-color: #01bec0;color:#fff;transition: background-color 100ms linear;
+
 }
 
 .socialButton.disabled {
-  border: 1px solid #fff;
-  background-color: transparent;
+  border: 1px solid #a1a2a6;
+  background-color: #a1a2a6;color:#FFF;transition: background-color 100ms linear;
+
 }
 
 .field.socialField {
@@ -147,10 +187,10 @@
 }
 
 .voteControl {
-  color: #fff;
+  color: #000;
   padding: 8px 25px;
   border-radius: 30px;
-  background-color: rgba(16, 2, 81, 0.2);
+  background-color: #d4d6da;
   cursor: pointer;
 }
 
@@ -159,3 +199,4 @@
   justify-content: center;
   margin-bottom: 20px;
 }
+

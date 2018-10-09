@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   font-size: 26px;
-  color: #fff;
+  color: #000;
   margin: 30px 0 20px 0;
 }
 
@@ -41,11 +41,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 30px 20px 20px 20px;
-  background: rgba(0, 0, 0, 0.1);
-  color: #fff;
+  background: #FFF;
+  color: #000;
   height: 200px;
   text-align: center;
-  font-size: 12px;
+  font-size: 12px;border-radius:4px;-webkit-box-shadow:0px 0px 0px 1px #c9ccd3;
 }
 
 .rewardsContent .rowItem > * {
@@ -53,45 +53,65 @@
 }
 
 @media only screen and (max-width: 850px) {
-  .itemHeader {
-}
+  .rewardsContent .rowItem {
+    height: 300px; margin: 7px;
+  }
 
-.rewardsContent .rowItem {
-  height: 300px; margin: 7px;
+  .bottomContainer {
+    height: 240px !important;
+  }
 
-}
+  .bottomContainer .addressField{
+    margin-bottom: 60px !important;
+  }
 
-@media only screen and (max-width: 540px) {
+  @media only screen and (max-width: 540px) {
+    .rewardsContent .rowItem {
+      height: 170px;
+      margin: 7px;
+      min-width:calc(100% - 30px)!important;
+    }
 
-.rewardsContent .rowItem {
-  height: 170px; margin: 7px;min-width:calc(100% - 30px)!important}
+    .rewardsContent .row {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 -12.5px;
+    }
 
-  .rewardsContent .row {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 -12.5px;
-}
+    .bottomContainer .addressField input {
+      width: 40vw !important;
+    }
 
-.bottomContainer .addressField span {
-  font-size: 12px!important;
-  padding: 0 2px;
-}
+    .bottomContainer {
+      min-width: calc(100% - 40px)!important;
+    }
 
-.bottomContainer .addressField input {
-  width: 220px!important;padding-left:5px;padding-right:5px;
-  text-align: center;
-  height: 44px;outline:none; border:none;border-radius:0px 3px 3px 0px;margin-left:-10px;
-}
+    .rewardsContent {
+      padding: 0 10px 35px 10px;
+    }
 
-.bottomContainer .addressField{
-  margin-left:-50px;
-}
+    .rewardsContent .row {
+      padding: 0 10px;
+    }
 
-}
+    .rewardsContent .rowItem {
+      min-width: calc(100% - 40px)!important;
+    }
+  }
 
-.addressField {padding-bottom:30px;padding-top:20px;}
+  @media only screen and (max-width: 410px) {
+    .bottomContainer .addressField span {
+      font-size: 4vw !important;
+      padding: 0 5px !important;
+    }
+
+    .bottomContainer {
+      height: 300px !important;
+    }
+  }
 }
 
 .rewardsContent .rowItem .itemHeader {
@@ -110,7 +130,7 @@
   border-radius: 30px;
   width: 120px;
   margin: 10px 0;
-  cursor: pointer;
+  cursor: pointer;color:#fff;
 }
 
 .itemFooter {
@@ -132,17 +152,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px 20px 20px 20px;
-  background: rgba(0, 0, 0, 0.1);
+  background: #54565a;
   color: #fff;
   height: 200px;
   font-size: 12px;
   text-align: center;
   align-self: stretch;
-  margin-top: 7px;
+  margin-top: 7px;border-radius:4px;
 }
 
 .bottomContainer .bottomHeader {
-  font-size: 20px;
+  font-size: 20px;padding-bottom:10px;
 }
 
 .bottomContainer .walletButton {
@@ -152,7 +172,7 @@
   width: 120px;
   margin: 10px 0;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 14px;margin-top:20px;margin-bottom:20px;
 }
 
 .bottomContainer .addressField {
@@ -177,11 +197,11 @@
 .bottomContainer .addressField input {
   width: 320px;
   text-align: center;
-  height: 44px;outline:none; border:none;border-radius:0px 3px 3px 0px;
+  height: 44px;outline:none; border:none;
 }
 
 .bottomContainer .important {
-  color: red;
+  background: #c00101;font-size:16px;font-weight:bold;border-radius:3px;padding:5px 7px;margin-right:10px;
 }
 
 .walletButton, .walletButton:visited {

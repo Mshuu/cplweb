@@ -21,15 +21,20 @@
 .graphContainer .resultAnswer {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 8px;color:#000;
 }
 
 .graphContainer .resultAnswer .resultAnswerText {
   text-align: left;
-  font-size: 21px;
+  font-size: 24px;
 }
 
-.graphContainer .resultAnswer::first-letter {text-transform:uppercase}
+.graphContainer .resultAnswer img {
+  height: 25px;
+  padding: 0 10px 0 0;
+}
+
+.graphContainer .resultAnswer .resultAnswerText::first-letter {text-transform:uppercase}
 
 
 .voteCount, .votePercentage {
@@ -39,8 +44,8 @@
   justify-content: center;
   height: 50px;
   font-size: 21px;
-  background-color: rgba(255, 255, 255, 0.15);
-  margin-right: 6px;
+  background-color: #d4d6da;
+  margin-right: 6px;color:#000;
 }
 
 .voteCount {
@@ -67,7 +72,10 @@
 .voteBarContainer .voteBarInner {
   min-height: 50px;
   animation: 1s ease-out 0s 1 slideInFromLeft;
-  transform-origin: bottom left;
+  transform-origin: bottom left;background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.08) 51%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.08) 51%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.08) 51%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#21000000',GradientType=0 );
 }
 
 

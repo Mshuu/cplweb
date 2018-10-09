@@ -15,7 +15,7 @@ const CATEGORY_MAP = {
   'Tec': {title: 'Business & Finance'},
 
   "All": { title: "All Categories" },
-  "Star": { title: "Featured Polls" },
+  "Star": { title: "Star Polls" },
   "MyVotes": { title: "My Votes" },
   "MyPolls": { title: "My Polls" },
   "Social": { title: "Social" },
@@ -34,8 +34,8 @@ class SummaryHeader extends Component {
 		if (this.props.type == "Star"){
     return (
       <div className="pollSummaryHeader">
-        <img src={ CategoryIcon["Featured Polls"] } />
-        <span>{ "Featured Polls" }</span>
+        <img src={ CategoryIcon["Star Polls"] } />
+        <span>{ "Star Polls" }</span>
       </div>
     );
 	} else {
