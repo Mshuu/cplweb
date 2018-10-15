@@ -35,11 +35,13 @@ class PollSummary extends Component {
 
   getPollsFor(category, limit){
     let numOfPolls = this.countPolls(category);
-
+    if (category == "starPolls"){
+      console.log("Category: " + category + " num: " + numOfPolls + " polls: %j",this.props.polls[category]);
+    }
     if(numOfPolls > limit){
       let startIndex = Math.floor(Math.random() * (numOfPolls - limit + 1));
       return this.props.polls[category].slice(startIndex, startIndex + limit);
-    } else 
+    } else
       return this.props.polls[category];
   }
 
