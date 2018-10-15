@@ -32,7 +32,7 @@ const WidgetPoll = async ( req, res ) => {
 
 async function authenticatedWidget(req, res, pollId, auth){
   let store = new Store();
-  let apiClient = new ServerApi(auth);
+  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
 
   store.setAuthenticated( true );
   store.setPoll( pollId, await apiClient.fetchPoll(pollId) );

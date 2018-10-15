@@ -20,7 +20,8 @@ class WsController {
   constructor(ws, auth){
     this.ws = ws;
     this.auth = auth;
-    this.apiClient = new ServerApi(auth);
+    this.ip = ws._socket.remoteAddress;
+    this.apiClient = new ServerApi(auth,ws._socket.remoteAddress);
 
     ws.on('message', this.handleMessage.bind(this));
   }
@@ -157,9 +158,12 @@ class WsController {
   }
 
   async replySearchPolls({id, searchString}){
+
     let polls = await this.apiClient.doSearch(searchString);
     console.dir(polls);
     let response = Object.assign({polls, id });
+
+
 
     this.ws.send( this.encryptResponse(response) )
   }

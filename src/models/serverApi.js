@@ -3,15 +3,21 @@ import moment from 'moment';
 import State from './state';
 
 const SERVER_URL = "https://node.clearpoll.com/Clearpoll";
-
+var ipAddr = "";
 class ServerApi {
+
 
   static async request(params){
     let response;
     let requestParams = params;
+    console.log("IP3:  " + ipAddr);
+    let headers = {
+      'Content-Type': 'application/json',
+      'X-Forwarded-For': ipAddr
+    };
 
     try {
-      response = await axios.post(SERVER_URL, requestParams);
+      response = await axios.post(SERVER_URL, requestParams, {headers: headers});
     } catch(e){
       console.dir(e);
       throw new Error('A network error occured');
@@ -38,10 +44,17 @@ class ServerApi {
     return response.data;
   }
 
-  constructor(auth){
+  constructor(auth,ip){
     this.auth = auth || {};
     this.voteHistory = [];
     this.historyFetched = false;
+    console.log("IP1 : " + ip);
+    if (ip == "::1" || !ip){
+      ipAddr = "103.94.51.210";
+    } else {
+      ipAddr = ip;
+    }
+    console.log("IP2 : " + ipAddr);
   }
 
   getHasVoted(pollId){
