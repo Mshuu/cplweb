@@ -29,7 +29,12 @@ class SummaryHeader extends Component {
   }
 
   render() {
-    let category = CATEGORY_MAP[this.props.category];
+    let category = "";
+    if (this.props.category != "undefined"){
+    category = CATEGORY_MAP[this.props.category];
+  } else {
+    category = CATEGORY_MAP["Star"];
+  }
 
 		if (this.props.type == "Star"){
     return (

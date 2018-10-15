@@ -214,10 +214,14 @@ class ViewPoll extends Component {
               <img src={ require('../images/poll_tick_icon.png') } />
               { this.numberToCommaFormat(poll.pollVotes) }
             </div>
-            { !poll.hasExpired && (
+            { !poll.hasExpired && poll.type != "Sponsored" &&  (
               <div className="field">
                 <img src={ require('../images/poll_clock_icon.png') } />
                 { poll.timeRemaining }
+              </div>
+            )}
+            { poll.type == "Sponsored" &&  (
+              <div className="field">
               </div>
             )}
             { !this.shouldShowResults(poll) && (
