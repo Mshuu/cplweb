@@ -202,6 +202,7 @@ class ServerApi {
   }
 
   async getPollList(params){
+    console.log("REQ: %j", params);
     let response = await ServerApi.request({
       function: 'GetPollList',
       ...params,
