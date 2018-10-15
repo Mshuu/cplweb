@@ -29,7 +29,13 @@ const Home = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
 	let homePolls = await apiClient.fetchHome();
 	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(homePolls), 'Y;8)t,[;xzy9niU2$tL?');
   let store = new Store({
@@ -85,7 +91,13 @@ const Poll = async ( req, res ) => {
 };
 
 async function authenticatedPoll(req, res, pollId, auth){
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPoll(pollId);
 
@@ -99,7 +111,13 @@ async function authenticatedPoll(req, res, pollId, auth){
 }
 
 async function unauthenticatedPoll(req, res, pollId, auth){
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchUnauthPoll(pollId);
 
@@ -132,8 +150,13 @@ const Search = async ( req, res ) => {
   }
 
   renderHead(req, res);
-  console.log("Connection: %j", req.headers['x-forwarded-for']);
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+  if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+    ip = req.headers['x-forwarded-for'];
+  } else {
+    ip = req.connection.remoteAddress
+  }
+  let apiClient = new ServerApi(auth,ip);
   let store = new Store();
 
   store.setSearchResult(searchTerm, await apiClient.doSearch(searchTerm) );
@@ -154,7 +177,13 @@ const CompletedPolls = async ( req, res ) => {
   renderHead(req, res);
 
   let isCompletedPage = req.url.startsWith('/completed');
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let category = req.params.category;
 
@@ -192,7 +221,13 @@ const BrowsePolls = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let category = req.params.category;
 
@@ -228,7 +263,13 @@ const StarPolls = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getPollList({
     category: 'All',
@@ -258,7 +299,13 @@ const MyVotes = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getPollList({
     category: 'All',
@@ -288,7 +335,13 @@ const MyPolls = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getPollList({
     category: 'All',
@@ -318,7 +371,13 @@ const SocialFeed = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getSocialFeed({
     recordStartNo: 0,
@@ -341,7 +400,13 @@ const ManageFriends = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
 
   renderReact(req, res, store);
@@ -359,7 +424,13 @@ const Account = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let settings = await apiClient.getUserSettings();
 
@@ -396,7 +467,13 @@ const Rewards = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth,req.connection.remoteAddress);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let settings = await apiClient.getUserSettings();
 
