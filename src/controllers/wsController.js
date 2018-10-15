@@ -21,7 +21,6 @@ class WsController {
     this.ws = ws;
     this.auth = auth;
     this.ip = ws._socket.remoteAddress;
-    console.log("WS: %j",ws.upgradeReq.headers);
     this.apiClient = new ServerApi(auth,ws._socket.remoteAddress);
 
     ws.on('message', this.handleMessage.bind(this));
