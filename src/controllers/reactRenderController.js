@@ -241,7 +241,7 @@ const StarPolls = async ( req, res ) => {
     positionLongitude: '',
     locationFilter: ''
   });
-
+  console.log("POLLS: %j", polls);
   store.setStarPolls(polls);
   renderReact(req, res, store);
 };
