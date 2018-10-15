@@ -10,7 +10,6 @@ class ServerApi {
   static async request(params){
     let response;
     let requestParams = params;
-    console.log("IP3:  " + ipAddr);
     let headers = {
       'Content-Type': 'application/json',
       'X-Forwarded-For': ipAddr
@@ -48,13 +47,11 @@ class ServerApi {
     this.auth = auth || {};
     this.voteHistory = [];
     this.historyFetched = false;
-    console.log("IP1: " + ip);
     if (ip == "::1" || !ip){
       ipAddr = "103.94.51.210";
     } else {
       ipAddr = ip.replace(/^.*:/, '');
     }
-    console.log("IP2 : " + ipAddr);
   }
 
   getHasVoted(pollId){
@@ -215,7 +212,6 @@ class ServerApi {
   }
 
   async getPollList(params){
-    console.log("REQ: %j", params);
     let response = await ServerApi.request({
       function: 'GetPollList',
       ...params,

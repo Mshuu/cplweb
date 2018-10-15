@@ -27,7 +27,6 @@ class WsController {
     this.ws = ws;
     this.auth = auth;
     this.ip = ip;
-    console.log("IP4: " + ip);
     this.apiClient = new ServerApi(auth,ip);
 
     ws.on('message', this.handleMessage.bind(this));

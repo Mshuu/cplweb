@@ -282,7 +282,6 @@ let apiClient = new ServerApi(auth,ip);
     positionLongitude: '',
     locationFilter: ''
   });
-  console.log("POLLS: %j", polls);
   store.setStarPolls(polls);
   renderReact(req, res, store);
 };
