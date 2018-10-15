@@ -1,6 +1,7 @@
 import Authenticator from '../models/authenticator';
 import ServerApi from '../models/serverApi';
 import CryptoJS from "crypto-js";
+var util = require('util')
 
 
 class WsController {
@@ -13,15 +14,20 @@ class WsController {
       ws.close();
       return
     }
-
-    new WsController(ws, auth);
+    let ip;
+    if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+      ip = req.headers['x-forwarded-for'];
+    } else {
+      ip = req.connection.remoteAddress
+    }
+    new WsController(ws, auth,ip);
   }
 
-  constructor(ws, auth){
+  constructor(ws, auth,ip){
     this.ws = ws;
     this.auth = auth;
-    this.ip = ws._socket.remoteAddress;
-    this.apiClient = new ServerApi(auth,ws._socket.remoteAddress);
+    this.ip = ip;
+    this.apiClient = new ServerApi(auth,ip);
 
     ws.on('message', this.handleMessage.bind(this));
   }
