@@ -71,7 +71,6 @@ class PollSummary extends Component {
   }
 
   render() {
-    console.log("POLLS : %j", this.props.polls);
 
     if(!this.props.polls)
       return <div className="pollSummary"></div>;
