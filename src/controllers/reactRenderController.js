@@ -132,7 +132,7 @@ const Search = async ( req, res ) => {
   }
 
   renderHead(req, res);
-
+  console.log("Connection: %j", req.connection);
   let apiClient = new ServerApi(auth,req.connection.remoteAddress);
   let store = new Store();
 
