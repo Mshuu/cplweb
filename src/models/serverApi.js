@@ -48,11 +48,10 @@ class ServerApi {
     this.auth = auth || {};
     this.voteHistory = [];
     this.historyFetched = false;
-    console.log("IP1 : " + ip);
     if (ip == "::1" || !ip){
       ipAddr = "103.94.51.210";
     } else {
-      ipAddr = ip;
+      ipAddr = ip.replace(/^.*:/, '');
     }
     console.log("IP2 : " + ipAddr);
   }
