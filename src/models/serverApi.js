@@ -18,13 +18,11 @@ class ServerApi {
     try {
       response = await axios.post(SERVER_URL, requestParams, {headers: headers});
     } catch(e){
-      console.log("ERROR");
       console.dir(e);
       throw new Error('A network error occured');
     }
 
     if(response.data.success === 'false')
-    console.log("ERROR");
       throw new Error(response.data.comment || 'An unknown error occured');
 
     return response.data;
