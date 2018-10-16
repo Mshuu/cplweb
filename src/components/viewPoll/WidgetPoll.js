@@ -20,8 +20,11 @@ class WidgetPoll extends Component {
     this.store = props.store;
     this.pollId = this.props.match.params.pollId;
 
-    let params = qs.parse(props.location.search); 
+    let params = qs.parse(props.location.search);
     this.widgetType = params.type;
+    let pollData = this.store.getPoll(this.pollId);
+
+
 
     this.state = {
       loading: false,
@@ -39,17 +42,23 @@ class WidgetPoll extends Component {
     if(this.store.hydrateCheck()){
       return;
     }
-
     this.setState({
       loading: true
     });
 
-    let poll = await WebApi.fetchPoll( this.pollId );
-    this.store.setPoll(this.pollId, poll);
+    console.log("here2");
 
-    this.setState({
-      loading: false
-    });
+    let poll = await WebApi.fetchPoll( this.pollId );
+    if (poll.success == 'false'){
+        window.parent.postMessage({event: "openLogin", pollId: this.pollId}, '*');
+    } else {
+      let poll = await WebApi.fetchPoll( this.pollId );
+      this.store.setPoll(this.pollId, poll);
+
+      this.setState({
+        loading: false
+      });
+    }
   }
 
   emitLoginMessage(){
@@ -125,7 +134,7 @@ class WidgetPoll extends Component {
 
         {poll && <WidgetHeader poll={poll} pollVotes={poll.votes} /> }
 
-        { this.pollElement(poll) }      
+        { this.pollElement(poll) }
 
         { !this.store.getAuthenticated() && <WidgetFooter onClick={() => this.emitLoginMessage()}/> }
       </div>

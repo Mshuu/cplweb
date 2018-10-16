@@ -158,10 +158,15 @@ class ServerApi {
   }
 
   async fetchUnauthPoll(pollId){
-    let pollData = await ServerApi.request({
+    let pollData = await ServerApi.request3({
       function: 'GetPoll',
       pollId
     });
+
+
+    if (pollData.success == 'false'){
+      return pollData;
+    } else {
 
     let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
     console.dir(poll);
@@ -189,6 +194,7 @@ class ServerApi {
     }
 
     return poll;
+  }
   }
 
   async fetchVotehistory(pollId){

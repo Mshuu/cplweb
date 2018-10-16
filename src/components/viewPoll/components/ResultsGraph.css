@@ -71,6 +71,7 @@
 
 .voteBarContainer .voteBarInner {
   min-height: 50px;
+  max-width: 100%;
   animation: 1s ease-out 0s 1 slideInFromLeft;
   transform-origin: bottom left;background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.08) 51%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.08) 51%); /* Chrome10-25,Safari5.1-6 */
