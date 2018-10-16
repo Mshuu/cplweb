@@ -27,6 +27,24 @@ class ServerApi {
 
     return response.data;
   }
+  static async request3(params){
+    let response;
+    let requestParams = params;
+    let headers = {
+      'Content-Type': 'application/json',
+      'X-Forwarded-For': ipAddr
+    };
+
+    try {
+      response = await axios.post(SERVER_URL, requestParams, {headers: headers});
+    } catch(e){
+      console.dir(e);
+      throw new Error('A network error occured');
+    }
+
+
+    return response.data;
+  }
   static async request2(params){
     let response;
     let requestParams = params;
@@ -90,47 +108,53 @@ class ServerApi {
     if(!this.historyFetched)
       await this.fetchVotehistory();
 
-    let pollData = await ServerApi.request({
+    let pollData = await ServerApi.request3({
       function: 'GetPoll',
       pollId
     });
 
-    let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
-    let hasExpired = moment(1000*poll.pollTime) < moment();
-
-    if( hasExpired || poll.hasVoted ){
-      let pollResults = await this.getPollResult(pollId);
-
-      poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
-      poll.results = pollResults.votesPerAnswer;
-      poll.votedOn = pollResults.voted;
-      poll.pollVotes = pollResults.totalVotes;
+    if (pollData.success == 'false'){
+      return pollData;
     } else {
-      let pollAnswers = await this.getPollAnswers(pollId);
-      poll.answers = pollAnswers.answer;
+
+          let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
+          let hasExpired = moment(1000*poll.pollTime) < moment();
+
+          if( hasExpired || poll.hasVoted ){
+            let pollResults = await this.getPollResult(pollId);
+
+            poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+            poll.results = pollResults.votesPerAnswer;
+            poll.votedOn = pollResults.voted;
+            poll.pollVotes = pollResults.totalVotes;
+          } else {
+            let pollAnswers = await this.getPollAnswers(pollId);
+            poll.answers = pollAnswers.answer;
+          }
+
+          if(poll.type == "Ratings"){
+            if(!poll.results) {
+              let resultResponse = await ServerApi.request({
+                function: 'GetPublicPollResult',
+                pollId
+              });
+              poll.results = resultResponse.votesPerAnswer;
+            }
+
+            let totalVotes = poll.pollVotes;
+
+            if(totalVotes == 0)
+              poll.averageRating = 0;
+            else
+              poll.averageRating = poll.results.reduce(
+                (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
+                0
+              );
+          }
+
+          return poll;
     }
 
-    if(poll.type == "Ratings"){
-      if(!poll.results) {
-        let resultResponse = await ServerApi.request({
-          function: 'GetPublicPollResult',
-          pollId
-        });
-        poll.results = resultResponse.votesPerAnswer;
-      }
-
-      let totalVotes = poll.pollVotes;
-
-      if(totalVotes == 0)
-        poll.averageRating = 0;
-      else
-        poll.averageRating = poll.results.reduce(
-          (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
-          0
-        );
-    }
-
-    return poll;
   }
 
   async fetchUnauthPoll(pollId){

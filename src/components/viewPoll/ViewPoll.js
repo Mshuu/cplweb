@@ -60,7 +60,11 @@ class ViewPoll extends Component {
     });
 
     let poll = await WebApi.fetchPoll( this.pollId );
-    this.store.setPoll(this.pollId, poll);
+    if (poll.success == 'false'){
+        this.props.history.push('/');
+    } else {
+      this.store.setPoll(this.pollId, poll);
+    }
 
     this.setState({
       loading: false

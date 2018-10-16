@@ -101,13 +101,19 @@ let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPoll(pollId);
 
-  store.setAuthenticated( true );
-  store.setPoll( pollId, poll );
+  if (poll.success == 'false'){
+    res.redirect('/');
+  } else {
 
-  let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+      store.setAuthenticated( true );
+      store.setPoll( pollId, poll );
 
-  renderHead(req, res, metadata);
-  renderReact(req, res, store);
+      let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+
+      renderHead(req, res, metadata);
+      renderReact(req, res, store);
+  }
+
 }
 
 async function unauthenticatedPoll(req, res, pollId, auth){

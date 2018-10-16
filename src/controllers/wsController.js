@@ -122,9 +122,18 @@ class WsController {
   async replyGetPoll({ id, pollId }){
     let poll = await this.apiClient.fetchPoll(pollId);
 
-    let response = Object.assign(poll, { id });
+    if (poll.success == 'false'){
 
-    this.ws.send( this.encryptResponse(response) )
+          let response = poll;
+
+          this.ws.send( this.encryptResponse(response) )
+    } else {
+
+          let response = Object.assign(poll, { id });
+
+          this.ws.send( this.encryptResponse(response) )
+    }
+
   }
 
   async replyVoteOnPoll({ id, pollId, voteAnswer, showOnFeed }){
