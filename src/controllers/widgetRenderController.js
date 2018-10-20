@@ -59,7 +59,6 @@ if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
   let apiClient = new ServerApi(auth,ip);
 
   let poll =  await apiClient.fetchUnauthPoll(pollId);
-  console.log("POLL : %j", poll);
 
   if (poll.success == 'false'){
 

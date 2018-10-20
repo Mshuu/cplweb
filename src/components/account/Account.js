@@ -29,7 +29,7 @@ class Account extends Component {
       this.setState({loading: false});
       return;
     }
-    
+
     this.setState({
       loading: true,
     });
@@ -57,7 +57,6 @@ class Account extends Component {
 
   get settingsElement(){
     let settings = this.store.getUserSettings();
-    console.dir(settings);
     if(Object.keys(settings).length == 0)
       return null;
     else

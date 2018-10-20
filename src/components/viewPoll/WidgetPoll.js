@@ -46,7 +46,6 @@ class WidgetPoll extends Component {
       loading: true
     });
 
-    console.log("here2");
 
     let poll = await WebApi.fetchPoll( this.pollId );
     if (poll.success == 'false'){
