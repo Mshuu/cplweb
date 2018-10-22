@@ -71,7 +71,6 @@ class SocialFriendList extends Component {
   }
 
   friend(friend, i){
-    console.dir(friend);
     return (
       <div className="friend" key={ i }>
         <div className={`muteToggle ${ friend.muted == 0 ? 'notMuted' : 'muted' }`} onClick={ () => this.toggleMute(friend.id) } >

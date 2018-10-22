@@ -44,7 +44,6 @@ class SocialSearch extends Component {
 
     let response = await WebApi.searchUsername(this.searchString);
 
-    console.dir(response);
 
     this.setState({
       loading: false,
@@ -62,7 +61,7 @@ class SocialSearch extends Component {
             <img src={ require('../images/friend_add_icon.png') } onClick={ () => this.sendFriendRequest(user.id) } /> }
         </div>
       );
-    });    
+    });
   }
 
   render() {
@@ -86,7 +85,7 @@ class SocialSearch extends Component {
 
         <div className={ this.state.resultsOpen ? "socialSearchResults" : "socialSearchResults inactive" }>
           <LoadingOverlay enabled={ this.state.loading } fullScreen={ false } />
-  
+
           { !this.state.loading && (
             <div className="userResultsContainer">
               { this.results }

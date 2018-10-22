@@ -18,7 +18,7 @@ class ServerApi {
     try {
       response = await axios.post(SERVER_URL, requestParams, {headers: headers});
     } catch(e){
-      console.dir(e);
+      console.dir("ERROR4: " + e);
       throw new Error('A network error occured');
     }
 
@@ -38,7 +38,7 @@ class ServerApi {
     try {
       response = await axios.post(SERVER_URL, requestParams, {headers: headers});
     } catch(e){
-      console.dir(e);
+      console.dir("ERROR 3:" + e);
       throw new Error('A network error occured');
     }
 
@@ -53,7 +53,7 @@ class ServerApi {
 			var server = "https://business.nextechdevelopments.com/CPLB";
       response = await axios.post(server, requestParams);
     } catch(e){
-      console.dir(e);
+      console.dir("ERROR2 : " + e);
       throw new Error('A network error occured');
     }
 
@@ -169,7 +169,6 @@ class ServerApi {
     } else {
 
     let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
-    console.dir(poll);
 
     let pollResults = await ServerApi.request({
       function: 'GetPublicPollResult',

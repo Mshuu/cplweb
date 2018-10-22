@@ -105,7 +105,7 @@ class WsController {
           break;
       }
     } catch(e){
-      console.dir(e);
+      console.dir("ERROR: " + e);
 
       let response = Object.assign({success: false, error: e.message}, { id: msg.id });
       this.ws.send( this.encryptResponse(response) )
@@ -175,7 +175,6 @@ class WsController {
   async replySearchPolls({id, searchString}){
 
     let polls = await this.apiClient.doSearch(searchString);
-    console.dir(polls);
     let response = Object.assign({polls, id });
 
 

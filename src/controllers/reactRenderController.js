@@ -29,7 +29,6 @@ const Home = async ( req, res ) => {
 
   renderHead(req, res);
 
-console.log("IP : " + req.connection.remoteAddress);
 var ip = ""
 if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
   ip = req.headers['x-forwarded-for'];

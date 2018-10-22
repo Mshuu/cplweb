@@ -24,7 +24,6 @@ class CompletedPolls extends Component {
     this.category = this.props.match.params.category;
     this.url = this.props.match.url;
 
-    console.dir(this.props.match);
 
     this.state = {
       loading: false,
