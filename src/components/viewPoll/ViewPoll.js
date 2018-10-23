@@ -95,9 +95,11 @@ class ViewPoll extends Component {
   }
 
   shouldShowResults(poll){
-    if (poll.creatorId == 3838){
+    if (poll.creatorId == 3939){
+
       return true;
     } else {
+
       return (poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated();
     }
   }

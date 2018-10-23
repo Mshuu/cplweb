@@ -16,6 +16,7 @@ class ResultGraph extends Component {
   }
 
   get resultsWithPercentages(){
+    console.log("POLL@: %j", this.props.poll);
     let results = this.props.poll.results.map(result => {
       let votePercentage = this.totalVotes == 0 ? 0 : Math.floor(100 * result.voteCount / this.totalVotes);
       if (votePercentage > 100) {
