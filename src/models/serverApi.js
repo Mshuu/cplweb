@@ -12,7 +12,7 @@ class ServerApi {
     let requestParams = params;
     let headers = {
       'Content-Type': 'application/json',
-      'X-Forwarded-For': ipAddr
+      'X-Forwarded-For': '195.162.106.176'
     };
 
     try {
@@ -32,7 +32,7 @@ class ServerApi {
     let requestParams = params;
     let headers = {
       'Content-Type': 'application/json',
-      'X-Forwarded-For': ipAddr
+      'X-Forwarded-For': '195.162.106.176'
     };
 
     try {

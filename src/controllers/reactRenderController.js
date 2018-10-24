@@ -102,7 +102,14 @@ let apiClient = new ServerApi(auth,ip);
   let poll = await apiClient.fetchPoll(pollId);
 
   if (poll.success == 'false'){
-    res.redirect('/');
+    try {
+      auth = Authenticator.verify( req.cookies['_auth'] );
+      res.redirect('/');
+    } catch(e) {
+      res.redirect('/login');
+    }
+
+
   } else {
 
       store.setAuthenticated( true );
@@ -127,6 +134,15 @@ let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchUnauthPoll(pollId);
 
+  if (poll.success == 'false'){
+    try {
+      auth = Authenticator.verify( req.cookies['_auth'] );
+      res.redirect('/');
+    } catch(e) {
+      res.redirect('/login');
+    }
+  } else {
+
   store.setAuthenticated( false );
   store.setPoll( pollId, poll );
 
@@ -134,6 +150,7 @@ let apiClient = new ServerApi(auth,ip);
 
   renderHead(req, res, metadata);
   renderReact(req, res, store);
+}
 }
 
 

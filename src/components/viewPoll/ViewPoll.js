@@ -60,8 +60,11 @@ class ViewPoll extends Component {
     });
 
     let poll = await WebApi.fetchPoll( this.pollId );
-    if (poll.success == 'false'){
+    if (poll.success == 'false' && this.store.getAuthenticated()){
         this.props.history.push('/');
+      } else if (poll.success == 'false' && !this.store.getAuthenticated()){
+        this.props.history.push('/login');
+
     } else {
       this.store.setPoll(this.pollId, poll);
     }
@@ -96,7 +99,6 @@ class ViewPoll extends Component {
 
   shouldShowResults(poll){
     if (poll.creatorId == 3939){
-
       return true;
     } else {
 
