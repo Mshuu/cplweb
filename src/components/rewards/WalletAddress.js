@@ -42,7 +42,7 @@ class WalletAddress extends Component {
         <input type="text"
           placeholder="POLL wallet address"
           value={this.state.ethAddress}
-          onChange={ e => this.setState({ethAddress: e.target.value}) }
+          onChange={ e => this.setState({ethAddress: e.target.value.trim()}) }
         />
         <span className="saveButton" onClick={() => this.saveAddress()} >
           <img src={ require('../images/save_icon.png') } />
@@ -52,6 +52,4 @@ class WalletAddress extends Component {
   }
 }
 
-export default WalletAddress;          
-
-
+export default WalletAddress;

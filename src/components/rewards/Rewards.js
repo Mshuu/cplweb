@@ -30,7 +30,7 @@ class Rewards extends Component {
       this.setState({loading: false});
       return;
     }
-    
+
     this.setState({
       loading: true,
     });
@@ -57,7 +57,10 @@ class Rewards extends Component {
           <div className="rowItem">
             <div className="itemHeader">Points Received</div>
             <div className="itemValue">{ settings.RP }</div>
+            <div className="percentagePoints">{ settings.pointPercentage.toFixed(3) }% of { Math.round(settings.totalPoints).toLocaleString('en')} </div>
+            <div className="totalPointsFor">total points for all users</div>
             <div className="itemFooter">
+
               <div>Points reset at the end of each rewards period.</div>
             </div>
           </div>

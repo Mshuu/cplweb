@@ -62,7 +62,7 @@ if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
 
   if (poll.success == 'false'){
 
-          renderReact(req, res, store, pollId);
+      
   } else {
 
 

@@ -123,6 +123,17 @@
   font-size: 46px;
   color: #01bec0;
 }
+.rewardsContent .rowItem .percentagePoints {
+  font-size: 20px;
+  color: #01bec0;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+.rewardsContent .rowItem .totalPointsFor {
+  font-size: 20px;
+  margin-top: -15px;
+  line-height: 2;
+}
 
 .rewardsContent .rowItem .payoutButton {
   background-color: #01bec0;
