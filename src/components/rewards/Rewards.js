@@ -45,6 +45,13 @@ class Rewards extends Component {
 
   get rewardsElement(){
     let settings = this.store.getUserSettings();
+    if (!settings.pointPercentage) {
+      settings.pointPercentage = 0.000;
+    }
+    if (!settings.totalPoints){
+      settings.totalPoints = 0;
+    }
+
 
     return (
       <div className="rewardsContent">
