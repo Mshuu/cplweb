@@ -133,6 +133,15 @@ if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
 let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPollAnon(pollId);
+
+  if (poll.success == 'false'){
+   try {
+     auth = Authenticator.verify( req.cookies['_auth'] );
+     res.redirect('/');
+   } catch(e) {
+     res.redirect('/login');
+   }
+ } else {
 	console.log("POLL5: %j", poll);
   store.setAuthenticated( false );
   store.setPoll( pollId, poll );
@@ -141,6 +150,7 @@ let apiClient = new ServerApi(auth,ip);
 
   renderHead(req, res, metadata);
   renderReact(req, res, store);
+}
 }
 
 
