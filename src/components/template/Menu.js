@@ -40,9 +40,9 @@ class Menu extends Component {
             <img src={ require('../images/menuIcons/vote_icon.png') } />
             Vote
           </div>
-          <div onClick={() => this.openUrl('/createWidget')}>
+          <div onClick={() => window.open("https://clearpoll.com/create", "_blank")}>
             <img src={ require('../images/menuIcons/create_icon.png') } />
-            Create Widgets
+            Create a Poll
           </div>
           <div onClick={() => this.openUrl('/completed')}>
             <img src={ require('../images/menuIcons/completed_icon.png') } />
@@ -66,7 +66,11 @@ class Menu extends Component {
           </div>
           <div onClick={() => this.openUrl('/starPolls')}>
             <img src={ require('../images/menuIcons/star_icon.png') } />
-            Star Polls
+            Featured Polls
+          </div>
+          <div onClick={() => this.openUrl('/createWidget')}>
+            <img src={ require('../images/menuIcons/create_widgets_icon.png') } />
+            Create Widgets
           </div>
           <div onClick={() => this.openUrl('/account')}>
             <img src={ require('../images/menuIcons/account_icon.png') } />

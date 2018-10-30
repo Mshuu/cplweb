@@ -29,7 +29,13 @@ const Home = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
 	let homePolls = await apiClient.fetchHome();
 	var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(homePolls), 'Y;8)t,[;xzy9niU2$tL?');
   let store = new Store({
@@ -85,21 +91,46 @@ const Poll = async ( req, res ) => {
 };
 
 async function authenticatedPoll(req, res, pollId, auth){
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPoll(pollId);
 
-  store.setAuthenticated( true );
-  store.setPoll( pollId, poll );
+  if (poll.success == 'false'){
+    try {
+      auth = Authenticator.verify( req.cookies['_auth'] );
+      res.redirect('/');
+    } catch(e) {
+      res.redirect('/login');
+    }
 
-  let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
 
-  renderHead(req, res, metadata);
-  renderReact(req, res, store);
+  } else {
+
+      store.setAuthenticated( true );
+      store.setPoll( pollId, poll );
+
+      let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+
+      renderHead(req, res, metadata);
+      renderReact(req, res, store);
+  }
+
 }
 
 async function unauthenticatedPoll(req, res, pollId, auth){
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPollAnon(pollId);
 	console.log("POLL5: %j", poll);
@@ -111,6 +142,7 @@ async function unauthenticatedPoll(req, res, pollId, auth){
   renderHead(req, res, metadata);
   renderReact(req, res, store);
 }
+
 
 
 
@@ -132,8 +164,13 @@ const Search = async ( req, res ) => {
   }
 
   renderHead(req, res);
-
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+  if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+    ip = req.headers['x-forwarded-for'];
+  } else {
+    ip = req.connection.remoteAddress
+  }
+  let apiClient = new ServerApi(auth,ip);
   let store = new Store();
 
   store.setSearchResult(searchTerm, await apiClient.doSearch(searchTerm) );
@@ -154,7 +191,13 @@ const CompletedPolls = async ( req, res ) => {
   renderHead(req, res);
 
   let isCompletedPage = req.url.startsWith('/completed');
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let category = req.params.category;
 
@@ -192,7 +235,13 @@ const BrowsePolls = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let category = req.params.category;
 
@@ -228,7 +277,13 @@ const StarPolls = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getPollList({
     category: 'All',
@@ -241,7 +296,6 @@ const StarPolls = async ( req, res ) => {
     positionLongitude: '',
     locationFilter: ''
   });
-
   store.setStarPolls(polls);
   renderReact(req, res, store);
 };
@@ -258,7 +312,13 @@ const MyVotes = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getPollList({
     category: 'All',
@@ -288,7 +348,13 @@ const MyPolls = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getPollList({
     category: 'All',
@@ -318,7 +384,13 @@ const SocialFeed = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let polls = await apiClient.getSocialFeed({
     recordStartNo: 0,
@@ -341,7 +413,13 @@ const ManageFriends = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
 
   renderReact(req, res, store);
@@ -359,7 +437,13 @@ const Account = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let settings = await apiClient.getUserSettings();
 
@@ -396,7 +480,13 @@ const Rewards = async ( req, res ) => {
 
   renderHead(req, res);
 
-  let apiClient = new ServerApi(auth);
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let settings = await apiClient.getUserSettings();
 
@@ -500,6 +590,16 @@ const htmlTail = store => `
         window.storeData = "${store}";
       </script>
       <script type="text/javascript" src="/public/bundle.js"></script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127300472-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127300472-1');
+</script>
+
     </body>
   </html>
 `;

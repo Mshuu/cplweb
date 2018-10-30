@@ -80,18 +80,18 @@
 .signupDesc {
   font-size: 12px;
   text-align: center;
-  color: #fff;
+  color: #000;
 	margin-top: 10px;
 }
 .signupDesc1 {
   font-size: 12px;
   text-align: center;
-  color: #fff;
+  color: #000;
 }
 .signupDesc2 {
   font-size: 20px;
   text-align: center;
-  color: #fff;
+  color: #000;
 }
 .importantText{
   font-size: 16px;
@@ -103,7 +103,7 @@
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  color: #fff;
+  color: #c40017;
 	margin-top: 10px;
 }
 .AlertText{

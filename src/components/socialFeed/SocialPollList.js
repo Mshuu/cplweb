@@ -42,7 +42,7 @@ class SocialPollList extends Component {
       this.setState({loading: false});
       return;
     }
-    
+
     this.setState({
       loading: resetCache,
       loadingMore: true
@@ -55,7 +55,6 @@ class SocialPollList extends Component {
       recordStartNo: existingPolls.length
     });
 
-    console.dir(response);
 
     this.store.setSocialFeed(existingPolls.concat(response.polls));
 

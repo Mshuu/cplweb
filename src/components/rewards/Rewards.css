@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   font-size: 26px;
-  color: #fff;
+  color: #000;
   margin: 30px 0 20px 0;
 }
 
@@ -41,11 +41,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 30px 20px 20px 20px;
-  background: rgba(0, 0, 0, 0.1);
-  color: #fff;
+  background: #FFF;
+  color: #000;
   height: 200px;
   text-align: center;
-  font-size: 12px;
+  font-size: 12px;border-radius:4px;-webkit-box-shadow:0px 0px 0px 1px #c9ccd3;
 }
 
 .rewardsContent .rowItem > * {
@@ -123,6 +123,17 @@
   font-size: 46px;
   color: #01bec0;
 }
+.rewardsContent .rowItem .percentagePoints {
+  font-size: 20px;
+  color: #01bec0;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+.rewardsContent .rowItem .totalPointsFor {
+  font-size: 20px;
+  margin-top: -15px;
+  line-height: 2;
+}
 
 .rewardsContent .rowItem .payoutButton {
   background-color: #01bec0;
@@ -130,7 +141,7 @@
   border-radius: 30px;
   width: 120px;
   margin: 10px 0;
-  cursor: pointer;
+  cursor: pointer;color:#fff;
 }
 
 .itemFooter {
@@ -152,17 +163,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px 20px 20px 20px;
-  background: rgba(0, 0, 0, 0.1);
+  background: #54565a;
   color: #fff;
   height: 200px;
   font-size: 12px;
   text-align: center;
   align-self: stretch;
-  margin-top: 7px;
+  margin-top: 7px;border-radius:4px;
 }
 
 .bottomContainer .bottomHeader {
-  font-size: 20px;
+  font-size: 20px;padding-bottom:10px;
 }
 
 .bottomContainer .walletButton {
@@ -172,7 +183,7 @@
   width: 120px;
   margin: 10px 0;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 14px;margin-top:20px;margin-bottom:20px;
 }
 
 .bottomContainer .addressField {
@@ -201,7 +212,7 @@
 }
 
 .bottomContainer .important {
-  color: red;
+  background: #c00101;font-size:16px;font-weight:bold;border-radius:3px;padding:5px 7px;margin-right:10px;
 }
 
 .walletButton, .walletButton:visited {

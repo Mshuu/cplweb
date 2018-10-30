@@ -15,7 +15,7 @@ const CATEGORY_MAP = {
   'Tec': {title: 'Business & Finance'},
 
   "All": { title: "All Categories" },
-  "Star": { title: "Star Polls" },
+  "Star": { title: "Featured Polls" },
   "MyVotes": { title: "My Votes" },
   "MyPolls": { title: "My Polls" },
   "Social": { title: "Social" },
@@ -29,13 +29,18 @@ class SummaryHeader extends Component {
   }
 
   render() {
-    let category = CATEGORY_MAP[this.props.category];
+    let category = "";
+    if (this.props.category != "undefined"){
+    category = CATEGORY_MAP[this.props.category];
+  } else {
+    category = CATEGORY_MAP["Star"];
+  }
 
 		if (this.props.type == "Star"){
     return (
       <div className="pollSummaryHeader">
-        <img src={ CategoryIcon["Star Polls"] } />
-        <span>{ "Star Polls" }</span>
+        <img src={ CategoryIcon["Featured Polls"] } />
+        <span>{ "Featured Polls" }</span>
       </div>
     );
 	} else {

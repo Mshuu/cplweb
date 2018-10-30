@@ -55,23 +55,37 @@ class ViewPoll extends Component {
     }
 		console.log("fetching");
 		if (this.state.authenticated == true){
-			this.setState({
-				loading: true
-			});
+			 this.setState({
+          loading: true
+        });
 
-			let poll = await WebApi.fetchPoll( this.pollId );
-			this.store.setPoll(this.pollId, poll);
+        let poll = await WebApi.fetchPoll( this.pollId );
+        if (poll.success == 'false' && this.store.getAuthenticated()){
+            this.props.history.push('/');
+          } else if (poll.success == 'false' && !this.store.getAuthenticated()){
+            this.props.history.push('/login');
 
-			this.setState({
-				loading: false
-			});
+        } else {
+          this.store.setPoll(this.pollId, poll);
+        }
+
+        this.setState({
+          loading: false
+        });
 		} else {
 			this.setState({
 				loading: true
 			});
 
 			let poll = await WebApi.fetchPollAnon( this.pollId );
-			this.store.setPoll(this.pollId, poll);
+      if (poll.success == 'false' && this.store.getAuthenticated()){
+          this.props.history.push('/');
+        } else if (poll.success == 'false' && !this.store.getAuthenticated()){
+          this.props.history.push('/login');
+
+      } else {
+        this.store.setPoll(this.pollId, poll);
+      }
 
 			this.setState({
 				loading: false
@@ -125,12 +139,15 @@ class ViewPoll extends Component {
   }
 
   shouldShowResults(poll){
-		if (poll.isAnon == 0 && this.state.authenticated == false){
+    if (poll.creatorId == 3939){
+      return true;
+    } else if (poll.isAnon == 0 && this.state.authenticated == false){
 			console.log("POLL71: %j", poll);
 			return true;
-		} else {
-    return (poll.hasVoted || poll.hasExpired);
-	}
+    } else {
+
+      return (poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated();
+    }
   }
 
   containerContent(poll){
@@ -255,10 +272,14 @@ class ViewPoll extends Component {
               <img src={ require('../images/poll_tick_icon.png') } />
               { this.numberToCommaFormat(poll.pollVotes) }
             </div>
-            { !poll.hasExpired && (
+            { !poll.hasExpired && poll.type != "Sponsored" &&  (
               <div className="field">
                 <img src={ require('../images/poll_clock_icon.png') } />
                 { poll.timeRemaining }
+              </div>
+            )}
+            { poll.type == "Sponsored" &&  (
+              <div className="field">
               </div>
             )}
             { !this.shouldShowResults(poll) && (

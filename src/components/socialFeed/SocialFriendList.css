@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 10px;color:#000;
 }
 
 .socialFriends .friendsHeader img {
@@ -28,11 +28,12 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 3px 10px;
-  color: #fff;
+  color: #FFF;
   margin: 3px 0;
+  background-color: #01bec0;
+  transition: background-color 100ms linear;
 }
 
 .friendContainer .friend .muteToggle, .friendContainer .friend .unfriend {

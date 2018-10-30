@@ -30,7 +30,7 @@ class Rewards extends Component {
       this.setState({loading: false});
       return;
     }
-    
+
     this.setState({
       loading: true,
     });
@@ -45,6 +45,13 @@ class Rewards extends Component {
 
   get rewardsElement(){
     let settings = this.store.getUserSettings();
+    if (!settings.pointPercentage) {
+      settings.pointPercentage = 0.000;
+    }
+    if (!settings.totalPoints){
+      settings.totalPoints = 0;
+    }
+
 
     return (
       <div className="rewardsContent">
@@ -57,7 +64,10 @@ class Rewards extends Component {
           <div className="rowItem">
             <div className="itemHeader">Points Received</div>
             <div className="itemValue">{ settings.RP }</div>
+            <div className="percentagePoints">{ settings.pointPercentage.toFixed(3) }% of { Math.round(settings.totalPoints).toLocaleString('en')} </div>
+            <div className="totalPointsFor">total points for all users</div>
             <div className="itemFooter">
+
               <div>Points reset at the end of each rewards period.</div>
             </div>
           </div>
@@ -75,7 +85,7 @@ class Rewards extends Component {
             <div className="itemHeader">Current Multiplier Level</div>
             <div className="itemValue">x{ settings.BM }</div>
             <div className="itemFooter">
-              <div>Multiplier levels are based on your existing POLL balance in your wallet and caluclated daily.</div>
+              <div>Multiplier levels are based on your existing POLL balance in your wallet and calculated daily.</div>
               <a className="itemLink" href="https://www.clearpoll.com/multiplier" target="_blank">More information.</a>
             </div>
           </div>

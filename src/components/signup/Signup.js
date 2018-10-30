@@ -130,7 +130,7 @@ if (this.state.showError == false){
 					We will never send you unsolicited messages or make your personal details available to any third parties.
 				</div>
 				<div className = "signupDesc">
-					<a href="https://www.iubenda.com/privacy-policy/73812586" title="Privacy Policy" target="_blank"><font color = "#ffffff">Privacy Policy</font></a>
+					<a href="https://www.iubenda.com/privacy-policy/73812586" title="Privacy Policy" target="_blank"><font color = "#000000">Privacy Policy</font></a>
 				</div>
 
       </div>

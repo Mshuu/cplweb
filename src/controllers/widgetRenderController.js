@@ -31,8 +31,15 @@ const WidgetPoll = async ( req, res ) => {
 };
 
 async function authenticatedWidget(req, res, pollId, auth){
+
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
   let store = new Store();
-  let apiClient = new ServerApi(auth);
+  let apiClient = new ServerApi(auth,ip);
 
   store.setAuthenticated( true );
   store.setPoll( pollId, await apiClient.fetchPoll(pollId) );
@@ -42,12 +49,31 @@ async function authenticatedWidget(req, res, pollId, auth){
 
 async function unauthenticatedWidget(req, res, pollId){
   let store = new Store();
-  let apiClient = new ServerApi();
+  let auth = {}
+  var ip = ""
+if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+  ip = req.headers['x-forwarded-for'];
+} else {
+  ip = req.connection.remoteAddress
+}
+  let apiClient = new ServerApi(auth,ip);
 
-  store.setAuthenticated( false );
-  store.setPoll( pollId, await apiClient.fetchUnauthPoll(pollId) );
+  let poll =  await apiClient.fetchUnauthPoll(pollId);
 
-  renderReact(req, res, store, pollId);
+  if (poll.success == 'false'){
+
+      
+  } else {
+
+
+
+
+      store.setAuthenticated( false );
+      store.setPoll(pollId, poll);
+
+      renderReact(req, res, store, pollId);
+  }
+
 }
 
 

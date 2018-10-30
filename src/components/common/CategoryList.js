@@ -41,7 +41,6 @@ class CategoryList extends Component {
   }
 
   get categoryElements(){
-    console.dir(CATEGORIES);
     return CATEGORIES.map((category, i) => {
       return (
         <div

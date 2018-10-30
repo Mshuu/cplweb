@@ -30,8 +30,8 @@
   flex: 1 1 auto;
   padding: 5px;
   height: 34px;
-  font-size: 16px;
-  text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;
+  font-size: 16px;background:#edeef1;
+  text-align: center;outline:none; border:none!important;border-radius:3px 0px 0px 3px;-webkit-box-shadow:inset 0px 0px 0px 1px #c9ccd3
 }
 
 .socialSearchButton {

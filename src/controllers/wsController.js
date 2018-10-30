@@ -1,6 +1,7 @@
 import Authenticator from '../models/authenticator';
 import ServerApi from '../models/serverApi';
 import CryptoJS from "crypto-js";
+var util = require('util')
 
 
 class WsController {
@@ -11,14 +12,20 @@ class WsController {
     } catch(e){
 
     }
-
-    new WsController(ws, auth);
+    let ip;
+    if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
+      ip = req.headers['x-forwarded-for'];
+    } else {
+      ip = req.connection.remoteAddress
+    }
+    new WsController(ws,auth,ip);
   }
 
-  constructor(ws, auth){
+  constructor(ws, auth,ip){
     this.ws = ws;
     this.auth = auth;
-    this.apiClient = new ServerApi(auth);
+    this.ip = ip;
+    this.apiClient = new ServerApi(auth,ip);
 
     ws.on('message', this.handleMessage.bind(this));
   }
@@ -102,7 +109,7 @@ class WsController {
           break;
       }
     } catch(e){
-      console.dir(e);
+      console.dir("ERROR: " + e);
 
       let response = Object.assign({success: false, error: e.message}, { id: msg.id });
       this.ws.send( this.encryptResponse(response) )
@@ -119,9 +126,18 @@ class WsController {
   async replyGetPoll({ id, pollId }){
     let poll = await this.apiClient.fetchPoll(pollId);
 
-    let response = Object.assign(poll, { id });
+    if (poll.success == 'false'){
 
-    this.ws.send( this.encryptResponse(response) )
+          let response = poll;
+
+          this.ws.send( this.encryptResponse(response) )
+    } else {
+
+          let response = Object.assign(poll, { id });
+
+          this.ws.send( this.encryptResponse(response) )
+    }
+
   }
   async replyGetPollAnon({ id, pollId }){
     let poll = await this.apiClient.fetchPollAnon(pollId);
@@ -195,9 +211,11 @@ class WsController {
   }
 
   async replySearchPolls({id, searchString}){
+
     let polls = await this.apiClient.doSearch(searchString);
-    console.dir(polls);
     let response = Object.assign({polls, id });
+
+
 
     this.ws.send( this.encryptResponse(response) )
   }

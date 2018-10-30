@@ -54,10 +54,14 @@ class Poll extends Component {
             <img src={ require('../images/poll_tick_icon.png') } />
             { this.props.poll.pollVotes }
           </span>
-          { !this.poll.hasExpired && (
+          { !this.poll.hasExpired && this.poll.twitterName != "Sponsored Poll" &&  (
             <span className="pollTimeRemaining">
               <img src={ require('../images/poll_clock_icon.png') } />
               { this.poll.timeRemaining }
+            </span>
+          )}
+          { this.poll.twitterName == "Sponsored Poll" &&  (
+            <span className="pollTimeRemaining">
             </span>
           )}
           { this.button() }
