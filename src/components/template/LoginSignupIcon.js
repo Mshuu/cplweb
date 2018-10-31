@@ -15,35 +15,10 @@ class Menu extends Component {
     };
   }
 
-  async componentDidMount(){
-    if(!IS_SERVER){
-      this.webFetch();
-    }
-  }
-
-  async webFetch(resetCache = true){
-    let settings = await WebApi.getUserSettings();
-    this.store.setUserSettings(settings);
-    console.log("PROPS: %j",this.props.store.data.userSettings.userName);
-    this.setState({
-      'username': this.props.store.data.userSettings.userName
-    });
-
-  }
-
   toggleMenu(visibility){
     this.setState({ active: visibility });
   }
 
-  getUsername(){
-    if(!IS_SERVER){
-      this.webFetch();
-    }
-    let settings2 = this.store.getUserSettings();
-    console.log("SEttings: %j",settings2);
-    console.log(settings2.userName);
-    return settings2.userName;
-  }
 
   openUrl(url){
     this.setState({ active: false });

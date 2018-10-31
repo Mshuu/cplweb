@@ -2979,6 +2979,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .viewPoll {
   text-align: center;
 }
+.anonText {
+  display: flex;
+  align-items: center;
+}
+
 
 .viewPoll .pollQuestion {
   font-size: 30px;font-weight:lighter!important;line-height:1.2;
@@ -3123,6 +3128,37 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006ea5', end
   background-color: #01bec0;
   border-radius: 30px;
 }
+.socialContainer .signupButtonViewPoll .signupImage{
+	height: 30px;
+	float: right;
+	margin-right: 20px;
+	vertical-align: middle;
+	display: inline-block;
+  margin-top: 10px;
+  margin-left: -50px;
+
+}
+.signupbuttonViewPoll:active {
+outline: none;
+border: none;
+}
+
+.signupButtonViewPoll {
+  width: 240px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  background: #ef7245 !important;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 50px;
+  margin-top: 20px!important;
+  cursor: pointer;
+  transition: background-color 100ms linear;font-weight:300;margin-bottom:15px;
+
+}
+
+.signupButtonViewPoll:hover {transition: background-color 100ms linear;background:#cc5323!important;cursor:pointer!important;}
 
 .pollInstallBanner {
   margin: 15px 0 35px 0;

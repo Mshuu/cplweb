@@ -50,7 +50,7 @@ class ViewPoll extends Component {
     this.setState({ showVote: !this.state.showVote });
   }
 	async webFetch(){
-		if(this.store.hydrateCheck()){
+		if(this.store.hydrateCheck() ){
       return;
     }
 		console.log("fetching");
@@ -141,16 +141,15 @@ class ViewPoll extends Component {
   shouldShowResults(poll){
     if (poll.creatorId == 3939){
       return true;
-    } else if (poll.isAnon == 0 && this.state.authenticated == false){
-			console.log("POLL71: %j", poll);
+    } else if (poll.isAnon == 0 && !this.store.getAuthenticated()){
 			return true;
     } else {
-
-      return (poll.hasVoted || poll.hasExpired) || !this.store.getAuthenticated();
+      return (poll.hasVoted || poll.hasExpired);
     }
   }
 
   containerContent(poll){
+    console.log("POLL : %j", poll);
     if(this.shouldShowResults(poll)){
       return (
         <ResultsGraph poll={ poll } showVote={ this.state.showVote } />
@@ -186,7 +185,8 @@ class ViewPoll extends Component {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  get socialContent(){
+   socialContent(poll){
+     console.log("POLLHERE: %j", poll);
     if(this.state.authenticated) {
       return (
         <div className="socialContainer">
@@ -209,7 +209,34 @@ class ViewPoll extends Component {
           </div>
         </div>
       );
+    } else if (!this.state.authenticated && poll.isAnon == 1) {
+      return (
+        <div className="socialContainer">
+          <div className="socialBanner">
+            <button className="signupButtonViewPoll">
+              Sign Up
+              <img src= { require('../images/pencil.png')} className = "signupImage" />
+            </button>
+          </div>
+          Share this poll!
+          <div className="socialButtons">
+            <a target="_blank" href={ this.twitterShareUrl }>
+              <img src={require('../images/twitter_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.facebookShareUrl }>
+              <img src={require('../images/facebook_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.googleShareUrl }>
+              <img src={require('../images/google_icon.png')} />
+            </a>
+            <a target="_blank" href={ this.redditShareUrl }>
+              <img src={require('../images/reddit_icon.png')} />
+            </a>
+          </div>
+        </div>
+      );
     } else {
+      console.log("here2");
       return (
         <div className="socialContainer">
           <div className="socialBanner">
@@ -222,6 +249,13 @@ class ViewPoll extends Component {
 
   summaryContent(poll){
     if(this.state.authenticated) {
+      return (
+        <div className="summaryContainer">
+          <SummaryHeader category={ poll.category} type={ poll.type }/>
+          <PollList category={ poll.category }  type={ poll.type }/>
+        </div>
+      );
+    } else if (!this.state.authenticated && poll.isAnon == 1){
       return (
         <div className="summaryContainer">
           <SummaryHeader category={ poll.category} type={ poll.type }/>
@@ -308,7 +342,7 @@ class ViewPoll extends Component {
           </div>
         )}
 
-        { this.socialContent }
+        { this.socialContent(poll) }
 
         { this.summaryContent(poll) }
       </div>

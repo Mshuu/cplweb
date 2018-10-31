@@ -108,7 +108,6 @@ class ServerApi {
     if(!this.historyFetched)
       await this.fetchVotehistory();
 
-    console.log("Fetching");
 
     let pollData = await ServerApi.request3({
       function: 'GetPoll',
@@ -159,44 +158,38 @@ class ServerApi {
 
   }
 	async fetchPollAnon(pollId){
-    console.log("Anon Fetcg");
     let pollData = await ServerApi.request3({
       function: 'GetPoll',
       pollId
     });
-		console.log("here %j", pollData);
     if (pollData.success == 'false'){
           return pollData;
     } else {
     let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
 		var pollisAnon = poll.isAnon;
     let hasExpired = moment(1000*poll.pollTime) < moment();
-		console.log("POLL88: %j", poll);
     if( poll.isAnon == 1){
-			console.log("anon");
       let pollResults = await this.getPollResultAnon(pollId);
-			console.log("got results: %j", pollResults);
       poll = Object.assign(this.getHasVoted(pollId), pollResults.pollInfo[0], {pollId});
-			console.log("ACTUAL:: %j", poll);
       poll.results = pollResults.votesPerAnswer;
       poll.votedOn = pollResults.voted;
       poll.pollVotes = pollResults.totalVotes;
+      let pollAnswers = await this.getPollAnswers(pollId);
+      poll.answers = pollAnswers.answer;
 			poll.isAnon = pollisAnon;
-			console.log("POLL2: %j", poll);
+      return poll;
     } else if (pollData.success == 'false'){
           return pollData;
         } else {
 
 
           if( hasExpired || poll.hasVoted || poll.creatorId == 3939 ){
-            console.log("Creator");
             let pollResults = await this.getPollResultAnon(pollId);
 
             poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
             poll.results = pollResults.votesPerAnswer;
             poll.votedOn = pollResults.voted;
             poll.pollVotes = pollResults.totalVotes;
-            console.log("POLLNOW: %j", poll);
           } else {
             let pollAnswers = await this.getPollAnswers(pollId);
             poll.answers = pollAnswers.answer;
@@ -343,7 +336,6 @@ class ServerApi {
       ...params,
       ...this.auth
     });
-    console.log("hi");
     return response;
   }
   async voteOnPollAnon(params){
