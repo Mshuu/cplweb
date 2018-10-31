@@ -33,10 +33,24 @@ class WebApi {
       pollId
     });
   }
+	static async fetchPollAnon(pollId){
+		return await WebApi.wsRequest({
+			function: 'GetPollAnon',
+			pollId
+		});
+	}
 
   static async voteOnPoll(pollId, voteAnswer, showOnFeed){
     return await WebApi.wsRequest({
       function: 'VoteOnPoll',
+      pollId,
+      voteAnswer,
+      showOnFeed
+    });
+  }
+  static async voteOnPollAnon(pollId, voteAnswer, showOnFeed){
+    return await WebApi.wsRequest({
+      function: 'VoteOnPollAnon',
       pollId,
       voteAnswer,
       showOnFeed

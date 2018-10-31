@@ -7,12 +7,10 @@ var util = require('util')
 class WsController {
   static connectionHandler(ws, req){
     let auth;
-
     try {
       auth = Authenticator.verify( req.cookies['_auth'] );
     } catch(e){
-      ws.close();
-      return
+
     }
     let ip;
     if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
@@ -43,7 +41,7 @@ class WsController {
 		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
     let msg = JSON.parse(plaintext);
 
-
+		console.log("MSG: " + msg.function);
     try{
       switch(msg.function){
         case 'GetPollListHome':
@@ -52,9 +50,15 @@ class WsController {
         case 'GetPoll':
           await this.replyGetPoll(msg);
           break;
+        case 'GetPollAnon':
+        await this.replyGetPollAnon(msg);
+        break;
         case 'VoteOnPoll':
           await this.replyVoteOnPoll(msg);
           break;
+				case 'VoteOnPollAnon':
+	         await this.replyVoteOnPollAnon(msg);
+	         break;
         case 'GetPollList':
           await this.replyGetPollList(msg);
           break;
@@ -135,8 +139,16 @@ class WsController {
     }
 
   }
+  async replyGetPollAnon({ id, pollId }){
+    let poll = await this.apiClient.fetchPollAnon(pollId);
 
-  async replyVoteOnPoll({ id, pollId, voteAnswer, showOnFeed }){
+    let response = Object.assign(poll, { id });
+
+    this.ws.send( this.encryptResponse(response) )
+  }
+
+  async replyVoteOnPoll({ id, pollId, voteAnswer, showOnFeed }, auth){
+		let apiClient = new ServerApi(auth);
     try {
       let data = await this.apiClient.voteOnPoll({
         pollId,
@@ -146,6 +158,32 @@ class WsController {
 
 
       let results = await this.apiClient.getPollResult(pollId);
+      let response = {
+        id,
+        success: true,
+        results: results.votesPerAnswer
+      };
+
+      this.ws.send( this.encryptResponse(response) )
+    } catch(e){
+      let response = {
+        id,
+        success: false
+      };
+
+      this.ws.send( this.encryptResponse(response) )
+    }
+  }
+  async replyVoteOnPollAnon({ id, pollId, voteAnswer, showOnFeed }){
+    try {
+      let data = await this.apiClient.voteOnPollAnon({
+        pollId,
+        voteAnswer,
+        showOnFeed
+      });
+
+
+      let results = await this.apiClient.getPollResultAnon(pollId);
       let response = {
         id,
         success: true,
