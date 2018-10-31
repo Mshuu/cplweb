@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import  CryptoJS from "crypto-js";
-
+import LoginSignupIcon from './LoginSignupIcon';
 import Menu from './Menu';
 import Login from '../login/Login';
 import Signup from '../signup/Signup';
@@ -22,6 +22,7 @@ import Account from '../account/Account';
 import CreateWidget from '../createWidget/CreateWidget';
 import Rewards from '../rewards/Rewards';
 import Store from '../../models/store';
+import UsernameIcon from './UsernameIcon';
 
 import * as qs from 'query-string';
 
@@ -58,6 +59,10 @@ class Template extends Component {
     return this.store.getAuthenticated() && this.props.location.pathname != '/login';
   }
 
+  get showLogin(){
+    return !this.store.getAuthenticated() && this.props.location.pathname != '/login';
+  }
+
   render() {
     return (
       <div className="templateContainer">
@@ -65,6 +70,8 @@ class Template extends Component {
           { !this.embedded &&
             <div className="templateHeader">
               <img src={ require("../images/ClearPoll-Logo.png") } onClick={() => this.handleLogoClick()}/>
+              { this.showMenu && <UsernameIcon store={this.store}/>}
+              { this.showLogin && <LoginSignupIcon store ={this.store}/>}
               { this.showMenu && <Menu /> }
             </div>
           }
