@@ -23,8 +23,11 @@ class ViewPoll extends Component {
       authenticated: this.store.getAuthenticated(),
       loading: false,
       showOnFeed: true,
-      showVote: true
+      showVote: true,
+      showAnonVotes: true,
+      response: {}
     };
+    this.redoResults();
   }
 
   componentWillReceiveProps(props){
@@ -35,6 +38,33 @@ class ViewPoll extends Component {
     });
     this.webFetch();
   }
+  GetTheResults(response){
+    var results = [];
+    console.log("RESPONSE: %j", response);
+    if (this.state.showAnonVotes){
+      console.log("true");
+      for (var i=0;i<response.results.length;i++){
+        var answer = response.results[i].answerText;
+        var voteCount = response.results[i].voteCount;
+        var anonCount = response.anonResults[i].anonCount;
+        var finalCount = voteCount + anonCount;
+        var finalAnswer = {'answerText': answer, 'voteCount': finalCount};
+        results.push(finalAnswer);
+      }
+    } else {
+      console.log("False");
+      for (var i=0;i<response.results.length;i++){
+        var answer = response.results[i].answerText;
+        var voteCount = response.results[i].voteCount;
+        var anonCount = response.anonResults[i].anonCount;
+        var finalCount = voteCount;
+        var finalAnswer = {'answerText': answer, 'voteCount': finalCount};
+        results.push(finalAnswer);
+    }
+  }
+  console.log("RESULTS: %j", results);
+  return results;
+}
 
   async componentDidMount(){
     if(!IS_SERVER){
@@ -47,13 +77,30 @@ class ViewPoll extends Component {
   }
 
   toggleVote(){
-    this.setState({ showVote: !this.state.showVote });
+    this.setState({ showVote: false });
+  }
+  redoResults(){
+    console.log("STATE: " + this.state.showAnonVotes);
+    console.log("POLL : " + this.pollId);
+    let poll = this.store.getPoll(this.pollId);
+    var results = this.GetTheResults(poll.response);
+    poll.results = results;
+    console.log("RESULTS %j", poll.results);
+    poll.hasVoted = poll.hasVoted;
+    poll.votedOn = poll.votedOn;
+
+    this.store.setPoll(this.pollId, poll);
+    this.forceUpdate();
+  }
+  toggleAnonResults(){
+    console.log("INITIAL " + this.state.showAnonVotes);
+    this.setState({ showAnonVotes: !this.state.showAnonVotes}, () => { console.log("STATe2: " + this.state.showAnonVotes); this.redoResults() });
+
   }
 	async webFetch(){
 		if(this.store.hydrateCheck() ){
       return;
     }
-		console.log("fetching");
 		if (this.state.authenticated == true){
 			 this.setState({
           loading: true
@@ -100,12 +147,13 @@ class ViewPoll extends Component {
     });
 
 		if (this.state.authenticated == true){
-		console.log("auth yes");
     let response = await WebApi.voteOnPoll( this.pollId, answerIdx, this.state.showOnFeed );
-		console.log("response: " + response);
+    console.log("RESPONSE FROM VOTE: %j", response);
     if(response.success){
       let poll = this.store.getPoll(this.pollId);
-      poll.results = response.results;
+      var results = this.GetTheResults(response);
+      poll.results = results;
+      poll.response = response;
       poll.hasVoted = true;
       poll.votedOn = [{answerText: answerIdx }];
 
@@ -117,12 +165,13 @@ class ViewPoll extends Component {
 			loading: false
 		});
 	} else {
-		console.log("auth no : " + this.pollId + " " + answerIdx + " " + this.state.showOnFeed);
 		    let response = await WebApi.voteOnPollAnon( this.pollId, answerIdx, this.state.showOnFeed );
-				console.log("response: " + response);
+        console.log("RESPONSE FROM VOTE: %j", response);
 		    if(response.success){
 		      let poll = this.store.getPoll(this.pollId);
-		      poll.results = response.results;
+          var results = this.GetTheResults(response);
+		      poll.results = results;
+          poll.response = response;
 		      poll.hasVoted = true;
 		      poll.votedOn = [{answerText: answerIdx }];
 
@@ -149,7 +198,6 @@ class ViewPoll extends Component {
   }
 
   containerContent(poll){
-    console.log("POLL : %j", poll);
     if(this.shouldShowResults(poll)){
       return (
         <ResultsGraph poll={ poll } showVote={ this.state.showVote } />
@@ -184,9 +232,47 @@ class ViewPoll extends Component {
   numberToCommaFormat(num){
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+  downloadBanner(poll){
+    if (!this.state.authenticated && poll.isAnon == 1){
+    return (
+      <div className="pollInstallBanner2">
+        <div className="installBannerImages">
+          <a href="https://play.google.com/store/apps/details?id=com.nextechdevelopments.clearpoll" target="_blank">
+            <img src={ require('../images/google_play_icon.png') }/>
+          </a>
+          <a href="https://itunes.apple.com/us/app/clearpoll/id1347664374" target="_blank">
+            <img src={ require('../images/app_store_icon.svg') }/>
+          </a>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div></div>
+    );
+  }
+  }
+
+  signupContext(poll){
+    if (!this.state.authenticated && poll.isAnon == 1){
+    return (
+      <div className = "signupContextContainer">
+      <div className = "signupContextText">
+        Get the ClearPoll app to&nbsp;
+        <span style={{color:'#01bec0'}}>create your own polls</span>
+        &nbsp;and earn real cryptocurrency rewards!
+      </div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+      </div>
+    );
+  }
+  }
 
    socialContent(poll){
-     console.log("POLLHERE: %j", poll);
     if(this.state.authenticated) {
       return (
         <div className="socialContainer">
@@ -213,12 +299,8 @@ class ViewPoll extends Component {
       return (
         <div className="socialContainer">
           <div className="socialBanner">
-            <button className="signupButtonViewPoll">
-              Sign Up
-              <img src= { require('../images/pencil.png')} className = "signupImage" />
-            </button>
-          </div>
           Share this poll!
+          </div>
           <div className="socialButtons">
             <a target="_blank" href={ this.twitterShareUrl }>
               <img src={require('../images/twitter_icon.png')} />
@@ -236,7 +318,6 @@ class ViewPoll extends Component {
         </div>
       );
     } else {
-      console.log("here2");
       return (
         <div className="socialContainer">
           <div className="socialBanner">
@@ -259,9 +340,10 @@ class ViewPoll extends Component {
       return (
         <div className="summaryContainer">
           <SummaryHeader category={ poll.category} type={ poll.type }/>
-          <PollList category={ poll.category }  type={ poll.type }/>
+          <PollList category={ poll.category }  type={ poll.type } anon={ poll.isAnon }/>
         </div>
       );
+
     } else {
       return (
         <div className="pollInstallBanner">
@@ -289,7 +371,6 @@ class ViewPoll extends Component {
 	}
 
     let poll = new Poll(pollData);
-		console.log("pollDaTA: %j", pollData);
     return (
       <div>
         <div className="pollQuestion">
@@ -339,8 +420,14 @@ class ViewPoll extends Component {
             <div className="voteControl" onClick={() => this.toggleVote()}>
               { this.state.showVote ? "Hide Vote" : "Show Vote" }
             </div>
+            <div className="voteControl2" onClick={() => this.toggleAnonResults()}>
+              { this.state.showAnonVotes ? "Hide Unregistered Votes" : "Show Unregistered Votes" }
+            </div>
           </div>
         )}
+
+        { this.signupContext(poll) }
+        { this.downloadBanner(poll) }
 
         { this.socialContent(poll) }
 

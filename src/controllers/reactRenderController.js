@@ -100,6 +100,7 @@ if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
 let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPoll(pollId);
+  console.log("POLL: %j", poll);
 
   if (poll.success == 'false'){
     try {

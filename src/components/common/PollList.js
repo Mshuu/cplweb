@@ -34,6 +34,27 @@ class PollList extends Component {
     let currentPosition = this.state.polls.length;
 
    let response;
+   if (this.props.anon && this.props.anon == 1){
+     if (this.props.type == "Star"){
+      response = await WebApi.getPollsAnon({
+        active: 'true',
+        type: 'Star',
+        category: 'All',
+        sortOrder: 'mostVotes',
+        recordStartNo: currentPosition,
+        recordQty: LOAD_MORE_QTY
+      });
+    } else {
+     response = await WebApi.getPollsAnon({
+       active: 'true',
+       type: 'Normal',
+       category: this.props.category,
+       sortOrder: 'mostVotes',
+       recordStartNo: currentPosition,
+       recordQty: LOAD_MORE_QTY
+     });
+ }
+   } else {
     if (this.props.type == "Star"){
 			response = await WebApi.getPolls({
 				active: 'true',
@@ -52,6 +73,7 @@ class PollList extends Component {
       recordStartNo: currentPosition,
       recordQty: LOAD_MORE_QTY
     });
+}
 }
 
     this.setState({

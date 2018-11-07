@@ -3087,6 +3087,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006ea5', end
   display: flex;
   flex-direction: column;margin-bottom:30px;background:#d4d6da;padding-top:18px;padding-bottom:12px;
 }
+.signupContextContainer {
+  width: 100%;
+  display : flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  background: #323335;
+  padding-top: 18px;
+  padding-bottom: 12px;
+  height: 35px;
+}
 
 .socialContainer .socialBanner {
   width: 100%;
@@ -3129,15 +3140,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006ea5', end
   background-color: #01bec0;
   border-radius: 30px;
 }
-.socialContainer .signupButtonViewPoll .signupImage{
-	height: 30px;
+
+.signupContextContainer .signupButtonViewPoll .signupImage{
+	height: 20px;
 	float: right;
-	margin-right: 20px;
+	margin-right: 10px;
 	vertical-align: middle;
 	display: inline-block;
-  margin-top: 10px;
-  margin-left: -50px;
+  margin-top: 5px;
+  margin-left: -40px;
 
+}
+.signupContextContainer .signupButtonViewPoll .signupButtonViewPollText{
+  font-size: 14px;
+  height: 20px;
+  text-align: center;
+  float: center;
+  line-height: 0px !important;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }
 .signupbuttonViewPoll:active {
 outline: none;
@@ -3145,24 +3168,33 @@ border: none;
 }
 
 .signupButtonViewPoll {
-  width: 240px;
-  height: 50px;
+  width: 140px;
+  height: 30px;
   border-radius: 25px;
   border: none;
   background: #ef7245 !important;
   color: #ffffff;
   font-size: 22px;
   line-height: 50px;
-  margin-top: 20px!important;
   cursor: pointer;
-  transition: background-color 100ms linear;font-weight:300;margin-bottom:15px;
+  transition: background-color 100ms linear;font-weight:300;margin-bottom:8px;
+  margin-left: 15px;
 
+}
+.signupContextContainer .signupContextText {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-bottom: 8px !important;
 }
 
 .signupButtonViewPoll:hover {transition: background-color 100ms linear;background:#cc5323!important;cursor:pointer!important;}
 
 .pollInstallBanner {
   margin: 15px 0 35px 0;
+}
+.pollInstallBanner2 {
+  margin: 15px 0 10px 0;
 }
 
 .socialFeedText {
@@ -3207,6 +3239,14 @@ border: none;
   border-radius: 30px;
   background-color: #d4d6da;
   cursor: pointer;
+}
+.voteControl2 {
+  color: #000;
+  padding: 8px 25px;
+  border-radius: 30px;
+  background-color: #d4d6da;
+  cursor: pointer;
+  margin-left: 30px;
 }
 
 .voteControlContainer {

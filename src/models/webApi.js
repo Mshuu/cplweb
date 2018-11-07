@@ -158,6 +158,12 @@ class WebApi {
       ...params
     });
   }
+  static async getPollsAnon(params){
+    return await WebApi.wsRequest({
+      function: 'GetPollListAnon',
+      ...params
+    });
+  }
 
   static async doSearch(searchString){
     return await WebApi.wsRequest({

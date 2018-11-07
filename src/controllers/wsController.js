@@ -62,6 +62,9 @@ class WsController {
         case 'GetPollList':
           await this.replyGetPollList(msg);
           break;
+        case 'GetPollListAnon':
+          await this.replyGetPollListAnon(msg);
+          break;
         case 'SearchPolls':
           await this.replySearchPolls(msg);
           break;
@@ -109,7 +112,7 @@ class WsController {
           break;
       }
     } catch(e){
-      console.dir("ERROR: " + e);
+      console.dir(e,null);
 
       let response = Object.assign({success: false, error: e.message}, { id: msg.id });
       this.ws.send( this.encryptResponse(response) )
@@ -128,12 +131,15 @@ class WsController {
 
     if (poll.success == 'false'){
 
+
+
           let response = poll;
 
           this.ws.send( this.encryptResponse(response) )
     } else {
 
           let response = Object.assign(poll, { id });
+
 
           this.ws.send( this.encryptResponse(response) )
     }
@@ -161,7 +167,8 @@ class WsController {
       let response = {
         id,
         success: true,
-        results: results.votesPerAnswer
+        results: results.votesPerAnswer,
+        anonResults: results.votesPerAnswerAnon
       };
 
       this.ws.send( this.encryptResponse(response) )
@@ -187,7 +194,8 @@ class WsController {
       let response = {
         id,
         success: true,
-        results: results.votesPerAnswer
+        results: results.votesPerAnswer,
+        anonResults: results.votesPerAnswerAnon
       };
 
       this.ws.send( this.encryptResponse(response) )
@@ -204,6 +212,14 @@ class WsController {
   async replyGetPollList(params){
     let id = params.id;
     let polls = await this.apiClient.getPollList(params);
+
+    let response = Object.assign({polls, id });
+
+    this.ws.send( this.encryptResponse(response) )
+  }
+  async replyGetPollListAnon(params){
+    let id = params.id;
+    let polls = await this.apiClient.getPollListAnon(params);
 
     let response = Object.assign({polls, id });
 
