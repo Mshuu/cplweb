@@ -25,7 +25,6 @@ class ResultGraph extends Component {
     });
 
 
-    // Fix the percentages so they add up to 100. Oh yes, I went there.
     while((100 - results.reduce((acc, result) => { return acc + result.votePercentage }, 0)) > 0){
       let highestIdx = -1;
       let highestDiff = 0;

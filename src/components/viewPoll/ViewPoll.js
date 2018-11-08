@@ -128,6 +128,7 @@ class ViewPoll extends Component {
       if (poll.success == 'false' && this.store.getAuthenticated()){
           this.props.history.push('/');
         } else if (poll.success == 'false' && !this.store.getAuthenticated()){
+          console.log("POLLRESPNOSE: %j", poll);
           this.props.history.push('/login');
 
       } else {
@@ -193,7 +194,7 @@ class ViewPoll extends Component {
     } else if (poll.isAnon == 0 && !this.store.getAuthenticated()){
 			return true;
     } else {
-      return (poll.hasVoted || poll.hasExpired);
+      return (poll.hasVoted || poll.hasExpired || poll.forceResults);
     }
   }
 

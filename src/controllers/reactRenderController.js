@@ -125,6 +125,7 @@ let apiClient = new ServerApi(auth,ip);
 }
 
 async function unauthenticatedPoll(req, res, pollId, auth){
+  console.log("UNAUTH");
   var ip = ""
 if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
   ip = req.headers['x-forwarded-for'];
@@ -134,12 +135,23 @@ if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
 let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPollAnon(pollId);
+  console.log("returned");
   if (poll.success == 'false'){
    try {
      auth = Authenticator.verify( req.cookies['_auth'] );
      res.redirect('/');
    } catch(e) {
+     if (poll.comment == "Already voted"){
+       store.setAuthenticated( false );
+       store.setPoll( pollId, poll );
+
+       let metadata = Object.assign({}, defaultMetadata, {title: poll.question});
+
+       renderHead(req, res, metadata);
+       renderReact(req, res, store);
+     } else {
      res.redirect('/login');
+   }
    }
  } else {
   store.setAuthenticated( false );

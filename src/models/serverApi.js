@@ -170,11 +170,134 @@ class ServerApi {
   }
 	async fetchPollAnon(pollId){
     let pollData = await ServerApi.request3({
-      function: 'GetPoll',
+      function: 'GetPollAnon',
       pollId
     });
     if (pollData.success == 'false'){
+      if (pollData.comment == "Already voted"){
+        let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
+        var pollisAnon = poll.isAnon;
+        let hasExpired = moment(1000*poll.pollTime) < moment();
+        let forceResults = true;
+        if( poll.isAnon == 1){
+          let pollResults = await this.getPollResultAnon(pollId);
+          poll = Object.assign(this.getHasVoted(pollId), pollResults.pollInfo[0], {pollId});
+          poll.results = pollResults.votesPerAnswer;
+          poll.anonResults = pollResults.votesPerAnswerAnon;
+          poll.votedOn = pollResults.voted;
+          poll.pollVotes = pollResults.totalVotes;
+
+                                let tempResponse = {
+                                  id: pollResults.id,
+                                  success: true,
+                                  results: pollResults.votesPerAnswer,
+                                  anonResults: pollResults.votesPerAnswerAnon
+                                };
+                                poll.response = tempResponse;
+          let pollAnswers = await this.getPollAnswers(pollId);
+          poll.answers = pollAnswers.answer;
+          poll.isAnon = pollisAnon;
+          poll.forceResults = forceResults;
+          return poll;
+        } else if (pollData.success == 'false'){
+          if (pollData.comment == "Already voted"){
+
+
+                          if( hasExpired || poll.hasVoted || poll.creatorId == 3939 || poll.forceResults ){
+                            let pollResults = await this.getPollResultAnon(pollId);
+
+                            poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+                            poll.results = pollResults.votesPerAnswer;
+                            poll.anonResults = pollResults.votesPerAnswerAnon
+                            poll.votedOn = pollResults.voted;
+                            poll.pollVotes = pollResults.totalVotes;
+                            poll.forceResults = forceResults;
+
+                                                  let tempResponse = {
+                                                    id: pollResults.id,
+                                                    success: true,
+                                                    results: pollResults.votesPerAnswer,
+                                                    anonResults: pollResults.votesPerAnswerAnon
+                                                  };
+                                                  poll.response = tempResponse;
+                          } else {
+                            let pollAnswers = await this.getPollAnswers(pollId);
+                            poll.answers = pollAnswers.answer;
+                          }
+
+                          if(poll.type == "Ratings"){
+                            if(!poll.results) {
+                              let resultResponse = await ServerApi.request({
+                                function: 'GetPublicPollResult',
+                                pollId
+                              });
+                              poll.results = resultResponse.votesPerAnswer;
+                            }
+
+                            let totalVotes = poll.pollVotes;
+
+                            if(totalVotes == 0)
+                              poll.averageRating = 0;
+                            else
+                              poll.averageRating = poll.results.reduce(
+                                (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
+                                0
+                              );
+                          }
+
+                          return poll;
+          } else {
+              return pollData;
+            }
+            } else {
+
+
+              if( hasExpired || poll.hasVoted || poll.creatorId == 3939 ){
+                let pollResults = await this.getPollResultAnon(pollId);
+
+                poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+                poll.results = pollResults.votesPerAnswer;
+                poll.anonResults = pollResults.votesPerAnswerAnon
+                poll.votedOn = pollResults.voted;
+                poll.pollVotes = pollResults.totalVotes;
+
+                                      let tempResponse = {
+                                        id: pollResults.id,
+                                        success: true,
+                                        results: pollResults.votesPerAnswer,
+                                        anonResults: pollResults.votesPerAnswerAnon
+                                      };
+                                      poll.response = tempResponse;
+              } else {
+                let pollAnswers = await this.getPollAnswers(pollId);
+                poll.answers = pollAnswers.answer;
+              }
+
+              if(poll.type == "Ratings"){
+                if(!poll.results) {
+                  let resultResponse = await ServerApi.request({
+                    function: 'GetPublicPollResult',
+                    pollId
+                  });
+                  poll.results = resultResponse.votesPerAnswer;
+                }
+
+                let totalVotes = poll.pollVotes;
+
+                if(totalVotes == 0)
+                  poll.averageRating = 0;
+                else
+                  poll.averageRating = poll.results.reduce(
+                    (acc, answer) => {return acc + Number(answer.answerText) * (answer.voteCount / totalVotes)},
+                    0
+                  );
+              }
+
+              return poll;
+        }
+      } else {
           return pollData;
+        }
     } else {
     let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
 		var pollisAnon = poll.isAnon;
