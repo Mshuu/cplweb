@@ -73,7 +73,7 @@ class Rewards extends Component {
           </div>
 
           <div className="rowItem">
-            <div className="itemHeader">POLL Token Balance</div>
+            <div className="itemHeader">POLL Rewards Balance</div>
             <div className="itemValue">{ settings.BP }</div>
             <div className="itemFooter">
               <div className="payoutButton">Request Payout</div>

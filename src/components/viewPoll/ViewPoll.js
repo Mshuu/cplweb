@@ -77,7 +77,7 @@ class ViewPoll extends Component {
   }
 
   toggleVote(){
-    this.setState({ showVote: false });
+    this.setState({ showVote: !this.state.showVote });
   }
   redoResults(){
     console.log("STATE: " + this.state.showAnonVotes);
@@ -139,6 +139,7 @@ class ViewPoll extends Component {
 				loading: false
 			});
 		}
+    this.redoResults();
 
 	}
 
