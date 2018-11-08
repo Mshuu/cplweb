@@ -100,7 +100,6 @@ if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
 let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPoll(pollId);
-  console.log("POLL: %j", poll);
 
   if (poll.success == 'false'){
     try {
@@ -125,7 +124,6 @@ let apiClient = new ServerApi(auth,ip);
 }
 
 async function unauthenticatedPoll(req, res, pollId, auth){
-  console.log("UNAUTH");
   var ip = ""
 if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
   ip = req.headers['x-forwarded-for'];
@@ -135,7 +133,6 @@ if (req.connection.remoteAddress == "::ffff:127.0.0.1"){
 let apiClient = new ServerApi(auth,ip);
   let store = new Store();
   let poll = await apiClient.fetchPollAnon(pollId);
-  console.log("returned");
   if (poll.success == 'false'){
    try {
      auth = Authenticator.verify( req.cookies['_auth'] );

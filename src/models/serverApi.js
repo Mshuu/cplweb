@@ -108,17 +108,14 @@ class ServerApi {
     if(!this.historyFetched)
       await this.fetchVotehistory();
 
-      console.log("Fetching");
     let pollData = await ServerApi.request3({
       function: 'GetPoll',
       pollId
     });
 
     if (pollData.success == 'false'){
-      console.log("false");
       return pollData;
     } else {
-      console.log("success");
 
           let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
           let hasExpired = moment(1000*poll.pollTime) < moment();

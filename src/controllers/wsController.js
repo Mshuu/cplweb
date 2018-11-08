@@ -41,7 +41,6 @@ class WsController {
 		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
     let msg = JSON.parse(plaintext);
 
-		console.log("MSG: " + msg.function);
     try{
       switch(msg.function){
         case 'GetPollListHome':

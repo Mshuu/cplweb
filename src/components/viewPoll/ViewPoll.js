@@ -40,9 +40,7 @@ class ViewPoll extends Component {
   }
   GetTheResults(response){
     var results = [];
-    console.log("RESPONSE: %j", response);
     if (this.state.showAnonVotes){
-      console.log("true");
       for (var i=0;i<response.results.length;i++){
         var answer = response.results[i].answerText;
         var voteCount = response.results[i].voteCount;
@@ -52,7 +50,6 @@ class ViewPoll extends Component {
         results.push(finalAnswer);
       }
     } else {
-      console.log("False");
       for (var i=0;i<response.results.length;i++){
         var answer = response.results[i].answerText;
         var voteCount = response.results[i].voteCount;
@@ -62,7 +59,6 @@ class ViewPoll extends Component {
         results.push(finalAnswer);
     }
   }
-  console.log("RESULTS: %j", results);
   return results;
 }
 
@@ -80,12 +76,9 @@ class ViewPoll extends Component {
     this.setState({ showVote: !this.state.showVote });
   }
   redoResults(){
-    console.log("STATE: " + this.state.showAnonVotes);
-    console.log("POLL : " + this.pollId);
     let poll = this.store.getPoll(this.pollId);
     var results = this.GetTheResults(poll.response);
     poll.results = results;
-    console.log("RESULTS %j", poll.results);
     poll.hasVoted = poll.hasVoted;
     poll.votedOn = poll.votedOn;
 
@@ -93,7 +86,6 @@ class ViewPoll extends Component {
     this.forceUpdate();
   }
   toggleAnonResults(){
-    console.log("INITIAL " + this.state.showAnonVotes);
     this.setState({ showAnonVotes: !this.state.showAnonVotes}, () => { console.log("STATe2: " + this.state.showAnonVotes); this.redoResults() });
 
   }
@@ -128,7 +120,6 @@ class ViewPoll extends Component {
       if (poll.success == 'false' && this.store.getAuthenticated()){
           this.props.history.push('/');
         } else if (poll.success == 'false' && !this.store.getAuthenticated()){
-          console.log("POLLRESPNOSE: %j", poll);
           this.props.history.push('/login');
 
       } else {
@@ -150,7 +141,6 @@ class ViewPoll extends Component {
 
 		if (this.state.authenticated == true){
     let response = await WebApi.voteOnPoll( this.pollId, answerIdx, this.state.showOnFeed );
-    console.log("RESPONSE FROM VOTE: %j", response);
     if(response.success){
       let poll = this.store.getPoll(this.pollId);
       var results = this.GetTheResults(response);
@@ -168,7 +158,6 @@ class ViewPoll extends Component {
 		});
 	} else {
 		    let response = await WebApi.voteOnPollAnon( this.pollId, answerIdx, this.state.showOnFeed );
-        console.log("RESPONSE FROM VOTE: %j", response);
 		    if(response.success){
 		      let poll = this.store.getPoll(this.pollId);
           var results = this.GetTheResults(response);
