@@ -27,7 +27,7 @@ class ViewPoll extends Component {
       showAnonVotes: true,
       response: {}
     };
-    this.redoResults();
+
   }
 
   componentWillReceiveProps(props){
@@ -37,6 +37,8 @@ class ViewPoll extends Component {
       loading: true
     });
     this.webFetch();
+    this.redoResults();
+
   }
   GetTheResults(response){
     var results = [];
@@ -77,6 +79,7 @@ class ViewPoll extends Component {
   }
   redoResults(){
     let poll = this.store.getPoll(this.pollId);
+    console.log("POLL: %j", poll);
     var results = this.GetTheResults(poll.response);
     poll.results = results;
     poll.hasVoted = poll.hasVoted;
@@ -97,6 +100,7 @@ class ViewPoll extends Component {
 			 this.setState({
           loading: true
         });
+        console.log("FETCHING");
 
         let poll = await WebApi.fetchPoll( this.pollId );
         if (poll.success == 'false' && this.store.getAuthenticated()){

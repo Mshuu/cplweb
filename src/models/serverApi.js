@@ -139,7 +139,9 @@ class ServerApi {
           } else {
             let pollResults = await this.getPollResult(pollId);
 
+
             poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+            console.log("POLL2: %j",poll);
             poll.results = pollResults.votesPerAnswer;
             poll.anonResults = pollResults.votesPerAnswerAnon;
             poll.votedOn = pollResults.voted;
@@ -233,6 +235,22 @@ class ServerApi {
                                                   };
                                                   poll.response = tempResponse;
                           } else {
+                            let pollResults = await this.getPollResultAnon(pollId);
+
+                            poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+                            poll.results = pollResults.votesPerAnswer;
+                            poll.anonResults = pollResults.votesPerAnswerAnon
+                            poll.votedOn = pollResults.voted;
+                            poll.pollVotes = pollResults.totalVotes;
+                            poll.forceResults = forceResults;
+
+                                                  let tempResponse = {
+                                                    id: pollResults.id,
+                                                    success: true,
+                                                    results: pollResults.votesPerAnswer,
+                                                    anonResults: pollResults.votesPerAnswerAnon
+                                                  };
+                                                  poll.response = tempResponse;
                             let pollAnswers = await this.getPollAnswers(pollId);
                             poll.answers = pollAnswers.answer;
                           }
