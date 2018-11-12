@@ -188,12 +188,13 @@ class ServerApi {
     });
     if (pollData.success == 'false'){
 
+
       if (pollData.comment == "Already voted"){
         let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
         var pollisAnon = poll.isAnon;
         let hasExpired = moment(1000*poll.pollTime) < moment();
         let forceResults = true;
-        if( poll.isAnon == 1){
+        if( poll.isAnon == 1 && poll.type != "Ratings"){
           let pollResults = await this.getPollResultAnon(pollId);
           poll = Object.assign(this.getHasVoted(pollId), pollResults.pollInfo[0], {pollId});
           poll.results = pollResults.votesPerAnswer;
@@ -333,7 +334,7 @@ class ServerApi {
     let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
 		var pollisAnon = poll.isAnon;
     let hasExpired = moment(1000*poll.pollTime) < moment();
-    if( poll.isAnon == 1){
+    if( poll.isAnon == 1 && poll.type != "Ratings"){
       let pollResults = await this.getPollResultAnon(pollId);
       poll = Object.assign(this.getHasVoted(pollId), pollResults.pollInfo[0], {pollId});
       poll.results = pollResults.votesPerAnswer;
