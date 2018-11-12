@@ -10,7 +10,7 @@ import './RatingPoll.css';
 class RatingPoll extends Component {
   constructor(props){
     super(props);
-=  }
+  }
 
   get averageScoreString(){
     return parseFloat(Math.round(this.props.poll.averageRating * 10) / 10).toFixed(1);
