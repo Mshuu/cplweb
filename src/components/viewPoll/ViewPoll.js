@@ -38,7 +38,6 @@ class ViewPoll extends Component {
     });
     this.webFetch();
     this.redoResults();
-
   }
   GetTheResults(response){
     var results = [];
@@ -79,6 +78,7 @@ class ViewPoll extends Component {
   }
   redoResults(){
     let poll = this.store.getPoll(this.pollId);
+    if (poll){
     console.log("POLL: %j", poll);
     var results = this.GetTheResults(poll.response);
     poll.results = results;
@@ -87,6 +87,9 @@ class ViewPoll extends Component {
 
     this.store.setPoll(this.pollId, poll);
     this.forceUpdate();
+  } else {
+    console.log("no poll");
+  }
   }
   toggleAnonResults(){
     this.setState({ showAnonVotes: !this.state.showAnonVotes}, () => { console.log("STATe2: " + this.state.showAnonVotes); this.redoResults() });
@@ -110,6 +113,7 @@ class ViewPoll extends Component {
 
         } else {
           this.store.setPoll(this.pollId, poll);
+              this.redoResults();
         }
 
         this.setState({
@@ -128,13 +132,14 @@ class ViewPoll extends Component {
 
       } else {
         this.store.setPoll(this.pollId, poll);
+            this.redoResults();
       }
 
 			this.setState({
 				loading: false
 			});
 		}
-    this.redoResults();
+
 
 	}
 
