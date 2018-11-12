@@ -28,6 +28,8 @@ class ViewPoll extends Component {
       response: {}
     };
 
+    this.redoResults();
+
 
   }
 
@@ -92,7 +94,7 @@ class ViewPoll extends Component {
   }
   }
   toggleAnonResults(){
-    this.setState({ showAnonVotes: !this.state.showAnonVotes}, () => { console.log("STATe2: " + this.state.showAnonVotes); this.redoResults() });
+    this.setState({ showAnonVotes: !this.state.showAnonVotes}, () => { this.redoResults() });
 
   }
 	async webFetch(){
