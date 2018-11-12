@@ -28,6 +28,7 @@ class ViewPoll extends Component {
       response: {}
     };
 
+
   }
 
   componentWillReceiveProps(props){
@@ -36,6 +37,7 @@ class ViewPoll extends Component {
     this.setState({
       loading: true
     });
+
     this.webFetch();
     this.redoResults();
   }
@@ -198,6 +200,8 @@ class ViewPoll extends Component {
   }
 
   containerContent(poll){
+    console.log("FETCHING");
+
     if(this.shouldShowResults(poll)){
       return (
         <ResultsGraph poll={ poll } showVote={ this.state.showVote } />

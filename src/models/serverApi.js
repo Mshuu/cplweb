@@ -184,7 +184,7 @@ class ServerApi {
   }
 	async fetchPollAnon(pollId){
     let pollData = await ServerApi.request3({
-      function: 'GetPollAnon',
+      function: 'GetPollAnon2',
       pollId
     });
     console.log("pollDATA: %j", pollData);
@@ -377,6 +377,21 @@ class ServerApi {
                                   };
                                   poll.response = tempResponse;
           } else {
+            let pollResults = await this.getPollResultAnon(pollId);
+
+            poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
+            poll.results = pollResults.votesPerAnswer;
+            poll.anonResults = pollResults.votesPerAnswerAnon
+            poll.votedOn = pollResults.voted;
+            poll.pollVotes = pollResults.totalVotes;
+
+                                  let tempResponse = {
+                                    id: pollResults.id,
+                                    success: true,
+                                    results: pollResults.votesPerAnswer,
+                                    anonResults: pollResults.votesPerAnswerAnon
+                                  };
+                                  poll.response = tempResponse;
             let pollAnswers = await this.getPollAnswers(pollId);
             poll.answers = pollAnswers.answer;
           }
