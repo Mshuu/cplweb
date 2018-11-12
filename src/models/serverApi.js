@@ -141,7 +141,6 @@ class ServerApi {
 
 
             poll = Object.assign(poll, pollResults.pollInfo[0], {pollId});
-            console.log("POLL2: %j",poll);
             poll.results = pollResults.votesPerAnswer;
             poll.anonResults = pollResults.votesPerAnswerAnon;
             poll.votedOn = pollResults.voted;
@@ -187,7 +186,6 @@ class ServerApi {
       function: 'GetPollAnon2',
       pollId
     });
-    console.log("pollDATA: %j", pollData);
     if (pollData.success == 'false'){
 
       if (pollData.comment == "Already voted"){
@@ -331,7 +329,6 @@ class ServerApi {
           return pollData;
         }
     } else {
-      console.log("GETTING ANON");
 
     let poll = Object.assign(this.getHasVoted(pollId), pollData.poll[0], {pollId});
 		var pollisAnon = poll.isAnon;
