@@ -447,8 +447,10 @@ class ViewPoll extends Component {
 
   commentSection(){
     return (
+      <div className="disqusContainer">
       <div id="disqus_thread">
         </div>
+      </div>
         );
   }
 

@@ -3129,6 +3129,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006ea5', end
   margin-bottom: 30px;
 }
 
+.viewPoll .disqusContainer {
+  margin-bottom: 30px;
+  padding: 0 35px 0 35px;
+}
+
 .socialContainer .voteButton {
   display: inline-block;
   text-decoration: none;
