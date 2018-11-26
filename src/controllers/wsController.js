@@ -109,6 +109,9 @@ class WsController {
         case 'UserSignup':
           await this.replyUserSignup(msg);
           break;
+        case 'FetchAdvert':
+          await this.replyFetchAdvert(msg);
+          break;
       }
     } catch(e){
       console.dir(e,null);
@@ -123,6 +126,11 @@ class WsController {
     let response = Object.assign(data, { id });
 
     this.ws.send( this.encryptResponse(response) )
+  }
+  async replyFetchAdvert({ category }){
+    let data = await this.apiClient.FetchAdvert(category);
+    let response = data;
+    this.ws.send( this.encryptResponse(response));
   }
 
   async replyGetPoll({ id, pollId }){

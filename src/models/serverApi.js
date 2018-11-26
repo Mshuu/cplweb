@@ -48,10 +48,12 @@ class ServerApi {
   static async request2(params){
     let response;
     let requestParams = params;
+    console.log("REQUEST: %j",requestParams);
 
     try {
 			var server = "https://business.nextechdevelopments.com/CPLB";
       response = await axios.post(server, requestParams);
+      console.log(response);
     } catch(e){
       console.dir("ERROR2 : " + e);
       throw new Error('A network error occured');
@@ -84,6 +86,8 @@ class ServerApi {
       return {};
   }
 
+
+
   async fetchHome(){
     let homeData = await ServerApi.request({
       function: 'GetPollListHome',
@@ -102,6 +106,21 @@ class ServerApi {
       });
     }
     return homeData;
+  }
+
+  async FetchAdvert(category) {
+    console.log("Cate2: %j", category['category']);
+    let adData = await ServerApi.request2({
+      function: 'FetchAdvert',
+      category: category['category']
+    });
+
+    if (adData.success == "true"){
+      return adData;
+    } else {
+      console.log("ERROR");
+      return adData;
+    }
   }
 
   async fetchPoll(pollId){
