@@ -264,7 +264,7 @@ let apiClient = new ServerApi(auth,ip);
   let category = req.params.category;
 
   if(category){
-    /**
+
     let polls = await apiClient.getPollList({
       active: 'false',
       type: 'Completed',
@@ -276,14 +276,16 @@ let apiClient = new ServerApi(auth,ip);
       positionLongitude: '',
       locationFilter: 'Global'
     });
-**/
+/**
 console.log("CATE: %j", category);
     let polls = await apiClient.FetchAdvert({
       category
     });
     console.log("POLL: %j", polls);
+    **/
     store.setCategoryPolls(category, polls);
   }
+
 
 
   renderReact(req, res, store);

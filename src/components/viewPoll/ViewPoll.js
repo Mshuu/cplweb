@@ -70,6 +70,11 @@ class ViewPoll extends Component {
   async componentDidMount(){
     if(!IS_SERVER){
       this.webFetch();
+
+    const s = document.createElement('script');
+      s.src = 'https://clearpoll-1.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      document.body.appendChild(s);
     }
   }
 
@@ -434,8 +439,17 @@ class ViewPoll extends Component {
         { this.socialContent(poll) }
 
         { this.summaryContent(poll) }
+
+        { this.commentSection() }
       </div>
     );
+  }
+
+  commentSection(){
+    return (
+      <div id="disqus_thread">
+        </div>
+        );
   }
 
   render() {

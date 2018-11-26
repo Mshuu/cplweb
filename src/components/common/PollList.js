@@ -34,13 +34,13 @@ class PollList extends Component {
     let currentPosition = this.state.polls.length;
 
    let response;
-
+/**
    response = await WebApi.FetchAdvert({
     category: this.props.category
    });
-
+**/
    console.log("RES: %j", response);
-   /**
+
    if (this.props.anon && this.props.anon == 1){
      if (this.props.type == "Star"){
       response = await WebApi.getPollsAnon({
@@ -83,7 +83,7 @@ class PollList extends Component {
 }
 
 }
-**/
+
     this.setState({
       loading: false,
       loadingMore: false,
