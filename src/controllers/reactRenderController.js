@@ -277,11 +277,9 @@ let apiClient = new ServerApi(auth,ip);
       locationFilter: 'Global'
     });
 /**
-console.log("CATE: %j", category);
     let polls = await apiClient.FetchAdvert({
       category
     });
-    console.log("POLL: %j", polls);
     **/
     store.setCategoryPolls(category, polls);
   }
