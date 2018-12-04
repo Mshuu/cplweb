@@ -45,7 +45,7 @@ class SocialPoll extends Component {
 			} else {
 				return (
 					<div className="pollLeft">
-						<span className="textHightlightGreen">{ this.poll.friendTwitterName }</span> voted on on poll #{ this.poll.pollId }
+						<span className="textHightlightGreen">{ this.poll.friendTwitterName }</span> voted on poll #{ this.poll.pollId }
 						<span className="textHightlightBlack"> '{this.poll.topic}'</span>
 					</div>
 				);
@@ -61,7 +61,7 @@ class SocialPoll extends Component {
     } else {
       return (
         <div className="pollLeft">
-          <span className="textHightlightGreen">{ this.poll.friendName }</span> voted on on poll #{ this.poll.pollId }
+          <span className="textHightlightGreen">{ this.poll.friendName }</span> voted on poll #{ this.poll.pollId }
           <span className="textHightlightBlack"> '{this.poll.topic}'</span>
         </div>
       );
