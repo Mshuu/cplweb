@@ -17,6 +17,7 @@ class ResultGraph extends Component {
 
   get resultsWithPercentages(){
     let results = this.props.poll.results.map(result => {
+      console.log("TOTAL: " + this.totalVotes + " viteCount: " + result.voteCount);
       let votePercentage = this.totalVotes == 0 ? 0 : Math.floor(100 * result.voteCount / this.totalVotes);
       if (votePercentage > 100) {
         votePercentage = 100;
@@ -41,12 +42,14 @@ class ResultGraph extends Component {
 
       results[highestIdx].votePercentage++;
     }
-
+    console.log("RES: %j", results);
     return results;
   }
 
   graphElement(result, i){
-    let votePercentage = Math.floor(100 * result.voteCount / (this.props.poll.pollVotes || 1));
+    console.log("voteCount : " + result.voteCount + " pollVotes: " + this.totalVotes);
+    let votePercentage = Math.floor(100 * result.voteCount / (this.totalVotes || 1));
+    console.log("VOTEPERC: " + votePercentage);
     let votedOn = this.props.poll.votedOn && this.props.poll.votedOn[0];
 
 
