@@ -297,9 +297,7 @@ GetScriptTag(){
             <a target="_blank" href={ this.facebookShareUrl }>
               <img src={require('../images/facebook_icon.png')} />
             </a>
-            <a target="_blank" href={ this.googleShareUrl }>
-              <img src={require('../images/google_icon.png')} />
-            </a>
+            
             <a target="_blank" href={ this.redditShareUrl }>
               <img src={require('../images/reddit_icon.png')} />
             </a>
