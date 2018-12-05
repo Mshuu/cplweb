@@ -80,7 +80,7 @@ class Template extends Component {
             <Route path="/createWidget" render={(props) => <CreateWidget {...props} store={this.store} />} />
             <Route path="/completed/:category?" render={(props) => <CompletedPolls {...props} store={this.store} />} />
             <Route path="/browse/:category?" render={(props) => <CompletedPolls {...props} store={this.store} />} />
-            <Route path="/starPolls" render={(props) => <StarPolls {...props} store={this.store} />} />
+            <Route path="/FeaturedPolls" render={(props) => <StarPolls {...props} store={this.store} />} />
             <Route path="/myVotes" render={(props) => <MyVotes {...props} store={this.store} />} />
             <Route path="/myPolls" render={(props) => <MyPolls {...props} store={this.store} />} />
             <Route path="/social/manageFriends" render={(props) => <ManageFriends {...props} store={this.store} />} />

@@ -9,7 +9,7 @@ const CATEGORY_MAP = {
   trendingPolls: {title: 'Trending'},
   endingSoonest: {title: 'Ending Soon'},
   latestPolls: {title: 'Latest'},
-  starPolls: {title: 'Featured Polls', url: '/starPolls' },
+  starPolls: {title: 'Featured Polls', url: '/FeaturedPolls' },
   myVotes: {title: 'My Votes', url: '/myVotes' },
   localPolls: {title: 'Local'},
   nationalPolls: {title: 'National' },
@@ -69,7 +69,7 @@ class PollSummary extends Component {
     if( this.countPolls('starPolls') > 0 ){
       return (
         <div>
-          <SummaryHeader title={ "Featured Polls" } image={ CategoryIcon['Featured Polls'] } url={ '/starPolls' }/>
+          <SummaryHeader title={ "Featured Polls" } image={ CategoryIcon['Featured Polls'] } url={ '/FeaturedPolls' }/>
           <PollRow polls={ this.getPollsFor('starPolls', 3) } forceNormal={ false } />
         </div>
       )

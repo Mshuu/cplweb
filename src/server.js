@@ -45,7 +45,7 @@ function childProcess() {
   app.get( "/search", Search);
   app.get( "/completed/:category*?", CompletedPolls);
   app.get( "/browse/:category*?", CompletedPolls);
-  app.get( "/starPolls", StarPolls);
+  app.get( "/FeaturedPolls", StarPolls);
   app.get( "/myVotes", MyVotes);
   app.get( "/myPolls", MyPolls);
   app.get( "/social", SocialFeed);

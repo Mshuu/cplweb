@@ -25,7 +25,7 @@ class HomeHeader extends Component {
   }
 
   openStarPolls(){
-    this.props.history.push(`/starPolls`);
+    this.props.history.push(`/FeaturedPolls`);
   }
 
   openCreateWidget(){
