@@ -76,8 +76,7 @@ class Rewards extends Component {
             <div className="itemHeader">POLL Rewards Balance</div>
             <div className="itemValue">{ settings.BP }</div>
             <div className="itemFooter">
-              <div className="payoutButton">Request Payout</div>
-              <div>The minimum payout amount is 50 POLL.</div>
+              <div>You will be paid out once your balance is over 50 POLL.</div>
             </div>
           </div>
 
