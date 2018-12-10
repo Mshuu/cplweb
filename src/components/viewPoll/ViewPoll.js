@@ -207,6 +207,14 @@ GetScriptTag(){
     }
   }
 
+  isRegistered(poll){
+    if (poll.isAnon == 1 && !this.store.getAuthenticated()){
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   containerContent(poll){
 
     if(this.shouldShowResults(poll)){
@@ -297,7 +305,7 @@ GetScriptTag(){
             <a target="_blank" href={ this.facebookShareUrl }>
               <img src={require('../images/facebook_icon.png')} />
             </a>
-            
+
             <a target="_blank" href={ this.redditShareUrl }>
               <img src={require('../images/reddit_icon.png')} />
             </a>
@@ -406,7 +414,7 @@ GetScriptTag(){
               <div className="field">
               </div>
             )}
-            { !this.shouldShowResults(poll) && (
+            { !this.shouldShowResults(poll) && this.isRegistered(poll) && (
                 <div className="field socialField">
                   <div className="socialFeedText">Show friends you voted?</div>
                   <div className="socialFeedContainer">
