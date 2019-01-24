@@ -41,6 +41,7 @@ export default class WsSocket {
     if(promises){
 
       promises.res(msg);
+    } else {
     }
   }
 

@@ -56,11 +56,11 @@ class WebApi {
       showOnFeed
     });
   }
-  static async FetchAdvert(category){
+  static async FetchAdvert(){
     return await WebApi.wsRequest({
-      function: 'FetchAdvert',
-      category
+      function: 'FetchAdvert'
     });
+
   }
   static async GetDesktopCode(phoneNumber,code){
       let params = {

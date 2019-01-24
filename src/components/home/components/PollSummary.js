@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import SummaryHeader from './SummaryHeader';
+import { Link, withRouter } from 'react-router-dom';
 import PollRow from './PollRow';
 import CategoryIcon from '../../common/CategoryIcon';
+import WebApi from '../../../models/webApi';
+import LoadingOverlay from '../../loadingOverlay/LoadingOverlay';
 
 import './PollSummary.css';
 
@@ -29,19 +32,50 @@ const CATEGORY_MAP = {
 class PollSummary extends Component {
   constructor(props){
     super(props);
-
+    this.state = {
+      loading: false
+    }
     this.props = props;
+}
+
+  async componentDidMount(){
+    this.getAds();
   }
 
-  getPollsFor(category, limit){
+  async getAds(category){
+    let advert = await WebApi.FetchAdvert();
+    this.setState({
+      advert: advert.advert
+    });
+  }
+
+ getPollsFor(category, limit){
     let numOfPolls = this.countPolls(category);
     if(numOfPolls > limit){
       if (category == "trendingPolls"){
         let startIndex = Math.floor(0);
-        console.log("DWQDWADD: %j", this.props.polls[category][4]);
-        
-        return this.props.polls[category].slice(startIndex, startIndex + limit);
+        console.log("HI %j",this.state.advert);
+        console.log("HI2 %j", this.props.polls[category][4]);
+        if (this.state.advert){
+        let newAdvert = {
+          category: category,
+          isAnon: 1,
+          locationFilter: "Global",
+          pollActive: "T",
+          pollTime: "9948512475",
+          pollVotes: 0,
+          question: this.state.advert.headline,
+          type: "Normal"
+        };
+        let normalPolls = this.props.polls[category].slice(startIndex, startIndex + limit);
+        normalPolls.splice(4,1,newAdvert);
+        return normalPolls;
       } else {
+        let normalPolls = this.props.polls[category].slice(startIndex, startIndex + limit);
+        return normalPolls;
+      }
+      } else {
+
         let startIndex = Math.floor(Math.random() * (numOfPolls - limit + 1));
         return this.props.polls[category].slice(startIndex, startIndex + limit);
       }

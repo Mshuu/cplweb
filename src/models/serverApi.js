@@ -106,18 +106,11 @@ class ServerApi {
     return homeData;
   }
 
-  async FetchAdvert(category) {
-    let adData = await ServerApi.request2({
+  async FetchAdvert() {
+     return await ServerApi.request2({
       function: 'FetchAdvert',
-      category: category['category']
+      category: "Trending"
     });
-
-    if (adData.success == "true"){
-      return adData;
-    } else {
-      console.log("ERROR");
-      return adData;
-    }
   }
 
   async fetchPoll(pollId){
