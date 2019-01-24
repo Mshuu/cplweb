@@ -65,36 +65,47 @@ class WidgetPoll extends Component {
   }
 
   async performVote(answerIdx){
-    if(!this.store.getAuthenticated()){
-      this.emitLoginMessage();
-      return;
-    }
-
-    let pollData = this.store.getPoll(this.pollId);
-    let poll = new Poll(pollData);
-
-    if(poll.hasVoted || poll.hasExpired) return;
-
     this.setState({
       loading: true
     });
 
+    if (this.state.authenticated == true){
     let response = await WebApi.voteOnPoll( this.pollId, answerIdx, this.state.showOnFeed );
-
     if(response.success){
-      poll.results = response.results;
-      poll.pollVotes += 1;
+      let poll = this.store.getPoll(this.pollId);
+      var results = this.GetTheResults(response);
+      poll.results = results;
+      poll.response = response;
       poll.hasVoted = true;
-      poll.votedOn = [{answerId: answerIdx, answerText: poll.answers[answerIdx] }];
+      poll.votedOn = [{answerText: answerIdx }];
 
       this.store.setPoll(this.pollId, poll);
     } else {
       alert('Error');
     }
-
     this.setState({
       loading: false
     });
+  } else {
+        let response = await WebApi.voteOnPollAnon( this.pollId, answerIdx, this.state.showOnFeed );
+        if(response.success){
+          let poll = this.store.getPoll(this.pollId);
+          var results = this.GetTheResults(response);
+          poll.results = results;
+          poll.response = response;
+          poll.hasVoted = true;
+          poll.votedOn = [{answerText: answerIdx }];
+
+          this.store.setPoll(this.pollId, poll);
+        } else {
+          alert('Error');
+        }
+        this.setState({
+          loading: false
+        });
+  }
+
+
   }
 
   containerContent(poll){

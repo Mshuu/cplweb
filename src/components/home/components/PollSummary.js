@@ -38,6 +38,8 @@ class PollSummary extends Component {
     if(numOfPolls > limit){
       if (category == "trendingPolls"){
         let startIndex = Math.floor(0);
+        console.log("DWQDWADD: %j", this.props.polls[category][4]);
+        
         return this.props.polls[category].slice(startIndex, startIndex + limit);
       } else {
         let startIndex = Math.floor(Math.random() * (numOfPolls - limit + 1));
