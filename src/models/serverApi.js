@@ -106,10 +106,10 @@ class ServerApi {
     return homeData;
   }
 
-  async FetchAdvert() {
+  async FetchAdvert(category) {
      return await ServerApi.request2({
       function: 'FetchAdvert',
-      category: "Trending"
+      category: category
     });
   }
 

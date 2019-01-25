@@ -17,8 +17,19 @@ class Poll extends Component {
   openPoll(){
     this.props.history.push(`/poll/${this.poll.id}`);
   }
+  openAdvert(){
+    var win = window.open(this.poll.url, '_blank');
+    win.focus();
+  }
 
   button(){
+     if (this.poll.isAdvert){
+       return (
+         <span className="pollVoteButton2" onClick={ () => this.openAdvert() }>
+           { this.poll.btnText }
+         </span>
+       )
+     } else {
     if(this.poll.hasVoted || this.poll.hasExpired)
       return (
         <span className="pollVoteButton resultsButton" onClick={ () => this.openPoll() }>
@@ -31,6 +42,7 @@ class Poll extends Component {
           Vote
         </span>
       );
+    }
   }
 
   renderStar(){
@@ -50,10 +62,13 @@ class Poll extends Component {
           </div>
         </div>
         <div className="pollBottom">
+                    { !this.props.poll.isAdvert &&
           <span className="pollVotes">
+
             <img src={ require('../images/poll_tick_icon.png') } />
             { this.props.poll.pollVotes }
           </span>
+        }
           { !this.poll.hasExpired && this.poll.twitterName != "Sponsored Poll" &&  (
             <span className="pollTimeRemaining">
               <img src={ require('../images/poll_clock_icon.png') } />
@@ -92,10 +107,13 @@ class Poll extends Component {
           </div>
         </div>
         <div className="pollBottom">
-          <span className="pollVotes">
-            <img src={ require('../images/poll_tick_icon.png') } />
-            { this.poll.pollVotes }
-          </span>
+        { !this.props.poll.isAdvert &&
+<span className="pollVotes">
+
+<img src={ require('../images/poll_tick_icon.png') } />
+{ this.props.poll.pollVotes }
+</span>
+}
           { this.button() }
         </div>
       </div>

@@ -127,8 +127,8 @@ class WsController {
 
     this.ws.send( this.encryptResponse(response) )
   }
-  async replyFetchAdvert({ id }){
-    let data = await this.apiClient.FetchAdvert();
+  async replyFetchAdvert({ id, category }){
+    let data = await this.apiClient.FetchAdvert(category);
     let response = Object.assign(data, { id });
     this.ws.send( this.encryptResponse(response));
   }

@@ -64,14 +64,18 @@ class PollSummary extends Component {
           pollActive: "T",
           pollTime: "9948512475",
           pollVotes: 0,
-          question: this.state.advert.headline,
-          type: "Normal"
+          question: this.state.advert.text,
+          type: "Normal",
+          isAdvert: true,
+          url: this.state.advert.url,
+          btnText: this.state.advert.btnText
         };
-        let normalPolls = this.props.polls[category].slice(startIndex, startIndex + limit);
-        normalPolls.splice(4,1,newAdvert);
+        let normalPolls = this.props.polls[category].slice(startIndex, startIndex + 9);
+        normalPolls.splice(4,0,newAdvert);
+        normalPolls.splice(9,0,newAdvert);
         return normalPolls;
       } else {
-        let normalPolls = this.props.polls[category].slice(startIndex, startIndex + limit);
+        let normalPolls = this.props.polls[category].slice(startIndex, startIndex + 9);
         return normalPolls;
       }
       } else {

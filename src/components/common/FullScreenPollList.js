@@ -16,8 +16,17 @@ class FullScreenPollList extends Component {
     super(props);
 
     this.state = {
-      sortOrder: "mostVotes"
+      sortOrder: "mostVotes",
+      hasFetched: false
     };
+  }
+  async fetchAdvert(category){
+    console.log("HERE");
+    let advert = await WebApi.FetchAdvert(category);
+    this.setState({
+      advert: advert.advert,
+      hasFetched: true
+    });
   }
 
   get pollElements(){
@@ -25,6 +34,34 @@ class FullScreenPollList extends Component {
 
     let polls = this.props.polls.slice(0);
     //this.applySortOrder(polls)
+    console.log("props: %j", this.props.polls);
+    console.log("hasFetched: " + this.state.hasFetched);
+  if (!IS_SERVER && !(this.props.polls === undefined) && this.props.polls.length != 0){
+    if (!this.state.hasFetched && this.props.polls){
+      console.log("firing");
+      this.fetchAdvert(this.props.polls.slice(0)[0].category);
+    }
+    console.log("aint server");
+    console.log("this.props: %j",this.props.polls);
+    if (this.state.advert){
+    let newAdvert = {
+      category: polls[0].category,
+      isAnon: 1,
+      locationFilter: "Global",
+      pollActive: "T",
+      pollTime: "9948512475",
+      pollVotes: 0,
+      question: this.state.advert.text,
+      type: "Normal",
+      isAdvert: true,
+      url: this.state.advert.url,
+      btnText: this.state.advert.btnText
+    };
+    polls.splice(4,1,newAdvert);
+    polls.splice(9,1,newAdvert);
+  }
+}
+
 
     return polls.map( (poll, i) => {
       return (

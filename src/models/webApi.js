@@ -56,9 +56,10 @@ class WebApi {
       showOnFeed
     });
   }
-  static async FetchAdvert(){
+  static async FetchAdvert(category){
     return await WebApi.wsRequest({
-      function: 'FetchAdvert'
+      function: 'FetchAdvert',
+      category: category
     });
 
   }

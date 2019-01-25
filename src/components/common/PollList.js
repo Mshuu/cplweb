@@ -74,6 +74,31 @@ class PollList extends Component {
       recordStartNo: currentPosition,
       recordQty: LOAD_MORE_QTY
     });
+    let advert = await WebApi.FetchAdvert();
+    this.setState({
+      advert: advert.advert
+    });
+
+    if (this.state.advert){
+    let newAdvert = {
+      category: this.props.category,
+      isAnon: 1,
+      locationFilter: "Global",
+      pollActive: "T",
+      pollTime: "9948512475",
+      pollVotes: 0,
+      question: this.state.advert.text,
+      type: "Normal",
+      isAdvert: true,
+      url: this.state.advert.url,
+      btnText: this.state.advert.btnText
+    };
+    response.polls.splice(4,0,newAdvert);
+    response.polls.splice(9,0,newAdvert);
+    response.polls.splice(14,0,newAdvert);
+    response.polls.splice(19,0,newAdvert);
+  } else {
+  }
 }
 
 }
