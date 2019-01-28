@@ -71,7 +71,7 @@ class PollSummary extends Component {
         };
         let normalPolls = this.props.polls[category].slice(startIndex, startIndex + 9);
         normalPolls.splice(4,0,newAdvert);
-        normalPolls.splice(9,0,newAdvert);
+        normalPolls.splice(9,1,newAdvert);
         return normalPolls;
       } else {
         let normalPolls = this.props.polls[category].slice(startIndex, startIndex + 9);
