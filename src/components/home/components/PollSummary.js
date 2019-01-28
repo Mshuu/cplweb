@@ -54,8 +54,6 @@ class PollSummary extends Component {
     if(numOfPolls > limit){
       if (category == "trendingPolls"){
         let startIndex = Math.floor(0);
-        console.log("HI %j",this.state.advert);
-        console.log("HI2 %j", this.props.polls[category][4]);
         if (this.state.advert){
         let newAdvert = {
           category: category,

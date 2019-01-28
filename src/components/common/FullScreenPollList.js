@@ -21,7 +21,6 @@ class FullScreenPollList extends Component {
     };
   }
   async fetchAdvert(category){
-    console.log("HERE");
     let advert = await WebApi.FetchAdvert(category);
     this.setState({
       advert: advert.advert,
@@ -34,15 +33,10 @@ class FullScreenPollList extends Component {
 
     let polls = this.props.polls.slice(0);
     //this.applySortOrder(polls)
-    console.log("props: %j", this.props.polls);
-    console.log("hasFetched: " + this.state.hasFetched);
   if (!IS_SERVER && !(this.props.polls === undefined) && this.props.polls.length != 0){
     if (!this.state.hasFetched && this.props.polls){
-      console.log("firing");
       this.fetchAdvert(this.props.polls.slice(0)[0].category);
     }
-    console.log("aint server");
-    console.log("this.props: %j",this.props.polls);
     if (this.state.advert){
     let newAdvert = {
       category: polls[0].category,
