@@ -91,12 +91,14 @@ class PollList extends Component {
       type: "Normal",
       isAdvert: true,
       url: this.state.advert.url,
+      title: this.state.advert.headline,
       btnText: this.state.advert.btnText
     };
-    response.polls.splice(4,0,newAdvert);
-    response.polls.splice(9,0,newAdvert);
-    response.polls.splice(14,0,newAdvert);
-    response.polls.splice(19,0,newAdvert);
+    response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert);
+    response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert);
+    response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert);
+    response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert);
+
   } else {
   }
 }

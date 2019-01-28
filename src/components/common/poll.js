@@ -89,6 +89,7 @@ class Poll extends Component {
     return (
       <div className="poll">
         <div className="pollTop">
+        { !this.props.poll.isAdvert &&
           <div className="pollTopHeader">
             <span className="pollNumber">
               <img src={ require('../images/poll_hash_icon.png') } />
@@ -102,6 +103,17 @@ class Poll extends Component {
               )
             }
           </div>
+        }
+        { this.props.poll.isAdvert &&
+          <div className="pollTopHeader">
+            <span className="pollNumber2">
+              {this.poll.title}
+            </span>
+              <span className="pollTimeRemaining2">
+              Ad
+              </span>
+          </div>
+        }
           <div className="pollTopQuestion">
             { this.poll.question }
           </div>

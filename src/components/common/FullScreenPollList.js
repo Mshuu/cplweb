@@ -55,10 +55,12 @@ class FullScreenPollList extends Component {
       type: "Normal",
       isAdvert: true,
       url: this.state.advert.url,
+      title: this.state.advert.headline,
       btnText: this.state.advert.btnText
     };
-    polls.splice(4,1,newAdvert);
-    polls.splice(9,1,newAdvert);
+    polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert);
+    polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert);
+    polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert);
   }
 }
 

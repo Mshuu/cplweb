@@ -68,6 +68,7 @@ class PollSummary extends Component {
           type: "Normal",
           isAdvert: true,
           url: this.state.advert.url,
+          title: this.state.advert.headline,
           btnText: this.state.advert.btnText
         };
         let normalPolls = this.props.polls[category].slice(startIndex, startIndex + 9);
