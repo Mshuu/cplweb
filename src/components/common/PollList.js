@@ -54,7 +54,81 @@ class PollList extends Component {
        recordStartNo: currentPosition,
        recordQty: LOAD_MORE_QTY
      });
- }
+     let advert = await WebApi.FetchAdvert();
+     let advert2 = await WebApi.FetchAdvert();
+     let advert3 = await WebApi.FetchAdvert();
+     let advert4 = await WebApi.FetchAdvert();
+
+     this.setState({
+       advert: advert.advert,
+       advert2: advert2.advert,
+       advert3: advert3.advert,
+       advert4: advert4.advert
+     });
+
+     if (this.state.advert){
+     let newAdvert = {
+       category: this.props.category,
+       isAnon: 1,
+       locationFilter: "Global",
+       pollActive: "T",
+       pollTime: "9948512475",
+       pollVotes: 0,
+       question: this.state.advert.text,
+       type: "Normal",
+       isAdvert: true,
+       url: this.state.advert.url,
+       title: this.state.advert.headline,
+       btnText: this.state.advert.btnText
+     };
+     let newAdvert2 = {
+       category: this.props.category,
+       isAnon: 1,
+       locationFilter: "Global",
+       pollActive: "T",
+       pollTime: "9948512475",
+       pollVotes: 0,
+       question: this.state.advert2.text,
+       type: "Normal",
+       isAdvert: true,
+       url: this.state.advert2.url,
+       title: this.state.advert2.headline,
+       btnText: this.state.advert2.btnText
+     };
+     let newAdvert3 = {
+       category: this.props.category,
+       isAnon: 1,
+       locationFilter: "Global",
+       pollActive: "T",
+       pollTime: "9948512475",
+       pollVotes: 0,
+       question: this.state.advert3.text,
+       type: "Normal",
+       isAdvert: true,
+       url: this.state.advert3.url,
+       title: this.state.advert3.headline,
+       btnText: this.state.advert3.btnText
+     };
+     let newAdvert4 = {
+       category: this.props.category,
+       isAnon: 1,
+       locationFilter: "Global",
+       pollActive: "T",
+       pollTime: "9948512475",
+       pollVotes: 0,
+       question: this.state.advert4.text,
+       type: "Normal",
+       isAdvert: true,
+       url: this.state.advert4.url,
+       title: this.state.advert4.headline,
+       btnText: this.state.advert4.btnText
+     };
+     response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert);
+     response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert2);
+     response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert3);
+     response.polls.splice(Math.floor((Math.random() * this.state.polls.length) + 1),1,newAdvert4);
+
+ }}
    } else {
     if (this.props.type == "Star"){
 			response = await WebApi.getPolls({
