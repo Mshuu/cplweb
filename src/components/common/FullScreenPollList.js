@@ -22,8 +22,12 @@ class FullScreenPollList extends Component {
   }
   async fetchAdvert(category){
     let advert = await WebApi.FetchAdvert(category);
+    let advert2 = await WebApi.FetchAdvert(category);
+    let advert3 = await WebApi.FetchAdvert(category);
     this.setState({
       advert: advert.advert,
+      advert2: advert2.advert,
+      advert3: advert3.advert,
       hasFetched: true
     });
   }
@@ -52,9 +56,37 @@ class FullScreenPollList extends Component {
       title: this.state.advert.headline,
       btnText: this.state.advert.btnText
     };
+    let newAdvert2 = {
+      category: polls[0].category,
+      isAnon: 1,
+      locationFilter: "Global",
+      pollActive: "T",
+      pollTime: "9948512475",
+      pollVotes: 0,
+      question: this.state.advert2.text,
+      type: "Normal",
+      isAdvert: true,
+      url: this.state.advert2.url,
+      title: this.state.advert2.headline,
+      btnText: this.state.advert2.btnText
+    };
+    let newAdvert3 = {
+      category: polls[0].category,
+      isAnon: 1,
+      locationFilter: "Global",
+      pollActive: "T",
+      pollTime: "9948512475",
+      pollVotes: 0,
+      question: this.state.advert3.text,
+      type: "Normal",
+      isAdvert: true,
+      url: this.state.advert3.url,
+      title: this.state.advert3.headline,
+      btnText: this.state.advert3.btnText
+    };
     polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert);
-    polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert);
-    polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert);
+    polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert2);
+    polls.splice(Math.floor((Math.random() * this.props.polls.length) + 1),1,newAdvert3);
   }
 }
 

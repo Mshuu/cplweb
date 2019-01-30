@@ -1,81 +1,4 @@
 require("source-map-support").install();
-.socialFriendRequests {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 30px 0 0 0;
-  padding: 0 20px;
-}
-
-
-.socialFriendRequests .requestHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  color: #000;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.socialFriendRequests .requestHeader img {
-  height: 30px;
-  margin-right: 15px;
-}
-
-.lolNoFriends {
-  color: #000;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  border-radius: 30px;
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 5px 0;
-}
-
-.friendContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.friendRequest {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  color: #fff;
-}
-
-.requestName {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  border-radius: 30px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.acceptRequest, .rejectRequest {
-  flex: 0 0 30px;
-  margin: 0 0 0 4px;
-  cursor: pointer;
-}
-
-.acceptRequest:hover, .rejectRequest:hover {
-  opacity: 0.8;
-}
-
-
-.acceptRequest img, .rejectRequest img {
-  height: 30px;
-}
-
-
 .loginSignupIcon {
   height: 100%;
   cursor: pointer;
@@ -168,6 +91,82 @@ require("source-map-support").install();
   cursor: pointer;
   height: 17px !important;
   width: 17px;
+}
+.menuContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 33px;
+}
+
+.menuContainer > img {
+  padding: 8px;
+}
+
+.menuContainer > img:hover {
+  background: #e3e1e1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 100ms linear;
+}
+
+.menu {
+  position: absolute;
+  background-color: rgba(18,26,29,0.93);
+  color: #fff;
+  min-width: 400px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+  top: 0;
+  margin-top: 70px;
+  padding: 0;
+}
+
+@media only screen and (max-width: 420px) {
+  .menu {
+    width:100%!important;left:-210px;
+  }
+  .menu div {
+    font-size: 5vw !important;
+    line-height: 8vw !important;
+    padding: 7.5px 0 !important;
+  }
+  .menuContainer {
+    padding-right: 33px !important;
+    padding-left: 10px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .menu div {
+    font-size:20px;line-height:40px;
+  }
+}
+
+.menu.inactive {
+  display: none;
+}
+
+.menu div {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 12px 0px;
+  border-left: 10px solid transparent;
+}
+
+.menu div:hover {
+  border-left: 10px solid #01bec0;
+  cursor: pointer;
+  background: #080a0d;
+}
+
+.menu div img {
+  height: 20px;
+  width: 20px;
+  margin: 0 20px 0 15px;
 }
 
 .loadingOverlayFullScreen {
@@ -3523,82 +3522,83 @@ box-shadow: 1px 1px 4px 1px #b3b6bc;border-radius:4px;
   text-align: center;
   margin: 3px 0;
 }
-.menuContainer {
-  height: 100%;
+.socialFriendRequests {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  position: relative;
-  padding: 0 33px;
+  margin: 30px 0 0 0;
+  padding: 0 20px;
 }
 
-.menuContainer > img {
-  padding: 8px;
+
+.socialFriendRequests .requestHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.menuContainer > img:hover {
-  background: #e3e1e1;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 100ms linear;
+.socialFriendRequests .requestHeader img {
+  height: 30px;
+  margin-right: 15px;
 }
 
-.menu {
-  position: absolute;
-  background-color: rgba(18,26,29,0.93);
+.lolNoFriends {
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px 0;
+}
+
+.friendContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.friendRequest {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
   color: #fff;
-  min-width: 400px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  right: 0;
-  top: 0;
-  margin-top: 70px;
-  padding: 0;
 }
 
-@media only screen and (max-width: 420px) {
-  .menu {
-    width:100%!important;left:-210px;
-  }
-  .menu div {
-    font-size: 5vw !important;
-    line-height: 8vw !important;
-    padding: 7.5px 0 !important;
-  }
-  .menuContainer {
-    padding-right: 33px !important;
-    padding-left: 10px !important;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .menu div {
-    font-size:20px;line-height:40px;
-  }
-}
-
-.menu.inactive {
-  display: none;
-}
-
-.menu div {
+.requestName {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin: 0;
-  padding: 12px 0px;
-  border-left: 10px solid transparent;
+  flex-grow: 1;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.menu div:hover {
-  border-left: 10px solid #01bec0;
+.acceptRequest, .rejectRequest {
+  flex: 0 0 30px;
+  margin: 0 0 0 4px;
   cursor: pointer;
-  background: #080a0d;
 }
 
-.menu div img {
-  height: 20px;
-  width: 20px;
-  margin: 0 20px 0 15px;
+.acceptRequest:hover, .rejectRequest:hover {
+  opacity: 0.8;
 }
+
+
+.acceptRequest img, .rejectRequest img {
+  height: 30px;
+}
+
+
 .socialFriends {
   display: flex;
   flex-direction: column;

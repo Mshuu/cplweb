@@ -44,8 +44,10 @@ class PollSummary extends Component {
 
   async getAds(category){
     let advert = await WebApi.FetchAdvert();
+    let advert2 = await WebApi.FetchAdvert();
     this.setState({
-      advert: advert.advert
+      advert: advert.advert,
+      advert2: advert2.advert
     });
   }
 
@@ -69,9 +71,23 @@ class PollSummary extends Component {
           title: this.state.advert.headline,
           btnText: this.state.advert.btnText
         };
+        let newAdvert2 = {
+          category: category,
+          isAnon: 1,
+          locationFilter: "Global",
+          pollActive: "T",
+          pollTime: "9948512475",
+          pollVotes: 0,
+          question: this.state.advert2.text,
+          type: "Normal",
+          isAdvert: true,
+          url: this.state.advert2.url,
+          title: this.state.advert2.headline,
+          btnText: this.state.advert2.btnText
+        };
         let normalPolls = this.props.polls[category].slice(startIndex, startIndex + 9);
         normalPolls.splice(4,0,newAdvert);
-        normalPolls.splice(9,1,newAdvert);
+        normalPolls.splice(9,1,newAdvert2);
         return normalPolls;
       } else {
         let normalPolls = this.props.polls[category].slice(startIndex, startIndex + 9);
