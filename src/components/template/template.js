@@ -97,7 +97,6 @@ class Template extends Component {
           </Switch>
         </div>
         <div className="templateFooter">
-                      Ⓒ Copyright 2018 Nextech Developments - Australia |
           <span style={{ cursor: 'pointer'}} onClick={ () => this.handleContactClick() }> Contact Us</span>
         </div>
       </div>
