@@ -5,6 +5,7 @@ import WebApi from '../../models/webApi';
 import LoadingOverlay from '../loadingOverlay/LoadingOverlay';
 import HomeHeader from '../common/HomeHeader';
 import PollSummary from './components/PollSummary';
+var Web3 = require('web3');
 
 import './Home.css';
 
@@ -37,7 +38,8 @@ class Home extends Component {
     });
 
     try {
-      this.store.data.homePolls = await WebApi.fetchHome();
+    //  let instance = new window.web3.eth.Contract(abi,'0xbd619d2e6a427b65B688Ca2778fD960CBfDE2F85');
+      //console.log(instance);
       this.setState({
         loading: false
       });
